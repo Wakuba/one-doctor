@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="1400" width="800">
+    <rect width="800" height="400" style="fill:#5DB0D0" />
+    <rect x='0' y='400' width="800" height="400" style="fill:#5DB0D0" />
+    <circle cx="430" cy="370" r="33" stroke-width='0.5' stroke='#ffff' fill="none" />
+    <circle cx="40" cy="400" r="40"  fill="white" />
+    <circle cx="670" cy="410" r="10"  fill="white" />
+    <circle cx="40" cy="200" r="25"  fill="white" />
+    <circle cx="750" cy="100" r="35"  fill="white" />
+    <circle cx="750" cy="180" r="20"  fill="white" />
+    <circle cx="75" cy="80" r="10"  fill="white" />
+    <circle cx="400" cy="400" r="15"  fill="white" />
+    <circle cx="60" cy="295" r="15" stroke-width='0.5' stroke='#ffff' fill="none" />
+    <circle cx="40" cy="315" r="15"  fill="#6E4E9D" />
+    <circle cx="60" cy="490" r="15"  fill="#6E4E9D" />
+    <circle cx="80" cy="150" r="15"  fill="#6E4E9D" />
+    <circle cx="750" cy="400" r="30"  fill="#6E4E9D" />
+    <circle cx="720" cy="480" r="15"  fill="#6E4E9D" />
+    <circle cx="410" cy="435" r="9"  fill="#6E4E9D" />
+    <circle cx="660" cy="80" r="9"  fill="#6E4E9D" />
+    <circle cx="60" cy="130" r="18" stroke-width='0.5' stroke='#ffff' fill='none' />
+    <circle cx="690" cy="500" r="38" stroke-width='0.5' stroke='#ffff' fill="none" />
+    <path fill='#F8FDFF' d="M0,800 v600 Q0,1200 200,1200 h400 Q800,1200 800,1000 v-600 Q800,600 600,600 h-400 Q0,600 0,800" />
+</svg>
