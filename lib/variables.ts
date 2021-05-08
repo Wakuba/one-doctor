@@ -1,1 +1,1 @@
-export const WIDTH_THRESHOLD: number= 640
+export const WIDTH_THRESHOLD: number= 600

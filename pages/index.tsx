@@ -1,13 +1,12 @@
 //React
 import React, { useEffect, useState, ReactEventHandler } from 'react'
-
 //Components
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
+import NewsLine from '../components/molecules/NewsLine'
 
 //Fower
 import { Box } from '@fower/react'
-import { setConfig, setTheme } from '@fower/core' 
 import { styled } from '@fower/styled'
 
 //others
@@ -17,14 +16,8 @@ import { WIDTH_THRESHOLD } from '../lib/variables'
 import firebase from 'firebase'
 import '@firebase/firestore'
 import 'firebase/firestore'
-import { firebaseConfig } from '../lib/firebase/firebaseConfig'
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-} else {
-  firebase.app();
-} 
-
+//getStaticProps from firebase
 export const getStaticProps = async () => {
   let content: any = [];
   try {
@@ -46,27 +39,10 @@ export const getStaticProps = async () => {
   }
 };
 
-setConfig({
-  unit: 'vw',
-}) 
-
-setTheme({
-  fontSizes: {
-    s: 'clamp(11px, 2.0vw, 13px)',
-    m: 'clamp(14px, 2.7vw, 16px)',
-    l:  5
-  },
-  colors: {
-    mainBlueRich: '#5DB0D0',
-    mainBlueMuted: '#F8FDFF',
-    white: '#fff'
-  },
-})
-
-const PreStyledTopDomain = styled('div', 'grid','bgMainBlueMuted', { position: 'relative', backgroundRepeat:'no-repeat',backgroundSize: '100% auto' })
+const PreStyledTopDomain = styled('div', 'relative', 'grid', { backgroundRepeat:'no-repeat',backgroundSize: '100% auto' })
 const TopImage = styled('img', 'circle-75', 'circle-45--sm', { gridArea: 'topImage' })
-const TopCatchCopy = styled('div', 'textL', 'white', { gridArea: 'catchCopy', transform: 'rotate(-10deg) translateX(25%)' })
-const TopCatchText = styled('div', 'textM', 'white', { gridArea: 'catchText' })
+const ScrollPointer= styled('div', 'white', 'coreFontSizeSM', 'absolute', 'left-4--md','left-3', 'top-58',  {borderBottom: '4px solid #fff', width: '14.5vw', transform: 'rotate(90deg)' })
+
 
 const Home = (props) => {
   const [width, setWidth] = useState(null)
@@ -83,10 +59,10 @@ const Home = (props) => {
           backgroundImage: 'url(/svg/bg-top-s.svg)',
           backgroundPosition: '0px -66px',
           gridTemplate: `
-          '.. ......... ..' 19vw
+          '.. ......... ..' 17vw
           '.. topImage  ..' 80vw
-          '.. catchCopy ..' 25vw
-          '.. catchText ..' 80vw/
+          '.. catchCopy ..' 22vw
+          '.. catchText ..' 85vw/
           10vw auto 10vw`,
           })
       : styled(PreStyledTopDomain, 'h-100',`minH="790px"`, {
@@ -94,10 +70,10 @@ const Home = (props) => {
           gridTemplate: 
           ` '......... ......... ........  ..' 80px
             '......... ......... ........  ..' 5vw
-            'catchCopy catchCopy topImage  ..' 20vw
+            '......... catchCopy topImage  ..' 20vw
             '......... catchText topImage  ..' 25vw
             '......... newsBoard newsBoard ..' auto/
-            15vw auto 45vw 5vw`,
+            11vw 40vw 45vw 5vw`,
         })
   )
 
@@ -108,14 +84,16 @@ const Home = (props) => {
         <Box as='main'>
           <TopDomain>
             <TopImage src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
-            <TopCatchCopy>キャッチコピー<br />白の手書き文字</TopCatchCopy>
-            <TopCatchText>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</TopCatchText>
+            <Box as='div' css={{width: '68vw', white: 'true', coreFontSizeLG: 'true', gridArea: 'catchCopy', transform: 'rotate(-10deg) translateY(-30%)' }}>キャッチコピー<br />白の手書き文字</Box>
+            <Box as='div' css={{ gridArea: 'catchText', coreFnotSizeMD: 'true', white:'true' }}>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</Box>
             {/* {(width => WIDTH_THRESHOLD || null) && <NewsBoard content={props.content} layoutStyles={{ 'newsBoard': styles.newsBoardWide, 'title': styles.title }} />} */}
+            { !(width < WIDTH_THRESHOLD) && <ScrollPointer>scroll</ScrollPointer>}
           </TopDomain>
 
           <div >
             <div >
-              <div >
+              <NewsLine title='イベント'>イベント内容</NewsLine>
+              {/* <div >
                 <iframe width="300" height="540" src="https://www.youtube.com/embed/o6xTZsgz6sA" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
               </div>
               <div >
@@ -126,7 +104,7 @@ const Home = (props) => {
               </div>
               <div >
                 <iframe width="300" height="540" src="https://www.youtube.com/embed/o6xTZsgz6sA" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-              </div>
+              </div> */}
             </div> 
             {/* {(width < WIDTH_THRESHOLD && width !== null) && <NewsBoard content={props.content} layoutStyles={{ 'newsBoard': styles.newsBoardNarrow, 'title': styles.titel }} />} */}
 
