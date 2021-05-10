@@ -1,49 +1,43 @@
 import Link from 'next/link'
+import { FC } from 'react'
+import { Box } from '@fower/react'
+import DepartBoard from '../organisms/DepartBoard'
 
-// type DepartKanbanProps = {
-//   key: number;
-//   children: React.ReactNode;
-//   departPage: string;
-//   layoutStyles?: {
-//     departKanban?: string;
-//     imageBox?: string;
-//     departName?: string;
-//   }
-// }
-// React.FC<DepartKanbanProps>
-const DepartKanban  = props => {
-  const { children, departPage, layoutStyles } = props
+type DepartKanbanProps = {
+  key: number;
+  children: React.ReactNode;
+  departPage?: string;
+  css?: any; 
+}
+const DepartKanban: FC<DepartKanbanProps> = ({ children, departPage, css, ...className})=> {
   return (
-    // <Link href={departPage}>
-      <div
-        bg='#fff'
-        css={{
-            border: '0.5px solid #707070',
-            borderRadius: '3px',
-            boxShadow: '0px 0px 15px #00000065',
-            display: 'grid',
-            gridTemplate: ` '.. ........ .. .......    ..' 15% 
-                            '.. imageBox .. departName ..' clamp(27px, 8.4vw, 52px) 
-                            '.. ........ .. .......    ..' 15% / 
-                            13.5% clamp(27px, 8.4vw, 52px) auto auto auto `,
-            height: '12.3vw',
-            maxHeight: '75px',
-            maxWidth: '300px',
-            minHeight: '39px',
-            width: '50vw',
-
-            '.imageBox' : {
-                gridArea: 'imageBox'
-            },
-            '.departName' : {
-                gridArea: 'departName'
-            }
-        }}
-        >
-        <img className='imageBox' />
-        <div className='departName'>{children}</div>
-      </div>
-    // </Link>
+    <Link href='EachDepart'>
+    <Box
+      {...className}
+      bg='white'
+      rounded='3px'
+      h='12.3vw'
+      maxH='75px'
+      minH='39px'
+      w='50vw'
+      minW='39px'
+      maxW='300px'
+      grid
+      shadowDefault
+      css={{
+          ...css,
+          border: '0.5px solid #707070',
+          gridTemplate: `
+          '.. ........ .. .......    ..' 15% 
+          '.. imageBox .. departName ..' clamp(27px, 8.5vw, 52px) 
+          '.. ........ .. .......    ..' 15% / 
+          13.5% clamp(27px, 8.5vw, 52px) auto auto auto `,
+      }}
+    >
+        <Box as='img' square='clamp(27px, 8.5vw, 52px)' border='0.3px' borderSolid borderNormShadeColor bgBlack css={{ gridArea: 'imageBox'}} />
+        <Box coreFontSizeSM toCenter css={{gridArea: 'departName'}}>{children}</Box>
+      </Box>
+    </Link>
   )
 }
 

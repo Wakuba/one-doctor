@@ -9,26 +9,29 @@
 //   })
 // }
 
-import React, { ReactNode, FC } from 'react'
+import React, { ReactNode, FC, ReactElement } from 'react'
 import { Box } from '@fower/react'
 
 type NewsLineProps = {
   key: number;
   title: string;
   children?: ReactNode;
+  css: any; 
 }
 
-const NewsLine: FC<NewsLineProps> = props => {
+const NewsLine: FC<NewsLineProps> = ({ title, children, css}) => {
   return (
-    <Box flex m='12px' coreFontSizeMD bgRed100>
-      <Box h='20px' minW='75px' bgMainBlueRich white rounded='4px' mr='24px' pl='10px' pr='10px'  coreFontSizeSM >
-        {props.title}
+    <Box flex css={{...css}}>
+      <Box flex-3 className='eventName' column toTop toLeft>
+        <Box inlineBlock rounded='4px' pl='8px' pr='8px' bgMainBlueRich white coreFontSizeSM>
+          {title}
+        </Box>
       </Box>
-      <Box
+      <Box flex-6 flex-7--sm flex-17--md className='eventDetail coreFontSizeSM'
       // dangerouslySetInnerHTML={{
       // __html: formatted
       // }}
-      > {props.children} </Box>
+      > {children} </Box>
     </Box>
   )
 }

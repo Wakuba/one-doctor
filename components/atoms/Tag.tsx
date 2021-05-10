@@ -1,11 +1,13 @@
+import { Box } from '@fower/react'
 
-type TagProps = {
+interface TagProps {
   children: React.ReactNode;
-  layoutStyle?: string;
+  className?: any;
 }
 
-const Tag: React.FC<TagProps> = ({ children, layoutStyle }) => (
-  <div bg='#fff' h='5vw' w='30vw' mb={21} flex alignItems='center' justifyContent='center' rounded='4px' shadowMD fontSize='clamp(11px, 2.0vw, 13px)'> {children} </div>
+const Tag: React.FC<TagProps> = ({ children, ...className}) => (
+  <Box bgWhite h='5vw' w='30vw' toCenter rounded='4px' shadowDefault coreFontSizeSM {...className}> {children} </Box>
 )
+
 
 export default Tag

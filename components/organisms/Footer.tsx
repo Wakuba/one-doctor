@@ -1,29 +1,14 @@
 import Link from 'next/link'
 import { styled } from '@fower/styled'
 import { Box } from '@fower/react'
-import React, { ReactNode, FC} from 'react'
-import { WIDTH_THRESHOLD } from '../../lib/variables'
+ 
+const StyledList = styled('li',  'toCenter')
 
-type ResponsiveUlProps = {
-  children?: ReactNode;
-  className?: any;
-}
-
-const StyledList = styled('li', 'flex', 'toCenter','flex={1}')
-
-const FooterFlame: FC<number> = ({ width }) => {
-
-  const RespUnorderedList:React.FC<ResponsiveUlProps> = ({ children, ...className }) => {
-    return (
-    width < WIDTH_THRESHOLD 
-      ? <Box as='ul' flex column toAround toCenterX {...className}>{children}</Box>
-      : <Box as='ul' flex row toEvenly toCenterY {...className}>{children}</Box>
-   )
-  }
-  
+const Footer = ({ isPageSmall }) => {
+  const StyledUnorderedLi = isPageSmall ? styled('ul', 'column', 'toCenterY') : styled('ul',  'row', 'toBetween') 
   return (
-    <Box as='footer' h='192px' w='100%' bg='#5DB0D0' color='#fff' flex column toCenter>
-      <RespUnorderedList w='60vw' pl-0 style={{ listStyle: 'none', fontSize: 'clamp(14px, 2.3vw, 18px)'}}>
+    <Box as='footer' h='192px' w='100%' white column toCenter css={{ backgroundColor: 'mainBlueRich'}}>
+      <StyledUnorderedLi w='60vw' pl-0 css={{listStyle: 'none'}} >
         <StyledList >
           運営について
         </StyledList>
@@ -32,18 +17,18 @@ const FooterFlame: FC<number> = ({ width }) => {
         </StyledList>
         <StyledList>
           <Link href='Inqueries'>
-            <a style={{textDecoration:'none', color: '#fff'}}>お問い合わせ</a>
+            <Box as='a' white css={{ textDecoration: 'none'}}>お問い合わせ</Box>
           </Link>
         </StyledList>
         <StyledList>
-          One Doctor とは
+          <Link href='AboutUs'>
+            <Box as='a' white css={{ textDecoration: 'none'}}> One Doctor とは</Box>
+          </Link>
         </StyledList>
-      </RespUnorderedList>
+      </StyledUnorderedLi>
       <Box>コピーライト</Box>
     </Box>
   )
-}
-
-const Footer = styled(FooterFlame)
+} 
 
 export default Footer
