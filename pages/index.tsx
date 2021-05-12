@@ -95,7 +95,7 @@ const Home = (props) => {
         <TopDomain>
           <TopImage src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
           <Box as='div' css={{ width: '68vw', white: 'true', coreFontSizeXL: 'true', gridArea: 'catchCopy', transform: 'rotate(-10deg) translateY(-30%)' }}>キャッチコピー<br />白の手書き文字</Box>
-          <Box as='div' css={{ color: 'white', coreFontSizeSM: 'true', gridArea: 'catchText'}}>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</Box>
+          <Box as='div' ml-3--sm css={{ color: 'white', coreFontSizeSM: 'true', gridArea: 'catchText'}}>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</Box>
             {!isPageSmall && <ScrollPointer>scroll</ScrollPointer>}
             {!isPageSmall && WideNewsBoard}
         </TopDomain>

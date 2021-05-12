@@ -8,7 +8,8 @@ type TabsProps = {
 }
 
 const Tabs: React.FC<TabsProps> = props => {
-  const [activeTab, setActiveTab] = useState(props.children[1].props.label)
+  const [activeTab, setActiveTab] = useState(props.children[0].props.label)
+  console.log(props.children[0])
 
   const changeTab = tab => {
     setActiveTab(tab);
@@ -24,7 +25,7 @@ const Tabs: React.FC<TabsProps> = props => {
         buttons.push(child.props.label)
         if (child.props.label === activeTab) content = child.props.children
       })}
-      <Box h='700px' w='100%' rounded='4px' borderT='5px' borderSolid borderMainBlueRich >{content}</Box>
+      <Box h='700px' w='100%' rounded--sm='2px' borderT='5px' borderSolid borderMainBlueRich shadowDefault column toCenterX>{content}</Box>
     </div>
   );
 }
