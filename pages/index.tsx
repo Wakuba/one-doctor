@@ -55,10 +55,7 @@ const Movie = ({src, title}) => <Box as='iframe' w-90vw w-20--sm h-125 h-28--sm 
 
 const Home = (props) => {
   let isPageSmall = useMediaQuery(`(max-width: ${WIDTH_THRESHOLD}px`)
-  const TopDomain = ( 
-    isPageSmall 
-    ? styled(PreStyledTopDomain, {
-        backgroundImage: 'url(/svg/bg-top-s.svg)',
+  const TopDomain = ( isPageSmall ? styled(PreStyledTopDomain, { backgroundImage: 'url(/svg/bg-top-s.svg)',
         backgroundPosition: '0px -66px',
         gridTemplate: `
         '.. ......... ..' 17vw

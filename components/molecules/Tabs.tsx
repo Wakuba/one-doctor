@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import { useState, FC, ReactNode } from 'react'
 import TabButtons from '../molecules/TabButtons'
 import { Box } from '@fower/react'
 
 type TabsProps = {
-  children?: React.ReactNode;
+  children?: ReactNode;
   label?: string;
 }
 
-const Tabs: React.FC<TabsProps> = props => {
+const Tabs: FC<TabsProps> = props => {
   const [activeTab, setActiveTab] = useState(props.children[0].props.label)
   console.log(props.children[0])
 

@@ -1,5 +1,6 @@
 import DepartKanban from '../molecules/DepartKanban'
 import { Box } from '@fower/react'
+import { FC } from 'react'
 
 type DepartBoardProps = {
     css?: any;
@@ -12,7 +13,7 @@ const depList: string[] = ['循環器', '消化器内科', '脳神経内科', '�
   '総合診断科', '感染症科', '救急', '整形外科', '耳鼻咽喉科・頭頸部外科',
   '麻酔科', '眼科', '形成外科', '公衆衛生', '外傷外科']
 
-const DepartBoard: React.FC<DepartBoardProps> = ({ css, ...className }) => {
+const DepartBoard: FC<DepartBoardProps> = ({ css, ...className }) => {
   return (
     <Box m--sm='10vw' {...className} css={{ margin: '6vw', whiteSpace: 'nowrap', ...css}} >
         <Box fontsemibold white coreFontSizeLG>診療科一覧</Box>

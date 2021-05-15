@@ -45,8 +45,7 @@ const size = atom.propKey.replace('coreFontSize', '').toLowerCase()
 switch (size) {
     case 'sm':
     atom.style = { fontSize: 'clamp(11px, 2.0vw, 14px)' }
-    break
-    case 'md':
+    break case 'md':
     atom.style = { fontSize: 'clamp(14px, 3vw, 16px)'}
     break
     case 'lg':

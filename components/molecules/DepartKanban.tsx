@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import { FC } from 'react'
+import { ReactNode, FC } from 'react'
 import { Box } from '@fower/react'
 import DepartBoard from '../organisms/DepartBoard'
 
 type DepartKanbanProps = {
   key: number;
-  children: React.ReactNode;
+  children: ReactNode;
   departPage?: string;
   css?: any; 
 }

@@ -8,7 +8,7 @@ type NewsBoardProps = {
   className?: any;
 }
  
-const NewsBoard: React.FC<NewsBoardProps> = ({content, css, ...className}) => {
+const NewsBoard: FC<NewsBoardProps> = ({content, css, ...className}) => {
   return (
     <Box {...className} css={{...css}}> 
       <Box className='title' coreFontSizeLG mb-3>NEWS</Box>

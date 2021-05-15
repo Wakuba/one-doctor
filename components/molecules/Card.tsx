@@ -1,6 +1,11 @@
 import { Box } from '@fower/react'
+import { ReactNode, FC } from 'reac'
 
-const Card = ({ children }) => (
+interface CardProps {
+	children: ReactNode;
+}
+
+const Card: FC<CardProps> = ({ children }) => (
     <Box w-80 w-30--sm h-20 h-9--sm column toCenter border='2px' borderSolid borderMainBlueRich css={{ boxSizing: 'content-box'}} >
         <Box w='100%' h='70%' bgMainBlueRich coreFontSizeSM white grid css={{
             gridTemplate: `

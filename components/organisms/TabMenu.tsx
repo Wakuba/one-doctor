@@ -2,10 +2,16 @@ import Tabs from '../molecules/Tabs'
 import TabField from '../molecules/TabField'
 import { Box } from '@fower/react'
 import CrewCard from '../molecules/CrewCard'
+import { FC } from 'react'
+
+interface TabMenuProps {
+	css?: string;
+	className?: any;
+}
 
 const tabNameList: string[] = ['基本情報', '医局紹介', '周辺地図', 'イベント', 'SNS']
 
-const TabMenu= ({ css, ...className}) => (
+const TabMenu: FC<TabMenuProps> = ({ css, ...className}) => (
   <Box {...className} css={{...css}}>
     <Tabs >
         <TabField label='基本情報' key={1}>

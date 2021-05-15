@@ -1,8 +1,14 @@
 import { Box } from '@fower/react'
-import { useState } from 'react'
+import { useState, ReactNode, FC } from 'react'
 import ReactCardFlip from 'react-card-flip'
 
-const CrewCard = ({ imgHeadSrc, imgTailSrc, children}) => {
+interface CrewCardProps {
+	imgHeadSrc: string;
+	imgTailSrc: string;
+	children: ReactNode;
+}
+
+const CrewCard: FC<CrewCardProps> = ({ imgHeadSrc, imgTailSrc, children}) => {
     const [ isFlipped, setIsFlipped ] = useState(true)
     const flip = () => {setIsFlipped(!isFlipped), console.log(isFlipped)}
     const HeadContent = ({ imgSrc , children}) => (
