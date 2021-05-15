@@ -23,7 +23,7 @@ const NewsLine: FC<NewsLineProps> = ({ title, children, css}) => {
   return (
     <Box flex css={{...css}}>
       <Box flex-3 className='eventName' column toTop toLeft>
-        <Box inlineBlock rounded='4px' pl='8px' pr='8px' bgMainBlueRich white coreFontSizeSM>
+        <Box inlineBlock rounded='4px' pl='8px' pr='8px' white css={{ backgroundColor: 'mainBlueRich', coreFontSizeSM: 'true' }}>
           {title}
         </Box>
       </Box>

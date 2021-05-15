@@ -11,14 +11,14 @@ import CardBoard from '../components/organisms/CardBoard'
 
 const EachDepartPage = props => {
     let isPageSmall = useMediaQuery(`(max-width: ${WIDTH_THRESHOLD}px`)
-    const Button = styled('button', 'white', 'coreFontSizeSM', 'w-37', 'h-7', 'bgMainBlueRich', 'mb-6', `rounded='3px'`)
+    const Button = styled('button', 'white', 'w-37', 'h-7', 'mb-6', `rounded='3px'`, { coreFontSizeSM: 'true', backgroundColor: 'mainBlueRich' })
     return (
         <Box>
             <Header  />
             <Box as='main' css={{ background: `linear-gradient(180deg, #5DB0D0 0%,#5DB0D0 130vw, #F8FDFF 100px,#F8FDFF 100%)`}}>
                 <Box pt-11 px-6 px-10--sm >
-                    <Box coreFontSizeLG fontSemibold white >筑波大学附属病院　循環器内科</Box>
-                    <Box as='p' coreFontSizeSM white>University of Tsukuba Hospital -cardiovascular medicine</Box>
+                    <Box fontSemibold white css={{ coreFontSizeLG: 'true' }}>筑波大学附属病院　循環器内科</Box>
+                    <Box as='p' white css={{ coreFontSizeSM: 'true' }}>University of Tsukuba Hospital -cardiovascular medicine</Box>
                     <Box toLeft spaceX-2>
                         <Tag>筑波大学附属病院</Tag>
                         <Tag>循環器内科</Tag>
@@ -27,8 +27,8 @@ const EachDepartPage = props => {
 
                 <Box relative bgWhite m-10--sm css={{ margin: '6vw'}}>
                     <Box p-3 >
-                        <Box mainBlueRich coreFontSizeSM borderB='1px' borderMainBlueRich mb-3>筑波大学附属病院　循環器内科イチオシポイント</Box>
-                        <Box coreFontSizeSM>
+                        <Box mainBlueRich borderB='1px' mb-3 css={{ borderMainBlueRich: 'true' coreFontSizeSM: 'true' }}>筑波大学附属病院　循環器内科イチオシポイント</Box>
+                        <Box css={{ coreFontSizeSM: 'true' }}>
                             <Box fontSemibold>教育：</Box>
                             <Box>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</Box>
                             <Box fontSemibold>臨床：</Box>
@@ -48,11 +48,11 @@ const EachDepartPage = props => {
                 <TabMenu p-0 bgWhite mx-10--sm />
 
                 <Box p-10 column toCenter>
-                    <Box coreFontSizeMD mb-6>イベントや見学を通じて診療科について理解を深めましょう</Box>
+									<Box mb-6 css={{ coreFontSizeMD: 'true'}}>イベントや見学を通じて診療科について理解を深めましょう</Box>
                     <Button>見学申し込みをする→</Button>
                     <Button>イベントのページを見る</Button>
                     <Button>イベントの提案をする→</Button>
-                    <Box coreFontSizeMD mb-6>詳しい情報については診療科のホームページをご覧ください</Box>
+										<Box mb-6 css={{ coreFontSizeMD: 'true' }}>詳しい情報については診療科のホームページをご覧ください</Box>
                     <Button>診療科公式ページ→→</Button>
                 </Box>
 

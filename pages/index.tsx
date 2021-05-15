@@ -49,7 +49,7 @@ export const getStaticProps = async () => {
 
 const PreStyledTopDomain = styled('div', 'relative', 'grid', { backgroundRepeat:'no-repeat',backgroundSize: '100% auto', backgroundColor: 'mainBlueMuted'})
 const TopImage = styled('img', 'circle-75', 'circle-45--sm', { gridArea: 'topImage' })
-const ScrollPointer= styled('div', 'white', 'coreFontSizeSM', 'absolute', 'left-4--md', 'left-4', 'top-48',  {borderBottom: '4px solid #fff', width: '14.5vw', transform: 'rotate(90deg)' })
+const ScrollPointer= styled('div', 'white', 'absolute', 'left-4--md', 'left-4', 'top-48',  { coreFontSizeSM: 'true', borderBottom: '4px solid #fff', width: '14.5vw', transform: 'rotate(90deg)' })
 const Movie = ({src, title}) => <Box as='iframe' w-90vw w-20--sm h-125 h-28--sm shadowMD src={src} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Box>
 
 
@@ -100,8 +100,8 @@ const Home = (props) => {
         <Box w='100%' toCenterX bgMainBlueMuted>
           <Box relative roundedBR-25 w-88 w-80--sm  bgMainBlueMuted >
             <RichBlueBRSquare/>
-            <Box fontsemibold coreFontSizeLG mainBlueRich mb-3>新着動画</Box>
-            <Box coreFontSizeMD>各診療科のやりがいやリアルな現場を動画で見ることができます</Box>
+            <Box fontsemibold mainBlueRich mb-3 css={{ coreFontSizeLG: 'true' }}>新着動画</Box>
+            <Box css={{ coreFontSizeMD: 'true' }}>各診療科のやりがいやリアルな現場を動画で見ることができます</Box>
             <Box overflowX='scroll' overflowY='hidden' >
               <Box w='1560px' row toLeft space-5>
                 <Movie src="https://www.youtube.com/embed/8jjswrh3agE" title="YouTube video player"></Movie>
@@ -123,10 +123,10 @@ const Home = (props) => {
         <Box relative roundedTL-25 bgMainBlueMuted pb-20 >
           <Box absolute square-25 bgMainBlueRich left0 top0 zIndex='-1'></Box>
           <Box ml-6 mr-6 ml-10--sm mr-10--sm pt-20 bgTranparent>
-            <Box mb-5 mainBlueRich coreFontSizeLG fontsemibold>筑波大学附属病院について</Box>
+            <Box mb-5 mainBlueRich fontsemibold css={{ coreFontSizeLG: 'true' }}>筑波大学附属病院について</Box>
             <Box as='iframe' w='100%' h-50 mb-8 width="600" height="450" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.454268485108!2d140.09971111521065!3d36.10678911412265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2sUniversity%20of%20Tsukuba!5e0!3m2!1sen!2sjp!4v1618728410770!5m2!1sen!2sjp"  ></Box>
             <Box toCenter>
-              <Box as='button' rounded='4px' w-42 h-10 w-13--md h-3--md coreFontSizeSM white bgMainBlueRich shadowMD>病院公式ページ</Box>
+              <Box as='button' rounded='4px' w-42 h-10 w-13--md h-3--md white bgMainBlueRich shadowMD css={{ coreFontSizeSM: 'true' }}>病院公式ページ</Box>
             </Box>
           </Box>
         </Box>

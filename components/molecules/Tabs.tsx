@@ -9,7 +9,6 @@ type TabsProps = {
 
 const Tabs: FC<TabsProps> = props => {
   const [activeTab, setActiveTab] = useState(props.children[0].props.label)
-  console.log(props.children[0])
 
   const changeTab = tab => {
     setActiveTab(tab);
@@ -25,7 +24,7 @@ const Tabs: FC<TabsProps> = props => {
         buttons.push(child.props.label)
         if (child.props.label === activeTab) content = child.props.children
       })}
-      <Box h='700px' w='100%' rounded--sm='2px' borderT='5px' borderSolid borderMainBlueRich shadowMD column toCenterX>{content}</Box>
+      <Box h='700px' w='100%' rounded--sm='2px' borderT='5px' borderSolid shadowMD column toCenterX css={{ borderMainBlueRich: 'true' }}>{content}</Box>
     </div>
   );
 }
