@@ -15,10 +15,7 @@ setConfig({
             xl: '1280px',
             '2xl': '1536px',
         },
-        colors: {
-            mainBlueRich: '#5DB0D0',
-            mainBlueMuted: '#F8FDFF',
-            white: '#fff',
+        colors: { mainBlueRich: '#5DB0D0', mainBlueMuted: '#F8FDFF', white: '#fff',
             black: '#000',
             normShadeColor: '#707070',
         },
@@ -65,7 +62,7 @@ return atom
 })
 
 addAtom('shadowDefault', {
-    shadow: '0px 0px 20px #00000029'
+    boxShadow: '0px 0px 20px #00000029'
 })
 
 const MyApp = ({ Component, pageProps }: AppProps) => ( <Component {...pageProps} /> )
