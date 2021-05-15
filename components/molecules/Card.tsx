@@ -7,7 +7,8 @@ interface CardProps {
 
 const Card: FC<CardProps> = ({ children }) => (
     <Box w-80 w-30--sm h-20 h-9--sm column toCenter border='2px' borderSolid css={{ borderMainBlueRich: 'true', boxSizing: 'content-box'}} >
-        <Box w='100%' h='70%' coreFontSizeSM white grid css={{
+        <Box w='100%' h='70%' white grid css={{
+						coreFontSizeSM: 'true',
 						bgMainBlueRich: 'true',
             gridTemplate: `
             '.. ...... .. ....... ..' 2vw 
@@ -19,7 +20,7 @@ const Card: FC<CardProps> = ({ children }) => (
             <Box square-10 white css={{  gridArea: 'imgBox'}}>{children[0]}</Box>
             <Box toCenterY toLeft css={{ gridArea: 'textBox'}}>{children[1]}</Box>
         </Box>
-        <Box w='100%' h='30%'  coreFontSizeSM toCenter>{children[2]}</Box>
+        <Box w='100%' h='30%' toCenter css={{ coreFontSizeSM: 'true' }}>{children[2]}</Box>
     </Box>
 )
 
