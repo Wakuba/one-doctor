@@ -17,7 +17,7 @@ const Card: FC<CardProps> = ({ children }) => (
             3vw 10vw 3vw auto 2vw
             `
         }}>
-            <Box square-10 white css={{  gridArea: 'imgBox'}}>{children[0]}</Box>
+            <Box square-10 white css={{  gridArea: 'imgBox'}}>{ children ? children[0] : 'No data'}</Box>
             <Box toCenterY toLeft css={{ gridArea: 'textBox'}}>{children[1]}</Box>
         </Box>
         <Box w='100%' h='30%' toCenter css={{ coreFontSizeSM: 'true' }}>{children[2]}</Box>
