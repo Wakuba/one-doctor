@@ -2,7 +2,7 @@ import { Box } from '@fower/react'
 import { ReactNode, FC } from 'react'
 
 interface CardProps {
-	children: ReactNode;
+	children?: ReactNode;
 }
 
 const Card: FC<CardProps> = ({ children }) => (
