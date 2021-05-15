@@ -61,10 +61,6 @@ switch (size) {
 return atom
 })
 
-addAtom('shadowDefault', {
-    boxShadow: '0px 0px 20px #00000029'
-})
-
 const MyApp = ({ Component, pageProps }: AppProps) => ( <Component {...pageProps} /> )
 
 

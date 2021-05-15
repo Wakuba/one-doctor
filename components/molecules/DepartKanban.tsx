@@ -24,7 +24,7 @@ const DepartKanban: FC<DepartKanbanProps> = ({ children, departPage, css, ...cla
       maxW='300px'
       row
       toCenterY
-      shadowDefault
+			shadowMD
       border='0.5px solid #707070'
       css={{
           ...css,

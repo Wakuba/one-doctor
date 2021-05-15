@@ -6,7 +6,7 @@ interface TagProps {
 }
 
 const Tag: React.FC<TagProps> = ({ children, ...className}) => (
-  <Box bgWhite h='5vw' w='30vw' toCenter rounded='4px' shadowDefault='true' coreFontSizeSM {...className}> {children} </Box>
+  <Box bgWhite h='5vw' w='30vw' toCenter rounded='4px' shadowMD coreFontSizeSM {...className}> {children} </Box>
 )
 
 

@@ -13,7 +13,7 @@ const AboutUs = () => {
             <Box as='main' relative p> 
                 <Box pl-10--sm pr-10--sm pb-10 roundedBR-25 pt-11 pr-6 pl-6 bgMainBlueRich >
                     <Box white mb-5 coreFontSizeLG fontsemibold>ABOUT US</Box >
-                    <Box coreFontSizeSM shadowDefault px-3 py-3> キャッチコピーを手書き文字のような感じにしたいです。（エモい感じの） トップページと同じでいいです </Box >
+                    <Box coreFontSizeSM shadowMD px-3 py-3> キャッチコピーを手書き文字のような感じにしたいです。（エモい感じの） トップページと同じでいいです </Box >
                     <Box as='p' white coreFontSizeLG fontsemibold>OUR MISSION</Box>
                     <Box coreFontSizeSM white>ミッションかマインドか、おそらくこの文章でいいと思いますが、最後のあたりの編集をお願いしたいです。 10年後、あなたがどんな医療を行っているか 考えたことがありますか？ 興味のある科はあっても、 具体的になにをしてるかは… そもそもいろんな制度もわからないし… 医師というのは一生学び続ける必要があります そのためには適切な場を選択しなければいけません 一人一人の医師の姿を見て その場を選んでみる、考えてみる ってことをしてみませんか？ 私たちone doctorはこのミッションを達成するために〜〜〜〜〜しています。</Box >
                 </Box>
@@ -23,7 +23,7 @@ const AboutUs = () => {
                     <Box coreFontSizeLG  css={{ paddingTop: '20vw', color: 'mainBlueRich'}}>運営について</Box >
                     <Box as='p' coreFontSizeSM >このサイトの運営は〜〜〜〜によって構成された＝＝＝がしております。</Box>
                     <Box toLeft--sm toCenter>
-                    <Box as='button' rounded='4px' h='15vw' maxH='45px' minH='15px' h--sm='3vw' w='60vw' maxW='200px' minW='140px' w--sm='13.5vw' shadowDefault white css={{ backgroundColor: 'mainBlueRich'}} >
+                    <Box as='button' rounded='4px' h='15vw' maxH='45px' minH='15px' h--sm='3vw' w='60vw' maxW='200px' minW='140px' w--sm='13.5vw' shadowMD white css={{ backgroundColor: 'mainBlueRich'}} >
                         { isPageSmall ? 'メドキャリHP' : 'メドキャリHP→'}
                     </Box>
                 </Box >

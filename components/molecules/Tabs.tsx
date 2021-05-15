@@ -25,7 +25,7 @@ const Tabs: React.FC<TabsProps> = props => {
         buttons.push(child.props.label)
         if (child.props.label === activeTab) content = child.props.children
       })}
-      <Box h='700px' w='100%' rounded--sm='2px' borderT='5px' borderSolid borderMainBlueRich shadowDefault column toCenterX>{content}</Box>
+      <Box h='700px' w='100%' rounded--sm='2px' borderT='5px' borderSolid borderMainBlueRich shadowMD column toCenterX>{content}</Box>
     </div>
   );
 }

@@ -50,7 +50,7 @@ export const getStaticProps = async () => {
 const PreStyledTopDomain = styled('div', 'relative', 'grid', { backgroundRepeat:'no-repeat',backgroundSize: '100% auto', backgroundColor: 'mainBlueMuted'})
 const TopImage = styled('img', 'circle-75', 'circle-45--sm', { gridArea: 'topImage' })
 const ScrollPointer= styled('div', 'white', 'coreFontSizeSM', 'absolute', 'left-4--md', 'left-4', 'top-48',  {borderBottom: '4px solid #fff', width: '14.5vw', transform: 'rotate(90deg)' })
-const Movie = ({src, title}) => <Box as='iframe' w-90vw w-20--sm h-125 h-28--sm shadowDefault src={src} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Box>
+const Movie = ({src, title}) => <Box as='iframe' w-90vw w-20--sm h-125 h-28--sm shadowMD src={src} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Box>
 
 
 const Home = (props) => {
@@ -129,7 +129,7 @@ const Home = (props) => {
             <Box mb-5 mainBlueRich coreFontSizeLG fontsemibold>筑波大学附属病院について</Box>
             <Box as='iframe' w='100%' h-50 mb-8 width="600" height="450" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.454268485108!2d140.09971111521065!3d36.10678911412265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2sUniversity%20of%20Tsukuba!5e0!3m2!1sen!2sjp!4v1618728410770!5m2!1sen!2sjp"  ></Box>
             <Box toCenter>
-              <Box as='button' rounded='4px' w-42 h-10 w-13--md h-3--md coreFontSizeSM white bgMainBlueRich shadowDefault>病院公式ページ</Box>
+              <Box as='button' rounded='4px' w-42 h-10 w-13--md h-3--md coreFontSizeSM white bgMainBlueRich shadowMD>病院公式ページ</Box>
             </Box>
           </Box>
         </Box>

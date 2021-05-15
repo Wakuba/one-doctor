@@ -2,7 +2,7 @@ import Card from '../molecules/Card'
 import { Box } from '@fower/react'
 
 const CardBoard = () => (
-    <Box  column toEvenly bgRed500 h-130 h-24--sm w-90 toCenterX bgWhite shadowDefault>
+    <Box  column toEvenly bgRed500 h-130 h-24--sm w-90 toCenterX bgWhite shadowMD>
         <Box coreFontSizeSM w-50 h='20%' column toEvenly>イベントや見学に参加することで、 より詳しく知ることができます</Box>
         <Box h='80%' column toBetween row--sm toLeft--sm>
             {/* <Box as='div' square-3 bgRed100/>
