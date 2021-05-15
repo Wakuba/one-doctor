@@ -16,8 +16,8 @@ const DepartBoard: React.FC<DepartBoardProps> = ({ css, ...className }) => {
   return (
     <Box m--sm='10vw' {...className} css={{ margin: '6vw', whiteSpace: 'nowrap', ...css}} >
         <Box fontsemibold white coreFontSizeLG>診療科一覧</Box>
-        <Box w='100%' overflowX='auto' overflowY='hidden'>
-            <Box w='1560px' space-5 w--sm='100%' py='3vw' flex flexWrap='wrap' row alignContent='flex-start' alignItems='center' justifyContent='flex-start' justifyContent--sm='space-between'>
+        <Box w='100%' overflowX='auto' overflowY='hidden' overflowX-disable--sm overflowY-disable--sm>
+            <Box w='1560px' space-3 w--sm='100%' py='3vw' flex flexWrap='wrap' row alignContent='flex-start' alignItems='center' justifyContent='flex-start' justifyContent--sm='space-between'>
                 {depList.map((cur, idx) => <DepartKanban key={idx + 1} >{cur}</DepartKanban>)}
             </Box >
         </Box>

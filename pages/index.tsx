@@ -100,7 +100,7 @@ const Home = (props) => {
             {!isPageSmall && WideNewsBoard}
         </TopDomain>
 
-        <Box w='100%' toCenterX>
+        <Box w='100%' toCenterX bgMainBlueMuted>
           <Box relative roundedBR-25 w-88 w-80--sm  bgMainBlueMuted >
             <RichBlueBRSquare/>
             <Box fontsemibold coreFontSizeLG mainBlueRich mb-3>新着動画</Box>

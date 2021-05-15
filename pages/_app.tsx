@@ -64,7 +64,7 @@ switch (size) {
 return atom
 })
 
-composeAtom('shadowDefault', {
+addAtom('shadowDefault', {
     shadow: '0px 0px 20px #00000029'
 })
 
