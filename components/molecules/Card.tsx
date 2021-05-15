@@ -1,5 +1,5 @@
 import { Box } from '@fower/react'
-import { ReactNode, FC } from 'reac'
+import { ReactNode, FC } from 'react'
 
 interface CardProps {
 	children: ReactNode;
