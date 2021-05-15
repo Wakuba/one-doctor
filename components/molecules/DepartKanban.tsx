@@ -22,19 +22,15 @@ const DepartKanban: FC<DepartKanbanProps> = ({ children, departPage, css, ...cla
       w='50vw'
       minW='39px'
       maxW='300px'
-      grid
+      row
+      toCenterY
       shadowDefault
+      border='0.5px solid #707070'
       css={{
           ...css,
-          border: '0.5px solid #707070',
-          gridTemplate: `
-          '.. ........ .. .......    ..' 15% 
-          '.. imageBox .. departName ..' clamp(27px, 8.5vw, 52px) 
-          '.. ........ .. .......    ..' 15% / 
-          13.5% clamp(27px, 8.5vw, 52px) auto auto auto `,
       }}
     >
-        <Box as='img' square='clamp(27px, 8.5vw, 52px)' border='0.3px' borderSolid borderNormShadeColor bgBlack css={{ gridArea: 'imageBox'}} />
+        <Box as='img' square='clamp(27px, 8.5vw, 52px)' ml='13.5%' mr='13.5%'  border='0.3px' borderSolid borderNormShadeColor bgBlack css={{ gridArea: 'imageBox'}} />
         <Box coreFontSizeSM toCenter css={{gridArea: 'departName'}}>{children}</Box>
       </Box>
     </Link>

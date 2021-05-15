@@ -10,8 +10,8 @@ const Inqueries = () => {
     <div>
       <Header />
       <Box column toCenter css={{ backgroundColor: 'mainBlueMuted', w: '100%' }}>
-        <Box as='main' pt-10 pt-11--sm w-88 w-80--sm >
-          <Box as='form' action=''>
+        <Box as='main' pt-10 pt-11--sm w='100%' toCenterX >
+          <Box as='form' action='' w--sm='80%' w='88%'>
               <Box mb='6vw'>
                   <Box as='div' mainBlueRich coreFontSizeLG fontSemibold>お問い合わせ</Box>
                   <p>以下のフォームに必要事項をご記入のうえ、「送信する」をクリックしてください</p>
