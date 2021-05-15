@@ -5,12 +5,12 @@ import ReactCardFlip from 'react-card-flip'
 interface CrewCardProps {
 	imgHeadSrc: string;
 	imgTailSrc: string;
-	children: ReactNode;
+	children?: ReactNode;
 }
 
 const CrewCard: FC<CrewCardProps> = ({ imgHeadSrc, imgTailSrc, children}) => {
     const [ isFlipped, setIsFlipped ] = useState(true)
-    const flip = () => {setIsFlipped(!isFlipped), console.log(isFlipped)}
+    const flip = () => {setIsFlipped(!isFlipped)}
     const HeadContent = ({ imgSrc , children}) => (
         <Box as='button' onClick={flip} css={{ 
             w: '90',
@@ -49,9 +49,8 @@ const CrewCard: FC<CrewCardProps> = ({ imgHeadSrc, imgTailSrc, children}) => {
     )
     return (
         <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal' >
-            <HeadContent  imgSrc={imgHeadSrc}>山中先生</HeadContent>
-            <TailContent  imgSrc={imgTailSrc}> 松村先生
-            </TailContent>
+						<HeadContent  imgSrc={imgHeadSrc}>{children[0]}</HeadContent>
+            <TailContent  imgSrc={imgTailSrc}>{children[1]}</TailContent>
         </ReactCardFlip>
     )
 }
