@@ -27,7 +27,7 @@ const EachDepartPage = props => {
 
                 <Box relative bgWhite m-10--sm css={{ margin: '6vw'}}>
                     <Box p-3 >
-                        <Box mainBlueRich borderB='1px' mb-3 css={{ borderMainBlueRich: 'true' coreFontSizeSM: 'true' }}>筑波大学附属病院　循環器内科イチオシポイント</Box>
+                        <Box mainBlueRich borderB='1px' mb-3 css={{ borderMainBlueRich: 'true', coreFontSizeSM: 'true' }}>筑波大学附属病院　循環器内科イチオシポイント</Box>
                         <Box css={{ coreFontSizeSM: 'true' }}>
                             <Box fontSemibold>教育：</Box>
                             <Box>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</Box>

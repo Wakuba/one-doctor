@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { ReactNode, FC } from 'react'
 import { Box } from '@fower/react'
-import DepartBoard from '../organisms/DepartBoard'
 
 type DepartKanbanProps = {
   key: number;
@@ -30,8 +29,8 @@ const DepartKanban: FC<DepartKanbanProps> = ({ children, departPage, css, ...cla
           ...css,
       }}
     >
-        <Box as='img' square='clamp(27px, 8.5vw, 52px)' ml='13.5%' mr='13.5%'  border='0.3px' borderSolid borderNormShadeColor bgBlack css={{ gridArea: 'imageBox'}} />
-        <Box coreFontSizeSM toCenter css={{gridArea: 'departName'}}>{children}</Box>
+        <Box as='img' square='clamp(27px, 8.5vw, 52px)' ml='13.5%' mr='13.5%'  border='0.3px' borderSolid bgBlack css={{ borderNormShadeColor: 'true', gridArea: 'imageBox'}} />
+        <Box toCenter css={{coreFontSizeSM: 'true', gridArea: 'departName'}}>{children}</Box>
       </Box>
     </Link>
   )

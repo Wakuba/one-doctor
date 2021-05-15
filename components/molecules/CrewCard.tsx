@@ -5,13 +5,17 @@ import ReactCardFlip from 'react-card-flip'
 interface CrewCardProps {
 	imgHeadSrc: string;
 	imgTailSrc: string;
-	children?: ReactNode;
 }
 
-const CrewCard: FC<CrewCardProps> = ({ imgHeadSrc, imgTailSrc, children}) => {
-    const [ isFlipped, setIsFlipped ] = useState(true)
-    const flip = () => {setIsFlipped(!isFlipped)}
-    const HeadContent = ({ imgSrc , children}) => (
+interface ContentProps {
+	imgSrc: string;
+	children: ReactNode;
+}
+
+const CrewCard: FC<CrewCardProps> = ({ imgHeadSrc, imgTailSrc }) => {
+	const [ isFlipped, setIsFlipped ] = useState(true); 
+	const flip = () => {setIsFlipped(!isFlipped)};
+		const HeadContent: FC<ContentProps> = ({ imgSrc , children}) => (
         <Box as='button' onClick={flip} css={{ 
             w: '90',
             h: '77',
@@ -29,7 +33,7 @@ const CrewCard: FC<CrewCardProps> = ({ imgHeadSrc, imgTailSrc, children}) => {
             <Box css={{ gridArea: 'textBox'}}>{children}</Box>
         </Box>
     )
-    const TailContent = ({ imgSrc, children }) => (
+		const TailContent: FC<ContentProps> = ({ imgSrc, children }) => (
         <Box as='button' onClick={flip} css={{ 
             w: '90',
             h: '77',
@@ -49,8 +53,8 @@ const CrewCard: FC<CrewCardProps> = ({ imgHeadSrc, imgTailSrc, children}) => {
     )
     return (
         <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal' >
-						<HeadContent  imgSrc={imgHeadSrc}>{children[0]}</HeadContent>
-            <TailContent  imgSrc={imgTailSrc}>{children[1]}</TailContent>
+						<HeadContent  imgSrc={imgHeadSrc}>yamanaka</HeadContent>
+            <TailContent  imgSrc={imgTailSrc}>matumura</TailContent>
         </ReactCardFlip>
     )
 }

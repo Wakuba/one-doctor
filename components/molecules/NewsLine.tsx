@@ -9,7 +9,7 @@
 //   })
 // }
 
-import React, { ReactNode, FC, ReactElement } from 'react'
+import React, { ReactNode, FC } from 'react'
 import { Box } from '@fower/react'
 
 type NewsLineProps = {

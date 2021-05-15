@@ -15,10 +15,7 @@ const TabMenu: FC<TabMenuProps> = ({ css, ...className}) => (
   <Box {...className} css={{...css}}>
     <Tabs >
         <TabField label='基本情報' key={1}>
-          <CrewCard imgHeadSrc='images/professor.png' imgTailSrc='images/professor2.png'>
-            <p>山中先生</p>
-            <p>松村先生</p>
-          </CrewCard>
+					<CrewCard imgHeadSrc='images/professor.png' imgTailSrc='images/professor2.png'/>
         </TabField>
         <TabField label='医局紹介' key={2}>
         </TabField>

@@ -2,11 +2,11 @@ import { FC, ReactNode } from 'react'
 
 type TabFieldProps = {
     key: number;
-    children?: React.ReactNode;
+    children?: ReactNode;
     label?: string;
   }
   
-const TabField: React.FC<TabFieldProps> = props => {
+const TabField: FC<TabFieldProps> = props => {
   console.log(props.children)
     return (
       <>

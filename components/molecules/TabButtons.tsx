@@ -1,5 +1,5 @@
 import { Box } from '@fower/react' 
-import { styled } from '@fower/styled' 
+
 type TabButtonsProps = { 
 	buttons: string[];
   changeTab: any;
