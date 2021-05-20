@@ -1,8 +1,8 @@
 import { Box } from '@fower/react'
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
-import { RichBlueTLSquare } from '../lib/StyledComponents'
 import { useContext } from 'react'
+import { RichBlueTLSquare } from '../lib/StyledComponents'
 import ScreenWidthContext from '../contexts/ScreenWidthContext'
 
 const AboutUs = () => {
