@@ -4,6 +4,11 @@ import Footer from '../components/organisms/Footer'
 import { useContext } from 'react'
 import { RichBlueTLSquare } from '../lib/StyledComponents'
 import ScreenWidthContext from '../contexts/ScreenWidthContext'
+import { styled } from '@fower/styled'
+
+// const PreStyledSquare = styled('div', { position: 'absolute', square: '25vw', zIndex: '-1'})
+// const RichBlueSquare = styled(PreStyledSquare, { backgroundColor: 'mainBlueRich'})
+// const RichBlueTLSquare = styled(RichBlueSquare, { left: '0px', top: '0px' })
 
 const AboutUs = () => {
     const isPageSmall = useContext(ScreenWidthContext)
