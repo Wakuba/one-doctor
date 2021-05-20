@@ -105,9 +105,9 @@ const Home: FC<HomeProps> = (props) => {
             {!isPageSmall && WideNewsBoard}
         </TopDomain>
 
-        <Box w='100%' toCenterX css={{ backgroundColor: 'MainBlueMuted'}}>
-          <Box relative roundedBR-25 w-88 w-80--sm  css={{ backgroundColor: 'bgMainBlueMuted'}} >
-            <RichBlueBRSquare/>
+        <Box w='100%' roundedBR-25 relative toCenterX css={{ backgroundColor: 'mainBlueMuted'}}>
+          <RichBlueBRSquare/>
+          <Box  w-88 w-80--sm >
             <Box fontSemibold mb-3 css={{ coreFontSizeLG: 'true', color: 'mainBlueRich' }}>新着動画</Box>
             <Box css={{ coreFontSizeMD: 'true' }}>各診療科のやりがいやリアルな現場を動画で見ることができます</Box>
             <Box overflowX='scroll' overflowY='hidden' >
