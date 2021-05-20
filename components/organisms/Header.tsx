@@ -8,11 +8,11 @@ type HeaderProps = {
   className?: any;
 }
 
-const HeaderFlame: FC<HeaderProps> = ({css, ...className})=> {
+const HeaderFlame: FC<HeaderProps> = ({css, ...className}) => {
   return (
-  <Box as='header' {...className} h='12vw' maxH='66px' minH='55px' w='100%' top-0 flex fixed--sm static zIndex-99 bgTransparent--sm  css={{backgorundColor: 'white',...css}}> 
+  <Box as='header' {...className} h='12vw' maxH='66px' minH='55px' w='100%' top-0 flex fixed--sm static zIndex-99 bgTransparent--sm  css={{ backgorundColor: 'white',...css }}> 
     <Link href='/'>
-      <Box as='img' className='onedoctorLogo' src='images/onedoctor.png' alt='one doctor logo' />
+      <Box as='img' src='images/onedoctor.png' alt='one doctor logo' css={{ objectFit: 'contain'}} />
     </Link>
   </Box>
   )

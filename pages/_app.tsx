@@ -1,4 +1,5 @@
 import React  from 'react'
+import Head from 'next/head'
 import type { AppProps /*, AppContext */ } from 'next/app'
 import { useMediaQuery } from '../lib/CustomHooks'
 import ScreenWidthContext from '../contexts/ScreenWidthContext'
@@ -66,6 +67,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     let isPageSmall = useMediaQuery(`(max-width: ${WIDTH_THRESHOLD}px`)
     return (
         <ScreenWidthContext.Provider value={isPageSmall}>
+            <Head>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <Component {...pageProps} /> 
         </ScreenWidthContext.Provider>
     )

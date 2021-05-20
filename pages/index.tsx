@@ -94,7 +94,7 @@ const Home: FC<HomeProps> = (props) => {
   }}/> 
 
   return (
-    <div>
+    <Box>
       <Header/>
       <Box as='main' >
         <TopDomain>
@@ -131,7 +131,7 @@ const Home: FC<HomeProps> = (props) => {
         <Box relative roundedTL-25 pb-20 css={{ backgroundColor: 'mainBlueMuted'}} >
           <Box absolute square-25 left0 top0 zIndex='-1' css={{ backgroundColor: 'mainBlueMuted'}}></Box>
           <Box ml-6 mr-6 ml-10--sm mr-10--sm pt-20 css={{ backgroundColor: 'tranparent'}}>
-            <Box mb-5 fontSemibold css={{ backgruondColro: 'mainBlueRich', coreFontSizeLG: 'true' }}>筑波大学附属病院について</Box>
+            <Box mb-5 fontSemibold css={{ color: 'mainBlueRich', backgruondColor: 'mainBlueRich', coreFontSizeLG: 'true' }}>筑波大学附属病院について</Box>
             <Box as='iframe' w='100%' h-50 mb-8 width="600" height="450" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.454268485108!2d140.09971111521065!3d36.10678911412265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2sUniversity%20of%20Tsukuba!5e0!3m2!1sen!2sjp!4v1618728410770!5m2!1sen!2sjp"  ></Box>
             <Box toCenter>
               <Box as='button' rounded='4px' w-42 h-10 w-13--md h-3--md white shadowMD css={{ backgroundColor: 'mainBlueRich', coreFontSizeSM: 'true' }}>病院公式ページ</Box>
@@ -140,7 +140,7 @@ const Home: FC<HomeProps> = (props) => {
         </Box>
       </Box>
       <Footer isPageSmall={isPageSmall}/>
-    </div>
+    </Box>
   )
 }
 
