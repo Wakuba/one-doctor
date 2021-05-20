@@ -66,12 +66,14 @@ return atom
 const MyApp = ({ Component, pageProps }: AppProps) => { 
     let isPageSmall = useMediaQuery(`(max-width: ${WIDTH_THRESHOLD}px`)
     return (
-        <ScreenWidthContext.Provider value={isPageSmall}>
+        <>
             <Head>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <Component {...pageProps} /> 
-        </ScreenWidthContext.Provider>
+            <ScreenWidthContext.Provider value={isPageSmall}>
+                <Component {...pageProps} /> 
+            </ScreenWidthContext.Provider>
+        </>
     )
 }
 
