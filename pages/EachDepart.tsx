@@ -1,17 +1,16 @@
 import { Box } from '@fower/react'
 import { styled } from '@fower/styled'
-import { useMediaQuery } from '../lib/customHook'
-import { WIDTH_THRESHOLD, mainBlueRich, mainBlueMuted } from '../lib/variables'
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import TabMenu from "../components/organisms/TabMenu"
 import Tag from '../components/atoms/Tag'
 import CardBoard from '../components/organisms/CardBoard'
+import { useContext } from 'react'
+import ScreenWidthContext from '../contexts/ScreenWidthContext'
 
-
-const EachDepartPage = props => {
-    let isPageSmall = useMediaQuery(`(max-width: ${WIDTH_THRESHOLD}px`)
-    const Button = styled('button', 'white', 'w-37', 'h-7', 'mb-6', `rounded='3px'`, { coreFontSizeSM: 'true', backgroundColor: 'mainBlueRich' })
+const EachDepartPage = () => {
+    const isPageSmall = useContext(ScreenWidthContext)
+    const Button = styled('button', 'white', 'w-37', 'h-7', 'mb-6', `rounded='3px'`, { fontSize: 'coreFontSizeSM', backgroundColor: 'mainBlueRich' })
     return (
         <Box>
             <Header  />
@@ -27,7 +26,7 @@ const EachDepartPage = props => {
 
                 <Box relative bgWhite m-10--sm css={{ margin: '6vw'}}>
                     <Box p-3 >
-                        <Box mainBlueRich borderB='1px' mb-3 css={{ borderMainBlueRich: 'true', coreFontSizeSM: 'true' }}>筑波大学附属病院　循環器内科イチオシポイント</Box>
+                        <Box borderB='1px' mb-3 css={{ color: 'mainBlurRich', borderMainBlueRich: 'true', coreFontSizeSM: 'true' }}>筑波大学附属病院　循環器内科イチオシポイント</Box>
                         <Box css={{ coreFontSizeSM: 'true' }}>
                             <Box fontSemibold>教育：</Box>
                             <Box>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</Box>
@@ -45,14 +44,14 @@ const EachDepartPage = props => {
                     <CardBoard/>
                 </Box>
 
-                <TabMenu p-0 bgWhite mx-10--sm />
+                <TabMenu p-0 mx-10--sm css={{ backgroundColor: 'white'}} />
 
                 <Box p-10 column toCenter>
-									<Box mb-6 css={{ coreFontSizeMD: 'true'}}>イベントや見学を通じて診療科について理解を深めましょう</Box>
+                    <Box mb-6 css={{ coreFontSizeMD: 'true'}}>イベントや見学を通じて診療科について理解を深めましょう</Box>
                     <Button>見学申し込みをする→</Button>
                     <Button>イベントのページを見る</Button>
                     <Button>イベントの提案をする→</Button>
-										<Box mb-6 css={{ coreFontSizeMD: 'true' }}>詳しい情報については診療科のホームページをご覧ください</Box>
+                    <Box mb-6 css={{ coreFontSizeMD: 'true' }}>詳しい情報については診療科のホームページをご覧ください</Box>
                     <Button>診療科公式ページ→→</Button>
                 </Box>
 

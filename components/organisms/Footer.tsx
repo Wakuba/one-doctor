@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { styled } from '@fower/styled'
 import { Box } from '@fower/react'
-import { ReactNode, FC } from 'react'
+import { FC } from 'react'
 
 interface FooterProps {
 	isPageSmall: boolean;

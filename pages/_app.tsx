@@ -1,8 +1,9 @@
-import React from 'react'
+import React  from 'react'
 import type { AppProps /*, AppContext */ } from 'next/app'
-
-import {setConfig,  addAtom, composeAtom, injectGlobalStyle } from '@fower/core'
+import { useMediaQuery } from '../lib/CustomHooks'
+import ScreenWidthContext from '../contexts/ScreenWidthContext'
 import { WIDTH_THRESHOLD } from '../lib/variables'
+import {setConfig,  addAtom, injectGlobalStyle } from '@fower/core'
 
 setConfig({
     unit: 'vw',
@@ -40,7 +41,7 @@ body: {
 }
 })
 
-addAtom(/coreFontSize(sm|md|lg|xl)/i, (atom) => {
+addAtom(/coreFontSize(sm|md|lg|xl)/i, atom => {
 const size = atom.propKey.replace('coreFontSize', '').toLowerCase()
 switch (size) {
     case 'sm':
@@ -55,13 +56,20 @@ switch (size) {
     case 'xl' :
     atom.style = { fontSize: 'clamp(30px, 8vw, 80px)' }
     break
-    default:
+    default: ;
     break
 }
 return atom
 })
 
-const MyApp = ({ Component, pageProps }: AppProps) => ( <Component {...pageProps} /> )
+const MyApp = ({ Component, pageProps }: AppProps) => { 
+    let isPageSmall = useMediaQuery(`(max-width: ${WIDTH_THRESHOLD}px`)
+    return (
+        <ScreenWidthContext.Provider value={isPageSmall}>
+            <Component {...pageProps} /> 
+        </ScreenWidthContext.Provider>
+    )
+}
 
 
 export default MyApp

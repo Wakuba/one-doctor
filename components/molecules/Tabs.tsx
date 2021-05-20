@@ -1,15 +1,17 @@
-import { useState, FC, ReactNode } from 'react'
+import { useState, FC, ReactNode, Children } from 'react'
 import TabButtons from '../molecules/TabButtons'
 import { Box } from '@fower/react'
 
-type TabsProps = {
-  children?: ReactNode;
+interface TabsProps {
+  children?: ReactNode; 
 }
 
-const Tabs: FC<TabsProps> = ({ children=['No data'] }) => {
-  const [activeTab, setActiveTab] = useState(children[0].props.label)
+//children[0].props.label
 
-  const changeTab = tab => {
+const Tabs: FC<TabsProps> = ({ children }) => {
+  const [activeTab, setActiveTab] = useState([])
+
+  const changeTab = (tab: any): void => {
     setActiveTab(tab);
   };
 
@@ -19,7 +21,7 @@ const Tabs: FC<TabsProps> = ({ children=['No data'] }) => {
   return (
     <div>
       <TabButtons activeTab={activeTab} buttons={buttons} changeTab={changeTab} />
-      {children.map(child => {
+      {Children.map(children, (child: any ) => {
         buttons.push(child.props.label)
         if (child.props.label === activeTab) content = child.props.children
       })}

@@ -1,35 +1,29 @@
+//React library
+import { useContext, FC } from 'react'
+
 //Components
-import { useMediaQuery } from '../lib/customHook'
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import NewsBoard from '../components/organisms/NewsBoard'
 import DepartBoard from '../components/organisms/DepartBoard'
-import { RichBlueBRSquare,  MutedBlueBRSquare, MutedBlueTLSquare } from '../lib/styledComponents'
-import TabMenu from '../components/organisms/TabMenu'
+import { RichBlueBRSquare,  MutedBlueBRSquare, MutedBlueTLSquare } from '../lib/StyledComponents'
+import ScreenWidthContext from '../contexts/ScreenWidthContext'
 
 //Fower
 import { Box } from '@fower/react'
 import { styled } from '@fower/styled'
 
-//others
-import { WIDTH_THRESHOLD } from '../lib/variables'
+//YoutubeAPI
+import { YOUTUBE_VIDEOLIST_API} from '../lib/variables'
 
-//Firebase
-import firebase from 'firebase'
-import '@firebase/firestore'
-import { firebaseConfig } from '../lib/firebase/firebase.config'
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-} else {
-  firebase.app();
-} 
-
+//firebase
+import { db } from '../lib/firebase/firebase.config'
 
 export const getStaticProps = async () => {
   let content: any = [];
+  let moviePlaylist;
   try {
-    const snapshot = await firebase.firestore().collection("fl_content").get();
+    const snapshot = await db.collection("fl_content").get();
     snapshot.docs.forEach((doc) => {
       content.push({
         title: doc.data().field_1618199954754,
@@ -38,23 +32,37 @@ export const getStaticProps = async () => {
     })
   }
   catch (error) {
-    console.log('Error getting documents; ', error);
+    console.log('Error getting documents from FlameLink; ', error);
+  }
+  try {
+    const res = await fetch(`${YOUTUBE_VIDEOLIST_API}?part=snippet&playlistId=PLFsfg2xP7cbJY2Cg4F_tWUSDrtfvLVCAu&maxResult=50&key=${process.env.YOUTUBE_API_KEY}`)
+    moviePlaylist = await res.json()
+  }
+  catch (error) {
   }
   return {
     props: {
-      content
+      content,
+      moviePlaylist
     }
   }
 };
 
 const PreStyledTopDomain = styled('div', 'relative', 'grid', { backgroundRepeat:'no-repeat',backgroundSize: '100% auto', backgroundColor: 'mainBlueMuted'})
 const TopImage = styled('img', 'circle-75', 'circle-45--sm', { gridArea: 'topImage' })
-const ScrollPointer= styled('div', 'white', 'absolute', 'left-4--md', 'left-4', 'top-48',  { coreFontSizeSM: 'true', borderBottom: '4px solid #fff', width: '14.5vw', transform: 'rotate(90deg)' })
-const Movie = ({src, title}) => <Box as='iframe' w-90vw w-20--sm h-125 h-28--sm shadowMD src={src} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Box>
+const ScrollPointer= styled('div', 'white', 'absolute', 'left-4--md', 'left-4', 'top-48',  { fontSize: 'coreFontSizeSM', borderBottom: '4px solid #fff', width: '14.5vw', transform: 'rotate(90deg)' })
 
+const Movie: FC<{src: string; title:string}> = ({src, title}) => (
+  <Box as='iframe' w-90vw w-20--sm h-125 h-28--sm shadowMD src={src} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Box>
+)
 
-const Home = (props) => {
-  let isPageSmall = useMediaQuery(`(max-width: ${WIDTH_THRESHOLD}px`)
+interface HomeProps {
+  content: any;
+  moviePlaylist: any;
+}
+
+const Home: FC<HomeProps> = (props) => {
+  const isPageSmall = useContext(ScreenWidthContext)
   const TopDomain = ( isPageSmall ? styled(PreStyledTopDomain, { backgroundImage: 'url(/svg/bg-top-s.svg)',
         backgroundPosition: '0px -66px',
         gridTemplate: `
@@ -97,10 +105,10 @@ const Home = (props) => {
             {!isPageSmall && WideNewsBoard}
         </TopDomain>
 
-        <Box w='100%' toCenterX bgMainBlueMuted>
-          <Box relative roundedBR-25 w-88 w-80--sm  bgMainBlueMuted >
+        <Box w='100%' toCenterX css={{ backgroundColor: 'MainBlueMuted'}}>
+          <Box relative roundedBR-25 w-88 w-80--sm  css={{ backgroundColor: 'bgMainBlueMuted'}} >
             <RichBlueBRSquare/>
-            <Box fontsemibold mainBlueRich mb-3 css={{ coreFontSizeLG: 'true' }}>新着動画</Box>
+            <Box fontSemibold mb-3 css={{ coreFontSizeLG: 'true', color: 'mainBlueRich' }}>新着動画</Box>
             <Box css={{ coreFontSizeMD: 'true' }}>各診療科のやりがいやリアルな現場を動画で見ることができます</Box>
             <Box overflowX='scroll' overflowY='hidden' >
               <Box w='1560px' row toLeft space-5>
@@ -114,19 +122,19 @@ const Home = (props) => {
           </Box>
         </Box> 
 
-        <Box relative roundedTL-25 roundedBR-25 py-10 bgMainBlueRich >
+        <Box relative roundedTL-25 roundedBR-25 py-10 css={{ backgroundColor: 'mainBlueRich'}}>
           <MutedBlueTLSquare/>
           <DepartBoard />
           <MutedBlueBRSquare/>
         </Box>
 
-        <Box relative roundedTL-25 bgMainBlueMuted pb-20 >
-          <Box absolute square-25 bgMainBlueRich left0 top0 zIndex='-1'></Box>
-          <Box ml-6 mr-6 ml-10--sm mr-10--sm pt-20 bgTranparent>
-            <Box mb-5 mainBlueRich fontsemibold css={{ coreFontSizeLG: 'true' }}>筑波大学附属病院について</Box>
+        <Box relative roundedTL-25 pb-20 css={{ backgroundColor: 'mainBlueMuted'}} >
+          <Box absolute square-25 left0 top0 zIndex='-1' css={{ backgroundColor: 'mainBlueMuted'}}></Box>
+          <Box ml-6 mr-6 ml-10--sm mr-10--sm pt-20 css={{ backgroundColor: 'tranparent'}}>
+            <Box mb-5 fontSemibold css={{ backgruondColro: 'mainBlueRich', coreFontSizeLG: 'true' }}>筑波大学附属病院について</Box>
             <Box as='iframe' w='100%' h-50 mb-8 width="600" height="450" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.454268485108!2d140.09971111521065!3d36.10678911412265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2sUniversity%20of%20Tsukuba!5e0!3m2!1sen!2sjp!4v1618728410770!5m2!1sen!2sjp"  ></Box>
             <Box toCenter>
-              <Box as='button' rounded='4px' w-42 h-10 w-13--md h-3--md white bgMainBlueRich shadowMD css={{ coreFontSizeSM: 'true' }}>病院公式ページ</Box>
+              <Box as='button' rounded='4px' w-42 h-10 w-13--md h-3--md white shadowMD css={{ backgroundColor: 'mainBlueRich', coreFontSizeSM: 'true' }}>病院公式ページ</Box>
             </Box>
           </Box>
         </Box>

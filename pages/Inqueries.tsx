@@ -1,11 +1,11 @@
 import { Box } from '@fower/react'
-import { useMediaQuery } from '../lib/customHook'
-import { WIDTH_THRESHOLD } from '../lib/variables'
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
+import { useContext } from 'react'
+import ScreenWidthContext from '../contexts/ScreenWidthContext'
 
 const Inqueries = () => {
-  let isPageSmall = useMediaQuery(`(max-width: ${WIDTH_THRESHOLD}px`)
+  const isPageSmall = useContext(ScreenWidthContext)
   return(
     <div>
       <Header />
@@ -13,7 +13,7 @@ const Inqueries = () => {
         <Box as='main' pt-10 pt-11--sm w='100%' toCenterX >
           <Box as='form' action='' w--sm='80%' w='88%'>
               <Box mb='6vw'>
-                  <Box as='div' mainBlueRich fontSemibold css={{ coreFontSizeLG: 'true' }}>お問い合わせ</Box>
+                  <Box as='div' fontSemibold css={{ backgroundColor: 'mainBlueRich', coreFontSizeLG: 'true' }}>お問い合わせ</Box>
                   <p>以下のフォームに必要事項をご記入のうえ、「送信する」をクリックしてください</p>
               </Box>
 
@@ -34,12 +34,12 @@ const Inqueries = () => {
             <Box mb='6vw'>
               <label>
                 <p>お問い合わせ内容(必須)</p>
-                <Box as='textarea' cols='40' rows='8' name='content' h='42vw' maxH='270px' w='100%' border='1px' rounded='4px'></Box>
+                <Box as='textarea' cols={40} rows={8} name='content' h='42vw' maxH='270px' w='100%' border='1px' rounded='4px'></Box>
               </label>
             </Box>
 
             <Box toCenter py='30px'>
-              <Box as='button' rounded='4px' bgMainBlueRich white h='45px' w='200px'>送信する</Box>
+              <Box as='button' rounded='4px' white h='45px' w='200px' css={{ backgroundColro: 'mainBlueRich'}}>送信する</Box>
             </Box>
 
           </Box>

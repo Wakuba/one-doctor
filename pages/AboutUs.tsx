@@ -1,20 +1,20 @@
 import { Box } from '@fower/react'
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
-import { RichBlueBRSquare, RichBlueTLSquare, MutedBlueBRSquare, MutedBlueTLSquare } from '../lib/styledComponents'
-import { WIDTH_THRESHOLD } from '../lib/variables'
-import { useMediaQuery } from '../lib/customHook'
+import { RichBlueTLSquare } from '../lib/StyledComponents'
+import { useContext } from 'react'
+import ScreenWidthContext from '../contexts/ScreenWidthContext'
 
 const AboutUs = () => {
-    let isPageSmall = useMediaQuery(`(max-width: ${WIDTH_THRESHOLD}px`)
+    const isPageSmall = useContext(ScreenWidthContext)
     return(
         <div>
             <Header />
             <Box as='main' relative p> 
                 <Box pl-10--sm pr-10--sm pb-10 roundedBR-25 pt-11 pr-6 pl-6 css={{ backgroundColor: 'mainBlueRich' }}>
-                    <Box white mb-5 fontsemibold css={{ coreFontSizeLG: 'true'}}>ABOUT US</Box >
+                    <Box white mb-5 fontSemibold css={{ coreFontSizeLG: 'true'}}>ABOUT US</Box >
                     <Box shadowMD px-3 py-3 css={{ coreFontSizeLG: 'true'}}> キャッチコピーを手書き文字のような感じにしたいです。（エモい感じの） トップページと同じでいいです </Box >
-                    <Box as='p' white fontsemibold css={{ coreFontSizeLG: 'true'}}>OUR MISSION</Box>
+                    <Box as='p' white fontSemibold css={{ coreFontSizeLG: 'true'}}>OUR MISSION</Box>
                     <Box white css={{ coreFontSizeSM: 'true' }}>ミッションかマインドか、おそらくこの文章でいいと思いますが、最後のあたりの編集をお願いしたいです。 10年後、あなたがどんな医療を行っているか 考えたことがありますか？ 興味のある科はあっても、 具体的になにをしてるかは… そもそもいろんな制度もわからないし… 医師というのは一生学び続ける必要があります そのためには適切な場を選択しなければいけません 一人一人の医師の姿を見て その場を選んでみる、考えてみる ってことをしてみませんか？ 私たちone doctorはこのミッションを達成するために〜〜〜〜〜しています。</Box >
                 </Box>
 
