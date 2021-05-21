@@ -17,7 +17,7 @@ const EachDepartPage = () => {
             <main className=''>
                 <div>
                     <div className='text-white' >筑波大学附属病院　循環器内科</div>
-                    <p className='text-white'>University of Tsukuba Hospital -cardiovascular medicine</div>
+                    <p className='text-white'>University of Tsukuba Hospital -cardiovascular medicine</p>
                     <div>
                         <Tag>筑波大学附属病院</Tag>
                         <Tag>循環器内科</Tag>

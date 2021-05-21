@@ -4,10 +4,9 @@ import { ReactNode, FC } from 'react'
 type DepartKanbanProps = {
   key: number;
   children: ReactNode;
-  departPage?: string;
 }
 
-const DepartKanban: FC<DepartKanbanProps> = ({ children, departPage, ...className})=> {
+const DepartKanban: FC<DepartKanbanProps> = ({ children })=> {
   return (
     <Link href='EachDepart'>
     <div className='bg-white rounded h-3 w-14 shadow-md'>
