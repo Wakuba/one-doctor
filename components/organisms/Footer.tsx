@@ -10,19 +10,16 @@ const StyledList = ({ children }: { children: ReactNode }) => (
 )
 
 const Footer: FC<FooterProps> = ({ isPageSmall }) => {
-  const StyledUnorderedLi = ({ children }: { children: ReactNode }) => ( isPageSmall 
-    ? <ul className='flex-col justify-center content-center list-none'>{ children }</ul> 
-    : <ul className='flex-row '></ul>
+  const StyledUnorderedLi = ({ children }: { children: ReactNode }) => ( 
+    isPageSmall 
+      ? <ul className='flex flex-col items-center list-none'>{ children }</ul> 
+      : <ul className='flex-row '></ul>
   )
   return (
-    <footer className='h-12 w-full text-white flex-col bg-prime-blue-rich'>
+    <footer className='h-52 w-full text-white flex flex-col items-center bg-prime-blue-rich justify-evenly'>
       <StyledUnorderedLi>
-        <StyledList >
-          運営について
-        </StyledList>
-        <StyledList>
-          利用規約
-        </StyledList>
+        <StyledList >運営について</StyledList>
+        <StyledList>利用規約</StyledList>
         <StyledList>
           <Link href='Inqueries'>
             <a className='text-white'>お問い合わせ</a>
