@@ -4,7 +4,7 @@ interface Styles {
     styles: string
 }
 
-const PreStyledSquare: FC<Styles> = ({ styles }) => ( <div className={`absolute -z-10 ${styles}`}></div> )
+const PreStyledSquare: FC<Styles> = ({ styles }) => ( <div className={`absolute -z-10 w-wscreen/4 h-wscreen/4 ${styles}`}></div> )
 const RichBlueSquare: FC<Styles> = ({ styles }) => (<PreStyledSquare styles={`bg-prime-blue-rich ${styles}`}/>)
 const MutedBlueSquare: FC<Styles> = ({ styles }) => (<PreStyledSquare styles={`bg-prime-blue-muted ${styles}`}/>)
 export const RichBlueTLSquare = () => (<RichBlueSquare styles='left-0 top-0'/>)

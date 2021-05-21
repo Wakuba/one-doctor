@@ -14,10 +14,10 @@ const depList: string[] = ['循環器', '消化器内科', '脳神経内科', '�
 
 const DepartBoard: FC<DepartBoardProps> = () => {
   return (
-    <div className=''>
-        <div >診療科一覧</div>
-        <div className='w-full overflow-x-auto overflow-y-hidden'>
-            <div className='flex-row flex-wrap content-start items-start justify-start'>
+    <div className='w-11/12 '>
+        <div className='text-white text-2xl font-semibold' >診療科一覧</div>
+        <div className='w-full sm:overflow-x-auto sm:overflow-y-hidden'>
+            <div className='flex flex-row flex-wrap sm:w-for-scroll justify-items-stretch '>
                 {depList.map((cur, idx) => <DepartKanban key={idx + 1} >{cur}</DepartKanban>)}
             </div >
         </div>

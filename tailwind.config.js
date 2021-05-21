@@ -19,7 +19,17 @@ module.exports = {
         'wscreen7/10': '70vw',
         'fit-to-screen': '216vw',
         'screen*2': '200vw',
+        'for-scroll': '1560px',
+        'wscreen/4': '25vw'
       }),
+      borderRadius: {
+        'bg-corner': '25vw'
+      },
+      colors: {
+        'prime-blue-rich': '#5DB0D0',
+        'prime-blue-muted': '#F8FDFF',
+        'prime-blue-pale': '#BBDFEC',
+      },
     },
     screens: {
       // => @media (max-width: 639px) { ... }
@@ -29,13 +39,6 @@ module.exports = {
       'md': {'max': '767px'},
       'sm': {'max': '639px'},
     },
-    colors: {
-      'prime-blue-rich': '#5DB0D0',
-      'prime-blue-muted': '#F8FDFF',
-      'prime-blue-pale': '#BBDFEC',
-      'white': '#fff'
-    },
-    
   },
   variants: {
     extend: {},

@@ -65,17 +65,19 @@ const Home: FC<HomeProps> = (props) => {
       <Header/>
       <main>
         <div className='sm:bg-hero-narrowback-image sm:bg-cover sm:bg-no-repeat sm:bg-minus66px sm:flex sm:flex-col sm:items-center sm:h-fit-to-screen pt-28 bg-prime-blue-muted'>
-          <img className='rounded-full sm:w-wscreen7/10 sm:h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
-          <div className='text-white'>キャッチコピー<br />白の手書き文字</div>
-          <div className='text-white'>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</div>
+          <img className='rounded-full sm:w-wscreen7/10 sm:h-wscreen7/10 ' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
+          <div className='w-11/12 flex justify-start mb-4'>
+            <div className='text-white text-4xl transform -rotate-12 '>キャッチコピー<br />白の手書き文字</div>
+          </div>
+          <div className='text-white w-10/12'>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</div>
             {!isPageSmall && <ScrollPointer>scroll</ScrollPointer>}
             {!isPageSmall && WideNewsBoard}
         </div>
 
-        <div className='w-full rounded-br-full relative bg-prime-blue-muted flex flex-col items-center'>
+        <div className='w-full rounded-br-bg-corner relative bg-prime-blue-muted flex flex-col items-center'>
           <RichBlueBRSquare/>
           <div className='w-11/12'>
-            <div className='text-prime-blue-rich text-xl font-semibold'>新着動画</div>
+            <div className='text-prime-blue-rich text-2xl font-semibold'>新着動画</div>
             <div className='text-sm'>各診療科のやりがいやリアルな現場を動画で見ることができます</div>
             <div className='overflow-x-scroll overflow-y-hidden'>
               <div className='w-screen*2 flex flex-row'>
@@ -89,7 +91,7 @@ const Home: FC<HomeProps> = (props) => {
           </div>
         </div> 
 
-        <div className='relative rounded-tl-full rounded-br-full bg-prime-blue-rich'>
+        <div className='relative w-full flex flex-col items-center rounded-tl-bg-corner rounded-br-bg-corner bg-prime-blue-rich py-wscreen/4'>
           <MutedBlueTLSquare/>
           <DepartBoard />
           <MutedBlueBRSquare/>

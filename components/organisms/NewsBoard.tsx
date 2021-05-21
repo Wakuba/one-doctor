@@ -9,7 +9,7 @@ type NewsBoardProps = {
 const NewsBoard: FC<NewsBoardProps> = ({ content }) => {
   return (
     <div> 
-      <div className='text-xl text-prime-blue-rich font-semibold'>NEWS</div>
+      <div className='text-2xl text-prime-blue-rich font-semibold'>NEWS</div>
       <p className='text-sm'>イベントや説明会の情報をお知らせします。</p>
       <div className='flex-col items-start bg-white rounded shadow-lg p-2.5 space-y-2'>
         {content.map((news: any, idx: number) => <NewsLine key={idx + 1} title={news.title} >{news.article}</NewsLine>)}
