@@ -1,5 +1,3 @@
-import { div } from '@fower/react'
-import { styled } from '@fower/styled'
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import TabMenu from "../components/organisms/TabMenu"

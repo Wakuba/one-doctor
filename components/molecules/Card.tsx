@@ -1,4 +1,3 @@
-import { div } from '@fower/react'
 import { FC } from 'react'
 
 interface CardProps {

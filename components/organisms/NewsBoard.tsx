@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { div } from '@fower/react' 
 import NewsLine from '../molecules/NewsLine'
 
 type NewsBoardProps = {

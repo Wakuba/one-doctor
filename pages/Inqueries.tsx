@@ -1,4 +1,3 @@
-import { div } from '@fower/react'
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import { useContext } from 'react'

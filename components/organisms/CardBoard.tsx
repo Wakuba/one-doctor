@@ -1,5 +1,4 @@
 import Card from '../molecules/Card'
-import { div } from '@fower/react'
 
 const CardBoard = () => (
     <div className='flex-col w-11/12 bg-white shadow-md'>
