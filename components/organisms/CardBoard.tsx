@@ -1,36 +1,32 @@
 import Card from '../molecules/Card'
-import { Box } from '@fower/react'
+import { div } from '@fower/react'
 
 const CardBoard = () => (
-    <Box  column toEvenly bgRed500 h-130 h-24--sm w-90 toCenterX bgWhite shadowMD>
-        <Box w-50 h='20%' column toEvenly css={{ coreFontSizeSM: 'true' }}>イベントや見学に参加することで、 より詳しく知ることができます</Box>
-        <Box h='80%' column toBetween row--sm toLeft--sm>
-            {/* <Box as='div' square-3 bgRed100/>
-            <Box square-3 bgBlue100/>
-            <Box square-3 bgAmber500/>
-            <Box square-3 bgBlueGray500/> */}
+    <div className='flex-col w-11/12 bg-white shadow-md'>
+        <div className='flex-col text-xs'>イベントや見学に参加することで、 より詳しく知ることができます</div>
+        <div className='h-4/5 flex-col'>
             <Card>
-                <Box as='img' square-10 src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRblRIGlzjN4yNtqpF84R2Mcy-RXcPhAYloLg&usqp=CAU'/>
-                <Box>より詳細な臨床情報や 研究内容に触れてみましょう！</Box>
-                <Box>診療科公式ホームページ→</Box>
+                <img className='' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRblRIGlzjN4yNtqpF84R2Mcy-RXcPhAYloLg&usqp=CAU'/>
+                <div>より詳細な臨床情報や 研究内容に触れてみましょう！</div>
+                <div>診療科公式ホームページ→</div>
             </Card>
             <Card>
-                <Box as='img' square-10 src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRblRIGlzjN4yNtqpF84R2Mcy-RXcPhAYloLg&usqp=CAU'/>
-                <Box>最新の情報をチェックして みましょう！</Box>
-                <Box>イベントページ→</Box>
+                <img className='' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRblRIGlzjN4yNtqpF84R2Mcy-RXcPhAYloLg&usqp=CAU'/>
+                <div>最新の情報をチェックして みましょう！</div>
+                <div>イベントページ→</div>
             </Card>
             <Card>
-                <Box as='img' square-10 src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRblRIGlzjN4yNtqpF84R2Mcy-RXcPhAYloLg&usqp=CAU'/>
-                <Box>あなたの希望するイベントを 開いてもらえるかも…？</Box>
-                <Box>イベントの提案をする→</Box>
+                <img className='' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRblRIGlzjN4yNtqpF84R2Mcy-RXcPhAYloLg&usqp=CAU'/>
+                <div>あなたの希望するイベントを 開いてもらえるかも…？</div>
+                <div>イベントの提案をする→</div>
             </Card>
             <Card>
-                <Box as='img' square-10 src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRblRIGlzjN4yNtqpF84R2Mcy-RXcPhAYloLg&usqp=CAU'/>
-                <Box>自分だけの質問をしてみましょう！</Box>
-                <Box>見学申し込みをする→</Box>
+                <img className='' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRblRIGlzjN4yNtqpF84R2Mcy-RXcPhAYloLg&usqp=CAU'/>
+                <div>自分だけの質問をしてみましょう！</div>
+                <div>見学申し込みをする→</div>
             </Card>
-        </Box>
-    </Box>
+        </div>
+    </div>
 )
 
 export default CardBoard

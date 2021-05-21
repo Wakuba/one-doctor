@@ -10,30 +10,28 @@
 // }
 
 import React, { ReactNode, FC } from 'react'
-import { Box } from '@fower/react'
 
 type NewsLineProps = {
   key: number;
   title: string;
   children?: ReactNode;
-  css: any; 
 }
 
-const NewsLine: FC<NewsLineProps> = ({ title, children, css}) => {
+const NewsLine: FC<NewsLineProps> = ({ title, children }) => {
   return (
-    <Box flex css={{...css}}>
-      <Box flex-3 className='eventName' column toTop toLeft>
-        <Box inlineBlock rounded='4px' pl='8px' pr='8px' white css={{ backgroundColor: 'mainBlueRich', coreFontSizeSM: 'true' }}>
-          {title}
-        </Box>
-      </Box>
-      <Box flex-6 flex-7--sm flex-17--md className='eventDetail coreFontSizeSM'
-      // dangerouslySetInnerHTML={{
-      // __html: formatted
-      // }}
-      > {children} </Box>
-    </Box>
+    <div className='grid grid-rows-1 grid-cols-3' >
+      <div className=''> 
+        <div className='rounded text-white bg-prime-blue-rich text-xs col-span-1 w-5/6 h-5 flex items-center justify-center' >
+          { title }
+        </div>
+      </div>
+      <div className='col-span-2 text-sm leading-5'> {children} </div>
+    </div>
   )
 }
 export default NewsLine
 
+
+      // dangerouslySetInnerHTML={{
+      // __html: formatted
+      // }}

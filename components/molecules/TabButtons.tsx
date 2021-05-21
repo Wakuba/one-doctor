@@ -1,5 +1,3 @@
-import { Box } from '@fower/react' 
-
 type TabButtonsProps = { 
 	buttons: string[];
   changeTab: any;
@@ -8,11 +6,11 @@ type TabButtonsProps = {
 
 const TabButtons: React.FC<TabButtonsProps> = ({buttons, changeTab, activeTab}) => {
   return (
-    <Box toLeft ml-1 spaceX-1>
+    <div className='' >
       {buttons.map((button, idx) =>
-           <Box as='button' key={idx} h-8 minH='30px' w-16 minW='60px' white roundedT='3px' cursorPointer bg={ button === activeTab ? 'mainBlueRich' : '#5DB0D065'}  onClick={() => changeTab(button)} css={{ coreFontSize: 'true' }}>{button}</Box >
+           <button key={idx} className={`h-2.5 w-5 text-white cursor-pointer text-xs ${ button === activeTab ? 'bg-prime-blue-rich' : 'bg-prime-blue-pale'}`}  onClick={() => changeTab(button)} >{button}</button>
       )}
-    </Box>
+    </div>
   )
 }
 export default TabButtons

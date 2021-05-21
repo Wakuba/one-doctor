@@ -1,4 +1,4 @@
-import { Box } from '@fower/react'
+import { div } from '@fower/react'
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import { useContext } from 'react'
@@ -9,42 +9,42 @@ const Inqueries = () => {
   return(
     <div>
       <Header />
-      <Box column toCenter css={{ backgroundColor: 'mainBlueMuted', w: '100%' }}>
-        <Box as='main' pt-10 pt-11--sm w='100%' toCenterX >
-          <Box as='form' action='' w--sm='80%' w='88%'>
-              <Box mb='6vw'>
-                  <Box as='div' fontSemibold css={{ backgroundColor: 'mainBlueRich', coreFontSizeLG: 'true' }}>お問い合わせ</Box>
+      <div className='flex-col justify-center content-center bg-prime-blue-muted w-full'>
+        <main className='w-full'>
+          <form action=''>
+              <div>
+                  <div className='bg-prime-blue-rich'>お問い合わせ</div>
                   <p>以下のフォームに必要事項をご記入のうえ、「送信する」をクリックしてください</p>
-              </Box>
+              </div>
 
-            <Box mb='6vw'>
+            <div>
               <label>
                 <p>お名前(必須)</p>
-                <Box as='input' type='text' name='name' h='15vw' maxH='60px' w='100%' border='1px' rounded='4px'></Box>
+                <input className='w-full border-2 rounded' type='text' name='name'></input>
               </label>
-            </Box>
+            </div>
 
-            <Box mb='6vw'>
+            <div>
               <label>
                 <p>メールアドレス(必須)</p>
-                <Box as='input' type='mail-adress' name='name' h='15vw' maxH='60px' w='100%' border='1px' rounded='4px'></Box>
+                <input className='w-full border-2 rounded' type='mail-adress' name='name'></input>
               </label>
-            </Box>
+            </div>
 
-            <Box mb='6vw'>
+            <div >
               <label>
                 <p>お問い合わせ内容(必須)</p>
-                <Box as='textarea' cols={40} rows={8} name='content' h='42vw' maxH='270px' w='100%' border='1px' rounded='4px'></Box>
+                <textarea cols={40} rows={8} name='content' className='w-full border-2 rounded'></textarea>
               </label>
-            </Box>
+            </div>
 
-            <Box toCenter py='30px'>
-              <Box as='button' rounded='4px' white h='45px' w='200px' css={{ backgroundColro: 'mainBlueRich'}}>送信する</Box>
-            </Box>
+            <div className='justify-center content-center'>
+              <button className='rounded text-white h-11 w-48 bg-prime-blue-rich'>送信する</button>
+            </div>
 
-          </Box>
-        </Box>
-      </Box>
+          </form >
+        </main>
+      </div>
       <Footer isPageSmall={isPageSmall} />
   </div>
 )

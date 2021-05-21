@@ -1,6 +1,5 @@
 import { useState, FC, ReactNode, Children } from 'react'
 import TabButtons from '../molecules/TabButtons'
-import { Box } from '@fower/react'
 
 interface TabsProps {
   children?: ReactNode; 
@@ -25,7 +24,7 @@ const Tabs: FC<TabsProps> = ({ children }) => {
         buttons.push(child.props.label)
         if (child.props.label === activeTab) content = child.props.children
       })}
-      <Box h='700px' w='100%' rounded--sm='2px' borderT='5px' borderSolid shadowMD column toCenterX css={{ borderMainBlueRich: 'true' }}>{content}</Box>
+      <div className='w-full rounded-sm border-t-4 border-solid shadow-md flex-col border-prime-blue-rich'>{content}</div>
     </div>
   );
 } 

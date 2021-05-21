@@ -1,12 +1,9 @@
-import { Box } from '@fower/react'
-
 interface TagProps {
   children: React.ReactNode;
-  className?: any;
 }
 
-const Tag: React.FC<TagProps> = ({ children, ...className}) => (
-  <Box bgWhite h='5vw' w='30vw' toCenter rounded='4px' shadowMD css={{ coreFontSizeSM: 'true'}} {...className}> {children} </Box>
+const Tag: React.FC<TagProps> = ({ children }) => (
+  <div className='bg-white h-32 w-5 justify-center justify-items-center rounded shadow-md text-xs'> {children} </div>
 )
 
 

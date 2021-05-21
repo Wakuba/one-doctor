@@ -1,19 +1,22 @@
 import Link from 'next/link'
-import { styled } from '@fower/styled'
-import { Box } from '@fower/react'
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
 interface FooterProps {
 	isPageSmall: boolean;
 }
  
-const StyledList = styled('li',  'toCenter')
+const StyledList = ({ children }: { children: ReactNode }) => (
+  <li className='justify-center content-center'> { children } </li>
+)
 
 const Footer: FC<FooterProps> = ({ isPageSmall }) => {
-  const StyledUnorderedLi = isPageSmall ? styled('ul', 'column', 'toCenterY') : styled('ul',  'row', 'toBetween') 
+  const StyledUnorderedLi = ({ children }: { children: ReactNode }) => ( isPageSmall 
+    ? <ul className='flex-col justify-center content-center list-none'>{ children }</ul> 
+    : <ul className='flex-row '></ul>
+  )
   return (
-    <Box as='footer' h='192px' w='100%' white column toCenter css={{ backgroundColor: 'mainBlueRich'}}>
-      <StyledUnorderedLi w='60vw' pl-0 css={{listStyle: 'none'}} >
+    <footer className='h-12 w-full text-white flex-col bg-prime-blue-rich'>
+      <StyledUnorderedLi>
         <StyledList >
           運営について
         </StyledList>
@@ -22,17 +25,17 @@ const Footer: FC<FooterProps> = ({ isPageSmall }) => {
         </StyledList>
         <StyledList>
           <Link href='Inqueries'>
-            <Box as='a' white css={{ textDecoration: 'none'}}>お問い合わせ</Box>
+            <a className='text-white'>お問い合わせ</a>
           </Link>
         </StyledList>
         <StyledList>
           <Link href='AboutUs'>
-            <Box as='a' white css={{ textDecoration: 'none'}}> One Doctor とは</Box>
+            <a className='text-white'> One Doctor とは</a>
           </Link>
         </StyledList>
       </StyledUnorderedLi>
-      <Box>コピーライト</Box>
-    </Box>
+      <div>コピーライト</div>
+    </footer>
   )
 } 
 

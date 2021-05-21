@@ -1,5 +1,5 @@
 //React library
-import { useContext, FC } from 'react'
+import { useContext, FC, ReactNode } from 'react'
 
 //Components
 import Header from '../components/organisms/Header'
@@ -8,10 +8,6 @@ import NewsBoard from '../components/organisms/NewsBoard'
 import DepartBoard from '../components/organisms/DepartBoard'
 import { RichBlueBRSquare,  MutedBlueBRSquare, MutedBlueTLSquare } from '../lib/StyledComponents'
 import ScreenWidthContext from '../contexts/ScreenWidthContext'
-
-//Fower
-import { Box } from '@fower/react'
-import { styled } from '@fower/styled'
 
 //YoutubeAPI
 import { YOUTUBE_VIDEOLIST_API} from '../lib/variables'
@@ -48,12 +44,10 @@ export const getStaticProps = async () => {
   }
 };
 
-const PreStyledTopDomain = styled('div', 'relative', 'grid', { backgroundRepeat:'no-repeat',backgroundSize: '100% auto', backgroundColor: 'mainBlueMuted'})
-const TopImage = styled('img', 'circle-75', 'circle-45--sm', { gridArea: 'topImage' })
-const ScrollPointer= styled('div', 'white', 'absolute', 'left-4--md', 'left-4', 'top-48',  { fontSize: 'coreFontSizeSM', borderBottom: '4px solid #fff', width: '14.5vw', transform: 'rotate(90deg)' })
+const ScrollPointer = ({ children }: { children: ReactNode }) => (<div className='text-white absolute border-solid'>{ children }</div> )
 
 const Movie: FC<{src: string; title:string}> = ({src, title}) => (
-  <Box as='iframe' w-90vw w-20--sm h-125 h-28--sm shadowMD src={src} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Box>
+  <iframe className='shadow-md w-72 h-96' src={src} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 )
 
 interface HomeProps {
@@ -63,84 +57,57 @@ interface HomeProps {
 
 const Home: FC<HomeProps> = (props) => {
   const isPageSmall = useContext(ScreenWidthContext)
-  const TopDomain = ( isPageSmall ? styled(PreStyledTopDomain, { backgroundImage: 'url(/svg/bg-top-s.svg)',
-        backgroundPosition: '0px -66px',
-        gridTemplate: `
-        '.. ......... ..' 17vw
-        '.. topImage  ..' 80vw
-        '.. catchCopy ..' 22vw
-        '.. catchText ..' 85vw/
-        10vw 80vw 10vw`,
-      })
-    : styled(PreStyledTopDomain, 'bgMainBlueMuted', 'h-100',`minH="790px"`, {
-      backgroundImage: 'url(svg/bg-top-m-l.svg)',
-      gridTemplate: `
-      '......... ......... ........  ..' 80px
-      '......... ......... ........  ..' 5vw
-      '......... catchCopy topImage  ..' 20vw
-      '......... catchText topImage  ..' 25vw
-      '......... newsBoard newsBoard ..' auto/
-      11vw 40vw 45vw 5vw`,
-    })
-  )
-  const WideNewsBoard = <NewsBoard content={props.content}  css={{
-    gridArea: 'newsBoard', 
-    '.title': { white: 'true' }, 
-    '.desc': { black: 'true'}
-  }}/>
-  const NarrowNewsBoard = <NewsBoard content={props.content}  css={{
-    '.title': { mainBlueRich: 'true', fontBold: 'true' },
-    '.desc': { black: 'true' }
-  }}/> 
+  const WideNewsBoard = <NewsBoard content={props.content}/>  
+  const NarrowNewsBoard = <NewsBoard content={props.content}/> 
 
   return (
-    <Box>
+    <div>
       <Header/>
-      <Box as='main' >
-        <TopDomain>
-          <TopImage src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
-          <Box as='div' css={{ width: '68vw', white: 'true', coreFontSizeXL: 'true', gridArea: 'catchCopy', transform: 'rotate(-10deg) translateY(-30%)' }}>キャッチコピー<br />白の手書き文字</Box>
-          <Box as='div' ml-3--sm css={{ color: 'white', coreFontSizeSM: 'true', gridArea: 'catchText'}}>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</Box>
+      <main>
+        <div className='sm:bg-hero-narrowback-image sm:bg-cover sm:bg-no-repeat sm:bg-minus66px sm:flex sm:flex-col sm:items-center sm:h-fit-to-screen pt-28 bg-prime-blue-muted'>
+          <img className='rounded-full sm:w-wscreen7/10 sm:h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
+          <div className='text-white'>キャッチコピー<br />白の手書き文字</div>
+          <div className='text-white'>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</div>
             {!isPageSmall && <ScrollPointer>scroll</ScrollPointer>}
             {!isPageSmall && WideNewsBoard}
-        </TopDomain>
+        </div>
 
-        <Box w='100%' roundedBR-25 relative toCenterX css={{ backgroundColor: 'mainBlueMuted'}}>
+        <div className='w-full rounded-br-full relative bg-prime-blue-muted flex flex-col items-center'>
           <RichBlueBRSquare/>
-          <Box  w-88 w-80--sm >
-            <Box fontSemibold mb-3 css={{ coreFontSizeLG: 'true', color: 'mainBlueRich' }}>新着動画</Box>
-            <Box css={{ coreFontSizeMD: 'true' }}>各診療科のやりがいやリアルな現場を動画で見ることができます</Box>
-            <Box overflowX='scroll' overflowY='hidden' >
-              <Box w='1560px' row toLeft space-5>
+          <div className='w-11/12'>
+            <div className='text-prime-blue-rich text-xl font-semibold'>新着動画</div>
+            <div className='text-sm'>各診療科のやりがいやリアルな現場を動画で見ることができます</div>
+            <div className='overflow-x-scroll overflow-y-hidden'>
+              <div className='w-screen*2 flex flex-row'>
                 <Movie src="https://www.youtube.com/embed/8jjswrh3agE" title="YouTube video player"></Movie>
                 <Movie src="https://www.youtube.com/embed/o6xTZsgz6sA" title="YouTube video player" ></Movie>
                 <Movie src="https://www.youtube.com/embed/o6xTZsgz6sA" title="YouTube video player"></Movie> 
                 <Movie src="https://www.youtube.com/embed/o6xTZsgz6sA" title="YouTube video player"></Movie>
-              </Box>
-            </Box>
+              </div>
+            </div>
             {isPageSmall && NarrowNewsBoard}
-          </Box>
-        </Box> 
+          </div>
+        </div> 
 
-        <Box relative roundedTL-25 roundedBR-25 py-10 css={{ backgroundColor: 'mainBlueRich'}}>
+        <div className='relative rounded-tl-full rounded-br-full bg-prime-blue-rich'>
           <MutedBlueTLSquare/>
           <DepartBoard />
           <MutedBlueBRSquare/>
-        </Box>
+        </div>
 
-        <Box relative roundedTL-25 pb-20 css={{ backgroundColor: 'mainBlueMuted'}} >
-          <Box absolute square-25 left0 top0 zIndex='-1' css={{ backgroundColor: 'mainBlueMuted'}}></Box>
-          <Box ml-6 mr-6 ml-10--sm mr-10--sm pt-20 css={{ backgroundColor: 'tranparent'}}>
-            <Box mb-5 fontSemibold css={{ color: 'mainBlueRich', backgruondColor: 'mainBlueRich', coreFontSizeLG: 'true' }}>筑波大学附属病院について</Box>
-            <Box as='iframe' w='100%' h-50 mb-8 width="600" height="450" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.454268485108!2d140.09971111521065!3d36.10678911412265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2sUniversity%20of%20Tsukuba!5e0!3m2!1sen!2sjp!4v1618728410770!5m2!1sen!2sjp"  ></Box>
-            <Box toCenter>
-              <Box as='button' rounded='4px' w-42 h-10 w-13--md h-3--md white shadowMD css={{ backgroundColor: 'mainBlueRich', coreFontSizeSM: 'true' }}>病院公式ページ</Box>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
+        <div className='relative rounded-tl-full bg-prime-blue-muted' >
+          <div className='absolute -z-10 bg-prime-blue-muted'></div>
+          <div className='bg-transparent'>
+            <div className='text-prime-blue-rich bg-prime-blue-rich'>筑波大学附属病院について</div>
+            <iframe className='w-full' width="600" height="450" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.454268485108!2d140.09971111521065!3d36.10678911412265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2sUniversity%20of%20Tsukuba!5e0!3m2!1sen!2sjp!4v1618728410770!5m2!1sen!2sjp"  ></iframe>
+            <div >
+              <button className='rounded text-white shadow-md bg-prime-blue-rich'>病院公式ページ</button>
+            </div>
+          </div>
+        </div>
+      </main>
       <Footer isPageSmall={isPageSmall}/>
-    </Box>
+    </div>
   )
 }
 
