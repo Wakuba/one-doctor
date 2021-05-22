@@ -6,7 +6,7 @@ import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import NewsBoard from '../components/organisms/NewsBoard'
 import DepartBoard from '../components/organisms/DepartBoard'
-import { RichBlueBRSquare,  MutedBlueBRSquare, MutedBlueTLSquare, RichBlueTLSquare } from '../lib/StyledComponents'
+import { RichBlueBRSquare,  MutedBlueBRSquare, MutedBlueTLSquare, RichBlueTLSquare } from '../components/atoms/StyledComponents'
 import ScreenWidthContext from '../contexts/ScreenWidthContext'
 
 //YoutubeAPI

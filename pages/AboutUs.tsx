@@ -1,7 +1,7 @@
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import { useContext } from 'react'
-import { RichBlueTLSquare } from '../lib/StyledComponents'
+import { RichBlueTLSquare } from '../components/atoms/StyledComponents'
 import ScreenWidthContext from '../contexts/ScreenWidthContext'
 
 const AboutUs = () => {
