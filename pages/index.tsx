@@ -45,7 +45,7 @@ export const getStaticProps = async () => {
 };
 
 const ScrollPointer = ({ children }: { children: ReactNode }) => (
-  <div className='text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 top-162 left-18 md:left-10'>{ children }</div> 
+  <div className='text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 top-162 md:left-10 ov-lg:left-18'>{ children }</div> 
 )
 
 const Movie: FC<{src: string; title:string}> = ({src, title}) => (
@@ -90,9 +90,9 @@ const Home: FC<HomeProps> = (props) => {
       h-fit-to-widescreen
       relative
     `}>
-      <div className='text-white text-6xl transform -rotate-12 my-wscreen/20 w-wscreen7/10 absolute mdf:top-5vw mdm:top-5vw  mdl:top-3vw ov-lg:top-3vw left-15vw'>キャッチコピー<br />白の手書き</div>
-      <div className='flex flex-row mr-20 ml-40 md:ml-28 mb-10'>
-        <div className='text-white w-11/12 ml-10 md:ml-0 lg:ml-5 mdf:self-end mdm:self-end mdl:self-center ov-lg:self-center'>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</div>
+      <div className='text-white text-6xl transform -rotate-12 my-wscreen/20 w-wscreen7/10 absolute left-wscreen/8 top-6 '>キャッチコピー<br />白の手書き</div>
+      <div className='flex flex-row mr-14 ml-16 ov-lg:ml-32'>
+        <div className='text-white w-11/12 ml-10 md:pt-40 lg:pt-52 xl:pt-64'>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</div>
         <img className='rounded-full w-wscreen9/20 h-wscreen9/20' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
         <ScrollPointer>scroll</ScrollPointer>
       </div>
