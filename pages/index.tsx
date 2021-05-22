@@ -44,9 +44,9 @@ export const getStaticProps = async () => {
   }
 };
 
-// const ScrollPointer = ({ children }: { children: ReactNode }) => (
-//   <div className='text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 top-162 md:left-10 ov-lg:left-18'>{ children }</div> 
-// )
+const ScrollPointer = ({ children }: { children: ReactNode }) => (
+  <div className='text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 top-162 md:left-10 ov-lg:left-18'>{ children }</div> 
+)
 
 const Movie: FC<{src: string; title:string}> = ({src, title}) => (
   <iframe className='shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2' src={src} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
@@ -68,7 +68,7 @@ const Home: FC<HomeProps> = (props) => {
             <div className='text-white ov-md:w-11/12 sm:w-10/12 ov-md:ml-10 md:pt-40 lg:pt-52 xl:pt-64'>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</div>
             <div className='text-white ov-md:text-6xl transform -rotate-12 my-wscreen/20 w-wscreen7/10 ov-md:absolute left-wscreen/8 top-6 sm:text-4xl'>キャッチコピー<br />白の手書き</div>
             <img className='rounded-full ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" /> 
-            {/* <ScrollPointer>scroll</ScrollPointer> */}
+            <ScrollPointer>scroll</ScrollPointer>
           </div>
           { !isPageSmall && 
             <div className='w-full flex justify-center mt-20'>
