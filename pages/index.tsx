@@ -58,7 +58,7 @@ interface HomeProps {
 }
 
 const Home: FC<HomeProps> = (props) => {
-  const isPageSmall = useContext(ScreenWidthContext)
+  let isPageSmall = useContext(ScreenWidthContext)
   const NarrowTopDomain = () => (
     <section className={`
       bg-hero-narrowback-image 

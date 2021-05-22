@@ -17,7 +17,7 @@ const Button = ({ children }: {children: ReactNode}) => (
 )
 
 const EachDepartPage = () => {
-    const isPageSmall = useContext(ScreenWidthContext)
+    let isPageSmall = useContext(ScreenWidthContext)
     return (
         <div>
             <Header  />

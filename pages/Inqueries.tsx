@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import ScreenWidthContext from '../contexts/ScreenWidthContext'
 
 const Inqueries = () => {
-  const isPageSmall = useContext(ScreenWidthContext)
+  let isPageSmall = useContext(ScreenWidthContext)
   return(
     <div>
       <Header />

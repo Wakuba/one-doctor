@@ -5,7 +5,7 @@ import { RichBlueTLSquare } from '../components/atoms/StyledComponents'
 import ScreenWidthContext from '../contexts/ScreenWidthContext'
 
 const AboutUs = () => {
-    const isPageSmall = useContext(ScreenWidthContext)
+    let isPageSmall = useContext(ScreenWidthContext)
     return(
         <div>
             <Header />
