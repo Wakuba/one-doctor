@@ -108,7 +108,8 @@ const Home: FC<HomeProps> = (props) => {
     <div>
       <Header/>
       <main>
-        { isPageSmall ? <NarrowTopDomain/> : <WideTopDomain/> }
+        { isPageSmall && <NarrowTopDomain/> }
+        { !isPageSmall && <WideTopDomain/> }
 
         <section className='w-full rounded-br-bg-corner ov-md:rounded-tl-bg-corner relative bg-prime-blue-muted flex flex-col items-center'>
           <RichBlueBRSquare/>
