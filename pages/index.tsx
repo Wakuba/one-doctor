@@ -44,9 +44,9 @@ export const getStaticProps = async () => {
   }
 };
 
-const ScrollPointer = ({ children }: { children: ReactNode }) => (
-  <div className='text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 top-162 md:left-10 ov-lg:left-18'>{ children }</div> 
-)
+// const ScrollPointer = ({ children }: { children: ReactNode }) => (
+//   <div className='text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 top-162 md:left-10 ov-lg:left-18'>{ children }</div> 
+// )
 
 const Movie: FC<{src: string; title:string}> = ({src, title}) => (
   <iframe className='shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2' src={src} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
