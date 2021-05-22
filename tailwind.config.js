@@ -3,18 +3,18 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      backgroundImage: theme => ({
+      backgroundImage: {
         'hero-wideback-image': "url(/svg/bg-top-m-l.svg)",
         'hero-narrowback-image': "url(/svg/bg-top-s.svg)",
         'ed-narrowback': 'url(/svg/bg-ed-s.svg)'
-      }),
-      backgroundPosition: theme => ({
+      },
+      backgroundPosition: {
         'minus66px': '0 -66px'
-      }),
+      },
       boxShadow: {
         'for-ichioshi-img': 'inset 0px 60px 30px -7px white'
       },
-      spacing: theme => ({
+      spacing: {
         '1/20'         : '5%',
         '2/11'         : '18.1818%',
         '1/10'         : '10%',
@@ -33,7 +33,7 @@ module.exports = {
         'wscreen/5'    : '20vw',
         'wscreen/4'    : '25vw',
         'wscreen/3'    : '33vw',
-      }),
+      },
       borderWidth: {
         1: '1px'
       },
