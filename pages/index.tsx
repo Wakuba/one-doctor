@@ -74,7 +74,7 @@ const Home: FC<HomeProps> = (props) => {
     `}>
       <img className='rounded-full w-wscreen7/10 h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
       <div className='w-11/12 flex justify-start mb-4'>
-        <div className='text-white ov-lg:text-4xl md:text-2xl transform -rotate-12 '>キャッチコピー<br />白の手書き文字</div>
+        <div className='text-white text-4xl transform -rotate-12 '>キャッチコピー<br />白の手書き文字</div>
       </div>
       <div className='text-white w-10/12'>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</div>
     </section>

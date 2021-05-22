@@ -32,7 +32,7 @@ const AboutUs = () => {
                     <div className='text-prime-blue-rich text-2xl font-semibold mb-5'>ABOUT LOGO</div >
                     <p className='text-sm mb-10'> 人と人の足りない部分を合わせると med が出来上がる、ワンドクターを通じて新しい医療の形を目指す様子を、One DoctorのOとDをモチーフに作成しています</p>
                     <div className='flex flex-col items-center pb-20'>
-                        <img className='w-1/3 object-contain' src='images/Logoの成り立ち.png'/>
+                        <img className='w-1/3 object-contain' src='images/logo-origin.png'/>
                     </div >
                 </div >
             </main>
