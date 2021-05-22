@@ -1,14 +1,9 @@
 import Tabs from '../molecules/Tabs'
 import TabField from '../molecules/TabField'
 import CrewCard from '../molecules/CrewCard'
-import { FC } from 'react'
 
-interface TabMenuProps {
-}
-
-
-const TabMenu: FC<TabMenuProps> = () => (
-  <div>
+const TabMenu = () => (
+  <div className='w-11/12'>
     <Tabs >
       <TabField label='基本情報' key={1}>
         <CrewCard imgHeadSrc='images/professor.png' imgTailSrc='images/professor2.png'/>

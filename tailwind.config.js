@@ -3,21 +3,23 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      zIndex: {
-        '-10': '-10'
-      },
       backgroundImage: theme => ({
         'hero-wideback-image': "url(/svg/bg-top-m-l.svg)",
         'hero-narrowback-image': "url(/svg/bg-top-s.svg)",
+        'ed-narrowback': 'url(/svg/bg-ed-s.svg)'
       }),
       backgroundPosition: theme => ({
         'minus66px': '0 -66px'
       }),
+      boxShadow: {
+        'for-ichioshi-img': 'inset 0px 60px 30px -7px white'
+      },
       spacing: theme => ({
         '1/20'         : '5%',
+        '2/11'         : '18.1818%',
         '1/10'         : '10%',
         'fit-to-screen': '216vw',
-        'fit-to-widescreen': '1000px',
+        'fit-to-widescreen': '1050px',
         'for-scroll'   : '1560px',
         'screen*2'     : '200vw',
         'hscreen/2'    : '50vh',
@@ -32,6 +34,9 @@ module.exports = {
         'wscreen/4'    : '25vw',
         'wscreen/3'    : '33vw',
       }),
+      borderWidth: {
+        1: '1px'
+      },
       borderRadius: {
         'bg-corner': '25vw'
       },
@@ -42,17 +47,26 @@ module.exports = {
       },
       inset: {
         '18': '4.5rem',
-        '162': '40.5rem'
-      }
+        '162': '40.5rem',
+        '3vw': '3vw',
+        '5vw': '5vw',
+        '15vw': '15vw',
+      },
+      zIndex: {
+        '-10': '-10'
+      },
     },
     screens: {
-      'sm': {'max': '639px'},
-      'md': {'min': '640px', 'max': '767px'},
-      'lg': {'min': '768px', 'max': '1023px'},
-      'xl': {'min': '1024px', 'max': '1279px'},
-      '2xl': {'min': '1280px', 'max': '1535px'},
-      '3xl': {'min': '1536px'},
-      'ov-md': '640px'
+      'sm': {'max': '767px'},
+      'md': {'min': '768px', 'max': '1023px'},
+      'mdf': {'min': '768px', 'max': '828px'},
+      'mdm': {'min': '829px', 'max': '959px'},
+      'mdl': {'min': '960px', 'max': '1023px'},
+      'lg': {'min': '1024px', 'max': '1279px'},
+      'xl': {'min': '1280px', 'max': '1535px'},
+      '2xl': {'min': '1536px'},
+      'ov-md': '768px',
+      'ov-lg': '1024px'
     },
   },
   variants: {

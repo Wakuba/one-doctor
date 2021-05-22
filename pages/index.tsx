@@ -45,7 +45,7 @@ export const getStaticProps = async () => {
 };
 
 const ScrollPointer = ({ children }: { children: ReactNode }) => (
-  <div className='text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 top-162 left-18 lg:left-10'>{ children }</div> 
+  <div className='text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 top-162 left-18 md:left-10'>{ children }</div> 
 )
 
 const Movie: FC<{src: string; title:string}> = ({src, title}) => (
@@ -60,7 +60,7 @@ interface HomeProps {
 const Home: FC<HomeProps> = (props) => {
   const isPageSmall = useContext(ScreenWidthContext)
   const NarrowTopDomain = () => (
-    <div className={`
+    <section className={`
       bg-hero-narrowback-image 
       bg-minus66px 
       flex 
@@ -74,13 +74,13 @@ const Home: FC<HomeProps> = (props) => {
     `}>
       <img className='rounded-full w-wscreen7/10 h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
       <div className='w-11/12 flex justify-start mb-4'>
-        <div className='text-white text-4xl transform -rotate-12 '>キャッチコピー<br />白の手書き文字</div>
+        <div className='text-white ov-lg:text-4xl md:text-2xl transform -rotate-12 '>キャッチコピー<br />白の手書き文字</div>
       </div>
       <div className='text-white w-10/12'>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</div>
-    </div>
+    </section>
   )
   const WideTopDomain = () => (
-    <div className={`
+    <section className={`
       bg-hero-wideback-image
       bg-no-repeat
       bg-cover
@@ -90,11 +90,9 @@ const Home: FC<HomeProps> = (props) => {
       h-fit-to-widescreen
       relative
     `}>
-      <div className='flex flex-row mr-20 ml-40 mb-10'>
-        <div className=''>
-          <div className='text-white text-6xl transform -rotate-12 my-wscreen/20 w-full'>キャッチコピー<br />白の手書き</div>
-          <div className='text-white w-11/12 ml-10 md:ml-0 lg:ml-5'>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</div>
-        </div>
+      <div className='text-white text-6xl transform -rotate-12 my-wscreen/20 w-wscreen7/10 absolute mdf:top-5vw mdm:top-5vw  mdl:top-3vw ov-lg:top-3vw left-15vw'>キャッチコピー<br />白の手書き</div>
+      <div className='flex flex-row mr-20 ml-40 md:ml-28 mb-10'>
+        <div className='text-white w-11/12 ml-10 md:ml-0 lg:ml-5 mdf:self-end mdm:self-end mdl:self-center ov-lg:self-center'>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</div>
         <img className='rounded-full w-wscreen9/20 h-wscreen9/20' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
         <ScrollPointer>scroll</ScrollPointer>
       </div>
@@ -104,14 +102,15 @@ const Home: FC<HomeProps> = (props) => {
       </div>
 
       <MutedBlueBRSquare/>
-    </div>
+    </section>
   )
   return (
     <div>
       <Header/>
       <main>
         { isPageSmall ? <NarrowTopDomain/> : <WideTopDomain/> }
-        <div className='w-full rounded-br-bg-corner ov-md:rounded-tl-bg-corner relative bg-prime-blue-muted flex flex-col items-center'>
+
+        <section className='w-full rounded-br-bg-corner ov-md:rounded-tl-bg-corner relative bg-prime-blue-muted flex flex-col items-center'>
           <RichBlueBRSquare/>
           <RichBlueTLSquare/>
           <div className='sm:w-11/12 ov-md:w-10/12 ov-md:py-wscreen/5'>
@@ -128,15 +127,15 @@ const Home: FC<HomeProps> = (props) => {
               </div>
             </div>
           </div>
-        </div> 
+        </section> 
 
-        <div className='relative w-full flex flex-col items-center rounded-tl-bg-corner rounded-br-bg-corner bg-prime-blue-rich py-wscreen/4'>
+        <section className='relative w-full flex flex-col items-center rounded-tl-bg-corner rounded-br-bg-corner bg-prime-blue-rich py-wscreen/4'>
           <MutedBlueTLSquare/>
           <DepartBoard />
           <MutedBlueBRSquare/>
-        </div>
+        </section>
 
-        <div className='relative rounded-tl-bg-corner bg-prime-blue-muted py-wscreen/4' >
+        <section className='relative rounded-tl-bg-corner bg-prime-blue-muted py-wscreen/4' >
           <RichBlueTLSquare/>
           <div className='bg-transparent flex flex-col items-center'>
             <div className='w-11/12'>
@@ -147,7 +146,7 @@ const Home: FC<HomeProps> = (props) => {
               <button className='rounded text-white shadow-md bg-prime-blue-rich w-44 h-11'>病院公式ページ</button>
             </div>
           </div>
-        </div>
+        </section>
       </main>
       <Footer isPageSmall={isPageSmall}/>
     </div>

@@ -13,7 +13,7 @@ const Footer: FC<FooterProps> = ({ isPageSmall }) => {
   const StyledUnorderedLi = ({ children }: { children: ReactNode }) => ( 
     isPageSmall 
       ? <ul className='flex flex-col items-center list-none'>{ children }</ul> 
-      : <ul className='flex-row '></ul>
+      : <ul className='flex-row '>{ children }</ul>
   )
   return (
     <footer className='h-52 w-full text-white flex flex-col items-center bg-prime-blue-rich justify-evenly'>
