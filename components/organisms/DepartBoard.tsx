@@ -17,9 +17,17 @@ const DepartBoard: FC<DepartBoardProps> = () => {
     <div className='sm:w-11/12 ov-md:w-10/12'>
         <div className='text-white sm:text-2xl ov-md:text-4xl font-semibold' >診療科一覧</div>
         <div className='sm:text-sm ov-md:text-lg mb-4'>各診療科にコンタクトを取ったり、イベント情報をチェックすることができます</div>
-        <div className='w-full sm:overflow-x-auto sm:overflow-y-hidden ov-md:flex ov-md:flex-col ov-md:items-center'>
-            <div className='flex flex-row flex-wrap sm:w-for-scroll sm:justify-items-stretch:wq
-             ov-md:justify-between ov-md:w-11/12'>
+        <div className='
+          w-full 
+          sm:overflow-x-auto sm:overflow-y-hidden 
+          md:overflow-x-auto md:overflow-y-hidden
+          ov-lg:flex ov-lg:flex-col ov-lg:items-center
+          '>
+            <div className='
+              flex flex-row flex-wrap 
+              sm:w-for-scroll sm:justify-items-stretch
+              md:w-for-scroll md:justify-items-stretch
+              ov-lg:justify-between ov-lg:w-11/12'>
                 {depList.map((cur, idx) => <DepartKanban key={idx + 1} >{cur}</DepartKanban>)}
             </div >
         </div>

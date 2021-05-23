@@ -20,7 +20,7 @@ module.exports = {
         '2/11'         : '18.1818%',
         '1/10'         : '10%',
         'fit-to-screen': '216vw',
-        'fit-to-widescreen': '1050px',
+        'fit-to-widescreen': '2150px',
         'for-scroll'   : '1560px',
         'screen*2'     : '200vw',
         'hscreen/2'    : '50vh',

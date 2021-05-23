@@ -57,14 +57,14 @@ const Home: FC<HomeProps> = (props) => {
     <div>
       <Header/>
       <main>
-        <section className='sm:bg-hero-narrowback-image sm:bg-prime-blue-muted sm:flex sm:flex-col sm:items-center sm:bg-minus66px sm:h-fit-to-screen ov-md:bg-hero-wideback-image ov-md:bg-prime-blue-rich ov-md:hit-to-widescreen bg-cover bg-no-repeat pt-wscreen/4 rounded-br-bg-corner h-fit-to-widescreen relative'>
+        <section className='sm:bg-hero-narrowback-image sm:bg-prime-blue-muted sm:flex sm:flex-col sm:items-center sm:bg-minus66px sm:h-fit-to-screen ov-md:bg-hero-wideback-image ov-md:bg-prime-blue-rich bg-cover bg-no-repeat pt-wscreen/4 rounded-br-bg-corner relative'>
             <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ov-md:mr-14 ov-md:ml-16 ov-lg:ml-32'>
               <div className='text-white ov-md:w-11/12 sm:w-10/12 ov-md:ml-10 md:pt-40 lg:pt-52 xl:pt-64'>「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）</div>
               <div className='text-white ov-md:text-6xl transform -rotate-12 my-wscreen/20 w-wscreen7/10 ov-md:absolute left-wscreen/8 top-6 sm:text-4xl'>キャッチコピー<br />白の手書き</div>
               <img className='rounded-full ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" /> 
               <div className='sm:!hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 top-162 md:left-10 ov-lg:left-18'>scroll</div> 
             </div>
-            <div className='sm:!hidden w-full flex justify-center mt-20'>
+            <div className='sm:!hidden w-full flex justify-center mt-20 pb-14'>
               <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white'}} content={ props.content }/>
             </div>
             <MutedBlueBRSquare/>

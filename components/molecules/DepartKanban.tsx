@@ -20,6 +20,8 @@ const DepartKanban: FC<DepartKanbanProps> = ({ children })=> {
         sm:w-52 
         sm:mr-4 
         sm:mb-4 
+        md:mr-8
+        md:mb-8
         ov-md:h-20 
         ov-md:w-80 
         ov-md:mb-10
