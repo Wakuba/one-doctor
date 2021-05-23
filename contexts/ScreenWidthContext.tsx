@@ -1,5 +1,5 @@
 import { createContext } from 'react'
 
-const ScreenWidthContext = createContext(false)
+const ScreenWidthContext = createContext(true)
 
 export default ScreenWidthContext
