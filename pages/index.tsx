@@ -104,13 +104,13 @@ const Home: FC<HomeProps> = (props) => {
           <MutedBlueBRSquare/>
         </section>
 
-        <section className='relative rounded-tl-bg-corner bg-prime-blue-muted py-wscreen/4' >
+        <section className='relative rounded-tl-bg-corner bg-prime-blue-muted py-wscreen/4 flex flex-col items-center' >
           <RichBlueTLSquare/>
-          <div className='bg-transparent flex flex-col items-center'>
-            <div className='w-11/12'>
-              <div className='text-prime-blue-rich text-2xl mb-5 font-semibold' >筑波大学附属病院について</div>
+          <div className='bg-transparent flex flex-col items-center sm:w-11/12 ov-md:w-8/12'>
+            <div className='w-full sm:mb-4 ov-md:mb-8'>
+              <div className='text-prime-blue-rich text-2xl font-semibold' >筑波大学附属病院について</div>
             </div>
-            <iframe className='w-11/12 mb-10 h-wscreen/2' width="600" height="450" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.454268485108!2d140.09971111521065!3d36.10678911412265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2sUniversity%20of%20Tsukuba!5e0!3m2!1sen!2sjp!4v1618728410770!5m2!1sen!2sjp"  ></iframe>
+            <iframe className='w-full mb-10 h-wscreen/2' width="600" height="450" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.454268485108!2d140.09971111521065!3d36.10678911412265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2sUniversity%20of%20Tsukuba!5e0!3m2!1sen!2sjp!4v1618728410770!5m2!1sen!2sjp"  ></iframe>
             <div >
               <button className='rounded text-white shadow-md bg-prime-blue-rich w-44 h-11'>病院公式ページ</button>
             </div>
