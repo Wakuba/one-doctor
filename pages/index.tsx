@@ -9,9 +9,6 @@ import DepartBoard from '../components/organisms/DepartBoard'
 import { RichBlueBRSquare,  MutedBlueBRSquare, MutedBlueTLSquare, RichBlueTLSquare } from '../components/atoms/StyledComponents'
 import ScreenWidthContext from '../contexts/ScreenWidthContext'
 
-//MediaQuery
-import MediaQuery from 'react-responsive'
-
 //YoutubeAPI
 import { YOUTUBE_VIDEOLIST_API} from '../lib/variables'
 
