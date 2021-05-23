@@ -3,11 +3,11 @@ import Footer from '../components/organisms/Footer'
 
 const Inqueries = () => {
   return(
-    <div>
+    <>
       <Header />
       <div className='flex-col justify-center content-center bg-prime-blue-muted w-full'>
         <main className='w-full flex flex-col items-center'>
-          <form action='' className='sm:w-11/12 space-y-10'>
+          <form action='' className='sm:w-11/12 ov-md:w-8/12 space-y-10'>
               <div className='mt-10'>
                   <div className='text-2xl text-prime-blue-rich font-semibold mb-6'>お問い合わせ</div>
                   <p className='text-sm'>以下のフォームに必要事項をご記入のうえ、「送信する」をクリックしてください</p>
@@ -42,7 +42,7 @@ const Inqueries = () => {
         </main>
       </div>
       <Footer/>
-  </div>
+  </>
 )
 }
 

@@ -7,18 +7,21 @@ module.exports = {
       backgroundImage: {
         'hero-wideback-image': "url(/svg/bg-top-m-l.svg)",
         'hero-narrowback-image': "url(/svg/bg-top-s.svg)",
-        'ed-narrowback': 'url(/svg/bg-ed-s.svg)'
+        'ed-narrowback': 'url(/svg/bg-ed-s.svg)',
+        'ed-wideback': 'url(/svg/bg-ed-m-l.svg)'
       },
       backgroundPosition: {
         'minus66px': '0 -66px'
       },
       boxShadow: {
-        'for-ichioshi-img': 'inset 0px 60px 30px -7px white'
+        'for-narrow-ichioshi-img': 'inset 0px 60px 30px -7px white',
+        'for-wide-ichioshi-img': 'inset 60px 0px 30px -7px white'
       },
       spacing: {
         '1/20'         : '5%',
         '2/11'         : '18.1818%',
         '1/10'         : '10%',
+        '1/6': '16.666667%',
         'fit-to-screen': '216vw',
         'fit-to-widescreen': '2150px',
         'for-scroll'   : '1560px',
@@ -49,6 +52,7 @@ module.exports = {
       inset: {
         '18': '4.5rem',
         '162': '40.5rem',
+        '200': '50rem',
         '3vw': '3vw',
         '5vw': '5vw',
         '15vw': '15vw',

@@ -6,7 +6,7 @@ interface CardProps {
 }
 
 const AppealCard: FC<CardProps> = ({ children, src }) => (
-    <div className='w-11/12 h-24 border-1 border-solid border-prime-blue-rich'>
+    <div className='w-11/12 h-24 border-1 border-solid border-prime-blue-rich ov-md:justify-self-center ov-md:mb-4'>
         <div className='w-full h-2/3 text-white text-xs bg-prime-blue-rich grid grid-cols-7'>
             <div className='col-span-2 flex justify-center items-center'>
                 <img className='h-10 w-10' src={src}/>

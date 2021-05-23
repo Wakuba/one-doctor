@@ -9,8 +9,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
         <>
             <Head>
-                <link rel='one doctor logo' href='/images/favicon.iso'/>
                 <title>one doctor</title>
+                <link rel="icon" type="image/x-icon" href="/public/images/favicon.ico"/>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <Component {...pageProps} /> 
