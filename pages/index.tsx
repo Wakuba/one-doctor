@@ -15,7 +15,7 @@ import { YOUTUBE_VIDEOLIST_API} from '../lib/variables'
 //firebase
 import { db } from '../lib/firebase/firebase.config'
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   let content: any = [];
   let moviePlaylist;
   try {
