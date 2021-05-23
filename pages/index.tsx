@@ -1,5 +1,5 @@
 //React library
-import { useContext, FC, ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 
 //Components
 import Header from '../components/organisms/Header'
@@ -7,7 +7,6 @@ import Footer from '../components/organisms/Footer'
 import NewsBoard from '../components/organisms/NewsBoard'
 import DepartBoard from '../components/organisms/DepartBoard'
 import { RichBlueBRSquare,  MutedBlueBRSquare, MutedBlueTLSquare, RichBlueTLSquare } from '../components/atoms/StyledComponents'
-import ScreenWidthContext from '../contexts/ScreenWidthContext'
 
 //YoutubeAPI
 import { YOUTUBE_VIDEOLIST_API} from '../lib/variables'
@@ -15,7 +14,7 @@ import { YOUTUBE_VIDEOLIST_API} from '../lib/variables'
 //firebase
 import { db } from '../lib/firebase/firebase.config'
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   let content: any = [];
   let moviePlaylist;
   try {
@@ -45,7 +44,7 @@ export const getServerSideProps = async () => {
 };
 
 const ScrollPointer = ({ children }: { children: ReactNode }) => (
-  <div className='text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 top-162 md:left-10 ov-lg:left-18'>{ children }</div> 
+  <div className='sm:hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 top-162 md:left-10 ov-lg:left-18'>{ children }</div> 
 )
 
 const Movie: FC<{src: string; title:string}> = ({src, title}) => (
@@ -58,7 +57,6 @@ interface HomeProps {
 }
 
 const Home: FC<HomeProps> = (props) => {
-  let isPageSmall = useContext(ScreenWidthContext)
   return (
     <div>
       <Header/>
@@ -70,11 +68,9 @@ const Home: FC<HomeProps> = (props) => {
               <img className='rounded-full ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" /> 
               <ScrollPointer>scroll</ScrollPointer>
             </div>
-            { !isPageSmall && 
-              <div className='w-full flex justify-center mt-20'>
-                <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white'}} content={ props.content }/>
-              </div>
-            }
+            <div className='sm:hidden w-full flex justify-center mt-20'>
+              <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white'}} content={ props.content }/>
+            </div>
             <MutedBlueBRSquare/>
         </section> 
 
@@ -95,11 +91,9 @@ const Home: FC<HomeProps> = (props) => {
               </div>
             </div>
           </div>
-          { isPageSmall && 
-            <div className='w-full flex justify-center mt-10 mb-10'>
-              <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich'}} content={ props.content }/>
-            </div>
-          } 
+          <div className='ov-md:hidden w-full flex justify-center mt-10 mb-10'>
+            <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich'}} content={ props.content }/>
+          </div>
         </section> 
 
         <section className='relative w-full flex flex-col items-center rounded-tl-bg-corner rounded-br-bg-corner bg-prime-blue-rich py-wscreen/4'>
@@ -121,7 +115,7 @@ const Home: FC<HomeProps> = (props) => {
           </div>
         </section>
       </main>
-      <Footer isPageSmall={isPageSmall}/>
+      <Footer/>
     </div>
   )
 }

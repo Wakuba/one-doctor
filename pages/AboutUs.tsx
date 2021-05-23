@@ -1,11 +1,8 @@
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
-import { useContext } from 'react'
 import { RichBlueTLSquare } from '../components/atoms/StyledComponents'
-import ScreenWidthContext from '../contexts/ScreenWidthContext'
 
 const AboutUs = () => {
-    let isPageSmall = useContext(ScreenWidthContext)
     return(
         <div>
             <Header />
@@ -23,7 +20,7 @@ const AboutUs = () => {
                     <p className='text-sm mb-10'>このサイトの運営は〜〜〜〜によって構成された＝＝＝がしております。</p>
                     <div className='flex flex-col items-center'>
                         <button className='rounded shadow-md text-white bg-prime-blue-rich w-64 h-14' >
-                            { isPageSmall ? 'メドキャリHP' : 'メドキャリHP→'}
+                             メドキャリHP
                         </button>
                     </div >
                 </div >
@@ -36,7 +33,7 @@ const AboutUs = () => {
                     </div >
                 </div >
             </main>
-            <Footer isPageSmall={isPageSmall} />
+            <Footer />
         </div>
     )
 }

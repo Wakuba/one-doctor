@@ -1,19 +1,14 @@
 import Link from 'next/link'
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 
-interface FooterProps {
-	isPageSmall: boolean;
-}
  
 const StyledList = ({ children }: { children: ReactNode }) => (
   <li className='justify-center content-center'> { children } </li>
 )
 
-const Footer: FC<FooterProps> = ({ isPageSmall }) => {
+const Footer = () => {
   const StyledUnorderedLi = ({ children }: { children: ReactNode }) => ( 
-    isPageSmall 
-      ? <ul className='flex flex-col items-center list-none'>{ children }</ul> 
-      : <ul className='flex-row '>{ children }</ul>
+    <ul className='flex sm:flex-col sm:items-center list-none '>{ children }</ul> 
   )
   return (
     <footer className='h-52 w-full text-white flex flex-col items-center bg-prime-blue-rich justify-evenly'>

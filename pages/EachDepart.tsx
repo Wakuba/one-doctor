@@ -3,8 +3,7 @@ import Footer from '../components/organisms/Footer'
 import TabMenu from "../components/organisms/TabMenu"
 import Tag from '../components/atoms/Tag'
 import AppealCardBoard from '../components/organisms/AppealCardBoard'
-import { ReactNode, useContext } from 'react'
-import ScreenWidthContext from '../contexts/ScreenWidthContext'
+import { ReactNode } from 'react'
 
 const PushPoint = ({ children }: { children: JSX.Element[] }) => (  
     <div>
@@ -17,7 +16,6 @@ const Button = ({ children }: {children: ReactNode}) => (
 )
 
 const EachDepartPage = () => {
-    let isPageSmall = useContext(ScreenWidthContext)
     return (
         <div>
             <Header  />
@@ -83,7 +81,7 @@ const EachDepartPage = () => {
                 </section>
 
             </main>
-            <Footer isPageSmall={isPageSmall} />
+            <Footer />
         </div>
   )
 }

@@ -1,10 +1,7 @@
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
-import { useContext } from 'react'
-import ScreenWidthContext from '../contexts/ScreenWidthContext'
 
 const Inqueries = () => {
-  let isPageSmall = useContext(ScreenWidthContext)
   return(
     <div>
       <Header />
@@ -44,7 +41,7 @@ const Inqueries = () => {
           </form >
         </main>
       </div>
-      <Footer isPageSmall={isPageSmall} />
+      <Footer/>
   </div>
 )
 }
