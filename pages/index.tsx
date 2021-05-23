@@ -64,7 +64,7 @@ const Home: FC<HomeProps> = (props) => {
               <img className='rounded-full ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" /> 
               <div className='sm:!hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 top-162 md:left-10 ov-lg:left-18'>scroll</div> 
             </div>
-            <div className='sm:hidden ov-md:w-full ov-md:flex ov-md:justify-center ov-md:mt-20'>
+            <div className='sm:!hidden w-full flex justify-center mt-20'>
               <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white'}} content={ props.content }/>
             </div>
             <MutedBlueBRSquare/>
@@ -87,7 +87,7 @@ const Home: FC<HomeProps> = (props) => {
               </div>
             </div>
           </div>
-          <div className='ov-md:!hidden sm:w-full sm:flex sm:justify-center sm:mt-10 sm:mb-10'>
+          <div className='ov-md:!hidden w-full flex justify-center mt-10 mb-10'>
             <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich'}} content={ props.content }/>
           </div>
         </section> 
