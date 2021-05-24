@@ -1,5 +1,6 @@
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
+import ModalTrigger from '../components/molecules/MoviePlayer'
 
 const Inqueries = () => {
   return(
@@ -39,6 +40,7 @@ const Inqueries = () => {
             </div>
 
           </form >
+          <ModalTrigger/>
         </main>
       </div>
       <Footer/>
