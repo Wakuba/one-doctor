@@ -1,5 +1,6 @@
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
+import ContactButtonModal from '../components/molecules/ContactButtonModal'
 
 const Inqueries = () => {
   return(
@@ -38,6 +39,7 @@ const Inqueries = () => {
               <button className='rounded text-white h-11 w-48 bg-prime-blue-rich'>送信する</button>
             </div>
           </form >
+          <ContactButtonModal/>
         </main>
       </div>
       <Footer/>

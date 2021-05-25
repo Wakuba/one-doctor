@@ -13,6 +13,7 @@ import { YOUTUBE_VIDEOLIST_API} from '../lib/variables'
 
 //firebase
 import { db } from '../lib/firebase/firebase.config'
+import ContactButtonModal from '../components/molecules/ContactButtonModal'
 
 export const getStaticProps = async () => {
   let content: any = [];
@@ -116,6 +117,7 @@ const Home: FC<HomeProps> = (props) => {
             </div>
           </div>
         </section>
+        <ContactButtonModal/>
       </main>
       <Footer/>
     </>
