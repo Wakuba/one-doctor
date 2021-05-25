@@ -77,6 +77,23 @@ module.exports = {
     backdropFilter: {
       'blur': 'blur(20px)',
     },
+    rotate: {
+      '-180': '-180deg',
+      '-90': '-90deg',
+      '-60': '-60deg',
+      '-45': '-45deg',
+      '-30': '-30deg',
+      '-12': '-12deg',
+      '0': '0',
+      '12': '12deg',
+      '30': '30deg',
+      '45': '45deg',
+      '60': '60deg',
+      '90': '90deg',
+      '135': '135deg',
+      '180': '180deg',
+      '270': '270deg',
+     }
   },
   variants: {
     extend: {},
