@@ -8,7 +8,9 @@ module.exports = {
         'hero-wideback-image': "url(/svg/bg-top-m-l.svg)",
         'hero-narrowback-image': "url(/svg/bg-top-s.svg)",
         'ed-narrowback': 'url(/svg/bg-ed-s.svg)',
-        'ed-wideback': 'url(/svg/bg-ed-m-l.svg)'
+        'ed-wideback': 'url(/svg/bg-ed-m-l.svg)',
+        'cc-back': 'url(/svg/bg-cc.svg)',
+        'contact-button': 'url(/svg/contact-button.svg)'
       },
       backgroundPosition: {
         'minus66px': '0 -66px'
