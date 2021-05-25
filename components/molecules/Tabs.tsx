@@ -22,7 +22,7 @@ const Tabs: FC<TabsProps> = ({ children }) => {
         buttons.push(child.props.label)
         if (child.props.label === activeTab) content = child.props.children
       })}
-      <div className='w-full rounded-sm border-t-4 border-solid shadow-md flex-col border-prime-blue-rich h-96'>{content}</div>
+      <div className='w-full rounded-sm border-t-4 border-solid shadow-md flex-col border-prime-blue-rich '>{content}</div>
     </>
   );
 } 

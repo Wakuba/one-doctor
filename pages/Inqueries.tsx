@@ -1,6 +1,5 @@
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
-import ModalTrigger from '../components/molecules/MoviePlayer'
 
 const Inqueries = () => {
   return(
@@ -9,10 +8,10 @@ const Inqueries = () => {
       <div className='flex-col justify-center content-center bg-prime-blue-muted w-full'>
         <main className='w-full flex flex-col items-center'>
           <form action='' className='sm:w-11/12 ov-md:w-8/12 space-y-10'>
-              <div className='mt-10'>
-                  <div className='text-2xl text-prime-blue-rich font-semibold mb-6'>お問い合わせ</div>
-                  <p className='text-sm'>以下のフォームに必要事項をご記入のうえ、「送信する」をクリックしてください</p>
-              </div>
+            <div className='mt-10'>
+                <h1 className='text-2xl text-prime-blue-rich font-semibold mb-6'>お問い合わせ</h1>
+                <p className='text-sm'>以下のフォームに必要事項をご記入のうえ、「送信する」をクリックしてください</p>
+            </div>
 
             <div>
               <label>
@@ -38,9 +37,7 @@ const Inqueries = () => {
             <div className='flex justify-center pb-10'>
               <button className='rounded text-white h-11 w-48 bg-prime-blue-rich'>送信する</button>
             </div>
-
           </form >
-          <ModalTrigger/>
         </main>
       </div>
       <Footer/>

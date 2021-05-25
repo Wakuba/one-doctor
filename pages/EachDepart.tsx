@@ -22,7 +22,7 @@ const EachDepartPage = () => {
             <main className='sm:bg-ed-narrowback ov-md:bg-ed-wideback bg-prime-blue-muted bg-contain bg-no-repeat'>
                 <section className='w-full flex flex-col items-center mb-14'>
                     <div className='sm:w-11/12 ov-md:w-8/12 flex flex-col pt-10'>
-                        <div className='text-white text-xl font-semibold mb-1' >筑波大学附属病院　循環器内科</div>
+                        <h1 className='text-white text-xl font-semibold mb-1' >筑波大学附属病院　循環器内科</h1>
                         <p className='text-white text-xs mb-1'>University of Tsukuba Hospital -cardiovascular medicine</p>
                         <div className='flex flex-row'>
                             <Tag>筑波大学附属病院</Tag>

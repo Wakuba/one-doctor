@@ -1,12 +1,12 @@
 import Tabs from '../molecules/Tabs'
 import TabField from '../molecules/TabField'
-import CrewCard from '../molecules/CrewCard'
+import CrewBoard from './CrewBoard'
 
 const TabMenu = () => (
   <div className='sm:w-11/12 ov-md:w-8/12'>
     <Tabs >
       <TabField label='基本情報' key={1}>
-        <CrewCard imgHeadSrc='images/professor.png' imgTailSrc='images/professor2.png'/>
+        <CrewBoard/>
       </TabField>
       <TabField label='医局紹介' key={2}>
       </TabField>

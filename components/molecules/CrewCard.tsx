@@ -1,33 +1,33 @@
-import { useState, ReactNode, FC } from 'react'
-import ReactCardFlip from 'react-card-flip'
+import { useState, FC } from 'react'
 
 interface CrewCardProps {
-	imgHeadSrc: string;
-	imgTailSrc: string;
+    layoutStyles?: string;
+    headImgSrc?: string;
+    tailImgSrc?: string;
 }
 
-interface ContentProps {
-	imgSrc: string;
-	children: ReactNode;
-}
-
-const CrewCard: FC<CrewCardProps> = ({ imgHeadSrc, imgTailSrc }) => {
-	const [ isFlipped, setIsFlipped ] = useState(true); 
-    const DefaultContent: FC<ContentProps> = ({ imgSrc, children }) => (
-        <button className='w-full h-3/4 shadow-lg' onClick={flip}>
-            <img className='' src={imgSrc} />
-            <div >{children}</div>
-        </button> 
+const CrewCard: FC<CrewCardProps> = ({layoutStyles, headImgSrc, tailImgSrc}) => {
+    const [ isFliped, setIsFliped ] = useState<boolean>(false)
+    const flip = () => { setIsFliped(!isFliped) }
+    const CardHead = ({ imgSrc }) => (
+            <div className="absolute w-full h-full backface-invisible wk-backface-invisible overflow-hidden rounded-8 shadow-lg bg-red-500" onClick={ flip }>
+                <img className='object-cover h-38 w-32 bg-black' src={imgSrc}/>
+            </div>
     )
-	const flip = () => {setIsFlipped(!isFlipped)};
-		const HeadContent: FC<ContentProps> = ({ imgSrc, children }) => <DefaultContent imgSrc={imgSrc}>{ children }</DefaultContent>
-		const TailContent: FC<ContentProps> = ({ imgSrc, children }) => <DefaultContent imgSrc={imgSrc}>{ children }</DefaultContent> 
+    
+    const CardTail = ({ imgSrc}) => (
+            <div className="absolute w-full h-full bg-blue-400 rotate-y-180 backface-invisible wk-backface-invisible" onClick={ flip }>
+                <div className='h-38 w-32 '>
+                    <img className='object-fit bg-black w-full' src={imgSrc}/>
+                </div>
+            </div>
+    )
     return (
-        <div className='sm:w-11/12 ov-md:w-2/5'>
-            <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal' >
-                <HeadContent  imgSrc={imgHeadSrc}>yamanaka</HeadContent>
-                <TailContent  imgSrc={imgTailSrc}>matumura</TailContent>
-            </ReactCardFlip>
+        <div className={`sm:w-11/12 ov-md:w-wscreen2/7 ov-md:h-wscreen/7 perspective justify-self-center ${layoutStyles}`}>
+            <div className={`w-full h-full preserve-3d duration-700 cursor-pointer relative ${ isFliped && 'rotate-y-180'}`}>
+                <CardHead imgSrc={headImgSrc}/>
+                <CardTail imgSrc={tailImgSrc}/>
+            </div>
         </div>
     )
 }

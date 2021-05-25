@@ -33,6 +33,8 @@ module.exports = {
         'wscreen7/10'  : '70vw',
         'wscreen/10'   : '10vw',
         'wscreen/8'    : '12.5vw',
+        'wscreen2/7' : '28.67vw',
+        'wscreen/7' : '14.286vw',
         'wscreen2/5'   : '40vw',
         'wscreen/5'    : '20vw',
         'wscreen/4'    : '25vw',

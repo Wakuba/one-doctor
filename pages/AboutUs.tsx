@@ -9,7 +9,7 @@ const AboutUs = () => {
             <Header />
             <main className='relative'> 
                 <section className=' rounded-br-bg-corner bg-prime-blue-rich w-full sm:px-1/20 ov-md:px-1/6 ov-md:py-20 sm:pb-20'>
-                    <div className='text-white text-2xl font-semibold pt-10 mb-5'>ABOUT US</div >
+                    <h1 className='text-white text-2xl font-semibold pt-10 mb-5'>ABOUT US</h1>
                     <div className='shadow-xl mb-10 text-xs p-3.5'> キャッチコピーを手書き文字のような感じにしたいです。（エモい感じの） トップページと同じでいいです </div >
                     <p className='text-white text-2xl font-semibold' >OUR MISSION</p>
                     <div className='text-white '>ミッションかマインドか、おそらくこの文章でいいと思いますが、最後のあたりの編集をお願いしたいです。 10年後、あなたがどんな医療を行っているか 考えたことがありますか？ 興味のある科はあっても、 具体的になにをしてるかは… そもそもいろんな制度もわからないし… 医師というのは一生学び続ける必要があります そのためには適切な場を選択しなければいけません 一人一人の医師の姿を見て その場を選んでみる、考えてみる ってことをしてみませんか？ 私たちone doctorはこのミッションを達成するために〜〜〜〜〜しています。</div >
