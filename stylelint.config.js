@@ -1,10 +1,17 @@
 module.exports = {
-    extends: ['stylelint-config-recommended'],
+    extends: ['stylelint-config-standard'],
+    plugins:['stylelint-order'],
     rules: {
       'at-rule-no-unknown': [
         true,
         {
-          ignoreAtRules: ['extends', 'tailwind'],
+          ignoreAtRules: [
+            'extends',
+            'tailwind',
+            "apply",
+            "variants",
+            "responsive",
+            "screen",],
         },
       ],
       'block-no-empty': null,
