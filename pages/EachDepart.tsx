@@ -3,7 +3,7 @@ import Footer from '../components/organisms/Footer'
 import TabMenu from "../components/organisms/TabMenu"
 import Tag from '../components/atoms/Tag'
 import AppealCardBoard from '../components/organisms/AppealCardBoard'
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 
 const PushPoint = ({ children }: { children: JSX.Element[] }) => (
   <div>
@@ -15,11 +15,44 @@ const Button = ({ children }: { children: ReactNode }) => (
   <button className='text-white rounded text-sm shadow-md px-3 font-medium bg-prime-blue-rich w-48 h-10 focus:outline-none'>{children}</button>
 )
 
+const Backdrop = ({ onCancel }) => <div className='w-full h-screen fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur z-20' onClick={onCancel} />
+
+const Modal = ({ onCancel, children }) => {
+  const cancelHandler = () => { onCancel() }
+  return (
+    <div onClick={cancelHandler} className='p-8 h-wscreen7/10 w-wscreen7/10 bg-gray-400 rounded-xl backdrop-filter backdrop-blur bg-opacity-70 fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50'>
+      { children}
+    </div>
+  )
+}
+
 const EachDepartPage = () => {
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
+  const closeModalHandler = () => { setModalIsOpen(false) }
+  const changeModalHandler = () => { setModalIsOpen(!modalIsOpen) }
   return (
     <>
       <Header />
       <main className='sm:bg-ed-narrowback ov-md:bg-ed-wideback bg-prime-blue-muted bg-contain bg-no-repeat'>
+        {modalIsOpen &&
+          <Modal onCancel={closeModalHandler}>
+            <PushPoint>
+              <span>教育：</span>
+              <span>テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキスト</span>
+            </PushPoint>
+            <PushPoint>
+              <span>臨床：</span>
+              <span>テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキスト</span>
+            </PushPoint>
+            <PushPoint>
+              <span>研究：</span>
+              <span>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキスト</span>
+            </PushPoint>
+          </Modal>
+        }
+        {modalIsOpen &&
+          <Backdrop onCancel={closeModalHandler} />
+        }
         <section className='w-full flex flex-col items-center mb-14'>
           <div className='sm:w-11/12 ov-md:w-8/12 flex flex-col pt-10'>
             <h1 className='text-white text-xl font-semibold mb-1' >筑波大学附属病院　循環器内科</h1>
@@ -32,7 +65,7 @@ const EachDepartPage = () => {
         </section>
 
         <section className='relative w-full flex flex-col items-center mb-16' >
-          <div className='sm:w-11/12 ov-md:w-8/12 ov-md:h-96  bg-white flex sm:flex-col ov-md:flex-row shadow-md'>
+          <div onClick={changeModalHandler} className='sm:w-11/12 ov-md:w-8/12 ov-md:h-96  bg-white flex sm:flex-col ov-md:flex-row shadow-md'>
             <div className='sm:p-3 ov-md:p-8 ov-md:flex-1 '>
               <div className='space-y-4 ov-md:h-72 overflow-y-hidden relative'>
                 <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
