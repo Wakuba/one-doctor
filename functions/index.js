@@ -27,8 +27,8 @@ ${data.content}
 `;
 };
 
-exports.sendMail =
-  functions.region("asia-northeast1").https.onCall((data, context) => {
+exports.sendMail1 =
+  functions.region("us-central1").https.onCall((data, context) => {
     const adminMail = {
       from: gmailEmail,
       to: adminEmail,

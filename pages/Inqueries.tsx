@@ -7,7 +7,6 @@ const firebaseConfig = require('../lib/firebase/firebase.config')
 const firebase = firebaseConfig.firebase
 
 
-
 const Inqueries = () => {
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
@@ -17,11 +16,12 @@ const Inqueries = () => {
 
   const onSubmit = e => {
     e.preventDefault()
-    let sendMail = firebase.functions().httpsCallable('sendMail');
+    let sendMail = firebase.functions().httpsCallable('sendMail1');
     sendMail(data)
     setName('')
     setEmail('')
     setContent('')
+    console.log('onSubmit')
   }
 
   return (
