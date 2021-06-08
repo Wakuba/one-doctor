@@ -20,7 +20,7 @@ const Backdrop = ({ onCancel }) => <div className='w-full h-screen fixed top-0 l
 const Modal = ({ onCancel, children }) => {
   const cancelHandler = () => { onCancel() }
   return (
-    <div onClick={cancelHandler} className='p-8 h-wscreen7/10 w-wscreen7/10 bg-gray-400 rounded-xl backdrop-filter backdrop-blur bg-opacity-70 fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50'>
+    <div onClick={cancelHandler} className='space-y-4 p-8 h-5/6 w-wscreen7/10 bg-gray-100 rounded-xl backdrop-filter backdrop-blur bg-opacity-70 fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50'>
       { children}
     </div>
   )
@@ -36,6 +36,9 @@ const EachDepartPage = () => {
       <main className='sm:bg-ed-narrowback ov-md:bg-ed-wideback bg-prime-blue-muted bg-contain bg-no-repeat'>
         {modalIsOpen &&
           <Modal onCancel={closeModalHandler}>
+            <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
+              筑波大学附属病院　循環器内科イチオシポイント
+                                </div>
             <PushPoint>
               <span>教育：</span>
               <span>テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキスト</span>
