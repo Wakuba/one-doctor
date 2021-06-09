@@ -41,15 +41,15 @@ const EachDepartPage = () => {
                                 </div>
             <PushPoint>
               <span>教育：</span>
-              <span>テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキスト</span>
+              <span>テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス</span>
             </PushPoint>
             <PushPoint>
               <span>臨床：</span>
-              <span>テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキスト</span>
+              <span>テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト</span>
             </PushPoint>
             <PushPoint>
               <span>研究：</span>
-              <span>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキスト</span>
+              <span>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</span>
             </PushPoint>
           </Modal>
         }
@@ -69,7 +69,7 @@ const EachDepartPage = () => {
 
         <section className='relative w-full flex flex-col items-center mb-16' >
           <div onClick={changeModalHandler} className='sm:w-11/12 ov-md:w-8/12 ov-md:h-96  bg-white flex sm:flex-col ov-md:flex-row shadow-md'>
-            <div className='sm:p-3 ov-md:p-8 ov-md:flex-1 '>
+            <div className='sm:p-3 sm:h-72 ov-md:p-8 ov-md:flex-1 overflow-y-hidden '>
               <div className='space-y-4 ov-md:h-72 overflow-y-hidden relative'>
                 <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
                   筑波大学附属病院　循環器内科イチオシポイント
@@ -86,10 +86,10 @@ const EachDepartPage = () => {
                   <span>研究：</span>
                   <span>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキスト</span>
                 </PushPoint>
-                <div className='absolute bottom-0 w-full h-12 opacity-90 read-more-gradient'></div>
               </div>
-              <button className='w-full h-8 text-xs'>▽もっと読む</button>
             </div>
+            <button className='w-full h-8 text-xs'>▽もっと読む</button>
+            <div className='absolute bottom-0 w-full h-12 opacity-90 read-more-gradient'></div>
             <div className='relative ov-md:flex-1 ov-md:flex ov-md:items-start w-full h-full'>
               <div className='
                                 border-0
@@ -140,6 +140,7 @@ const EachDepartPage = () => {
             </div>
           </div>
         </section>
+
 
       </main>
       <Footer />
