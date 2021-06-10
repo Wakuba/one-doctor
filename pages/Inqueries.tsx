@@ -8,6 +8,7 @@ const firebase = firebaseConfig.firebase
 
 
 const Inqueries = () => {
+<<<<<<< HEAD
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [content, setContent] = useState<string>('')
@@ -24,6 +25,8 @@ const Inqueries = () => {
     console.log('onSubmit')
   }
 
+=======
+>>>>>>> feature/2021-5/wakuba/ポップアップテキスト
   return (
     <>
       <Header />
@@ -61,6 +64,10 @@ const Inqueries = () => {
             </div>
           </form >
           <ContactButtonModal />
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature/2021-5/wakuba/ポップアップテキスト
         </main>
       </div>
       <Footer />
