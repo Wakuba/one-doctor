@@ -22,9 +22,9 @@ const TabMenu = () => {
     <div className='sm:w-11/12 ov-md:w-8/12'>
       <Tabs >
         <TabField label='基本情報' key={1}>
-          <CrewBoard />
         </TabField>
         <TabField label='医局紹介' key={2}>
+          <CrewBoard />
         </TabField>
         <TabField label='周辺地図' key={3}>
         </TabField>

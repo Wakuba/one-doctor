@@ -1,14 +1,16 @@
 import CrewCard from '../molecules/CrewCard'
 
 const CrewBoard = () => (
-    <div className='grid grid-cols-2 w-full self-center gap-y-4 py-4'>
-        <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg'/>
-        <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg'/>
-        <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg'/>
-        <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg'/>
-        <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg'/>
-        <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg'/>
-    </div>
+  <div className='ov-md:grid ov-md:grid-cols-2 ov-md:gap-y-4
+                  sm:flex sm:flex-col sm:items-center sm:space-y-2
+                  w-full py-4'>
+    <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg' />
+    <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg' />
+    <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg' />
+    <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg' />
+    <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg' />
+    <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg' />
+  </div>
 )
 
 export default CrewBoard
