@@ -6,10 +6,10 @@ import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import NewsBoard from '../components/organisms/NewsBoard'
 import DepartBoard from '../components/organisms/DepartBoard'
-import { RichBlueBRSquare,  MutedBlueBRSquare, MutedBlueTLSquare, RichBlueTLSquare } from '../components/atoms/StyledComponents'
+import { RichBlueBRSquare, MutedBlueBRSquare, MutedBlueTLSquare, RichBlueTLSquare } from '../components/atoms/StyledComponents'
 
 //YoutubeAPI
-import { YOUTUBE_VIDEOLIST_API} from '../lib/variables'
+import { YOUTUBE_VIDEOLIST_API } from '../lib/variables'
 
 //firebase
 import { db } from '../lib/firebase/firebase.config'
@@ -18,6 +18,8 @@ import ContactButtonModal from '../components/molecules/ContactButtonModal'
 export const getStaticProps = async () => {
   let content: any = [];
   let moviePlaylist;
+  let events;
+
   try {
     const snapshot = await db.collection("fl_content").get();
     snapshot.docs.forEach((doc) => {
@@ -30,21 +32,27 @@ export const getStaticProps = async () => {
   catch (error) {
     console.log('Error getting documents from FlameLink; ', error);
   }
+
   try {
-    const res = await fetch(`${YOUTUBE_VIDEOLIST_API}?part=snippet&playlistId=PLFsfg2xP7cbJY2Cg4F_tWUSDrtfvLVCAu&maxResult=50&key=${process.env.YOUTUBE_API_KEY}`)
-    moviePlaylist = await res.json()
+    const ytData = await fetch(
+      `${YOUTUBE_VIDEOLIST_API}?part=snippet&playlistId=PLFsfg2xP7cbJY2Cg4F_tWUSDrtfvLVCAu&maxResult=50&key=${process.env.YOUTUBE_API_KEY}`,
+      { method: "GET" },
+    ).then(res => res.json())
+    moviePlaylist = ytData;
   }
   catch (error) {
+    console.log('Error getting YoutubeMovie', error)
   }
+
   return {
     props: {
       content,
-      moviePlaylist
+      moviePlaylist,
     }
   }
 };
 
-const Movie: FC<{src: string; title:string}> = ({src, title}) => (
+const Movie: FC<{ src: string; title: string }> = ({ src, title }) => (
   <iframe className='shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2' src={src} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 )
 
@@ -56,57 +64,57 @@ interface HomeProps {
 const Home: FC<HomeProps> = (props) => {
   return (
     <>
-      <Header/>
+      <Header />
       <main>
         <section className='sm:bg-hero-narrowback-image sm:bg-prime-blue-muted sm:flex sm:flex-col sm:items-center sm:bg-minus66px sm:h-fit-to-screen ov-md:bg-hero-wideback-image ov-md:bg-prime-blue-rich bg-cover bg-no-repeat pt-wscreen/5 rounded-br-bg-corner relative'>
-            <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ov-md:mr-14 ov-md:ml-16 ov-lg:ml-32'>
-              <div className='text-white ov-md:w-11/12 sm:w-10/12 ov-md:ml-10 md:pt-40 lg:pt-52 xl:pt-64 lg:text-xl ov-md:pr-4'>
-                「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）
+          <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ov-md:mr-14 ov-md:ml-16 ov-lg:ml-32'>
+            <div className='text-white ov-md:w-11/12 sm:w-10/12 ov-md:ml-10 md:pt-40 lg:pt-52 xl:pt-64 lg:text-xl ov-md:pr-4'>
+              「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）
               </div>
-              <h1 className='text-white md:text-6xl ov-lg:text-8xl transform -rotate-12 my-wscreen/20 w-wscreen7/10 ov-md:absolute left-wscreen/8 top-6 sm:text-4xl'>
-                キャッチコピー<br/>白の手書き
+            <h1 className='text-white md:text-6xl ov-lg:text-8xl transform -rotate-12 my-wscreen/20 w-wscreen7/10 ov-md:absolute left-wscreen/8 top-6 sm:text-4xl'>
+              キャッチコピー<br />白の手書き
               </h1>
-              <img className='rounded-full ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" /> 
-              <div className='sm:!hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 md:top-162 md:left-8 ov-lg:left-20 ov-lg:top-200'>
-                scroll
-              </div> 
-            </div>
-            <div className='sm:!hidden w-full flex justify-center mt-20 pb-14'>
-              <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white'}} content={ props.content }/>
-            </div>
-            <MutedBlueBRSquare/>
-        </section> 
+            <img className='rounded-full ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
+            <div className='sm:!hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 md:top-162 md:left-8 ov-lg:left-20 ov-lg:top-200'>
+              scroll
+              </div>
+          </div>
+          <div className='sm:!hidden w-full flex justify-center mt-20 pb-14'>
+            <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white' }} content={props.content} />
+          </div>
+          <MutedBlueBRSquare />
+        </section>
 
         <section className='w-full rounded-br-bg-corner ov-md:rounded-tl-bg-corner relative bg-prime-blue-muted flex flex-col items-center'>
-          <RichBlueBRSquare/>
-          <RichBlueTLSquare/>
+          <RichBlueBRSquare />
+          <RichBlueTLSquare />
           <div className='sm:w-11/12 ov-md:w-10/12 ov-md:py-wscreen/5'>
             <div className='text-prime-blue-rich text-2xl font-semibold'>新着動画</div>
             <div className='text-sm'>各診療科のやりがいやリアルな現場を動画で見ることができます</div>
             <div className='overflow-x-scroll overflow-y-hidden'>
               <div className='w-screen*2 flex flex-row'>
-                <Movie src="https://www.youtube.com/embed/8jjswrh3agE" title="YouTube video player"/>
+                <Movie src="https://www.youtube.com/embed/8jjswrh3agE" title="YouTube video player" />
                 <Movie src="https://www.youtube.com/embed/o6xTZsgz6sA" title="YouTube video player" />
-                <Movie src="https://www.youtube.com/embed/o6xTZsgz6sA" title="YouTube video player"/> 
-                <Movie src="https://www.youtube.com/embed/o6xTZsgz6sA" title="YouTube video player"/>
-                <Movie src="https://www.youtube.com/embed/8jjswrh3agE" title="YouTube video player"/>
-                <Movie src="https://www.youtube.com/embed/8jjswrh3agE" title="YouTube video player"/>
+                <Movie src="https://www.youtube.com/embed/o6xTZsgz6sA" title="YouTube video player" />
+                <Movie src="https://www.youtube.com/embed/o6xTZsgz6sA" title="YouTube video player" />
+                <Movie src="https://www.youtube.com/embed/8jjswrh3agE" title="YouTube video player" />
+                <Movie src="https://www.youtube.com/embed/8jjswrh3agE" title="YouTube video player" />
               </div>
             </div>
           </div>
           <div className='ov-md:!hidden w-full flex justify-center mt-10 mb-10'>
-            <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich'}} content={ props.content }/>
+            <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={props.content} />
           </div>
-        </section> 
+        </section>
 
         <section className='relative w-full flex flex-col items-center rounded-tl-bg-corner rounded-br-bg-corner bg-prime-blue-rich py-wscreen/4'>
-          <MutedBlueTLSquare/>
+          <MutedBlueTLSquare />
           <DepartBoard />
-          <MutedBlueBRSquare/>
+          <MutedBlueBRSquare />
         </section>
 
         <section className='relative rounded-tl-bg-corner bg-prime-blue-muted py-wscreen/4 flex flex-col items-center' >
-          <RichBlueTLSquare/>
+          <RichBlueTLSquare />
           <div className='bg-transparent flex flex-col items-center sm:w-11/12 ov-md:w-8/12'>
             <div className='w-full sm:mb-4 ov-md:mb-8'>
               <div className='text-prime-blue-rich text-2xl font-semibold' >筑波大学附属病院について</div>
@@ -117,9 +125,9 @@ const Home: FC<HomeProps> = (props) => {
             </div>
           </div>
         </section>
-        <ContactButtonModal/>
+        <ContactButtonModal />
       </main>
-      <Footer/>
+      <Footer />
     </>
   )
 }

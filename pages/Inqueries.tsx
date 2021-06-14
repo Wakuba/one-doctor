@@ -1,14 +1,12 @@
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import ContactButtonModal from '../components/molecules/ContactButtonModal'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const firebaseConfig = require('../lib/firebase/firebase.config')
 const firebase = firebaseConfig.firebase
 
-
 const Inqueries = () => {
-<<<<<<< HEAD
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [content, setContent] = useState<string>('')
@@ -24,9 +22,6 @@ const Inqueries = () => {
     setContent('')
     console.log('onSubmit')
   }
-
-=======
->>>>>>> feature/2021-5/wakuba/ポップアップテキスト
   return (
     <>
       <Header />
@@ -64,10 +59,6 @@ const Inqueries = () => {
             </div>
           </form >
           <ContactButtonModal />
-<<<<<<< HEAD
-=======
-
->>>>>>> feature/2021-5/wakuba/ポップアップテキスト
         </main>
       </div>
       <Footer />

@@ -3,7 +3,7 @@ import Footer from '../components/organisms/Footer'
 import TabMenu from "../components/organisms/TabMenu"
 import Tag from '../components/atoms/Tag'
 import AppealCardBoard from '../components/organisms/AppealCardBoard'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 const PushPoint = ({ children }: { children: JSX.Element[] }) => (
   <div>
@@ -30,8 +30,11 @@ const Modal = ({ onCancel, children }) => {
 
 const EachDepartPage = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
+
   const closeModalHandler = () => { setModalIsOpen(false) }
   const changeModalHandler = () => { setModalIsOpen(!modalIsOpen) }
+
+
   return (
     <>
       <Header />
@@ -138,6 +141,7 @@ const EachDepartPage = () => {
           <AppealCardBoard />
         </section>
 
+
         <section className='w-full flex justify-center mb-16'>
           <div className='sm:w-11/12 ov-md:w-8/12 sm:h-72 ov-md:h-96 bg-prime-blue-rich flex justify-center items-center'>
             <div className='w-3/4 h-3/4 bg-prime-blue-muted'>
@@ -166,7 +170,6 @@ const EachDepartPage = () => {
             </div>
           </div>
         </section>
-
 
       </main>
       <Footer />
