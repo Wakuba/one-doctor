@@ -9,13 +9,14 @@ const TabMenu = () => {
 
   useEffect(() => {
     fetch(
-      'https://script.google.com/macros/s/AKfycbxdAlYVZE0aU-v7gW8pYyBqDd1_dc-3oC4b57_b86jxZfrAhk5z-8QOvvIV9FecXZsPEQ/exec',
+      'https://script.google.com/macros/s/AKfycbzmrnZq2-7JaQLpE_AFenimwJIL2y1rIGNm6F4NgecKbLNUMWBI6IPmlOYV4VsJ71issw/exec',
       { method: "GET" }
     )
       .then(res => res.json())
       .then(data => { setSpreadsheetData(data) })
       .catch((e) => console.log(e))
   }, [])
+  console.log(spreadsheetData)
 
   return (
     <div className='sm:w-11/12 ov-md:w-8/12'>
