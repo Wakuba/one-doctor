@@ -3,7 +3,8 @@ import Footer from '../components/organisms/Footer'
 import TabMenu from "../components/organisms/TabMenu"
 import Tag from '../components/atoms/Tag'
 import AppealCardBoard from '../components/organisms/AppealCardBoard'
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useState } from 'react'
+import ThreePointLeader from '../components/atoms/ThreePointLeader'
 
 const PushPoint = ({ children }: { children: JSX.Element[] }) => (
   <div>
@@ -43,7 +44,7 @@ const EachDepartPage = () => {
           <Modal onCancel={closeModalHandler}>
             <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
               筑波大学附属病院　循環器内科イチオシポイント
-                                </div>
+            </div>
             <PushPoint>
               <span>教育：</span>
               <span>
@@ -67,7 +68,7 @@ const EachDepartPage = () => {
                 テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
                 テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
                 テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
-                </span>
+              </span>
             </PushPoint>
             <PushPoint>
               <span>研究：</span>
@@ -78,7 +79,7 @@ const EachDepartPage = () => {
                 テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
                 テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
                 テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                </span>
+              </span>
             </PushPoint>
           </Modal>
         }
@@ -98,27 +99,30 @@ const EachDepartPage = () => {
 
         <section className='relative w-full flex flex-col items-center mb-16' >
           <div onClick={changeModalHandler} className='sm:w-11/12 ov-md:w-8/12 ov-md:h-96  bg-white flex sm:flex-col ov-md:flex-row shadow-md'>
-            <div className='sm:p-3 sm:h-72 ov-md:p-8 ov-md:flex-1 overflow-y-hidden '>
-              <div className='space-y-4 ov-md:h-72 overflow-y-hidden relative'>
-                <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
-                  筑波大学附属病院　循環器内科イチオシポイント
-                                </div>
-                <PushPoint>
-                  <span>教育：</span>
-                  <span>テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキステ</span>
-                </PushPoint>
-                <PushPoint>
-                  <span>臨床：</span>
-                  <span>テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテ</span>
-                </PushPoint>
-                <PushPoint>
-                  <span>研究：</span>
-                  <span>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキスト</span>
-                </PushPoint>
-                <div className='absolute w-full bg-red-300 top-56 h-10 read-more-gradient z-30'></div>
+            <div className='ov-md:p-8 ov-md:flex-1'>
+              <div className='sm:p-3 sm:h-72  overflow-y-hidden relative'>
+                <div className='space-y-4 ov-md:h-72 '>
+                  <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
+                    筑波大学附属病院　循環器内科イチオシポイント
+                  </div>
+                  <PushPoint>
+                    <span>教育：</span>
+                    <span>テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキステ</span>
+                  </PushPoint>
+                  <PushPoint>
+                    <span>臨床：</span>
+                    <span>テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテ</span>
+                  </PushPoint>
+                  <PushPoint>
+                    <span>研究：</span>
+                    <span>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキスト</span>
+                  </PushPoint>
+                </div>
+                <div className='absolute w-full left-0 bottom-0 shadow-for-readmore h-16'></div>
               </div>
+              <ThreePointLeader />
+              <button className='w-full h-8 text-xs bg-white focus:outline-none'>もっと読む</button>
             </div>
-            <button className='w-full h-8 text-xs'>▽もっと読む</button>
             <div className='relative ov-md:flex-1 ov-md:flex ov-md:items-start w-full h-full'>
               <div className='
                                 border-0

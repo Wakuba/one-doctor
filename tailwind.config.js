@@ -17,6 +17,7 @@ module.exports = {
       boxShadow: {
         'for-narrow-ichioshi-img': 'inset 0px 60px 30px -7px white',
         'for-wide-ichioshi-img': 'inset 60px 0px 30px -7px white',
+        'for-readmore': 'inset 0px -50px 48px 6px white'
       },
       spacing: {
         '1/20': '5%',
