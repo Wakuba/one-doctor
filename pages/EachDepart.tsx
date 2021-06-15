@@ -6,9 +6,7 @@ import AppealCardBoard from '../components/organisms/AppealCardBoard'
 import { ReactNode, useState } from 'react'
 import ThreePointLeader from '../components/atoms/ThreePointLeader'
 import Modal from '../components/atoms/Modal'
-import { Carousel } from 'react-responsive-carousel'
-import VideoPopupper from '../components/molecules/VideoPopupper'
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import MovieCarousel from '../components/organisms/MovieCarousel'
 
 const PushPoint = ({ children }: { children: JSX.Element[] }) => (
   <div>
@@ -44,6 +42,8 @@ const EachDepartPage = () => {
             modalIsOpen={modalIsOpen}
             setModalIsOpen={setModalIsOpen}
             defaultWrapperStyle='sm:w-11/12 ov-md:w-8/12 ov-md:h-96  bg-white flex sm:flex-col ov-md:flex-row shadow-md'
+            modalWrapperStyle='sm:w-9/12 ov-md:w-wscreen7/10'
+            modalContainerStyle='w-full'
             defaultAreaContents={
               <>
                 <div className='ov-md:p-8 ov-md:flex-1'>
@@ -139,7 +139,8 @@ const EachDepartPage = () => {
 
 
         <section className='flex flex-col items-center'>
-          <div className='w-11/12 bg-prime-blue-rich flex flex-col items-center pt-6'>
+          <div className='w-11/12 bg-prime-blue-rich flex flex-col items-center py-6'>
+            <MovieCarousel layoutStyle='w-wscreen7/10' />
           </div>
         </section>
 

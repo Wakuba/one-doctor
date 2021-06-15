@@ -6,8 +6,8 @@ const VideoPopupper = ({ videoId }) => {
   const [isPopup, setIsPopup] = useState<boolean>(false)
 
   const opts = {
-    height: '360',
-    width: '500'
+    height: '390',
+    width: '640',
   }
 
   return (
@@ -15,11 +15,12 @@ const VideoPopupper = ({ videoId }) => {
       modalIsOpen={isPopup}
       setModalIsOpen={setIsPopup}
       defaultAreaContents={
-        <img alt="" src="/images/cat.jpeg" />
+        <img className='h-full object-contain' alt="" src="https://japan.cnet.com/storage/2016/02/22/54fe9f8884f587fe86efb81119754660/t/584/438/d/20160222adobeneko2top_640.jpg" />
       }
-      modalAreaContents={<YouTube videoId={videoId} opts={opts} />}
-      modalWrapperStyle='flex items-center'
-      modalContainerStyle='flex justify-center'
+      modalAreaContents={<YouTube videoId={videoId} opts={opts} className='sm:w-full' />}
+      defaultWrapperStyle='w-96 '
+      modalWrapperStyle='flex items-center w-11/12'
+      modalContainerStyle='flex justify-center w-full'
     />
   )
 }
