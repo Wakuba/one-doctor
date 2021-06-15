@@ -124,19 +124,8 @@ const EachDepartPage = () => {
               <button className='w-full h-8 text-xs bg-white focus:outline-none'>もっと読む</button>
             </div>
             <div className='relative ov-md:flex-1 ov-md:flex ov-md:items-start w-full h-full'>
-              <div className='
-                                border-0
-                                bg-transparent
-                                absolute
-                                z-20
-                                sm:shadow-for-narrow-ichioshi-img
-                                sm:h-24
-                                sm:w-full
-                                ov-md:shadow-for-wide-ichioshi-img
-                                ov-md:h-full
-                                ov-md:w-24
-                            ' ></div>
-              <img className='sm:w-full sm:h-auto z-10 border-white' src='/images/ichioshi-image.png' />
+              <div className='border-0 bg-transparent absolute z-20 sm:shadow-for-narrow-ichioshi-img sm:h-24 sm:w-full ov-md:shadow-for-wide-ichioshi-img ov-md:h-full ov-md:w-24' ></div>
+              <img className='sm:w-full sm:h-auto ov-md:h-full ov-md:object-cover z-10 border-white' src='/images/ichioshi-image.png' />
             </div>
           </div>
         </section>
