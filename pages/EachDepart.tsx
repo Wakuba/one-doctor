@@ -6,6 +6,16 @@ import AppealCardBoard from '../components/organisms/AppealCardBoard'
 import { ReactNode, useState } from 'react'
 import ThreePointLeader from '../components/atoms/ThreePointLeader'
 
+export const getServerSideProps = async () => {
+  const res = await fetch(
+    'https://script.google.com/macros/s/AKfycbzmrnZq2-7JaQLpE_AFenimwJIL2y1rIGNm6F4NgecKbLNUMWBI6IPmlOYV4VsJ71issw/exec',
+    { method: "GET" }
+  )
+  const spreadsheetData = await res.json();
+  console.log('spreadsheetData', spreadsheetData)
+  return { props: { spreadsheetData } }
+}
+
 const PushPoint = ({ children }: { children: JSX.Element[] }) => (
   <div>
     <div className='font-semibold text-base' >{children[0]}</div>
@@ -29,7 +39,7 @@ const Modal = ({ onCancel, children }) => {
   )
 }
 
-const EachDepartPage = () => {
+const EachDepartPage = ({ spreadsheetData }) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
 
   const closeModalHandler = () => { setModalIsOpen(false) }
@@ -144,7 +154,7 @@ const EachDepartPage = () => {
         </section>
 
         <section className='w-full flex flex-col items-center mb-16'>
-          <TabMenu />
+          <TabMenu data={spreadsheetData} />
         </section>
 
         <section className='w-full flex flex-col items-center pb-20'>
