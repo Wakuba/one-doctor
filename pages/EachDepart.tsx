@@ -5,6 +5,8 @@ import Tag from '../components/atoms/Tag'
 import AppealCardBoard from '../components/organisms/AppealCardBoard'
 import { ReactNode, useState } from 'react'
 import ThreePointLeader from '../components/atoms/ThreePointLeader'
+import Modal from '../components/atoms/Modal'
+import MovieCarousel from '../components/organisms/MovieCarousel'
 
 export const getServerSideProps = async () => {
   const res = await fetch(
@@ -22,81 +24,18 @@ const PushPoint = ({ children }: { children: JSX.Element[] }) => (
     <div className='text-sm'>{children[1]}</div>
   </div>
 )
+
 const Button = ({ children }: { children: ReactNode }) => (
   <button className='text-white rounded text-sm shadow-md px-3 font-medium bg-prime-blue-rich w-48 h-10 focus:outline-none'>{children}</button>
 )
 
-const Backdrop = ({ onCancel }) => <div className='w-full h-screen fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur z-20' onClick={onCancel} />
-
-const Modal = ({ onCancel, children }) => {
-  const cancelHandler = () => { onCancel() }
-  return (
-    <div onClick={cancelHandler} className=' sm:w-9/12 ov-md:w-wscreen7/10 h-5/6 bg-gray-100 rounded-xl backdrop-filter backdrop-blur bg-opacity-70 fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 overflow-y-scroll'>
-      <div className='w-full space-y-4 ov-md:p-8 sm:p-6'>
-        {children}
-      </div>
-    </div>
-  )
-}
-
-const EachDepartPage = ({ spreadsheetData }) => {
+const EachDepartPage = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
-
-  const closeModalHandler = () => { setModalIsOpen(false) }
-  const changeModalHandler = () => { setModalIsOpen(!modalIsOpen) }
-
 
   return (
     <>
       <Header />
       <main className='sm:bg-ed-narrowback ov-md:bg-ed-wideback bg-prime-blue-muted bg-contain bg-no-repeat'>
-        {modalIsOpen &&
-          <div>
-
-            <Modal onCancel={closeModalHandler}>
-              <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
-                筑波大学附属病院　循環器内科イチオシポイント
-              </div>
-              <PushPoint>
-                <span>教育：</span>
-                <span>
-                  テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                  テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                  テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                  テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                  テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                  テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                  テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                  テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                  テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                </span>
-              </PushPoint>
-              <PushPoint>
-                <span>臨床：</span>
-                <span>
-                  テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
-                  テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
-                  テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
-                  テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
-                  テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
-                  テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
-                </span>
-              </PushPoint>
-              <PushPoint>
-                <span>研究：</span>
-                <span>
-                  テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                  テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                  テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                  テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                  テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                  テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                </span>
-              </PushPoint>
-            </Modal>
-            <Backdrop onCancel={closeModalHandler} />
-          </div>
-        }
         <section className='w-full flex flex-col items-center mb-14'>
           <div className='sm:w-11/12 ov-md:w-8/12 flex flex-col pt-10'>
             <h1 className='text-white text-xl font-semibold mb-1' >筑波大学附属病院　循環器内科</h1>
@@ -109,36 +48,99 @@ const EachDepartPage = ({ spreadsheetData }) => {
         </section>
 
         <section className='relative w-full flex flex-col items-center mb-16' >
-          <div onClick={changeModalHandler} className='sm:w-11/12 ov-md:w-8/12 ov-md:h-96  bg-white flex sm:flex-col ov-md:flex-row shadow-md'>
-            <div className='ov-md:p-8 ov-md:flex-1'>
-              <div className='sm:p-3 sm:h-72  overflow-y-hidden relative'>
-                <div className='space-y-4 ov-md:h-72 '>
-                  <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
-                    筑波大学附属病院　循環器内科イチオシポイント
+          <Modal
+            modalIsOpen={modalIsOpen}
+            setModalIsOpen={setModalIsOpen}
+            defaultWrapperStyle='sm:w-11/12 ov-md:w-8/12 ov-md:h-96  bg-white flex sm:flex-col ov-md:flex-row shadow-md'
+            modalWrapperStyle='sm:w-9/12 ov-md:w-wscreen7/10'
+            modalContainerStyle='w-full'
+            defaultAreaContents={
+              <>
+                <div className='ov-md:p-8 ov-md:flex-1'>
+                  <div className='sm:p-3 sm:h-72  overflow-y-hidden relative'>
+                    <div className='space-y-4 ov-md:h-72 '>
+                      <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
+                        筑波大学附属病院　循環器内科イチオシポイント
+                      </div>
+                      <PushPoint>
+                        <span>教育：</span>
+                        <span>テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキステ</span>
+                      </PushPoint>
+                      <PushPoint>
+                        <span>臨床：</span>
+                        <span>テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテ</span>
+                      </PushPoint>
+                      <PushPoint>
+                        <span>研究：</span>
+                        <span>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキスト</span>
+                      </PushPoint>
+                    </div>
+                    <div className='absolute w-full left-0 bottom-0 shadow-for-readmore h-16'></div>
                   </div>
-                  <PushPoint>
-                    <span>教育：</span>
-                    <span>テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキステ</span>
-                  </PushPoint>
-                  <PushPoint>
-                    <span>臨床：</span>
-                    <span>テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテ</span>
-                  </PushPoint>
-                  <PushPoint>
-                    <span>研究：</span>
-                    <span>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキスト</span>
-                  </PushPoint>
+                  <ThreePointLeader />
+                  <button className='w-full h-8 text-xs bg-white focus:outline-none'>もっと読む</button>
                 </div>
-                <div className='absolute w-full left-0 bottom-0 shadow-for-readmore h-16'></div>
-              </div>
-              <ThreePointLeader />
-              <button className='w-full h-8 text-xs bg-white focus:outline-none'>もっと読む</button>
-            </div>
-            <div className='relative ov-md:flex-1 ov-md:flex ov-md:items-start w-full h-full'>
-              <div className='border-0 bg-transparent absolute z-20 sm:shadow-for-narrow-ichioshi-img sm:h-24 sm:w-full ov-md:shadow-for-wide-ichioshi-img ov-md:h-full ov-md:w-24' ></div>
-              <img className='sm:w-full sm:h-auto ov-md:h-full ov-md:object-cover z-10 border-white' src='/images/ichioshi-image.png' />
-            </div>
-          </div>
+                <div className='relative ov-md:flex-1 ov-md:flex ov-md:items-start w-full h-full'>
+                  <div className='
+                                border-0
+                                bg-transparent
+                                absolute
+                                z-20
+                                sm:shadow-for-narrow-ichioshi-img
+                                sm:h-24
+                                sm:w-full
+                                ov-md:shadow-for-wide-ichioshi-img
+                                ov-md:h-full
+                                ov-md:w-24
+                            ' ></div>
+                  <img className='sm:w-full sm:h-auto z-10 border-white' src='/images/ichioshi-image.png' />
+                </div>
+              </>
+            }
+            modalAreaContents={
+              <>
+                <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
+                  筑波大学附属病院　循環器内科イチオシポイント
+                </div>
+                <PushPoint>
+                  <span>教育：</span>
+                  <span>
+                    テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
+                    テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
+                    テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
+                    テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
+                    テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
+                    テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
+                    テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
+                    テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
+                    テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
+                  </span>
+                </PushPoint>
+                <PushPoint>
+                  <span>臨床：</span>
+                  <span>
+                    テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
+                    テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
+                    テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
+                    テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
+                    テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
+                    テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
+                  </span>
+                </PushPoint>
+                <PushPoint>
+                  <span>研究：</span>
+                  <span>
+                    テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                    テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                    テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                    テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                    テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                    テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                  </span>
+                </PushPoint>
+              </>
+            }
+          />
         </section>
 
         <section className='w-full flex flex-col items-center mb-16'>
@@ -146,11 +148,9 @@ const EachDepartPage = ({ spreadsheetData }) => {
         </section>
 
 
-        <section className='w-full flex justify-center mb-16'>
-          <div className='sm:w-11/12 ov-md:w-8/12 sm:h-72 ov-md:h-96 bg-prime-blue-rich flex justify-center items-center'>
-            <div className='w-3/4 h-3/4 bg-prime-blue-muted'>
-
-            </div>
+        <section className='flex flex-col items-center'>
+          <div className='w-11/12 bg-prime-blue-rich flex flex-col items-center py-6'>
+            <MovieCarousel layoutStyle='w-wscreen7/10' />
           </div>
         </section>
 
