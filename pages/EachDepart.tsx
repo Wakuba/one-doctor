@@ -40,7 +40,7 @@ const EachDepartPage = () => {
           <Modal
             modalIsOpen={modalIsOpen}
             setModalIsOpen={setModalIsOpen}
-            wrapperStyle={'sm:w-11/12 ov-md:w-8/12 ov-md:h-96  bg-white flex sm:flex-col ov-md:flex-row shadow-md'}
+            defaultWrapperStyle='sm:w-11/12 ov-md:w-8/12 ov-md:h-96  bg-white flex sm:flex-col ov-md:flex-row shadow-md'
             defaultAreaContents={
               <>
                 <div className='ov-md:p-8 ov-md:flex-1'>
