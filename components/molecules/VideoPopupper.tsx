@@ -15,8 +15,8 @@ const VideoPopupper = ({ videoId }) => {
       modalIsOpen={isPopup}
       setModalIsOpen={setIsPopup}
       defaultAreaContents={
-        <div className='h-96 w-96 bg-gray-600'>
-        </div>}
+        <img alt="" src="/images/cat.jpeg" />
+      }
       modalAreaContents={<YouTube videoId={videoId} opts={opts} />}
       modalWrapperStyle='flex items-center'
       modalContainerStyle='flex justify-center'

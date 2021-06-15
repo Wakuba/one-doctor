@@ -6,6 +6,9 @@ import AppealCardBoard from '../components/organisms/AppealCardBoard'
 import { ReactNode, useState } from 'react'
 import ThreePointLeader from '../components/atoms/ThreePointLeader'
 import Modal from '../components/atoms/Modal'
+import { Carousel } from 'react-responsive-carousel'
+import VideoPopupper from '../components/molecules/VideoPopupper'
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 const PushPoint = ({ children }: { children: JSX.Element[] }) => (
   <div>
@@ -135,11 +138,8 @@ const EachDepartPage = () => {
         </section>
 
 
-        <section className='w-full flex justify-center mb-16'>
-          <div className='sm:w-11/12 ov-md:w-8/12 sm:h-72 ov-md:h-96 bg-prime-blue-rich flex justify-center items-center'>
-            <div className='w-3/4 h-3/4 bg-prime-blue-muted'>
-
-            </div>
+        <section className='flex flex-col items-center'>
+          <div className='w-11/12 bg-prime-blue-rich flex flex-col items-center pt-6'>
           </div>
         </section>
 
