@@ -1,12 +1,12 @@
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import ContactButtonModal from '../components/molecules/ContactButtonModal'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const firebaseConfig = require('../lib/firebase/firebase.config')
 const firebase = firebaseConfig.firebase
 
-const Inqueries = () => {
+export default function Inqueries() {
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [content, setContent] = useState<string>('')
@@ -65,5 +65,3 @@ const Inqueries = () => {
     </>
   )
 }
-
-export default Inqueries

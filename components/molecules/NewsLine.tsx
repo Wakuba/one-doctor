@@ -9,7 +9,7 @@
 //   })
 // }
 
-import React, { ReactNode, FC } from 'react'
+import { ReactNode } from 'react'
 
 type NewsLineProps = {
   key: number;
@@ -17,19 +17,18 @@ type NewsLineProps = {
   children?: ReactNode;
 }
 
-const NewsLine: FC<NewsLineProps> = ({ title, children }) => {
+export default function NewsLine({ title, children }: NewsLineProps) {
   return (
     <div className='grid grid-rows-1 sm:grid-cols-3 ov-md:grid-cols-5' >
-      <div className=''> 
+      <div className=''>
         <div className='rounded text-white bg-prime-blue-rich text-xs col-span-1 w-5/6 h-5 flex items-center justify-center' >
-          { title }
+          {title}
         </div>
       </div>
       <div className='sm:col-span-2 ov-md:col-span-4 text-sm leading-5'> {children} </div>
     </div>
   )
 }
-export default NewsLine
 
 
       // dangerouslySetInnerHTML={{

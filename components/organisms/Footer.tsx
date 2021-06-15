@@ -1,15 +1,15 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
- 
-const StyledList = ({ children }: { children: ReactNode }) => (
-  <li className='justify-center content-center'> { children } </li>
+
+const StyledList = (props: { children: ReactNode }) => (
+  <li className='justify-center content-center'> {props.children} </li>
 )
-const StyledUnorderedLi = ({ children }: { children: ReactNode }) => ( 
-  <ul className='flex sm:flex-col sm:items-center ov-md:space-x-6 list-none '>{ children }</ul> 
+const StyledUnorderedLi = (props: { children: ReactNode }) => (
+  <ul className='flex sm:flex-col sm:items-center ov-md:space-x-6 list-none '>{props.children}</ul>
 )
 
-const Footer = () => {
+export default function Footer() {
   return (
     <footer className='h-52 w-full text-white flex flex-col items-center bg-prime-blue-rich justify-evenly'>
       <StyledUnorderedLi>
@@ -29,6 +29,4 @@ const Footer = () => {
       <div>コピーライト</div>
     </footer>
   )
-} 
-
-export default Footer
+}

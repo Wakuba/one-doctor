@@ -14,22 +14,23 @@ export const getServerSideProps = async () => {
     { method: "GET" }
   )
   const spreadsheetData = await res.json();
-  console.log('spreadsheetData', spreadsheetData)
   return { props: { spreadsheetData } }
 }
 
-const PushPoint = ({ children }: { children: JSX.Element[] }) => (
+const PushPoint = (props: { children: JSX.Element[] }) => (
   <div>
-    <div className='font-semibold text-base' >{children[0]}</div>
-    <div className='text-sm'>{children[1]}</div>
+    <div className='font-semibold text-base' >{props.children[0]}</div>
+    <div className='text-sm'>{props.children[1]}</div>
   </div>
 )
 
-const Button = ({ children }: { children: ReactNode }) => (
-  <button className='text-white rounded text-sm shadow-md px-3 font-medium bg-prime-blue-rich w-48 h-10 focus:outline-none'>{children}</button>
+const Button = (props: { children: ReactNode }) => (
+  <button className='text-white rounded text-sm shadow-md px-3 font-medium bg-prime-blue-rich w-48 h-10 focus:outline-none'>
+    {props.children}
+  </button>
 )
 
-const EachDepartPage = () => {
+export default function EachDepartPage({ spreadsheetData }) {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
 
   return (
@@ -181,4 +182,3 @@ const EachDepartPage = () => {
   )
 }
 
-export default EachDepartPage

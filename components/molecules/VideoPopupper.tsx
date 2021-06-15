@@ -2,7 +2,7 @@ import { useState } from "react"
 import Modal from '../atoms/Modal'
 import YouTube from "react-youtube"
 
-const VideoPopupper = ({ videoId }) => {
+export default function VideoPopupper({ videoId }) {
   const [isPopup, setIsPopup] = useState<boolean>(false)
 
   const opts = {
@@ -24,5 +24,3 @@ const VideoPopupper = ({ videoId }) => {
     />
   )
 }
-
-export default VideoPopupper

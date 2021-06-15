@@ -1,17 +1,16 @@
 import { FC, ReactNode } from 'react'
 
 type TabFieldProps = {
-    key: number;
-    children?: ReactNode;
-    label?: string;
-  }
-  
-const TabField: FC<TabFieldProps> = props => {
-    return (
-      <>
-        {props.children}
-      </>
-    )
+  key: number;
+  children?: ReactNode;
+  label?: string;
 }
-  
-export default TabField
+
+export default function TabField(props: TabFieldProps) {
+  return (
+    <>
+      {props.children}
+    </>
+  )
+}
+

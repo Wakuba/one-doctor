@@ -8,9 +8,6 @@ import NewsBoard from '../components/organisms/NewsBoard'
 import DepartBoard from '../components/organisms/DepartBoard'
 import { RichBlueBRSquare, MutedBlueBRSquare, MutedBlueTLSquare, RichBlueTLSquare } from '../components/atoms/StyledComponents'
 
-//YoutubeAPI
-import { YOUTUBE_VIDEOLIST_API } from '../lib/variables'
-
 //firebase
 import { db } from '../lib/firebase/firebase.config'
 import ContactButtonModal from '../components/molecules/ContactButtonModal'
