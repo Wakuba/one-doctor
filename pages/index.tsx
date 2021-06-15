@@ -17,8 +17,6 @@ import ContactButtonModal from '../components/molecules/ContactButtonModal'
 
 export const getStaticProps = async () => {
   let content: any = [];
-  let moviePlaylist;
-  let events;
 
   try {
     const snapshot = await db.collection("fl_content").get();
@@ -33,21 +31,9 @@ export const getStaticProps = async () => {
     console.log('Error getting documents from FlameLink; ', error);
   }
 
-  try {
-    const ytData = await fetch(
-      `${YOUTUBE_VIDEOLIST_API}?part=snippet&playlistId=PLFsfg2xP7cbJY2Cg4F_tWUSDrtfvLVCAu&maxResult=50&key=${process.env.YOUTUBE_API_KEY}`,
-      { method: "GET" },
-    ).then(res => res.json())
-    moviePlaylist = ytData;
-  }
-  catch (error) {
-    console.log('Error getting YoutubeMovie', error)
-  }
-
   return {
     props: {
       content,
-      moviePlaylist,
     }
   }
 };
@@ -58,10 +44,9 @@ const Movie: FC<{ src: string; title: string }> = ({ src, title }) => (
 
 interface HomeProps {
   content: any;
-  moviePlaylist: any;
 }
 
-const Home: FC<HomeProps> = (props) => {
+export default function Home(props: FC<HomeProps>) {
   return (
     <>
       <Header />
@@ -70,14 +55,14 @@ const Home: FC<HomeProps> = (props) => {
           <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ov-md:mr-14 ov-md:ml-16 ov-lg:ml-32'>
             <div className='text-white ov-md:w-11/12 sm:w-10/12 ov-md:ml-10 md:pt-40 lg:pt-52 xl:pt-64 lg:text-xl ov-md:pr-4'>
               「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）
-              </div>
+            </div>
             <h1 className='text-white md:text-6xl ov-lg:text-8xl transform -rotate-12 my-wscreen/20 w-wscreen7/10 ov-md:absolute left-wscreen/8 top-6 sm:text-4xl'>
               キャッチコピー<br />白の手書き
-              </h1>
+            </h1>
             <img className='rounded-full ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
             <div className='sm:!hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 md:top-162 md:left-8 ov-lg:left-20 ov-lg:top-200'>
               scroll
-              </div>
+            </div>
           </div>
           <div className='sm:!hidden w-full flex justify-center mt-20 pb-14'>
             <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white' }} content={props.content} />
@@ -131,6 +116,3 @@ const Home: FC<HomeProps> = (props) => {
     </>
   )
 }
-
-
-export default Home
