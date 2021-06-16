@@ -2,12 +2,13 @@ import Tabs from '../molecules/Tabs'
 import TabField from '../molecules/TabField'
 import CrewBoard from './CrewBoard'
 import EventTab from './EventTab'
+import { SpreadSheetDataType } from '../../lib/types'
 // import { useEffect, useState } from 'react'
 
 
 
 // const [spreadsheetData, setSpreadsheetData] = useState()
-export default function TabMenu({ data }) {
+export default function TabMenu({ data }: { data: SpreadSheetDataType[] }) {
   return (
     <div className='sm:w-11/12 ov-md:w-8/12'>
       <Tabs >

@@ -7,6 +7,7 @@ import { ReactNode, useState } from 'react'
 import ThreePointLeader from '../components/atoms/ThreePointLeader'
 import { ModalMainArea, ModalBackdrop } from '../components/atoms/Modal'
 import MovieCarousel from '../components/organisms/MovieCarousel'
+import { SpreadSheetDataType } from '../lib/types'
 
 export const getServerSideProps = async () => {
   const res = await fetch(
@@ -30,7 +31,7 @@ const Button = (props: { children: ReactNode }) => (
   </button>
 )
 
-export default function EachDepartPage({ spreadsheetData }) {
+export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: SpreadSheetDataType[] }) {
   const [isTextModalOpen, setIsTextModalOpen] = useState<boolean>(false)
 
   return (
