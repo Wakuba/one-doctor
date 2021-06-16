@@ -2,8 +2,6 @@ import { useState } from 'react'
 
 const Backdrop = ({ onCancel }) => <div className='w-full h-screen fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur z-20' onClick={onCancel} />
 
-
-
 const Modal = ({ onCancel, layoutStyles, children }) => {
   const cancelHandler = () => { onCancel() }
   return (
