@@ -12,6 +12,9 @@ import { RichBlueBRSquare, MutedBlueBRSquare, MutedBlueTLSquare, RichBlueTLSquar
 import { db } from '../lib/firebase/firebase.config'
 import ContactButtonModal from '../components/molecules/ContactButtonModal'
 
+//types
+import { NewsLineType } from '../lib/types'
+
 export const getStaticProps = async () => {
   let content: any = [];
 
@@ -40,10 +43,10 @@ const Movie: FC<{ src: string; title: string }> = ({ src, title }) => (
 )
 
 interface HomeProps {
-  content: any;
+  content: NewsLineType[];
 }
 
-export default function Home(props: FC<HomeProps>) {
+export default function Home(props: HomeProps) {
   return (
     <>
       <Header />
