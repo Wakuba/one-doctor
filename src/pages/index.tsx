@@ -57,12 +57,14 @@ export default function Home(props: FC<HomeProps>) {
               キャッチコピー<br />白の手書き
             </h1>
             <img className='rounded-full ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
-            <div className='sm:!hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 md:top-162 md:left-8 ov-lg:left-20 ov-lg:top-200'>
+            <div className='sm:hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 md:top-162 md:left-8 ov-lg:left-20 ov-lg:top-200'>
               scroll
             </div>
           </div>
-          <div className='sm:!hidden w-full flex justify-center mt-20 pb-14'>
-            <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white' }} content={props.content} />
+          <div className='sm:hidden'>
+            <div className='w-full flex justify-center mt-20 pb-14'>
+              <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white' }} content={props.content} />
+            </div>
           </div>
           <MutedBlueBRSquare />
         </section>
@@ -84,9 +86,13 @@ export default function Home(props: FC<HomeProps>) {
               </div>
             </div>
           </div>
-          <div className='ov-md:!hidden w-full flex justify-center mt-10 mb-10'>
-            <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={props.content} />
+
+          <div className='ov-md:hidden'>
+            <div className='w-full flex justify-center mt-10 mb-10'>
+              <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={props.content} />
+            </div>
           </div>
+
         </section>
 
         <section className='relative w-full flex flex-col items-center rounded-tl-bg-corner rounded-br-bg-corner bg-prime-blue-rich py-wscreen/4'>
