@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick'
 import YouTube from "react-youtube";
 import { ModalBackdrop, ModalMainArea } from "../atoms/Modal";
-import { sliderData } from '../../public/staticData'
+import { sliderData } from '../../../public/staticData'
 
 
 let initModalState = {}
@@ -15,13 +15,13 @@ const opts = {
   width: '640',
 }
 
-export default function MovieCarousel(props: { layoutStyle: string }) {
+export default function MovieCarousel(props: { layoutStyle?: string }) {
   const [modalActive, setModalActive] = useState<{ [key: number]: boolean }>(initModalState)
-  const closeModal = (key) => {
+  const closeModal = () => {
     setModalActive(initModalState)
     console.log('closeModal成功')
   }
-  const openModal = (key) => {
+  const openModal = (key: number) => {
     setModalActive({ ...modalActive, [key]: true })
     console.log('af', modalActive)
   }
@@ -37,17 +37,13 @@ export default function MovieCarousel(props: { layoutStyle: string }) {
   return (
     <>
       {sliderData.map((data, idx) => {
-        function closeModalAim() {
-          const key = idx;
-          closeModal(key)
-        }
         return (
           modalActive[idx] &&
           <div key={idx}>
-            <ModalMainArea closeModal={closeModalAim} modalWrapperStyle='w-10/12 h-8/12' modalContainerStyle='h-full w-full'>
+            <ModalMainArea closeModal={closeModal} modalWrapperStyle='w-10/12 h-8/12' modalContainerStyle='h-full w-full'>
               <YouTube videoId={data.videoId} opts={opts} containerClassName='ov-md:h-full sm:h-wscreen7/10 w-full flex flex-col items-center justify-center' className='h-10/12 w-10/12' />
             </ModalMainArea>
-            <ModalBackdrop closeModal={closeModalAim} />
+            <ModalBackdrop closeModal={closeModal} />
           </div>
         )
       }
@@ -55,12 +51,12 @@ export default function MovieCarousel(props: { layoutStyle: string }) {
       }
       <Slider className='w-9/12' {...settings}>
         {sliderData.map((data, idx) => {
-          function openModalAim() {
+          function openModalCloser() {
             const key = idx;
             openModal(key)
           }
           return (
-            <img key={idx} onClick={openModalAim} alt='eyecatch image' src={data.eyecatchImg} />
+            <img key={idx} onClick={openModalCloser} alt='eyecatch image' src={data.eyecatchImg} />
           )
         })}
       </Slider>

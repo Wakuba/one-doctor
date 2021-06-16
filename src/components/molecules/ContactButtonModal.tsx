@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, ReactNode } from 'react'
 
-const Backdrop = ({ onCancel }) => <div className='w-full h-screen fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur z-20' onClick={onCancel} />
+const Backdrop = ({ onCancel }: { onCancel: () => void }) => <div className='w-full h-screen fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur z-20' onClick={onCancel} />
 
-const Modal = ({ onCancel, layoutStyles, children }) => {
+const Modal = ({ onCancel, layoutStyles, children }: { onCancel: () => void; layoutStyles: string; children: ReactNode }) => {
   const cancelHandler = () => { onCancel() }
   return (
     <div onClick={cancelHandler} className={`ov-md:w-32 ov-md:h-32 sm:w-20 sm:h-20 px-4 rounded-full bg-prime-blue-rich shadow-lg flex justify-center items-center text-white ov-md:text-md sm:text-xs font-semibold ${layoutStyles}`}>

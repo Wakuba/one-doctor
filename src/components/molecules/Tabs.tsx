@@ -1,4 +1,4 @@
-import { useState, FC, ReactNode, Children, SetStateAction } from 'react'
+import { useState, ReactNode, Children, SetStateAction } from 'react'
 import TabButtons from '../molecules/TabButtons'
 
 interface TabsProps {
