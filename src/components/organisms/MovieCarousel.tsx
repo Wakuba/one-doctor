@@ -15,7 +15,7 @@ const opts = {
   width: '640',
 }
 
-export default function MovieCarousel() {
+export default function MovieCarousel(props: { layoutStyle?: string }) {
   const [modalActive, setModalActive] = useState<{ [key: number]: boolean }>(initModalState)
   const closeModal = () => {
     setModalActive(initModalState)

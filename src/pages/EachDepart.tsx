@@ -146,7 +146,7 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
 
         <section className='flex flex-col items-center mb-16'>
           <div className='ov-md:w-8/12 sm:w-11/12 bg-prime-blue-rich flex flex-col items-center py-6'>
-            <MovieCarousel />
+            <MovieCarousel layoutStyle='w-full' />
           </div>
         </section>
 

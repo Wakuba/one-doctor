@@ -11,13 +11,13 @@
 
 import { ReactNode } from 'react'
 
-type NewsLinePropsType = {
+type NewsLineProps = {
   key: number;
   title: string;
   children?: ReactNode;
 }
 
-export default function NewsLine({ title, children }: NewsLinePropsType) {
+export default function NewsLine({ title, children }: NewsLineProps) {
   return (
     <div className='grid grid-rows-1 sm:grid-cols-3 ov-md:grid-cols-5' >
       <div className=''>
