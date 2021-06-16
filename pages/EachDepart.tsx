@@ -92,7 +92,7 @@ export default function EachDepartPage({ spreadsheetData }) {
           </div>
           {isTextModalOpen &&
             <>
-              <ModalMainArea closeModal={() => setIsTextModalOpen(false)} modalWrapperStyle='sm:w-9/12 ov-md:w-wscreen7/10' modalContainerStyle='w-full'>
+              <ModalMainArea closeModal={() => setIsTextModalOpen(false)} modalWrapperStyle='sm:w-9/12 ov-md:w-wscreen7/10 h-5/6' modalContainerStyle='w-full'>
                 <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
                   筑波大学附属病院　循環器内科イチオシポイント
                 </div>
