@@ -16,8 +16,4 @@ if (!firebase.apps.length) {
   firebase.app();
 }
 
-const db = firebase.firestore();
-
-module.exports = {
-  db, firebase
-}
+export const db = firebase.firestore();

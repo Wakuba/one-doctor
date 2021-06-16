@@ -1,5 +1,5 @@
 //React library
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 //Components
 import Header from '../components/organisms/Header'
@@ -11,6 +11,9 @@ import { RichBlueBRSquare, MutedBlueBRSquare, MutedBlueTLSquare, RichBlueTLSquar
 //firebase
 import { db } from '../lib/firebase/firebase.config'
 import ContactButtonModal from '../components/molecules/ContactButtonModal'
+
+//types
+import { NewsLineType } from '../lib/types'
 
 export const getStaticProps = async () => {
   let content: any = [];
@@ -40,10 +43,10 @@ const Movie: FC<{ src: string; title: string }> = ({ src, title }) => (
 )
 
 interface HomeProps {
-  content: any;
+  content: NewsLineType[]
 }
 
-export default function Home(props: FC<HomeProps>) {
+export default function Home({ content }: HomeProps) {
   return (
     <>
       <Header />
@@ -63,7 +66,7 @@ export default function Home(props: FC<HomeProps>) {
           </div>
           <div className='sm:hidden'>
             <div className='w-full flex justify-center mt-20 pb-14'>
-              <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white' }} content={props.content} />
+              <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white' }} content={content} />
             </div>
           </div>
           <MutedBlueBRSquare />
@@ -89,7 +92,7 @@ export default function Home(props: FC<HomeProps>) {
 
           <div className='ov-md:hidden'>
             <div className='w-full flex justify-center mt-10 mb-10'>
-              <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={props.content} />
+              <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={content} />
             </div>
           </div>
 

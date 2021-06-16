@@ -1,11 +1,13 @@
 import NewsLine from '../molecules/NewsLine'
+import { NewsLineType } from '../../lib/types'
 
 type NewsBoardProps = {
-  content?: any;
+  content?: NewsLineType[];
   layoutStyles?: any;
 }
 
 export default function NewsBoard({ content, layoutStyles }: NewsBoardProps) {
+  if (content == undefined) content = [{ article: '特にNewsはありません', title: '特にNewsはありません' }]
   return (
     <div className={`${layoutStyles.container}`}>
       <div className={`text-2xl sm:text-prime-blue-rich font-semibold ${layoutStyles.title}`}>NEWS</div>

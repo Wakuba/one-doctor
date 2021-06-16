@@ -6,3 +6,8 @@ export interface SpreadSheetDataType {
   place: string;
   timeStamp: string;
 }
+
+export interface NewsLineType {
+  article?: string;
+  title?: string;
+}
