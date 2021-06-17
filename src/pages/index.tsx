@@ -38,7 +38,7 @@ export const getStaticProps = async () => {
   }
 };
 
-const Movie: FC<{ src: string; title: string }> = ({ src, title }) => (
+const Movie = ({ src, title }: { src: string; title: string }) => (
   <iframe className='shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2' src={src} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 )
 
@@ -46,7 +46,7 @@ interface HomeProps {
   content: NewsLineType[];
 }
 
-export default function Home(props: HomeProps) {
+export default function Home({ content }: HomeProps) {
   return (
     <>
       <Header />
@@ -80,7 +80,7 @@ export default function Home(props: HomeProps) {
           </div>
           <div className='sm:hidden'>
             <div className='w-full flex justify-center mt-10 '>
-              <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white' }} content={props.content} />
+              <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white' }} content={content} />
             </div>
           </div>
           <MutedBlueBRSquare />
@@ -106,7 +106,7 @@ export default function Home(props: HomeProps) {
 
           <div className='ov-md:hidden'>
             <div className='w-full flex justify-center mt-10 '>
-              <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={props.content} />
+              <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={content} />
             </div>
           </div>
 
@@ -129,8 +129,8 @@ export default function Home(props: HomeProps) {
               <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold' >筑波大学附属病院について</div>
             </div>
             <iframe className='w-full mb-10 h-wscreen/2' width="600" height="450" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.454268485108!2d140.09971111521065!3d36.10678911412265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2sUniversity%20of%20Tsukuba!5e0!3m2!1sen!2sjp!4v1618728410770!5m2!1sen!2sjp"  ></iframe>
-            <div >
-              <button className='rounded text-white shadow-md bg-prime-blue-rich w-44 h-11'>病院公式ページ</button>
+            <div className='rounded text-white shadow-md bg-prime-blue-rich w-44 h-11 flex justify-center items-center'>
+              <a href='http://www.hosp.tsukuba.ac.jp/' >病院公式ページ</a>
             </div>
           </div>
         </section>

@@ -1,16 +1,17 @@
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import ContactButtonModal from '../components/molecules/ContactButtonModal'
-import React from 'react'
 import emailjs from 'emailjs-com'
-
+import { SyntheticEvent } from 'react'
+// BaseSyntheticEvent<MouseEvent, EventTarget & HTMLElement, EventTarget>
 export default function Inqueries() {
-  const sendEmail = (e) => {
+  const sendEmail = (e: any) => {
     e.preventDefault()
+    const form: string | HTMLFormElement = e.target
     emailjs.sendForm(
       "service_sz9y5mf",
       "template_pevd481",
-      e.target,
+      form,
       "user_60TLo9otiZVvLECln9dJa",
     )
       .then((result) => {
