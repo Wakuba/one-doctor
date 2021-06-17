@@ -13,14 +13,14 @@ import { ReactNode } from 'react'
 
 type NewsLineProps = {
   key: number;
-  title: string;
-  children?: ReactNode;
+  title: ReactNode;
+  children: ReactNode;
 }
 
 export default function NewsLine({ title, children }: NewsLineProps) {
   return (
     <div className='grid grid-rows-1 sm:grid-cols-3 ov-md:grid-cols-5' >
-      <div className=''>
+      <div >
         <div className='rounded text-white bg-prime-blue-rich text-xs col-span-1 w-5/6 h-5 flex items-center justify-center breakAll' >
           {title}
         </div>

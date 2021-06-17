@@ -3,7 +3,6 @@ import { SpreadSheetDataType } from '../../lib/types'
 
 
 export default function EventTab({ events }: { events: SpreadSheetDataType[] }) {
-  console.log(events)
   return (
     <div className='w-full ov-md:p-8 sm:p-4 bg-white'>
       <div className='space-y-8'>

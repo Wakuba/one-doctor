@@ -5,10 +5,13 @@ import EventTab from './EventTab'
 import { SpreadSheetDataType } from '../../lib/types'
 // import { useEffect, useState } from 'react'
 
+interface TabMenuPropsType {
+  data: SpreadSheetDataType[]
+}
 
 
 // const [spreadsheetData, setSpreadsheetData] = useState()
-export default function TabMenu({ data }: { data: SpreadSheetDataType[] }) {
+export default function TabMenu({ data }: TabMenuPropsType) {
   return (
     <div className='sm:w-11/12 ov-md:w-8/12'>
       <Tabs >

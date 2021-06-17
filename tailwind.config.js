@@ -46,7 +46,7 @@ module.exports = {
         1: '1px'
       },
       borderRadius: {
-        'bg-corner': '25vw'
+        'bg-corner': '15vw'
       },
       colors: {
         'prime-blue-rich': '#5DB0D0',
@@ -57,6 +57,7 @@ module.exports = {
         18: '4.5rem',
         162: '40.5rem',
         200: '50rem',
+        238: '59.5rem',
         '3vw': '3vw',
         '5vw': '5vw',
         '15vw': '15vw',

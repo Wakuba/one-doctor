@@ -4,12 +4,14 @@ import { ReactNode } from 'react'
 type DepartKanbanProps = {
   key: number;
   children: ReactNode;
+  layoutStyle?: string;
 }
 
-export default function DepartKanban({ children }: DepartKanbanProps) {
+export default function DepartKanban({ children, layoutStyle }: DepartKanbanProps) {
   return (
     <Link href='EachDepart'>
       <div className={`
+      ${layoutStyle}
         bg-white
         rounded
         shadow-xl
@@ -18,16 +20,11 @@ export default function DepartKanban({ children }: DepartKanbanProps) {
         items-center
         sm:h-14
         sm:w-52
-        sm:mr-4
-        sm:mb-4
-        md:mr-8
-        md:mb-8
         ov-md:h-20
         ov-md:w-80
-        ov-md:mb-10
        `}>
-        <img className='mx-7 sm:h-11 sm:w-11 ov-md:h-14 ov-md:w-14 bg-prime-blue-muted border-solid' />
-        <div className='sm:text-xs ov-md:text-md mr-4'>{children}</div>
+        <img className='mx-6 sm:h-11 sm:w-11 ov-md:h-14 ov-md:w-14 bg-prime-blue-muted border-solid' />
+        <div className='sm:text-xs ov-md:text-md mr-4 '>{children}</div>
       </div>
     </Link>
   )

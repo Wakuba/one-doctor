@@ -19,11 +19,9 @@ export default function MovieCarousel() {
   const [modalActive, setModalActive] = useState<{ [key: number]: boolean }>(initModalState)
   const closeModal = () => {
     setModalActive(initModalState)
-    console.log('closeModal成功')
   }
   const openModal = (key: number) => {
     setModalActive({ ...modalActive, [key]: true })
-    console.log('af', modalActive)
   }
 
   var settings = {
@@ -40,14 +38,13 @@ export default function MovieCarousel() {
         return (
           modalActive[idx] &&
           <div key={idx}>
-            <ModalMainArea closeModal={closeModal} modalWrapperStyle='w-10/12 h-8/12' modalContainerStyle='h-full w-full'>
-              <YouTube videoId={data.videoId} opts={opts} containerClassName='ov-md:h-full sm:h-wscreen7/10 w-full flex flex-col items-center justify-center' className='h-10/12 w-10/12' />
+            <ModalMainArea closeModal={closeModal} modalWrapperStyle='w-10/12 h-5/6' modalContainerStyle='h-full w-full'>
+              <YouTube videoId={data.videoId} opts={opts} containerClassName='ov-md:h-full sm:h-wscreen7/10 w-full flex flex-col items-center justify-center' className='h-5/6 w-10/12' />
             </ModalMainArea>
             <ModalBackdrop closeModal={closeModal} />
           </div>
         )
-      }
-      )
+      })
       }
       <Slider className='w-9/12' {...settings}>
         {sliderData.map((data, idx) => {

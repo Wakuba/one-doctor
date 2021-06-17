@@ -43,8 +43,8 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
             <h1 className='text-white text-xl font-semibold mb-1' >筑波大学附属病院　循環器内科</h1>
             <p className='text-white text-xs mb-1'>University of Tsukuba Hospital -cardiovascular medicine</p>
             <div className='flex flex-row'>
-              <Tag>筑波大学附属病院</Tag>
-              <Tag>循環器内科</Tag>
+              <Tag layoutStyle='mr-2'>筑波大学附属病院</Tag>
+              <Tag layoutStyle='mr-2'>循環器内科</Tag>
             </div>
           </div>
         </section>

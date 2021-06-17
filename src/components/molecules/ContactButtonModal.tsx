@@ -17,7 +17,7 @@ export default function ContactButtonModal() {
   const changeModalHandler = () => { setModalIsOpen(!modalIsOpen) }
   return (
     <>
-      <div onClick={changeModalHandler} className='fixed right-4 bottom-4 bg-contact-button bg-contain bg-no-repeat md:h-32 md:w-32 ov-lg:h-48 ov-lg:w-48  sm:w-20 sm:h-20 flex justify-center items-center text-white z-50'>
+      <div onClick={changeModalHandler} className='fixed right-4 bottom-4 bg-contact-button bg-contain bg-no-repeat ov-md:h-32 ov-md:w-32  sm:w-20 sm:h-20 flex justify-center items-center text-white z-50'>
         <div className='ov-md:text-3xl sm:text-sm '>contact</div>
       </div>
       {modalIsOpen &&
