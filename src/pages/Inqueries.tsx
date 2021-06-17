@@ -7,7 +7,12 @@ import emailjs from 'emailjs-com'
 export default function Inqueries() {
   const sendEmail = (e) => {
     e.preventDefault()
-    emailjs.sendForm(process.env.EMAIL_JS_SERVICE, process.env.TEMPLATE_ID, e.target, process.env.USER_ID)
+    emailjs.sendForm(
+      "service_sz9y5mf",
+      "template_pevd481",
+      e.target,
+      "user_60TLo9otiZVvLECln9dJa",
+    )
       .then((result) => {
         console.log(result.text);
       }, (error) => {
