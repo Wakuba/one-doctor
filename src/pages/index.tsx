@@ -1,6 +1,3 @@
-//React library
-import React, { FC } from 'react'
-
 //Components
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
@@ -42,6 +39,12 @@ const Movie = ({ src, title }: { src: string; title: string }) => (
   <iframe className='shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2' src={src} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 )
 
+const ScrollArrow = () => (
+  <div className='sm:hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 md:top-200 md:left-8 ov-lg:left-14 ov-lg:top-238'>
+    scroll
+  </div>
+)
+
 interface HomeProps {
   content: NewsLineType[];
 }
@@ -74,9 +77,7 @@ export default function Home({ content }: HomeProps) {
               キャッチコピー<br />白の手書き
             </h1>
             <img className='rounded-full ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
-            <div className='sm:hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 md:top-162 md:left-8 ov-lg:left-14 ov-lg:top-238'>
-              scroll
-            </div>
+            <ScrollArrow />
           </div>
           <div className='sm:hidden'>
             <div className='w-full flex justify-center mt-10 '>
