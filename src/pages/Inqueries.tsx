@@ -2,8 +2,7 @@ import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import ContactButtonModal from '../components/molecules/ContactButtonModal'
 import emailjs from 'emailjs-com'
-import { SyntheticEvent } from 'react'
-// BaseSyntheticEvent<MouseEvent, EventTarget & HTMLElement, EventTarget>
+
 export default function Inqueries() {
   const sendEmail = (e: any) => {
     e.preventDefault()

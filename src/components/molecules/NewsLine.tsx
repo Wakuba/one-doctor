@@ -13,7 +13,7 @@ import { ReactNode } from 'react'
 
 type NewsLineProps = {
   key: number;
-  title: string;
+  title: ReactNode;
   children: ReactNode;
 }
 
