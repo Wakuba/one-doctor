@@ -19,11 +19,9 @@ export default function MovieCarousel() {
   const [modalActive, setModalActive] = useState<{ [key: number]: boolean }>(initModalState)
   const closeModal = () => {
     setModalActive(initModalState)
-    console.log('closeModal成功')
   }
   const openModal = (key: number) => {
     setModalActive({ ...modalActive, [key]: true })
-    console.log('af', modalActive)
   }
 
   var settings = {
@@ -46,8 +44,7 @@ export default function MovieCarousel() {
             <ModalBackdrop closeModal={closeModal} />
           </div>
         )
-      }
-      )
+      })
       }
       <Slider className='w-9/12' {...settings}>
         {sliderData.map((data, idx) => {

@@ -8,7 +8,6 @@ type NewsBoardProps = {
 
 export default function NewsBoard({ layoutStyles, content }: NewsBoardProps) {
   if (content == undefined) content = [{ article: '特になし', title: '特になし' }]
-  console.log(content)
   return (
     <div className={`${layoutStyles.container}`}>
       <div className={`text-2xl sm:text-prime-blue-rich font-semibold ${layoutStyles.title}`}>NEWS</div>
