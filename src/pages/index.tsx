@@ -82,7 +82,7 @@ export default function Home({ content }: HomeProps) {
           </div>
           <div className='sm:hidden'>
             <div className='w-full flex justify-center mt-10 '>
-              <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={content} />
+              <NewsBoard layoutStyles={{ container: 'w-8/12', title: 'text-white' }} content={content} />
             </div>
           </div>
           <MutedBlueBRSquare />
