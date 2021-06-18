@@ -50,6 +50,7 @@ interface HomeProps {
 }
 
 export default function Home({ content }: HomeProps) {
+  console.log(content)
   return (
     <>
       <Header />
@@ -90,7 +91,7 @@ export default function Home({ content }: HomeProps) {
         <section className='w-full rounded-br-bg-corner rounded-tl-bg-corner relative bg-prime-blue-muted flex flex-col items-center py-24'>
           <RichBlueBRSquare />
           <RichBlueTLSquare />
-          <div className='sm:w-11/12 ov-md:w-8/12 '>
+          <div className='sm:w-11/12 ov-md:w-10/12 '>
             <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold'>新着動画</div>
             <div className='text-sm'>各診療科のやりがいやリアルな現場を動画で見ることができます</div>
             <div className='overflow-x-scroll overflow-y-hidden'>
@@ -115,7 +116,7 @@ export default function Home({ content }: HomeProps) {
 
         <section className='relative w-full flex flex-col items-center rounded-tl-bg-corner rounded-br-bg-corner bg-prime-blue-rich py-24'>
           <MutedBlueTLSquare />
-          <div className='sm:w-11/12 ov-md:w-8/12'>
+          <div className='sm:w-11/12 ov-md:w-10/12'>
             <div className='text-white sm:text-2xl ov-md:text-4xl font-semibold' >診療科一覧</div>
             <div className='sm:text-sm ov-md:text-lg mb-4'>各診療科にコンタクトを取ったり、イベント情報をチェックすることができます</div>
             <DepartBoard />
@@ -125,7 +126,7 @@ export default function Home({ content }: HomeProps) {
 
         <section className='relative rounded-tl-bg-corner bg-prime-blue-muted py-24 flex flex-col items-center' >
           <RichBlueTLSquare />
-          <div className='bg-transparent flex flex-col items-center sm:w-11/12 ov-md:w-8/12'>
+          <div className='bg-transparent flex flex-col items-center sm:w-11/12 ov-md:w-10/12'>
             <div className='w-full sm:mb-4 ov-md:mb-8'>
               <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold' >筑波大学附属病院について</div>
             </div>
