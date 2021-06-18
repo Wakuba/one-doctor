@@ -46,7 +46,7 @@ export default function MovieCarousel() {
         )
       })
       }
-      <Slider className='w-9/12' {...settings}>
+      <Slider className='w-9/12' {...settings} arrows={true} dots={true}>
         {sliderData.map((data, idx) => {
           function openModalCloser() {
             const key = idx;
@@ -60,3 +60,14 @@ export default function MovieCarousel() {
     </>
   );
 }
+
+// 'w-full list-none flex flex-row
+
+// position: absolute;
+// bottom: -25px;
+// display: block;
+// width: 100 %;
+// padding: 0;
+// margin: 0;
+// list - style: none;
+// text - align: center;

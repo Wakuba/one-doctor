@@ -50,8 +50,6 @@ interface HomeProps {
 }
 
 export default function Home({ content }: HomeProps) {
-  const WideNewsBoard = () => <NewsBoard layoutStyles={{ container: 'w-8/12', title: 'text-white' }} content={content} />
-  const NarrowNewsBoard = () => <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={content} />
   return (
     <>
       <Header />
@@ -83,7 +81,7 @@ export default function Home({ content }: HomeProps) {
           </div>
           <div className='sm:hidden'>
             <div className='w-full flex justify-center mt-10 '>
-              <WideNewsBoard />
+              <NewsBoard layoutStyles={{ container: 'w-8/12', title: 'text-white' }} content={content} />
             </div>
           </div>
           <MutedBlueBRSquare />
@@ -109,7 +107,7 @@ export default function Home({ content }: HomeProps) {
 
           <div className='ov-md:hidden'>
             <div className='w-full flex justify-center mt-10 '>
-              <NarrowNewsBoard />
+              <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={content} />
             </div>
           </div>
 
