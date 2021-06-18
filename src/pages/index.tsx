@@ -50,6 +50,8 @@ interface HomeProps {
 }
 
 export default function Home({ content }: HomeProps) {
+  const WideNewsBoard = () => <NewsBoard layoutStyles={{ container: 'w-8/12', title: 'text-prime-blue-rich' }} content={content} />
+  const NarrowNewsBoard = () => <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-white' }} content={content} />
   return (
     <>
       <Header />
@@ -81,7 +83,7 @@ export default function Home({ content }: HomeProps) {
           </div>
           <div className='sm:hidden'>
             <div className='w-full flex justify-center mt-10 '>
-              <NewsBoard layoutStyles={{ container: 'w-2/3', title: 'text-white' }} content={content} />
+              <WideNewsBoard />
             </div>
           </div>
           <MutedBlueBRSquare />
@@ -90,7 +92,7 @@ export default function Home({ content }: HomeProps) {
         <section className='w-full rounded-br-bg-corner rounded-tl-bg-corner relative bg-prime-blue-muted flex flex-col items-center py-24'>
           <RichBlueBRSquare />
           <RichBlueTLSquare />
-          <div className='sm:w-11/12 ov-md:w-10/12 '>
+          <div className='sm:w-11/12 ov-md:w-8/12 '>
             <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold'>新着動画</div>
             <div className='text-sm'>各診療科のやりがいやリアルな現場を動画で見ることができます</div>
             <div className='overflow-x-scroll overflow-y-hidden'>
@@ -107,7 +109,7 @@ export default function Home({ content }: HomeProps) {
 
           <div className='ov-md:hidden'>
             <div className='w-full flex justify-center mt-10 '>
-              <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={content} />
+              <NarrowNewsBoard />
             </div>
           </div>
 
@@ -115,7 +117,7 @@ export default function Home({ content }: HomeProps) {
 
         <section className='relative w-full flex flex-col items-center rounded-tl-bg-corner rounded-br-bg-corner bg-prime-blue-rich py-24'>
           <MutedBlueTLSquare />
-          <div className='sm:w-11/12 ov-md:w-10/12'>
+          <div className='sm:w-11/12 ov-md:w-8/12'>
             <div className='text-white sm:text-2xl ov-md:text-4xl font-semibold' >診療科一覧</div>
             <div className='sm:text-sm ov-md:text-lg mb-4'>各診療科にコンタクトを取ったり、イベント情報をチェックすることができます</div>
             <DepartBoard />
