@@ -28,4 +28,53 @@
   .breakAll {
     word-break: break-all;
   }
+  .slick-dots-tw {
+    bottom: -25px;
+    display: flex !important;
+    width: 100%;
+    list-style-type:none;
+    justify-content: space-around;
+    & li {
+      @apply inline-block cursor-pointer w-4 h-4  ;
+      & button {
+        @apply bg-gray-400 rounded-full block w-4 h-4 cursor-pointer text-transparent outline-none;
+      }
+    }
+  }
+  .slick-slider-tw {
+    & .slick-arrow {
+      font-size: 0;
+      line-height: 0;
+      position: absolute;
+      top: 50%;
+      display: block;
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      transform: translate(0, -50%);
+      cursor: pointer;
+      color: transparent;
+      border: none;
+      outline: none;
+      background: transparent;
+    }
+    & .slick-prev::before {
+      content: '←';
+      font-family: 'slick';
+      font-size: 20px;
+      line-height: 1;
+      opacity: .75;
+      color: white;
+      -webkit-font-smoothing: antialiased;
+    }
+    & .slick-next::before {
+      content:'→';
+      font-family: 'slick';
+      font-size: 20px;
+      line-height: 1;
+      opacity: .75;
+      color: white;
+      -webkit-font-smoothing: antialiased;
+    }
+  }
 }
