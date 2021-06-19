@@ -146,7 +146,8 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
 
 
         <section className='flex flex-col items-center mb-16'>
-          <div className='ov-md:w-8/12 sm:w-11/12 bg-prime-blue-rich flex flex-col items-center py-6'>
+          <div className='ov-md:w-8/12 sm:w-11/12 bg-prime-blue-rich flex flex-col items-center py-6 rounded-md'>
+            <p className='text-white sm:text-xs ov-md:text-md sm:my-2 ov-md:my-4 breakAll'>紹介動画を視聴して雰囲気をみてみませんか？</p>
             <MovieCarousel />
           </div>
         </section>
