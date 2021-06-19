@@ -8,6 +8,7 @@ import ThreePointLeader from '../components/atoms/ThreePointLeader'
 import { ModalMainArea, ModalBackdrop } from '../components/atoms/Modal'
 import MovieCarousel from '../components/organisms/MovieCarousel'
 import { SpreadSheetDataType } from '../lib/types'
+import ContactButtonModal from '../components/molecules/ContactButtonModal'
 
 export const getServerSideProps = async () => {
   const res = await fetch(
@@ -170,6 +171,7 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
             </div>
           </div>
         </section>
+        <ContactButtonModal />
 
       </main>
       <Footer />
