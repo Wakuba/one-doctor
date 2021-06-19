@@ -73,7 +73,8 @@ module.exports = {
       'xl': { 'min': '1280px', 'max': '1535px' },
       '2xl': { 'min': '1536px' },
       'ov-md': '768px',
-      'ov-lg': '1024px'
+      'ov-lg': '1024px',
+      'ov-xl': '1280px',
     },
     backdropFilter: {
       'blur': 'blur(20px)',
@@ -101,8 +102,5 @@ module.exports = {
       backgroundColor: ['hover']
     },
   },
-  plugins: [
-
-  ],
   important: true,
 }

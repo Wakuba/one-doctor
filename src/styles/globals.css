@@ -28,6 +28,9 @@
   .breakAll {
     word-break: break-all;
   }
+  .crew-bg {
+    background:linear-gradient(to bottom, #5DB0D0 0%, #5DB0D0 30%, #F8FDFF 30%, #F8FDFF 100%)
+  }
   .slick-dots-tw {
     margin-top:10px;
     display: flex !important;

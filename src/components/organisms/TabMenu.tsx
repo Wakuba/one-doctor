@@ -21,7 +21,7 @@ export default function TabMenu({ data }: TabMenuPropsType) {
             <div className='w-full h-96'></div>
           </div>
         </TabField>
-        <TabField label='医局紹介' key={2}>
+        <TabField label='局員紹介' key={2}>
           <CrewBoard />
         </TabField>
         <TabField label='周辺地図' key={3}>
