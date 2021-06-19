@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import '@firebase/firestore'
+import '@firebase/functions'
 
 const firebaseConfig = {
   apiKey: process.env.BROWSER_FIREBASE_API_KEY,
@@ -17,5 +18,5 @@ if (!firebase.apps.length) {
 }
 
 
-const db: firebase.firestore.Firestore = firebase.firestore();
-export { db, firebase }
+export const db: firebase.firestore.Firestore = firebase.firestore();
+export const firebaseFunction = firebase.functions()

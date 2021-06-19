@@ -1,7 +1,7 @@
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import ContactButtonModal from '../components/molecules/ContactButtonModal'
-import { firebase } from '../lib/firebase/firebase.config'
+import { firebaseFunction } from '../lib/firebase/firebase.config'
 import { SyntheticEvent } from 'react'
 
 export default function Inqueries() {
@@ -17,7 +17,7 @@ export default function Inqueries() {
       email: target.email.value,
       content: target.content.value
     }
-    let sendMail = firebase.functions().httpsCallable('sendMail');
+    let sendMail = firebaseFunction.httpsCallable('sendMail');
     sendMail(data)
     target.name.value = ''
     target.email.value = ''
