@@ -38,7 +38,7 @@ export default function MovieCarousel() {
         return (
           modalActive[idx] &&
           <div key={idx}>
-            <ModalMainArea closeModal={closeModal} modalWrapperStyle='w-10/12 h-5/6' modalContainerStyle='h-full w-full'>
+            <ModalMainArea closeModal={closeModal} modalWrapperStyle='w-10/12 h-5/6' modalContainerStyle='h-full w-full flex flex-col justify-center '>
               <YouTube videoId={data.videoId} opts={opts} containerClassName='ov-md:h-full sm:h-wscreen7/10 w-full flex flex-col items-center justify-center' className='h-5/6 w-10/12' />
             </ModalMainArea>
             <ModalBackdrop closeModal={closeModal} />
