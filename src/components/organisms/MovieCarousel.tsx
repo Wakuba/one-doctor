@@ -46,7 +46,7 @@ export default function MovieCarousel() {
         )
       })
       }
-      <Slider className='w-9/12' {...settings} arrows={true} dots={true}>
+      <Slider className='w-9/12 slick-slider-tw' dotsClass='slick-dots-tw' {...settings} arrows={true} dots={true}>
         {sliderData.map((data, idx) => {
           function openModalCloser() {
             const key = idx;
