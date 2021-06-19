@@ -8,7 +8,6 @@ const firebaseConfig = {
   storageBucket: process.env.BROWSER_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.BROWSER_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.BROWSER_FIREBASE_APP_ID,
-  databaseURL: process.env.BROWSER_FIREBASE_DATABASE_URL,
 };
 
 if (!firebase.apps.length) {
