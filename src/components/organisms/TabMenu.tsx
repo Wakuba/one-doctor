@@ -17,7 +17,7 @@ export default function TabMenu({ data }: TabMenuPropsType) {
       <Tabs >
         <TabField label='基本情報' key={1}>
           <div className='p-8'>
-            <div className='w-1/3 border-l-8 bg-prime-blue-muted border-prime-blue-rich ov-md:text-lg font-medium'>研修カリキュラム</div>
+            <div className=' border-l-8 bg-prime-blue-muted inline-block px-2 border-prime-blue-rich ov-md:text-lg font-medium'>研修カリキュラム</div>
             <div className='w-full h-96'></div>
           </div>
         </TabField>
