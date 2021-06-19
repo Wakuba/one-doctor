@@ -97,7 +97,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundColor: ['hover']
+    },
   },
   plugins: [
 

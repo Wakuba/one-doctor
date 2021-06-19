@@ -29,7 +29,7 @@
     word-break: break-all;
   }
   .slick-dots-tw {
-    bottom: -25px;
+    margin-top:10px;
     display: flex !important;
     width: 100%;
     list-style-type:none;
@@ -37,7 +37,7 @@
     & li {
       @apply inline-block cursor-pointer w-4 h-4  ;
       & button {
-        @apply bg-gray-400 rounded-full block w-4 h-4 cursor-pointer text-transparent outline-none;
+        @apply bg-gray-400 rounded-full block w-4 h-4 cursor-pointer text-transparent outline-none hover:bg-gray-600;
       }
     }
   }
