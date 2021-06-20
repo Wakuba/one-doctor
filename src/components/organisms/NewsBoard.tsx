@@ -11,7 +11,7 @@ export default function NewsBoard({ layoutStyles, content }: NewsBoardProps) {
 
   return (
     <div className={`${layoutStyles.container}`}>
-      <div className={`text-2xl sm:text-prime-blue-rich font-semibold ${layoutStyles.title}`}>NEWS</div>
+      <div className={`sm:text-2xl ov-md:text-4xl sm:text-prime-blue-rich font-semibold ${layoutStyles.title}`}>NEWS</div>
       <p className='text-sm'>イベントや説明会の情報をお知らせします。</p>
       <div className='flex-col items-start bg-white rounded shadow-lg p-2.5 space-y-2'>
         {content.map((news: NewsLineType, idx: number): JSX.Element => {

@@ -9,8 +9,14 @@ const depList: string[] = ['循環器', '消化器内科', '脳神経内科', '�
 export default function DepartBoard() {
   return (
     <div className='w-full sm:overflow-x-auto sm:overflow-y-hidden md:overflow-x-auto md:overflow-y-hidden ov-lg:flex ov-lg:flex-col ov-lg:items-center'>
-      <div className='flex flex-row flex-wrap sm:w-for-scroll sm:justify-items-stretch md:w-for-scroll md:justify-items-stretch ov-lg:justify-between ov-lg:w-11/12'>
-        {depList.map((cur, idx) => <DepartKanban layoutStyle='sm:mr-4 sm:mb-4 md:mr-8 md:mb-8 ov-md:mb-10' key={idx + 1} >{cur}</DepartKanban>)}
+      <div className='
+      flex
+      flex-row
+      flex-wrap
+      sm:w-for-scroll sm:justify-items-stretch
+      md:w-for-scroll md:justify-items-stretch
+      ov-lg:justify-strech ov-lg:w-full'>
+        {depList.map((cur, idx) => <DepartKanban layoutStyle='sm:mr-4 sm:mb-4 md:mb-8 ov-md:mb-10 ov-md:mr-4' key={idx + 1} >{cur}</DepartKanban>)}
       </div >
     </div>
   )

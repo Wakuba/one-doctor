@@ -42,6 +42,9 @@ module.exports = {
         'wscreen/4': '25vw',
         'wscreen/3': '33vw',
       },
+      margin: {
+        '3.5vw': '3.5vw'
+      },
       borderWidth: {
         1: '1px'
       },
@@ -59,12 +62,23 @@ module.exports = {
         200: '50rem',
         238: '59.5rem',
         '3vw': '3vw',
+        '-1%': '-1%',
         '5vw': '5vw',
         '15vw': '15vw',
+        '80%': '80%'
       },
       zIndex: {
         '-10': '-10'
       },
+      fontSize: {
+        '10vw': '10vw',
+        '6vw': '6vw',
+        '1.5vw': '1.5vw'
+      },
+      lineHeight: {
+        '10vw': '10vw',
+        '6vw': '6vw'
+      }
     },
     screens: {
       'sm': { 'max': '767px' },
@@ -95,12 +109,11 @@ module.exports = {
       '135': '135deg',
       '180': '180deg',
       '270': '270deg',
-    },
+    }
   },
   variants: {
     extend: {
       backgroundColor: ['hover']
     },
   },
-  important: true,
 }

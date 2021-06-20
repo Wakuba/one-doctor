@@ -40,7 +40,7 @@ const Movie = ({ src, title }: { src: string; title: string }) => (
 )
 
 const ScrollArrow = () => (
-  <div className='sm:hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 md:top-200 md:left-8 ov-lg:left-14 ov-lg:top-238'>
+  <div className='sm:hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 ov-md:-left-1% ov-md:top-80%'>
     scroll
   </div>
 )
@@ -69,11 +69,21 @@ export default function Home({ content }: HomeProps) {
                       relative
         '>
           <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ov-md:mr-14 ov-md:ml-16 ov-lg:ml-32'>
-            <div className='text-white ov-md:w-11/12 sm:w-10/12 ov-md:ml-10 md:pt-40 lg:pt-52 xl:pt-64 lg:text-xl ov-md:pr-4'>
+            <div className='text-white
+                            sm:w-10/12
+                            md:pt-40
+                            ov-md:w-11/12  ov-md:ml-3.5vw ov-md:pr-4
+                            lg:pt-52 lg:text-xl
+                            ov-xl:pt-64  ov-xl:text-1.5vw
+                            '>
               「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）
               「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）
             </div>
-            <h1 className='text-white md:text-6xl ov-lg:text-8xl transform -rotate-12 my-wscreen/20 w-wscreen7/10 ov-md:absolute left-wscreen/8 top-6 sm:text-4xl'>
+            <h1 className='text-white transform -rotate-12 my-wscreen/20 w-wscreen7/10 left-wscreen/8 top-6
+                            sm:text-10vw sm:leading-10vw
+                            md:text-10vw md:leading-10vw
+                            ov-lg:text-6vw ov-lg:leading-6vw
+                            ov-md:absolute  '>
               キャッチコピー<br />白の手書き
             </h1>
             <img className='rounded-full ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
