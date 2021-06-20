@@ -6,8 +6,6 @@ module.exports = {
       backgroundImage: {
         'hero-wideback-image': "url(/svg/bg-top-m-l.svg)",
         'hero-narrowback-image': "url(/svg/bg-top-s.svg)",
-        'ed-narrowback': 'url(/svg/bg-ed-s.svg)',
-        'ed-wideback': 'url(/svg/bg-ed-m-l.svg)',
         'cc-back': 'url(/svg/bg-cc.svg)',
         'contact-button': 'url(/svg/contact-button.svg)'
       },
@@ -55,6 +53,7 @@ module.exports = {
         'prime-blue-rich': '#5DB0D0',
         'prime-blue-muted': '#F8FDFF',
         'prime-blue-pale': '#BBDFEC',
+        'off-white': '#ffffff98'
       },
       inset: {
         18: '4.5rem',

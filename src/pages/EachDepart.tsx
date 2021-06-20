@@ -38,7 +38,7 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
   return (
     <>
       <Header />
-      <main className='sm:bg-ed-narrowback ov-md:bg-ed-wideback bg-prime-blue-muted bg-contain bg-no-repeat'>
+      <main className='ed-back-linear bg-contain bg-no-repeat'>
         <section className='w-full flex flex-col items-center mb-14'>
           <div className='sm:w-11/12 ov-md:w-8/12 flex flex-col pt-10'>
             <h1 className='text-white text-xl font-semibold mb-1' >筑波大学附属病院　循環器内科</h1>
@@ -146,7 +146,7 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
 
 
         <section className='flex flex-col items-center mb-16'>
-          <div className='ov-md:w-8/12 sm:w-11/12 bg-prime-blue-rich flex flex-col items-center py-6 rounded-md'>
+          <div className='ov-md:w-8/12 sm:w-11/12 bg-prime-blue-rich flex flex-col items-center py-6'>
             <p className='text-white sm:text-xs ov-md:text-md sm:my-2 ov-md:my-4 breakAll'>紹介動画を視聴して雰囲気をみてみませんか？</p>
             <MovieCarousel />
           </div>
