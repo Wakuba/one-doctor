@@ -12,7 +12,7 @@ interface CardFacePropsType {
 }
 
 const CardHead = ({ imgSrc, flip }: CardFacePropsType) => (
-  <div className="absolute grid grid-cols-10 w-full h-full backface-invisible wk-backface-invisible overflow-hidden rounded-8 shadow-lg crew-bg" onClick={flip}>
+  <div onClick={flip} className="absolute grid grid-cols-10 w-full h-full backface-invisible wk-backface-invisible overflow-hidden shadow-lg crew-bg-blue border-1 border-prime-blue-rich rounded-sm" >
     <div className='col-span-4 flex items-center justify-center'>
       <img className='object-conttain w-11/12 h-11/12' src={imgSrc} />
     </div>
@@ -38,7 +38,7 @@ const CardHead = ({ imgSrc, flip }: CardFacePropsType) => (
 )
 
 const CardTail = ({ imgSrc, flip }: CardFacePropsType) => (
-  <div className="absolute grid grid-cols-10 w-full h-full crew-bg rotate-y-180 backface-invisible wk-backface-invisible" onClick={flip}>
+  <div onClick={flip} className="absolute grid grid-cols-10 w-full h-full crew-bg-purple rotate-y-180 backface-invisible wk-backface-invisible shadow-lg border-1 border-prime-blue-rich rounded-sm" >
     <div className='col-span-4 flex items-center justify-center'>
       <img className='object-contain w-11/12 h-11/12' src={imgSrc} />
     </div>
