@@ -73,19 +73,19 @@
     }
 
     & .slick-prev {
-      border-bottom: 1vw solid #ffffff98;
+      border-top: 1vw solid #ffffff98;
       border-left: 1vw solid #ffffff98;
-      transform: translate(-45%, -50%) rotate(45deg);
+      transform: translate(-45%, -50%) rotate(-45deg) skew(165deg, 165deg);
+    }
+
+    & .slick-next {
+      border-bottom: 1vw solid #ffffff98;
+      border-right: 1vw solid #ffffff98;
+      transform: translate(45%, -50%) rotate(-45deg) skew(165deg, 165deg);
     }
 
     & .slick-prev::before {
       content: '';
-    }
-
-    & .slick-next {
-      border-top: 1vw solid #ffffff98;
-      border-right: 1vw solid #ffffff98;
-      transform: translate(45%, -50%) rotate(45deg);
     }
 
     & .slick-next::before {
