@@ -40,7 +40,7 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
       <Header />
       <main className='ed-back-linear bg-contain bg-no-repeat'>
         <section className='w-full flex flex-col items-center mb-14'>
-          <div className='sm:w-11/12 ov-md:w-8/12 flex flex-col pt-10'>
+          <div className='sm:w-11/12 ov-md:w-8/12 flex flex-col pt-20'>
             <h1 className='text-white text-xl font-semibold mb-1' >筑波大学附属病院　循環器内科</h1>
             <p className='text-white text-xs mb-1'>University of Tsukuba Hospital -cardiovascular medicine</p>
             <div className='flex flex-row'>
