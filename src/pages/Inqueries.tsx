@@ -26,9 +26,9 @@ export default function Inqueries() {
   return (
     <>
       <Header />
-      <div className='flex-col justify-center content-center bg-prime-blue-muted w-full'>
+      <div className='flex-col justify-center content-center bg-prime-blue-muted w-full ov-md:pt-20'>
         <main className='w-full flex flex-col items-center'>
-          <form action='' onSubmit={onSubmit} className='sm:w-11/12 ov-md:w-8/12 space-y-10'>
+          <form action='' onSubmit={onSubmit} className='sm:w-11/12 ov-md:w-7/10 space-y-10'>
 
             <div className='mt-10'>
               <h1 className='text-2xl text-prime-blue-rich font-semibold mb-6'>お問い合わせ</h1>
@@ -60,7 +60,6 @@ export default function Inqueries() {
               <button type='submit' className='rounded text-white h-11 w-48 bg-prime-blue-rich'>送信する</button>
             </div>
           </form >
-          <ContactButtonModal />
         </main>
       </div>
       <Footer />
