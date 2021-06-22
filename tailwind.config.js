@@ -74,7 +74,8 @@ module.exports = {
       fontSize: {
         '10vw': '10vw',
         '6vw': '6vw',
-        '1.5vw': '1.5vw'
+        '1.5vw': '1.5vw',
+        '1vw': '1vw',
       },
       lineHeight: {
         '10vw': '10vw',

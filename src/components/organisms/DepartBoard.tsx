@@ -16,7 +16,7 @@ export default function DepartBoard() {
       sm:w-for-scroll sm:justify-items-stretch
       md:w-for-scroll md:justify-items-stretch
       ov-lg:justify-strech ov-lg:w-full'>
-        {depList.map((cur, idx) => <DepartKanban layoutStyle='sm:mr-4 sm:mb-4 md:mb-8 ov-md:mb-10 ov-md:mr-4' key={idx + 1} >{cur}</DepartKanban>)}
+        {depList.map((cur, idx) => <DepartKanban layoutStyle='sm:mr-4 sm:mb-4 ov-md:mb-8 ov-md:mr-3' key={idx + 1} >{cur}</DepartKanban>)}
       </div >
     </div>
   )
