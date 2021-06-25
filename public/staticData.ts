@@ -1,4 +1,32 @@
 
+export const depList: { name: string; page: string }[] = [
+  { name: '循環器', page: 'Departments/EachDepart' },
+  { name: '消化器内科', page: 'Departments/EachDepart' },
+  { name: '脳神経内科', page: 'Departments/EachDepart' },
+  { name: '腎臓内科', page: 'Departments/EachDepart' },
+  { name: '血液内科', page: 'Departments/EachDepart' },
+  { name: 'アレルギーリウマチ', page: 'Departments/EachDepart' },
+  { name: '皮膚科', page: 'Departments/EachDepart' },
+  { name: '泌尿器科', page: 'Departments/EachDepart' },
+  { name: '脳神経外科', page: 'Departments/EachDepart' },
+  { name: '心臓血管外科', page: 'Departments/EachDepart' },
+  { name: '呼吸器外科', page: 'Departments/EachDepart' },
+  { name: '消化器外科', page: 'Departments/EachDepart' },
+  { name: '移植外科', page: 'Departments/EachDepart' },
+  { name: '緩和ケア', page: 'Departments/EachDepart' },
+  { name: '放射線科', page: 'Departments/Radiology' },
+  { name: '総合診断科', page: 'Departments/EachDepart' },
+  { name: '感染症科', page: 'Departments/EachDepart' },
+  { name: '救急', page: 'Departments/EachDepart' },
+  { name: '整形外科', page: 'Departments/EachDepart' },
+  { name: '耳鼻咽喉科', page: 'Departments/EachDepart' },
+  { name: '麻酔科', page: 'Departments/EachDepart' },
+  { name: '眼科', page: 'Departments/EachDepart' },
+  { name: '形成外科', page: 'Departments/EachDepart' },
+  { name: '公衆衛生', page: 'Departments/EachDepart' },
+  { name: '外傷外科', page: 'Departments/EachDepart' }
+]
+
 export const sliderData = [
   {
     eyecatchImg: '/images/cat.jpeg',

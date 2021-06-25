@@ -5,12 +5,13 @@ type DepartKanbanProps = {
   key: number;
   children: ReactNode;
   layoutStyle?: string;
+  correspondedPage: string;
 }
 
-export default function DepartKanban({ children, layoutStyle }: DepartKanbanProps) {
+export default function DepartKanban({ children, layoutStyle, correspondedPage }: DepartKanbanProps) {
   return (
-    <Link href='EachDepart'>
-      <div className={`
+    <Link href={correspondedPage}>
+      <button className={`
       ${layoutStyle}
         bg-white rounded shadow-xl flex flex-row items-center sm:h-14 sm:w-52 md:h-16 md:w-64
         lg:h-wscreen/20 lg:w-wscreen/5 lg:max-h-16 lg:max-w-64
@@ -23,7 +24,7 @@ export default function DepartKanban({ children, layoutStyle }: DepartKanbanProp
         ov-xl:h-14 ov-xl:w-14
         ' />
         <div className='sm:text-xs md:text-sm lg:text-1vw ov-xl:text-sm mr-4 '>{children}</div>
-      </div>
+      </button>
     </Link>
   )
 }
