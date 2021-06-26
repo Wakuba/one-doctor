@@ -7,7 +7,6 @@ import { RichBlueBRSquare, MutedBlueBRSquare, MutedBlueTLSquare, RichBlueTLSquar
 
 //firebase
 import { db } from '../lib/firebase/firebase.config'
-import ContactButtonModal from '../components/molecules/ContactButtonModal'
 
 //types
 import { NewsLineType } from '../lib/types'

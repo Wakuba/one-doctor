@@ -7,7 +7,6 @@ interface TabMenuPropsType {
 }
 
 export default function TabMenu({ children }: TabMenuPropsType) {
-  console.log(children[0])
   return (
     <div className='sm:w-11/12 ov-md:w-8/12'>
       <Tabs >

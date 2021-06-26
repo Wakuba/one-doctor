@@ -1,3 +1,4 @@
+import Script from 'next/script'
 //Components
 import Header from '../../components/organisms/Header'
 import Footer from '../../components/organisms/Footer'
@@ -15,7 +16,6 @@ import TwitterTimeline from '../../components/molecules/TwitterTimeline'
 import { ReactNode } from 'react'
 import { SpreadSheetDataType } from '../../lib/types'
 
-import Head from 'next/head'
 
 
 export const getStaticProps = async () => {
@@ -37,11 +37,10 @@ const Button = (props: { children: ReactNode, href?: string }) => (
 )
 
 export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: SpreadSheetDataType[] }) {
+
   return (
     <>
-      <Head>
-        <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
-      </Head>
+
       <Header />
       <main className='ed-back-linear bg-contain bg-no-repeat'>
         <section className='w-full flex flex-col items-center mb-14 pt-10'>
@@ -88,6 +87,12 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
             <CrewBoard key={2} />
             <div key={3}></div>
             <EventTab key={4} events={spreadsheetData} />
+            <div className='w-full ov-md:p-8 sm:p-4 bg-white'>
+              <div className='space-y-8'>
+                <div className='border-l-8 inline-block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>関連SNS</div>
+                <TwitterTimeline href='https://twitter.com/tkbradiol?ref_src=twsrc%5Etfw' />
+              </div>
+            </div>
           </TabMenu>
         </section>
 
