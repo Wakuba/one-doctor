@@ -1,4 +1,3 @@
-import Script from 'next/script'
 //Components
 import Header from '../../components/organisms/Header'
 import Footer from '../../components/organisms/Footer'
@@ -11,6 +10,7 @@ import EachDepTopSection from '../../components/organisms/EachDepTopSeciton '
 import EventTab from '../../components/organisms/EventTab'
 import CrewBoard from '../../components/organisms/CrewBoard'
 import TwitterTimeline from '../../components/molecules/TwitterTimeline'
+import PushPoint from '../../components/atoms/PushPoint'
 
 //Types
 import { ReactNode } from 'react'
@@ -37,10 +37,8 @@ const Button = (props: { children: ReactNode, href?: string }) => (
 )
 
 export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: SpreadSheetDataType[] }) {
-
   return (
     <>
-
       <Header />
       <main className='ed-back-linear bg-contain bg-no-repeat'>
         <section className='w-full flex flex-col items-center mb-14 pt-10'>
@@ -57,16 +55,24 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
         <EachDepTopSection
           layoutStyle='mb-16'
           depName='放射線診断・IVR科'
-          educationalPoint={`科内カンファレンスや研究会などがあり、勉強している先生が多く、画像診断のレベルが高い。
-        IVR（小外）ができると、どの病院にいっても頼りにされる。
-        `}
-          clinicalPoint={`楽天メディカルが進めている光免疫療法の基礎的研究を進めており、今後は臨床的な観点からIVRの手技に応用したいと考えている。
-        AIのプロジェクトが動き始めたところ。企業ともタイアップして研究を進めるので、コンピュータに興味のある人にはお薦め。
-        `}
-          researchPoint={`レジデントによく教えてくれる（教えたがり）。
-        毎日夕方に何らかのカンファレンスがあるので、画像以外の情報も含めて勉強ができる。
-        他の診療科との合同カンファレンスではレジデントが画像のプレゼンをするので、その準備を教官が教えてくれる。そのため、プレゼンのレベルは全国一だと思う。
-        `} />
+        >
+          <EachDepTopSection.EducationalPoint >
+            科内カンファレンスや研究会などがあり、勉強している先生が多く、画像診断のレベルが高い。
+            IVR（小外）ができると、どの病院にいっても頼りにされる。
+          </EachDepTopSection.EducationalPoint>
+          <EachDepTopSection.ClinicalPoint>
+            楽天メディカルが進めている光免疫療法の基礎的研究を進めており、今後は臨床的な観点からIVRの手技に応用したいと考えている。
+            AIのプロジェクトが動き始めたところ。企業ともタイアップして研究を進めるので、コンピュータに興味のある人にはお薦め。
+          </EachDepTopSection.ClinicalPoint>
+          <EachDepTopSection.ResearchPoint>
+            レジデントによく教えてくれる（教えたがり）。
+            毎日夕方に何らかのカンファレンスがあるので、画像以外の情報も含めて勉強ができる。
+            他の診療科との合同カンファレンスではレジデントが画像のプレゼンをするので、その準備を教官が教えてくれる。そのため、プレゼンのレベルは全国一だと思う。
+          </EachDepTopSection.ResearchPoint>
+          <EachDepTopSection.OtherPoint>
+            放射線診断医は、働き方の形態（場所・時間）が選べるので、出産や育児のある女性は働きやすい。男性でも自分の時間の有意義に使っている先生がいる。
+          </EachDepTopSection.OtherPoint>
+        </EachDepTopSection>
 
 
         <section className='w-full flex flex-col items-center mb-16'>
@@ -89,6 +95,8 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
             <EventTab key={4} events={spreadsheetData} />
             <div className='w-full ov-md:p-8 sm:p-4 bg-white'>
               <div className='space-y-8'>
+                <div className='border-l-8 inline-block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>公式サイト</div>
+                <Button href="http://tsukuba-radiology.info/">診療科公式ページ→</Button>
                 <div className='border-l-8 inline-block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>関連SNS</div>
                 <TwitterTimeline href='https://twitter.com/tkbradiol?ref_src=twsrc%5Etfw' />
               </div>

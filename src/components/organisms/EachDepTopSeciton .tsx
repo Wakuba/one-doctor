@@ -1,24 +1,16 @@
-import { useState } from 'react'
+import { useState, ReactNode } from 'react'
 import ThreePointLeader from '../atoms/ThreePointLeader'
 import { ModalMainArea, ModalBackdrop } from '../atoms/Modal'
+import PushPoint from '../atoms/PushPoint'
 
 interface DepTopSectionPropsType {
   layoutStyle: string;
   depName: string;
-  educationalPoint: string;
-  clinicalPoint: string;
-  researchPoint: string;
+  children: any;
 }
-
-const PushPoint = (props: { children: JSX.Element[] }) => (
-  <div>
-    <div className='font-semibold text-base' >{props.children[0]}</div>
-    <div className='text-sm'>{props.children[1]}</div>
-  </div>
-)
-
-export default function EachDepTopSection({ layoutStyle, depName, educationalPoint, clinicalPoint, researchPoint }: DepTopSectionPropsType) {
+export default function EachDepTopSection({ layoutStyle, depName, children }: DepTopSectionPropsType) {
   const [isTextModalOpen, setIsTextModalOpen] = useState<boolean>(false)
+  console.log(children)
   return (
 
     <section className={`${layoutStyle} relative w-full flex flex-col items-center `} >
@@ -29,18 +21,7 @@ export default function EachDepTopSection({ layoutStyle, depName, educationalPoi
               <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
                 筑波大学附属病院　{depName}イチオシポイント
               </div>
-              <PushPoint>
-                <span>教育：</span>
-                <span>{educationalPoint}</span>
-              </PushPoint>
-              <PushPoint>
-                <span>臨床：</span>
-                <span>{clinicalPoint}</span>
-              </PushPoint>
-              <PushPoint>
-                <span>研究：</span>
-                <span>{researchPoint}</span>
-              </PushPoint>
+              {children.map((child: JSX.Element): JSX.Element => <>{child}</>)}
             </div>
             <div className='absolute w-full left-0 bottom-0 shadow-for-readmore h-16'></div>
           </div>
@@ -69,24 +50,7 @@ export default function EachDepTopSection({ layoutStyle, depName, educationalPoi
             <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
               筑波大学附属病院　循環器内科イチオシポイント
             </div>
-            <PushPoint>
-              <span>教育：</span>
-              <span>
-                {educationalPoint}
-              </span>
-            </PushPoint>
-            <PushPoint>
-              <span>臨床：</span>
-              <span>
-                {clinicalPoint}
-              </span>
-            </PushPoint>
-            <PushPoint>
-              <span>研究：</span>
-              <span>
-                {researchPoint}
-              </span>
-            </PushPoint>
+            {children.map((child: JSX.Element): JSX.Element => <>{child}</>)}
           </ModalMainArea>
           <ModalBackdrop closeModal={() => setIsTextModalOpen(false)} />
         </>
@@ -94,3 +58,44 @@ export default function EachDepTopSection({ layoutStyle, depName, educationalPoi
     </section>
   )
 }
+
+
+function EducationalPoint({ children }: { children: ReactNode }) {
+  return (
+    <PushPoint>
+      <span>教育：</span>
+      {children}
+    </PushPoint>
+  )
+}
+EachDepTopSection.EducationalPoint = EducationalPoint
+
+function ClinicalPoint({ children }: { children: ReactNode }) {
+  return (
+    <PushPoint>
+      <span>臨床：</span>
+      {children}
+    </PushPoint>
+  )
+}
+EachDepTopSection.ClinicalPoint = ClinicalPoint
+
+function ResearchPoint({ children }: { children: ReactNode }) {
+  return (
+    <PushPoint>
+      <span>研究：</span>
+      {children}
+    </PushPoint>
+  )
+}
+EachDepTopSection.ResearchPoint = ResearchPoint
+
+function OtherPoint({ children }: { children: ReactNode }) {
+  return (
+    <PushPoint>
+      <span>その他：</span>
+      {children}
+    </PushPoint>
+  )
+}
+EachDepTopSection.OtherPoint = OtherPoint
