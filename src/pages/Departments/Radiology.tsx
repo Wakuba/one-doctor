@@ -1,13 +1,22 @@
+//Components
 import Header from '../../components/organisms/Header'
 import Footer from '../../components/organisms/Footer'
 import TabMenu from "../../components/organisms/TabMenu"
 import Tag from '../../components/atoms/Tag'
 import AppealCardBoard from '../../components/organisms/AppealCardBoard'
-import { ReactNode } from 'react'
 import MovieCarousel from '../../components/organisms/MovieCarousel'
-import { SpreadSheetDataType } from '../../lib/types'
 import ContactButtonModal from '../../components/molecules/ContactButtonModal'
 import EachDepTopSection from '../../components/organisms/EachDepTopSeciton '
+import EventTab from '../../components/organisms/EventTab'
+import CrewBoard from '../../components/organisms/CrewBoard'
+import TwitterTimeline from '../../components/molecules/TwitterTimeline'
+
+//Types
+import { ReactNode } from 'react'
+import { SpreadSheetDataType } from '../../lib/types'
+
+import Head from 'next/head'
+
 
 export const getStaticProps = async () => {
   const res = await fetch(
@@ -28,24 +37,37 @@ const Button = (props: { children: ReactNode, href?: string }) => (
 )
 
 export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: SpreadSheetDataType[] }) {
-
-
   return (
     <>
+      <Head>
+        <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+      </Head>
       <Header />
       <main className='ed-back-linear bg-contain bg-no-repeat'>
         <section className='w-full flex flex-col items-center mb-14 pt-10'>
           <div className='sm:w-11/12 ov-md:w-8/12 flex flex-col ov-md:pt-20'>
-            <h1 className='text-white text-xl font-semibold mb-1' >筑波大学附属病院　放射線科</h1>
+            <h1 className='text-white text-xl font-semibold mb-1' >筑波大学附属病院　放射線診断・IVR科</h1>
             <p className='text-white text-xs mb-1'>University of Tsukuba Hospital -cardiovascular medicine</p>
             <div className='flex flex-row'>
               <Tag layoutStyle='mr-2'>筑波大学附属病院</Tag>
-              <Tag layoutStyle='mr-2'>放射線科</Tag>
+              <Tag layoutStyle='mr-2'>放射線診断・IVR科</Tag>
             </div>
           </div>
         </section>
 
-        <EachDepTopSection layoutStyle='mb-16' />
+        <EachDepTopSection
+          layoutStyle='mb-16'
+          depName='放射線診断・IVR科'
+          educationalPoint={`科内カンファレンスや研究会などがあり、勉強している先生が多く、画像診断のレベルが高い。
+        IVR（小外）ができると、どの病院にいっても頼りにされる。
+        `}
+          clinicalPoint={`楽天メディカルが進めている光免疫療法の基礎的研究を進めており、今後は臨床的な観点からIVRの手技に応用したいと考えている。
+        AIのプロジェクトが動き始めたところ。企業ともタイアップして研究を進めるので、コンピュータに興味のある人にはお薦め。
+        `}
+          researchPoint={`レジデントによく教えてくれる（教えたがり）。
+        毎日夕方に何らかのカンファレンスがあるので、画像以外の情報も含めて勉強ができる。
+        他の診療科との合同カンファレンスではレジデントが画像のプレゼンをするので、その準備を教官が教えてくれる。そのため、プレゼンのレベルは全国一だと思う。
+        `} />
 
 
         <section className='w-full flex flex-col items-center mb-16'>

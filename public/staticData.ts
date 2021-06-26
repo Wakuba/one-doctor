@@ -14,7 +14,7 @@ export const depList: { name: string; page: string }[] = [
   { name: '消化器外科', page: 'Departments/EachDepart' },
   { name: '移植外科', page: 'Departments/EachDepart' },
   { name: '緩和ケア', page: 'Departments/EachDepart' },
-  { name: '放射線科', page: 'Departments/Radiology' },
+  { name: '放射線診断・IVR科', page: 'Departments/Radiology' },
   { name: '総合診断科', page: 'Departments/EachDepart' },
   { name: '感染症科', page: 'Departments/EachDepart' },
   { name: '救急', page: 'Departments/EachDepart' },

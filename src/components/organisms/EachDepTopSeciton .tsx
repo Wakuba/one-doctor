@@ -2,6 +2,14 @@ import { useState } from 'react'
 import ThreePointLeader from '../atoms/ThreePointLeader'
 import { ModalMainArea, ModalBackdrop } from '../atoms/Modal'
 
+interface DepTopSectionPropsType {
+  layoutStyle: string;
+  depName: string;
+  educationalPoint: string;
+  clinicalPoint: string;
+  researchPoint: string;
+}
+
 const PushPoint = (props: { children: JSX.Element[] }) => (
   <div>
     <div className='font-semibold text-base' >{props.children[0]}</div>
@@ -9,7 +17,7 @@ const PushPoint = (props: { children: JSX.Element[] }) => (
   </div>
 )
 
-export default function EachDepTopSection({ layoutStyle }: { layoutStyle: string }) {
+export default function EachDepTopSection({ layoutStyle, depName, educationalPoint, clinicalPoint, researchPoint }: DepTopSectionPropsType) {
   const [isTextModalOpen, setIsTextModalOpen] = useState<boolean>(false)
   return (
 
@@ -19,19 +27,19 @@ export default function EachDepTopSection({ layoutStyle }: { layoutStyle: string
           <div className='sm:p-3 sm:h-72  overflow-y-hidden relative'>
             <div className='space-y-4 ov-md:h-72 '>
               <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
-                筑波大学附属病院　循環器内科イチオシポイント
+                筑波大学附属病院　{depName}イチオシポイント
               </div>
               <PushPoint>
                 <span>教育：</span>
-                <span>テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキステ</span>
+                <span>{educationalPoint}</span>
               </PushPoint>
               <PushPoint>
                 <span>臨床：</span>
-                <span>テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテ</span>
+                <span>{clinicalPoint}</span>
               </PushPoint>
               <PushPoint>
                 <span>研究：</span>
-                <span>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキストテキストテキトスステキストテキストテキストテキストテキスト</span>
+                <span>{researchPoint}</span>
               </PushPoint>
             </div>
             <div className='absolute w-full left-0 bottom-0 shadow-for-readmore h-16'></div>
@@ -57,44 +65,26 @@ export default function EachDepTopSection({ layoutStyle }: { layoutStyle: string
       </div>
       {isTextModalOpen &&
         <>
-          <ModalMainArea closeModal={() => setIsTextModalOpen(false)} modalWrapperStyle='sm:w-9/12 ov-md:w-wscreen7/10 h-5/6' modalContainerStyle='w-full'>
+          <ModalMainArea closeModal={() => setIsTextModalOpen(false)} modalWrapperStyle='sm:w-9/12 ov-md:w-wscreen7/10 h-5/6' modalContainerStyle='w-full space-y-4'>
             <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
               筑波大学附属病院　循環器内科イチオシポイント
             </div>
             <PushPoint>
               <span>教育：</span>
               <span>
-                テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
-                テキストテキストテキストテキストテキトスステキストテキストテキストテキストテキストテキストテキストテキス
+                {educationalPoint}
               </span>
             </PushPoint>
             <PushPoint>
               <span>臨床：</span>
               <span>
-                テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
-                テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
-                テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
-                テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
-                テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
-                テテキストテキストテキストテキストキテストテキストテキストテキストテキストテキストキストテキストテキスト
+                {clinicalPoint}
               </span>
             </PushPoint>
             <PushPoint>
               <span>研究：</span>
               <span>
-                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                {researchPoint}
               </span>
             </PushPoint>
           </ModalMainArea>
