@@ -14,7 +14,6 @@ export default function Tabs({ children }: TabsProps) {
 
   let content;
   let buttons: string[] = [];
-
   return (
     <>
       <TabButtons activeTab={activeTab} buttons={buttons} changeTab={changeTab} />

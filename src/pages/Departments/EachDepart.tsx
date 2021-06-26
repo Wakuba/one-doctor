@@ -59,7 +59,7 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
         </section>
 
         <section className='w-full flex flex-col items-center mb-16'>
-          <TabMenu data={spreadsheetData} />
+
         </section>
 
         <section className='w-full flex flex-col items-center pb-20'>

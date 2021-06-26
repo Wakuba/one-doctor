@@ -83,7 +83,12 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
         </section>
 
         <section className='w-full flex flex-col items-center mb-16'>
-          <TabMenu data={spreadsheetData} />
+          <TabMenu>
+            <div key={1}></div>
+            <CrewBoard key={2} />
+            <div key={3}></div>
+            <EventTab key={4} events={spreadsheetData} />
+          </TabMenu>
         </section>
 
         <section className='w-full flex flex-col items-center pb-20'>
