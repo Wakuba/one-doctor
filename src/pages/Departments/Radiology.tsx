@@ -12,7 +12,7 @@ import CrewBoard from '../../components/organisms/CrewBoard'
 import TwitterTimeline from '../../components/molecules/TwitterTimeline'
 
 //Types
-import { ReactNode } from 'react'
+import { ReactNode, memo } from 'react'
 import { SpreadSheetDataType } from '../../lib/types'
 
 
@@ -28,12 +28,14 @@ export const getStaticProps = async () => {
 
 
 const Button = (props: { children: ReactNode, href?: string }) => (
-  <a href={props.href} className='rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center'>
+  <a rel="noopener" target='_blank' href={props.href} className='rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center'>
     <span className='text-white text-sm font-medium '>
       {props.children}
     </span>
   </a>
 )
+
+const TwitterTimelineMemo = memo(({ href }: { href: string }) => <TwitterTimeline href={href} />)
 
 export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: SpreadSheetDataType[] }) {
   return (
@@ -97,7 +99,7 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
                 <div className='border-l-8 inline-block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>公式サイト</div>
                 <Button href="http://tsukuba-radiology.info/">診療科公式ページ→</Button>
                 <div className='border-l-8 inline-block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>関連SNS</div>
-                <TwitterTimeline href='https://twitter.com/tkbradiol?ref_src=twsrc%5Etfw' />
+                <TwitterTimelineMemo href='https://twitter.com/tkbradiol?ref_src=twsrc%5Etfw' />
               </div>
             </div>
           </TabMenu>
