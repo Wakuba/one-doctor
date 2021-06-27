@@ -1,8 +1,7 @@
 {
   "functions": {
-    "source": "functions"
-  },
-  "storage": {
-    "rules": "firebase.rules"
+    "predeploy": [
+      "npm --prefix \"$RESOURCE_DIR\" run lint"
+    ]
   }
 }

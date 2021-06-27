@@ -1,6 +1,5 @@
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
-import ContactButtonModal from '../components/molecules/ContactButtonModal'
 import { firebaseFunction } from '../lib/firebase/firebase.config'
 import { SyntheticEvent } from 'react'
 
