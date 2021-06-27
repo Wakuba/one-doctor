@@ -74,23 +74,22 @@
       width: 0;
       height: 0;
       cursor: pointer;
-
     }
 
     & .slick-prev {
-      border-top: 8vw solid transparent;
-      border-bottom: 8vw solid transparent;
-      border-right: 4vw solid #ffffff98;
-      border-left: 4vw solid transparent;
-      transform: translate(-70%, -50%);
+      border-top: 7vw solid transparent;
+      border-bottom: 7vw solid transparent;
+      border-right: 3vw solid #ffffff98;
+      border-left: 3vw solid transparent;
+      transform: translate(-5vw, -50%);
     }
 
     & .slick-next {
-      border-top: 8vw solid transparent;
-      border-bottom: 8vw solid transparent;
-      border-right: 4vw solid transparent;
-      border-left: 4vw solid #ffffff98;
-      transform: translate(70%, -50%);
+      border-top: 7vw solid transparent;
+      border-bottom: 7vw solid transparent;
+      border-right: 3vw solid transparent;
+      border-left: 3vw solid #ffffff98;
+      transform: translate(5vw, -50%);
     }
 
     & .slick-prev::before {
