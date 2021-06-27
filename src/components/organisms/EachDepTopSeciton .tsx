@@ -10,7 +10,6 @@ interface DepTopSectionPropsType {
 }
 export default function EachDepTopSection({ layoutStyle, depName, children }: DepTopSectionPropsType) {
   const [isTextModalOpen, setIsTextModalOpen] = useState<boolean>(false)
-  console.log(children)
   return (
 
     <section className={`${layoutStyle} relative w-full flex flex-col items-center `} >

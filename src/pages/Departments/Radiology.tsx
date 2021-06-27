@@ -10,7 +10,6 @@ import EachDepTopSection from '../../components/organisms/EachDepTopSeciton '
 import EventTab from '../../components/organisms/EventTab'
 import CrewBoard from '../../components/organisms/CrewBoard'
 import TwitterTimeline from '../../components/molecules/TwitterTimeline'
-import PushPoint from '../../components/atoms/PushPoint'
 
 //Types
 import { ReactNode } from 'react'
