@@ -10,8 +10,8 @@ const CancelButton = ({ onCancel }: { onCancel: MouseEventHandler<HTMLDivElement
 interface ModalMainAreaPropsType {
   closeModal: MouseEventHandler<HTMLDivElement>;
   children: ReactNode;
-  modalWrapperStyle: string;
-  modalContainerStyle: string
+  modalWrapperStyle?: string;
+  modalContainerStyle?: string
 }
 
 export const ModalMainArea = ({ closeModal, children, modalWrapperStyle, modalContainerStyle }: ModalMainAreaPropsType) => {
