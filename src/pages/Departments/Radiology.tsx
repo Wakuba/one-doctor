@@ -6,7 +6,7 @@ import Tag from '../../components/atoms/Tag'
 import AppealCardBoard from '../../components/organisms/AppealCardBoard'
 import MovieCarousel from '../../components/organisms/MovieCarousel'
 import ContactButtonModal from '../../components/molecules/ContactButtonModal'
-import EachDepTopSection from '../../components/organisms/EachDepTopSeciton '
+import DepTopSection from '../../components/organisms/DepTopSeciton '
 import EventTab from '../../components/organisms/EventTab'
 import CrewBoard from '../../components/organisms/CrewBoard'
 import TwitterTimeline from '../../components/molecules/TwitterTimeline'
@@ -51,27 +51,27 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
           </div>
         </section>
 
-        <EachDepTopSection
+        <DepTopSection
           layoutStyle='mb-16'
           depName='放射線診断・IVR科'
         >
-          <EachDepTopSection.EducationalPoint >
+          <DepTopSection.EducationalPoint >
             科内カンファレンスや研究会などがあり、勉強している先生が多く、画像診断のレベルが高い。
             IVR（小外）ができると、どの病院にいっても頼りにされる。
-          </EachDepTopSection.EducationalPoint>
-          <EachDepTopSection.ClinicalPoint>
+          </DepTopSection.EducationalPoint>
+          <DepTopSection.ClinicalPoint>
             楽天メディカルが進めている光免疫療法の基礎的研究を進めており、今後は臨床的な観点からIVRの手技に応用したいと考えている。
             AIのプロジェクトが動き始めたところ。企業ともタイアップして研究を進めるので、コンピュータに興味のある人にはお薦め。
-          </EachDepTopSection.ClinicalPoint>
-          <EachDepTopSection.ResearchPoint>
+          </DepTopSection.ClinicalPoint>
+          <DepTopSection.ResearchPoint>
             レジデントによく教えてくれる（教えたがり）。
             毎日夕方に何らかのカンファレンスがあるので、画像以外の情報も含めて勉強ができる。
             他の診療科との合同カンファレンスではレジデントが画像のプレゼンをするので、その準備を教官が教えてくれる。そのため、プレゼンのレベルは全国一だと思う。
-          </EachDepTopSection.ResearchPoint>
-          <EachDepTopSection.OtherPoint>
+          </DepTopSection.ResearchPoint>
+          <DepTopSection.OtherPoint>
             放射線診断医は、働き方の形態（場所・時間）が選べるので、出産や育児のある女性は働きやすい。男性でも自分の時間の有意義に使っている先生がいる。
-          </EachDepTopSection.OtherPoint>
-        </EachDepTopSection>
+          </DepTopSection.OtherPoint>
+        </DepTopSection>
 
 
         <section className='w-full flex flex-col items-center mb-16'>

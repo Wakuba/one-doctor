@@ -7,7 +7,7 @@ import { ReactNode } from 'react'
 import MovieCarousel from '../../components/organisms/MovieCarousel'
 import { SpreadSheetDataType } from '../../lib/types'
 import ContactButtonModal from '../../components/molecules/ContactButtonModal'
-import EachDepTopSection from '../../components/organisms/EachDepTopSeciton '
+import DepTopSection from '../../components/organisms/DepTopSeciton '
 
 export const getStaticProps = async () => {
   const res = await fetch(
@@ -43,7 +43,7 @@ export default function EachDepartPage({ spreadsheetData }: { spreadsheetData: S
           </div>
         </section>
 
-        <EachDepTopSection layoutStyle='mb-16' />
+        <DepTopSection layoutStyle='mb-16' />
 
 
         <section className='w-full flex flex-col items-center mb-16'>

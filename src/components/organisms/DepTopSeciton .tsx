@@ -8,7 +8,7 @@ interface DepTopSectionPropsType {
   depName: string;
   children: any;
 }
-export default function EachDepTopSection({ layoutStyle, depName, children }: DepTopSectionPropsType) {
+export default function DepTopSection({ layoutStyle, depName, children }: DepTopSectionPropsType) {
   const [isTextModalOpen, setIsTextModalOpen] = useState<boolean>(false)
   return (
 
@@ -67,7 +67,7 @@ function EducationalPoint({ children }: { children: ReactNode }) {
     </PushPoint>
   )
 }
-EachDepTopSection.EducationalPoint = EducationalPoint
+DepTopSection.EducationalPoint = EducationalPoint
 
 function ClinicalPoint({ children }: { children: ReactNode }) {
   return (
@@ -77,7 +77,7 @@ function ClinicalPoint({ children }: { children: ReactNode }) {
     </PushPoint>
   )
 }
-EachDepTopSection.ClinicalPoint = ClinicalPoint
+DepTopSection.ClinicalPoint = ClinicalPoint
 
 function ResearchPoint({ children }: { children: ReactNode }) {
   return (
@@ -87,7 +87,7 @@ function ResearchPoint({ children }: { children: ReactNode }) {
     </PushPoint>
   )
 }
-EachDepTopSection.ResearchPoint = ResearchPoint
+DepTopSection.ResearchPoint = ResearchPoint
 
 function OtherPoint({ children }: { children: ReactNode }) {
   return (
@@ -97,4 +97,4 @@ function OtherPoint({ children }: { children: ReactNode }) {
     </PushPoint>
   )
 }
-EachDepTopSection.OtherPoint = OtherPoint
+DepTopSection.OtherPoint = OtherPoint
