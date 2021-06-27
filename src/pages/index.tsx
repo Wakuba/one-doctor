@@ -1,9 +1,14 @@
-//Components
+//Externel Components
+import { useState } from 'react'
+import YouTube from 'react-youtube'
+
+//Custom Components
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import NewsBoard from '../components/organisms/NewsBoard'
 import DepartBoard from '../components/organisms/DepartBoard'
 import { RichBlueBRSquare, MutedBlueBRSquare, MutedBlueTLSquare, RichBlueTLSquare } from '../components/atoms/StyledComponents'
+import { ModalMainArea, ModalBackdrop } from '../components/atoms/Modal'
 
 //firebase
 import { db } from '../lib/firebase/firebase.config'
@@ -32,11 +37,29 @@ export const getServerSideProps = async () => {
       content,
     }
   }
+}
+const opts = {
+  height: '390',
+  width: '640',
 };
 
-const Movie = ({ src, title }: { src: string; title: string }) => (
-  <iframe className='shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2' src={src} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-)
+const Movie = ({ src, title, videoId }: { src: string; title: string, videoId: string }) => {
+  const [modalActive, setModalActive] = useState(false)
+  return (
+    <>
+      {modalActive &&
+        <>
+          < ModalMainArea modalWrapperStyle='w-10/12 h-5/6' modalContainerStyle='h-full w-full flex flex-col justify-center' closeModal={() => setModalActive(false)}>
+            <YouTube videoId={videoId} opts={opts} containerClassName='ov-md:h-full sm:h-wscreen7/10 w-full flex flex-col items-center justify-center' className='h-5/6 w-10/12' />
+          </ModalMainArea >
+          <ModalBackdrop closeModal={() => setModalActive(false)} />
+        </>
+      }
+
+      <img onClick={() => setModalActive(true)} className='shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2' src={src} title={title} />
+    </>
+  )
+}
 
 const ScrollArrow = () => (
   <div className='sm:hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 ov-md:-left-1% ov-md:top-80%'>
@@ -141,7 +164,7 @@ export default function Home({ content }: HomeProps) {
             </div>
             <iframe className='w-full mb-10 h-wscreen/2' width="600" height="450" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.454268485108!2d140.09971111521065!3d36.10678911412265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2sUniversity%20of%20Tsukuba!5e0!3m2!1sen!2sjp!4v1618728410770!5m2!1sen!2sjp"  ></iframe>
             <div className='rounded text-white shadow-md bg-prime-blue-rich w-44 h-11 flex justify-center items-center'>
-              <a href='http://www.hosp.tsukuba.ac.jp/' >病院公式ページ</a>
+              <a rel="noopener" target='_blank' href='http://www.hosp.tsukuba.ac.jp/' >病院公式ページ</a>
             </div>
           </div>
         </section>
