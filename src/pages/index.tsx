@@ -20,16 +20,16 @@ export const getStaticProps = async () => {
   let newsBoardData: any = [];
   try {
     const snapshot = await db.collection("fl_content").get();
-    snapshot.docs
-      .filter(doc => doc.data()._fl_meta_.schema === 'topPageNewsBoard')
-      .forEach((doc) => {
+    snapshot.docs.forEach((doc) => {
+      if (doc.data()._fl_meta_.schema === 'topPageNewsBoard') {
         newsBoardData.push({
+          id: doc.data().id,
           title: doc.data().newsTitle,
           detail: doc.data().newsDetail,
         })
-      })
-  }
-  catch (error) {
+      }
+    })
+  } catch (error) {
     console.log('Error getting documents from FlameLink; ', error);
   }
 
@@ -69,7 +69,7 @@ const ScrollArrow = () => (
 )
 
 interface HomeProps {
-  content: NewsLineType[];
+  newsBoardData: NewsLineType[];
 }
 
 export default function Home({ newsBoardData }: HomeProps) {

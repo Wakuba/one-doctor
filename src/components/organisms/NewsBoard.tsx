@@ -7,7 +7,7 @@ type NewsBoardProps = {
 }
 
 export default function NewsBoard({ layoutStyles, content }: NewsBoardProps) {
-  if (content == undefined) content = [{ title: '特になし', article: '特になし' }]
+  if (content == undefined) content = [{ title: '特になし', detail: '特になし' }]
 
   return (
     <div className={`${layoutStyles.container}`}>
@@ -15,7 +15,7 @@ export default function NewsBoard({ layoutStyles, content }: NewsBoardProps) {
       <p className='text-sm'>イベントや説明会の情報をお知らせします。</p>
       <div className='flex-col items-start bg-white rounded shadow-lg p-2.5 space-y-2'>
         {content.map((news: NewsLineType, idx: number): JSX.Element => {
-          return <NewsLine key={idx} title={news.title}>{news.article} </NewsLine>
+          return <NewsLine key={idx} title={news.title}>{news.detail} </NewsLine>
         })
         }
       </div>

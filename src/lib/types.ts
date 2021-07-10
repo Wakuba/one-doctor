@@ -8,6 +8,6 @@ export interface SpreadSheetDataType {
 }
 
 export interface NewsLineType {
-  article?: string;
   title?: string;
+  detail?: string;
 }
