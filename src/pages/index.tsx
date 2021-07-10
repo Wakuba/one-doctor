@@ -16,17 +16,18 @@ import { db } from '../lib/firebase/firebase.config'
 //types
 import { NewsLineType } from '../lib/types'
 
-export const getServerSideProps = async () => {
-  let content: any = [];
-
+export const getStaticProps = async () => {
+  let newsBoardData: any = [];
   try {
     const snapshot = await db.collection("fl_content").get();
-    snapshot.docs.forEach((doc) => {
-      content.push({
-        title: doc.data().field_1618199954754,
-        article: doc.data().field_1620310046897
+    snapshot.docs
+      .filter(doc => doc.data()._fl_meta_.schema === 'topPageNewsBoard')
+      .forEach((doc) => {
+        newsBoardData.push({
+          title: doc.data().newsTitle,
+          detail: doc.data().newsDetail,
+        })
       })
-    })
   }
   catch (error) {
     console.log('Error getting documents from FlameLink; ', error);
@@ -34,7 +35,7 @@ export const getServerSideProps = async () => {
 
   return {
     props: {
-      content,
+      newsBoardData,
     }
   }
 }
@@ -71,7 +72,7 @@ interface HomeProps {
   content: NewsLineType[];
 }
 
-export default function Home({ content }: HomeProps) {
+export default function Home({ newsBoardData }: HomeProps) {
   return (
     <>
       <Header />
@@ -114,7 +115,7 @@ export default function Home({ content }: HomeProps) {
           </div>
           <div className='sm:hidden'>
             <div className='w-full flex justify-center mt-10 '>
-              <NewsBoard layoutStyles={{ container: 'w-8/12', title: 'text-white' }} content={content} />
+              <NewsBoard layoutStyles={{ container: 'w-8/12', title: 'text-white' }} content={newsBoardData} />
             </div>
           </div>
           <MutedBlueBRSquare />
@@ -140,7 +141,7 @@ export default function Home({ content }: HomeProps) {
 
           <div className='ov-md:hidden'>
             <div className='w-full flex justify-center mt-10 '>
-              <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={content} />
+              <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={newsBoardData} />
             </div>
           </div>
 
