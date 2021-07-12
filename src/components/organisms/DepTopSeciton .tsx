@@ -63,9 +63,19 @@ export default function DepTopSection({ depName, educationalPoint, clinicalPoint
                               ov-md:h-full
                               ov-md:w-24
                               ' ></div>
+<<<<<<< Updated upstream
           <div className='relative sm:w-full sm:h-auto ov-md:h-full ov-md:object-cover z-10 border-white'>
             <Image src='/images/ichioshi-image.png' />
           </div>
+=======
+<<<<<<< Updated upstream
+          <img className='sm:w-full sm:h-auto ov-md:h-full ov-md:object-cover z-10 border-white' src='/images/ichioshi-image.png' />
+=======
+          <div className='relative sm:w-full sm:h-auto ov-md:h-full ov-md:object-cover z-10 border-white'>
+            {/* <Image src='/images/ichioshi-image.png' /> */}
+          </div>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
         </div>
       </div>

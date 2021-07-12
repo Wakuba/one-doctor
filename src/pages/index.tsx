@@ -1,6 +1,7 @@
 //Externel Components
 import { useState } from 'react'
 import YouTube from 'react-youtube'
+import Image from 'next/image'
 
 //Custom Components
 import Header from '../components/organisms/Header'
@@ -56,8 +57,9 @@ const Movie = ({ src, title, videoId }: { src: string; title: string, videoId: s
           <ModalBackdrop closeModal={() => setModalActive(false)} />
         </>
       }
-
-      <img onClick={() => setModalActive(true)} className='shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2' src={src} title={title} />
+      <div onClick={() => setModalActive(true)} className='relative shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2'>
+        <Image layout='fill' objectFit='contain' loading='lazy' src={src} alt={title} />
+      </div>
     </>
   )
 }
@@ -91,26 +93,25 @@ export default function Home({ newsBoardData }: HomeProps) {
                       rounded-br-bg-corner
                       relative
         '>
-          <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ov-md:mr-14 ov-md:ml-16 ov-lg:ml-32'>
-            <div className='text-white
-                            sm:w-10/12
-                            md:pt-40
-                            ov-md:w-11/12  ov-md:ml-3.5vw ov-md:pr-4
-                            lg:pt-52 lg:text-xl
-                            ov-xl:pt-64  ov-xl:text-1.5vw
+          <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ml-wscreen/10 mr-wscreen/20'>
+            <div className='text-white flex items-center
+                            ov-md:w-wscreen2/5
+                            lg:text-xl
+                             ov-xl:text-1.5vw
                             text-shadow
                             '>
-              「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）
               「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）
             </div>
             <h1 className='text-white transform -rotate-12 my-wscreen/20 w-wscreen7/10 left-wscreen/8 top-6
                             sm:text-10vw sm:leading-10vw
-                            md:text-10vw md:leading-10vw
-                            ov-lg:text-6vw ov-lg:leading-6vw
-                            ov-md:absolute  '>
+                            ov-md:text-7vw ov-md:leading-7vw
+                            ov-md:absolute'>
               キャッチコピー<br />白の手書き
             </h1>
-            <img className='rounded-full ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10' src="https://aih-net.com/update_include/top/img/img_hero_03.jpg" />
+            <div className='relative ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10'>
+              <Image className='rounded-full ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10' layout='fill' objectFit='cover' src="/images/hero-image.jpeg" />
+            </div>
+
             <ScrollArrow />
           </div>
           <div className='sm:hidden'>
@@ -129,12 +130,12 @@ export default function Home({ newsBoardData }: HomeProps) {
             <div className='text-sm'>各診療科のやりがいやリアルな現場を動画で見ることができます</div>
             <div className='overflow-x-scroll overflow-y-hidden'>
               <div className='w-screen*2 flex flex-row'>
-                <Movie src="https://www.youtube.com/embed/8jjswrh3agE" title="YouTube video player" />
-                <Movie src="https://www.youtube.com/embed/o6xTZsgz6sA" title="YouTube video player" />
-                <Movie src="https://www.youtube.com/embed/o6xTZsgz6sA" title="YouTube video player" />
-                <Movie src="https://www.youtube.com/embed/o6xTZsgz6sA" title="YouTube video player" />
-                <Movie src="https://www.youtube.com/embed/8jjswrh3agE" title="YouTube video player" />
-                <Movie src="https://www.youtube.com/embed/8jjswrh3agE" title="YouTube video player" />
+                <Movie videoId="https://www.youtube.com/embed/8jjswrh3agE" src='/images/professor.png' title="YouTube video player" />
+                <Movie videoId="https://www.youtube.com/embed/8jjswrh3agE" src='/images/professor.png' title="YouTube video player" />
+                <Movie videoId="https://www.youtube.com/embed/8jjswrh3agE" src='/images/professor.png' title="YouTube video player" />
+                <Movie videoId="https://www.youtube.com/embed/8jjswrh3agE" src='/images/professor.png' title="YouTube video player" />
+                <Movie videoId="https://www.youtube.com/embed/8jjswrh3agE" src='/images/professor.png' title="YouTube video player" />
+                <Movie videoId="https://www.youtube.com/embed/8jjswrh3agE" src='/images/professor.png' title="YouTube video player" />
               </div>
             </div>
           </div>
