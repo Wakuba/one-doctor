@@ -18,10 +18,16 @@ import { db } from '../lib/firebase/firebase.config'
 import { NewsLineType } from '../lib/types'
 
 export const getStaticProps = async () => {
+<<<<<<< HEAD
   let newsBoardData: any = [];
+=======
+  let content: any = [];
+
+>>>>>>> feature/2021-7/wakuba/dynamicRoutingOfDepartments
   try {
-    const snapshot = await db.collection("fl_content").get();
+    const snapshot = await db.collection("fl_content").where('_fl_meta_.schema', '==', 'topPageNewsBoard').get();
     snapshot.docs.forEach((doc) => {
+<<<<<<< HEAD
       if (doc.data()._fl_meta_.schema === 'topPageNewsBoard') {
         newsBoardData.push({
           id: doc.data().id,
@@ -29,6 +35,12 @@ export const getStaticProps = async () => {
           detail: doc.data().newsDetail,
         })
       }
+=======
+      content.push({
+        title: doc.data().newsTitle,
+        article: doc.data().newsDetail
+      })
+>>>>>>> feature/2021-7/wakuba/dynamicRoutingOfDepartments
     })
   } catch (error) {
     console.log('Error getting documents from FlameLink; ', error);
