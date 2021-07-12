@@ -16,15 +16,15 @@ import { db } from '../lib/firebase/firebase.config'
 //types
 import { NewsLineType } from '../lib/types'
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   let content: any = [];
 
   try {
-    const snapshot = await db.collection("fl_content").get();
+    const snapshot = await db.collection("fl_content").where('_fl_meta_.schema', '==', 'topPageNewsBoard').get();
     snapshot.docs.forEach((doc) => {
       content.push({
-        title: doc.data().field_1618199954754,
-        article: doc.data().field_1620310046897
+        title: doc.data().newsTitle,
+        article: doc.data().newsDetail
       })
     })
   }
