@@ -1,4 +1,4 @@
-import { useState, ReactNode } from 'react'
+import { useState } from 'react'
 import ThreePointLeader from '../atoms/ThreePointLeader'
 import { ModalMainArea, ModalBackdrop } from '../atoms/Modal'
 import PushPoint from '../atoms/PushPoint'
@@ -18,6 +18,7 @@ export default function DepTopSection({ depName, educationalPoint, clinicalPoint
     <>
       <PushPoint>
         <span>教育：</span>
+<<<<<<< HEAD
         {educationalPoint}
       </PushPoint>
       <PushPoint>
@@ -31,6 +32,21 @@ export default function DepTopSection({ depName, educationalPoint, clinicalPoint
       <PushPoint>
         <span>その他：</span>
         {otherPoint}
+=======
+        <span>{educationalPoint}</span>
+      </PushPoint>
+      <PushPoint>
+        <span>臨床：</span>
+        <span>{clinicalPoint}</span>
+      </PushPoint>
+      <PushPoint>
+        <span>研究：</span>
+        <span>{researchPoint}</span>
+      </PushPoint>
+      <PushPoint>
+        <span>その他：</span>
+        <span>{otherPoint}</span>
+>>>>>>> feature/2021-7/wakuba/dynamicRoutingOfDepartments
       </PushPoint>
     </>
   )
@@ -63,6 +79,7 @@ export default function DepTopSection({ depName, educationalPoint, clinicalPoint
                               ov-md:h-full
                               ov-md:w-24
                               ' ></div>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
           <div className='relative sm:w-full sm:h-auto ov-md:h-full ov-md:object-cover z-10 border-white'>
             <Image src='/images/ichioshi-image.png' />
@@ -76,6 +93,11 @@ export default function DepTopSection({ depName, educationalPoint, clinicalPoint
           </div>
 >>>>>>> Stashed changes
 >>>>>>> Stashed changes
+=======
+          <div className='relative sm:w-full sm:h-auto ov-md:h-full ov-md:object-cover z-10 border-white'>
+            {/* <Image src='/images/ichioshi-image.png' /> */}
+          </div>
+>>>>>>> feature/2021-7/wakuba/dynamicRoutingOfDepartments
 
         </div>
       </div>

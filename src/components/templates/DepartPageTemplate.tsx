@@ -115,9 +115,8 @@ interface DepartmentPagePropsType {
   postData: any;
 }
 
-export default function DepartmentPageTemplate({ spreadsheetData, postData }: DepartmentPagePropsType) {
+export default function DepartPageTemplate({ spreadsheetData, postData }: DepartmentPagePropsType) {
   const { departmentName, universityName, hospitalName, tabMenu, topSection, officialWebSite } = postData
-  console.log(tabMenu.crewCardListTab)
   return (
     <>
       <Header />
