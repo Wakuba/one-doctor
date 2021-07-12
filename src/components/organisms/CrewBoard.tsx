@@ -1,6 +1,6 @@
 import CrewCard from '../molecules/CrewCard'
 
-export default function CrewBoard() {
+export default function CrewBoard({ crewDataList }) {
   return (
     <div className='
     ov-xl:grid
@@ -19,12 +19,7 @@ export default function CrewBoard() {
     sm:space-y-2
     w-full
     py-4'>
-      <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg' />
-      <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg' />
-      <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg' />
-      <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg' />
-      <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg' />
-      <CrewCard headImgSrc='/images/tsukuba-prof1.jpeg' tailImgSrc='/images/tsukuba-prof2.jpeg' />
+      {crewDataList.map(crewData => <CrewCard key={crewData.uniqueKey} crewData={crewData} />)}
     </div>
   )
 }
