@@ -5,8 +5,8 @@ export default function DepartmentPage({ postData }) {
   return <DepartPageTemplate postData={postData} />
 }
 
-export async function getStaticPaths() {
-  let paths: any = []
+export const getStaticPaths = async () => {
+  const paths: any = []
   const snapshot = await db.collection('fl_content')
     .where('_fl_meta_.schema', '==', 'departmentPage')
     .get()
@@ -17,13 +17,13 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params }) {
+export const getStaticProps = async ({ params }) => {
   let postData: any = null
   const snapshot = await db.collection('fl_content')
     .where('_fl_meta_.schema', '==', 'departmentPage')
     .where('departmentName.departmentNameInEnglish', '==', params.department)
     .get()
-  let flFileIds: string[] = []
+  const flFileIds: string[] = []
   snapshot.docs.forEach(doc => {
     postData = {
       departmentName: doc.data().departmentName,
