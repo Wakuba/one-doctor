@@ -62,7 +62,6 @@ export default function DepartPageTemplate({ postData }: DepartmentPagePropsType
             <AppealCardBoard />
           </section>
 
-
           <section className='flex flex-col items-center mb-16'>
             <div className='w-full bg-prime-blue-rich flex flex-col items-center py-6'>
               <p className='text-white sm:text-xs ov-md:text-md sm:my-2 ov-md:my-4 breakAll'>紹介動画を視聴して雰囲気をみてみませんか？</p>

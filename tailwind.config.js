@@ -18,8 +18,8 @@ module.exports = {
         'for-readmore': 'inset 0px -50px 48px 6px white'
       },
       spacing: {
-        112: '28rem',
-        137: '34.25rem',
+        112: '448px',
+        137: '548px',
         172: '690px',
         179: '716px',
         258: '1008px',

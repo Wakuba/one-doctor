@@ -19,7 +19,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   //postData全体の取得
-  let postData: any = null
+  let postData: any = {}
   const snapshot = await db.collection('fl_content')
     .where('_fl_meta_.schema', '==', 'departmentPage')
     .where('departmentName.departmentNameInEnglish', '==', params.department)

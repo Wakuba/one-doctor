@@ -8,4 +8,7 @@ module.exports = {
     BROWSER_FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
     BROWSER_FIREBASE_MEASUREMENT_ID: process.env.BROWSER_FIREBASE_MEASUREMENT_ID,
   },
+  images: {
+    domains: ['firebasestorage.googleapis.com'],
+  }
 }

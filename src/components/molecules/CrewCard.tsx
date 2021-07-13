@@ -1,5 +1,10 @@
+//External components
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
+
+//Firebase
 import { storage } from '../../lib/firebase/firebase.config'
+
 
 interface CrewCardPropsType {
   layoutStyles?: string;
@@ -79,9 +84,9 @@ function CardHead({ imgSrc, flip, isArrowVanished, crewName, position, backgroun
     <div onClick={flip} className='absolute h-full w-full backface-invisible wk-backface-invisible'>
       <div className="relative grid grid-cols-10 w-full h-full shadow-lg backface-invisible wk-backface-invisible  crew-bg-blue border-1 border-prime-blue-rich rounded-sm" >
         <div className='col-span-4 flex items-center justify-center'>
-          {imgSrc ? <img className='object-conttain w-11/12 h-11/12' src={imgSrc} /> : <div className='w-11/12 h-11/12 text-gray-400 flex justify-center' >now <br />loading</div>}
+          {imgSrc ? <Image width={154} height={204} src={imgSrc} loading='lazy' objectFit='cover' alt='crew image' className='w-11/12 h-11/12' /> : <div className='w-11/12 h-11/12 text-gray-400 flex justify-center' >now <br />loading</div>}
         </div>
-        <div className='col-span-6 px-4 text-xs flex flex-col justify-evenly'>
+        <div className='col-span-6 px-4 sm:text-xs md:text-xs lg:text-xs xl:text-xs 2xl:text-sm flex flex-col justify-evenly'>
           <div>
             <p>{position}(役職)</p>
             <p className='font-semibold'>{crewName}</p>
@@ -113,9 +118,9 @@ function CardTail({ imgSrc, flip, isArrowVanished, crewName, position, schoolLif
     <div onClick={flip} className='absolute h-full w-full ' >
       <div className="relative grid grid-cols-10 w-full h-full crew-bg-purple rotate-y-180 backface-invisible  wk-backface-invisible shadow-lg border-1 border-prime-blue-rich rounded-sm" >
         <div className='col-span-4 flex items-center justify-center'>
-          <img className='object-contain w-11/12 h-11/12' src={imgSrc} />
+          {imgSrc ? <Image width={154} height={204} src={imgSrc} loading='lazy' objectFit='cover' alt='crew image' /> : <div className='w-11/12 h-11/12 text-gray-400 flex justify-center' >now <br />loading</div>}
         </div>
-        <div className='col-span-6 px-4 sm:text-xs md:text-xs lg:text-xs ov-xl:text-xs flex flex-col justify-evenly'>
+        <div className='col-span-6 px-4 sm:text-xs md:text-xs lg:text-xs xl:text-xs 2xl:text-sm flex flex-col justify-evenly'>
           <div>
             <p className=''>{position}(役職)</p>
             <p className='sm:text-sm md:text-sm lg:text-sm ov-lg:text-sm font-semibold'>{crewName}</p>
