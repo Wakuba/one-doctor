@@ -8,7 +8,7 @@ interface TabMenuPropsType {
 
 export default function TabMenu({ children }: TabMenuPropsType) {
   return (
-    <div className='sm:w-11/12 ov-md:w-8/12'>
+    <div className='w-full'>
       <Tabs >
         <TabField label='基本情報' key={1}>
           {children[0]}

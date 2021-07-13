@@ -38,15 +38,18 @@ export default function CrewCard({ layoutStyles, crewData }: CrewCardPropsType) 
       const imgPath = storageRef.child('flamelink/media').child(crewImgFileName)
       imgPath.getDownloadURL().then(url => setCrewImg(url)).catch(error => console.log(error));
     }, [])
-
+  // sm:w-11/12 sm:h-wscreen7/10
+  // md:w-8/12 md:h-wscreen9/20
+  // lg:w-wscreen/3 lg:h-wscreen/5
+  // ov-xl:w-wscreen2/7 ov-xl:h-wscreen/5
   return (
-    <div className={`${layoutStyles}
-    sm:w-11/12 sm:h-wscreen7/10
-    md:w-8/12 md:h-wscreen9/20
-    lg:w-wscreen/3 lg:h-wscreen/5
-    ov-xl:w-wscreen2/7 ov-xl:h-wscreen/5
-    perspective
-    justify-self-center `}>
+    <div className='
+    perspective justify-self-center
+    sm:w-112 sm:h-64
+    md:w-112 md:h-64
+    lg:w-112 lg:h-64
+    xl:w-112 xl:h-64
+    2xl:w-137 2xl:h-72 '>
       <div className={`w-full h-full preserve-3d duration-700 cursor-pointer relative ${isFliped && 'rotate-y-180'}`}>
         <CardHead
           flip={flip}
@@ -78,12 +81,12 @@ function CardHead({ imgSrc, flip, isArrowVanished, crewName, position, backgroun
         <div className='col-span-4 flex items-center justify-center'>
           {imgSrc ? <img className='object-conttain w-11/12 h-11/12' src={imgSrc} /> : <div className='w-11/12 h-11/12 text-gray-400 flex justify-center' >now <br />loading</div>}
         </div>
-        <div className='col-span-6 px-4 sm:text-xs md:text-sm ov-lg:text-xs flex flex-col justify-evenly'>
+        <div className='col-span-6 px-4 text-xs flex flex-col justify-evenly'>
           <div>
-            <p className=''>{position}(役職)</p>
-            <p className='sm:text-sm md:text:md ov-lg:text-sm  font-semibold'>{crewName}</p>
+            <p>{position}(役職)</p>
+            <p className='font-semibold'>{crewName}</p>
           </div>
-          <div className=''>
+          <div >
             <p className='font-semibold'>略歴</p>
             <p>{background ? background : '特になし'}</p>
           </div>

@@ -37,7 +37,7 @@ export default function DepTopSection({ depName, educationalPoint, clinicalPoint
 
   return (
     <>
-      <div onClick={() => setIsTextModalOpen(true)} className='sm:w-11/12 ov-md:w-8/12 ov-md:h-96  bg-white flex sm:flex-col ov-md:flex-row shadow-md'>
+      <div onClick={() => setIsTextModalOpen(true)} className='w-full bg-white flex sm:flex-col ov-md:flex-row shadow-md'>
         <div className='ov-md:p-8 ov-md:flex-1'>
           <div className='sm:p-3 sm:h-72  overflow-y-hidden relative'>
             <div className='space-y-4 ov-md:h-72 '>
