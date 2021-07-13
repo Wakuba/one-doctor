@@ -17,41 +17,6 @@ import { db } from '../lib/firebase/firebase.config'
 //types
 import { NewsLineType } from '../lib/types'
 
-export const getStaticProps = async () => {
-<<<<<<< HEAD
-  let newsBoardData: any = [];
-=======
-  let content: any = [];
-
->>>>>>> feature/2021-7/wakuba/dynamicRoutingOfDepartments
-  try {
-    const snapshot = await db.collection("fl_content").where('_fl_meta_.schema', '==', 'topPageNewsBoard').get();
-    snapshot.docs.forEach((doc) => {
-<<<<<<< HEAD
-      if (doc.data()._fl_meta_.schema === 'topPageNewsBoard') {
-        newsBoardData.push({
-          id: doc.data().id,
-          title: doc.data().newsTitle,
-          detail: doc.data().newsDetail,
-        })
-      }
-=======
-      content.push({
-        title: doc.data().newsTitle,
-        article: doc.data().newsDetail
-      })
->>>>>>> feature/2021-7/wakuba/dynamicRoutingOfDepartments
-    })
-  } catch (error) {
-    console.log('Error getting documents from FlameLink; ', error);
-  }
-
-  return {
-    props: {
-      newsBoardData,
-    }
-  }
-}
 const opts = {
   height: '390',
   width: '640',
@@ -165,6 +130,47 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
     </>
   )
 }
+
+export async function getStaticProps() {
+  const newsBoardData: any = [];
+  const depList: any = []
+
+  try {
+    const snapshotDash = await db.collection("fl_content").where('_fl_meta_.schema', '==', 'topPageNewsBoard').get();
+    snapshotDash.docs.forEach(doc => {
+      newsBoardData.push({
+        id: doc.data().id,
+        title: doc.data().newsTitle,
+        detail: doc.data().newsDetail,
+      })
+    })
+  } catch (error) {
+    console.log('Error getting news documents from FlameLink; ', error);
+  }
+
+  try {
+    const snapshot = await db.collection('fl_content')
+      .where('_fl_meta_.schema', '==', 'departmentPage')
+      .get()
+    snapshot.docs.forEach(doc => {
+      depList.push({
+        departmentNameInJapanese: doc.data().departmentName.departmentNameInJapanese,
+        path: `/Departments/${doc.data().departmentName.departmentNameInEnglish}`,
+      })
+    })
+  } catch (error) {
+    console.log('Error getting depList', error);
+  }
+
+  return {
+    props: {
+      newsBoardData,
+      depList
+    }
+  }
+}
+
+
 function Movie({ src, title, videoId }: { src: string; title: string, videoId: string }) {
   const [modalActive, setModalActive] = useState(false)
   return (
