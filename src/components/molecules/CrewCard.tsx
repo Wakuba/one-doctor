@@ -18,66 +18,6 @@ interface CardFacePropsType {
   schoolLife?: string;
 }
 
-const CardHead = ({ imgSrc, flip, isArrowVanished, crewName, position, background, majorField, licence }: CardFacePropsType) => (
-  <div onClick={flip} className='absolute h-full w-full backface-invisible wk-backface-invisible'>
-    <div className="relative grid grid-cols-10 w-full h-full shadow-lg backface-invisible wk-backface-invisible  crew-bg-blue border-1 border-prime-blue-rich rounded-sm" >
-      <div className='col-span-4 flex items-center justify-center'>
-        <img className='object-conttain w-11/12 h-11/12' src={imgSrc} />
-      </div>
-      <div className='col-span-6 px-4 sm:text-xs md:text-sm ov-lg:text-xs flex flex-col justify-evenly'>
-        <div>
-          <p className=''>{position}(役職)</p>
-          <p className='sm:text-sm md:text:md ov-lg:text-sm  font-semibold'>{crewName}</p>
-        </div>
-        <div className=''>
-          <p className='font-semibold'>略歴</p>
-          <p>{background}</p>
-        </div>
-        <div>
-          <p className='font-semibold'>資格</p>
-          <p>{licence}</p>
-        </div>
-        <div>
-          <p className='font-semibold'>専門分野,研究</p>
-          <p>{majorField}</p>
-        </div>
-      </div>
-      <div className={`absolute h-8 w-28 bottom-0 right-0 flex flex-row transform translate-y-1/4 ${isArrowVanished && 'hidden'}`}>
-        <p className='text-xs text-prime-blue-rich pt-4'>the other side</p>
-        <img className='h-8 w-8 bottom-0 right-0 ' src='/svg/reverse-icon.svg' />
-      </div>
-    </div>
-  </div>
-)
-
-const CardTail = ({ imgSrc, flip, isArrowVanished, crewName, position, schoolLife }: CardFacePropsType) => (
-  <div onClick={flip} className='absolute h-full w-full ' >
-    <div className="relative grid grid-cols-10 w-full h-full crew-bg-purple rotate-y-180 backface-invisible  wk-backface-invisible shadow-lg border-1 border-prime-blue-rich rounded-sm" >
-      <div className='col-span-4 flex items-center justify-center'>
-        <img className='object-contain w-11/12 h-11/12' src={imgSrc} />
-      </div>
-      <div className='col-span-6 px-4 sm:text-xs md:text-xs lg:text-xs ov-xl:text-xs flex flex-col justify-evenly'>
-        <div>
-          <p className=''>{position}(役職)</p>
-          <p className='sm:text-sm md:text-sm lg:text-sm ov-lg:text-sm font-semibold'>{crewName}</p>
-        </div>
-        <div>
-          <p className='font-semibold'>休日の過ごし方・趣味</p>
-          <p> テキストテキストテキストテキストテキス </p>
-        </div>
-        <div className=''>
-          <p className='font-semibold'>学生時代の部活</p>
-          <p>{schoolLife} </p>
-        </div>
-      </div>
-      <div className={`absolute h-8 w-28 bottom-0 right-0 flex flex-row transform translate-y-1/4 ${!isArrowVanished && 'hidden'}`}>
-        <p className='text-xs text-prime-blue-rich pt-4'>the other side</p>
-        <img className='h-8 w-8 bottom-0 right-0 ' src='/svg/reverse-icon.svg' />
-      </div>
-    </div>
-  </div>
-)
-
 export default function CrewCard({ layoutStyles, crewData }: CrewCardPropsType) {
   const [isFliped, setIsFliped] = useState<boolean>(false)
   const [arrowVanisher, setArrowVanisher] = useState<boolean>(false)
@@ -125,6 +65,70 @@ export default function CrewCard({ layoutStyles, crewData }: CrewCardPropsType) 
           position={position}
           schoolLife={schoolLife}
         />
+      </div>
+    </div>
+  )
+}
+
+function CardHead({ imgSrc, flip, isArrowVanished, crewName, position, background, majorField, licence }: CardFacePropsType) {
+  return (
+    <div onClick={flip} className='absolute h-full w-full backface-invisible wk-backface-invisible'>
+      <div className="relative grid grid-cols-10 w-full h-full shadow-lg backface-invisible wk-backface-invisible  crew-bg-blue border-1 border-prime-blue-rich rounded-sm" >
+        <div className='col-span-4 flex items-center justify-center'>
+          {imgSrc ? <img className='object-conttain w-11/12 h-11/12' src={imgSrc} /> : <div className='w-11/12 h-11/12 text-gray-400 flex justify-center' >now <br />loading</div>}
+        </div>
+        <div className='col-span-6 px-4 sm:text-xs md:text-sm ov-lg:text-xs flex flex-col justify-evenly'>
+          <div>
+            <p className=''>{position}(役職)</p>
+            <p className='sm:text-sm md:text:md ov-lg:text-sm  font-semibold'>{crewName}</p>
+          </div>
+          <div className=''>
+            <p className='font-semibold'>略歴</p>
+            <p>{background}</p>
+          </div>
+          <div>
+            <p className='font-semibold'>資格</p>
+            <p>{licence}</p>
+          </div>
+          <div>
+            <p className='font-semibold'>専門分野,研究</p>
+            <p>{majorField}</p>
+          </div>
+        </div>
+        <div className={`absolute h-8 w-28 bottom-0 right-0 flex flex-row transform translate-y-1/4 ${isArrowVanished && 'hidden'}`}>
+          <p className='text-xs text-prime-blue-rich pt-4'>the other side</p>
+          <img className='h-8 w-8 bottom-0 right-0 ' src='/svg/reverse-icon.svg' />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function CardTail({ imgSrc, flip, isArrowVanished, crewName, position, schoolLife }: CardFacePropsType) {
+  return (
+    <div onClick={flip} className='absolute h-full w-full ' >
+      <div className="relative grid grid-cols-10 w-full h-full crew-bg-purple rotate-y-180 backface-invisible  wk-backface-invisible shadow-lg border-1 border-prime-blue-rich rounded-sm" >
+        <div className='col-span-4 flex items-center justify-center'>
+          <img className='object-contain w-11/12 h-11/12' src={imgSrc} />
+        </div>
+        <div className='col-span-6 px-4 sm:text-xs md:text-xs lg:text-xs ov-xl:text-xs flex flex-col justify-evenly'>
+          <div>
+            <p className=''>{position}(役職)</p>
+            <p className='sm:text-sm md:text-sm lg:text-sm ov-lg:text-sm font-semibold'>{crewName}</p>
+          </div>
+          <div>
+            <p className='font-semibold'>休日の過ごし方・趣味</p>
+            <p> テキストテキストテキストテキストテキス </p>
+          </div>
+          <div className=''>
+            <p className='font-semibold'>学生時代の部活</p>
+            <p>{schoolLife} </p>
+          </div>
+        </div>
+        <div className={`absolute h-8 w-28 bottom-0 right-0 flex flex-row transform translate-y-1/4 ${!isArrowVanished && 'hidden'}`}>
+          <p className='text-xs text-prime-blue-rich pt-4'>the other side</p>
+          <img className='h-8 w-8 bottom-0 right-0 ' src='/svg/reverse-icon.svg' />
+        </div>
       </div>
     </div>
   )

@@ -57,36 +57,14 @@ const opts = {
   width: '640',
 };
 
-const Movie = ({ src, title, videoId }: { src: string; title: string, videoId: string }) => {
-  const [modalActive, setModalActive] = useState(false)
-  return (
-    <>
-      {modalActive &&
-        <>
-          < ModalMainArea modalWrapperStyle='w-10/12 h-5/6' modalContainerStyle='h-full w-full flex flex-col justify-center' closeModal={() => setModalActive(false)}>
-            <YouTube videoId={videoId} opts={opts} containerClassName='ov-md:h-full sm:h-wscreen7/10 w-full flex flex-col items-center justify-center' className='h-5/6 w-10/12' />
-          </ModalMainArea >
-          <ModalBackdrop closeModal={() => setModalActive(false)} />
-        </>
-      }
-      <div onClick={() => setModalActive(true)} className='relative shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2'>
-        <Image layout='fill' objectFit='contain' loading='lazy' src={src} alt={title} />
-      </div>
-    </>
-  )
-}
-
-const ScrollArrow = () => (
-  <div className='sm:hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 ov-md:-left-1% ov-md:top-80%'>
-    scroll
-  </div>
-)
 
 interface HomeProps {
   newsBoardData: NewsLineType[];
+  depList: string[]
 }
 
-export default function Home({ newsBoardData }: HomeProps) {
+export default function Home({ newsBoardData, depList }: HomeProps) {
+  console.log(depList)
   return (
     <>
       <Header />
@@ -185,5 +163,31 @@ export default function Home({ newsBoardData }: HomeProps) {
       </main>
       <Footer />
     </>
+  )
+}
+function Movie({ src, title, videoId }: { src: string; title: string, videoId: string }) {
+  const [modalActive, setModalActive] = useState(false)
+  return (
+    <>
+      {modalActive &&
+        <>
+          < ModalMainArea modalWrapperStyle='w-10/12 h-5/6' modalContainerStyle='h-full w-full flex flex-col justify-center' closeModal={() => setModalActive(false)}>
+            <YouTube videoId={videoId} opts={opts} containerClassName='ov-md:h-full sm:h-wscreen7/10 w-full flex flex-col items-center justify-center' className='h-5/6 w-10/12' />
+          </ModalMainArea >
+          <ModalBackdrop closeModal={() => setModalActive(false)} />
+        </>
+      }
+      <div onClick={() => setModalActive(true)} className='relative shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2'>
+        <Image layout='fill' objectFit='contain' loading='lazy' src={src} alt={title} />
+      </div>
+    </>
+  )
+}
+
+function ScrollArrow() {
+  return (
+    <div className='sm:hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 ov-md:-left-1% ov-md:top-80%'>
+      scroll
+    </div>
   )
 }
