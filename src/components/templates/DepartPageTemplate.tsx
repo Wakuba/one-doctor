@@ -13,46 +13,6 @@ import TwitterTimeline from '../../components/molecules/TwitterTimeline'
 
 //Types
 import { ReactNode, memo } from 'react'
-import { SpreadSheetDataType } from '../../lib/types'
-
-
-
-
-export const getStaticProps = async () => {
-  // let pageWholeData: any = [];
-  let spreadsheetData: any = [];
-  // try {
-  //   const snapshot = await db.collection("fl_content").get();
-  //   snapshot.docs.forEach((doc) => {
-  //     if (doc.data()._fl_meta_.schema === 'departmentPage') {
-  //       pageWholeData.push({
-  //         id: doc.data().id,
-  //         title: doc.data().newsTitle,
-  //         detail: doc.data().newsDetail,
-  //       })
-  //     }
-  //   })
-  // } catch (error) {
-  //   console.log('Error getting department page documents from FlameLink; ', error);
-  // }
-
-  try {
-    const res = await fetch(
-      'https://script.google.com/macros/s/AKfycbzmrnZq2-7JaQLpE_AFenimwJIL2y1rIGNm6F4NgecKbLNUMWBI6IPmlOYV4VsJ71issw/exec',
-      { method: "GET" }
-    )
-    spreadsheetData = await res.json();
-  } catch (error) {
-    console.log('Error getting spreadsheet data from google spreadsheet')
-  }
-
-  return {
-    props: {
-      spreadsheetData,
-    }
-  }
-}
-
 
 const Button = (props: { children: ReactNode, href?: string }) => (
   <a rel="noopener" target='_blank' href={props.href} className='rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center'>
@@ -65,12 +25,12 @@ const Button = (props: { children: ReactNode, href?: string }) => (
 const TwitterTimelineMemo = memo(({ href }: { href: string }) => <TwitterTimeline href={href} />)
 
 interface DepartmentPagePropsType {
-  spreadsheetData?: SpreadSheetDataType[];
   postData: any;
 }
 
-export default function DepartPageTemplate({ spreadsheetData, postData }: DepartmentPagePropsType) {
+export default function DepartPageTemplate({ postData }: DepartmentPagePropsType) {
   const { departmentName, universityName, hospitalName, tabMenu, topSection, officialWebSite } = postData
+
   return (
     <>
       <Header />
@@ -114,7 +74,7 @@ export default function DepartPageTemplate({ spreadsheetData, postData }: Depart
             <div key={1}></div>
             <CrewBoard key={2} crewDataList={tabMenu.crewCardListTab} />
             <div key={3}></div>
-            <EventTab key={4} events={spreadsheetData} />
+            <EventTab key={4} />
             <div className='w-full ov-md:p-8 sm:p-4 bg-white'>
               <div className='space-y-8'>
                 <div className='border-l-8 inline-block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>公式サイト</div>
