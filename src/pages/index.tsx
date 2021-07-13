@@ -29,7 +29,6 @@ interface HomeProps {
 }
 
 export default function Home({ newsBoardData, depList }: HomeProps) {
-  console.log(depList)
   return (
     <>
       <Header />

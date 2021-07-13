@@ -16,6 +16,7 @@ interface CardFacePropsType {
   licence?: string;
   majorField?: string;
   schoolLife?: string;
+  forFun?: string;
 }
 
 export default function CrewCard({ layoutStyles, crewData }: CrewCardPropsType) {
@@ -23,7 +24,7 @@ export default function CrewCard({ layoutStyles, crewData }: CrewCardPropsType) 
   const [arrowVanisher, setArrowVanisher] = useState<boolean>(false)
   const [crewImg, setCrewImg] = useState<string>('')
   const flip = () => { setIsFliped(!isFliped) }
-  const { crewName, position, background, licence, majorField, schoolLife, crewImgFileName } = crewData
+  const { crewName, position, background, licence, majorField, schoolLife, crewImgFileName, forFun } = crewData
 
   useEffect(
     () => {
@@ -84,15 +85,15 @@ function CardHead({ imgSrc, flip, isArrowVanished, crewName, position, backgroun
           </div>
           <div className=''>
             <p className='font-semibold'>略歴</p>
-            <p>{background}</p>
+            <p>{background ? background : '特になし'}</p>
           </div>
           <div>
             <p className='font-semibold'>資格</p>
-            <p>{licence}</p>
+            <p>{licence ? licence : '特になし'}</p>
           </div>
           <div>
             <p className='font-semibold'>専門分野,研究</p>
-            <p>{majorField}</p>
+            <p>{majorField ? majorField : '特になし'}</p>
           </div>
         </div>
         <div className={`absolute h-8 w-28 bottom-0 right-0 flex flex-row transform translate-y-1/4 ${isArrowVanished && 'hidden'}`}>
@@ -104,7 +105,7 @@ function CardHead({ imgSrc, flip, isArrowVanished, crewName, position, backgroun
   )
 }
 
-function CardTail({ imgSrc, flip, isArrowVanished, crewName, position, schoolLife }: CardFacePropsType) {
+function CardTail({ imgSrc, flip, isArrowVanished, crewName, position, schoolLife, forFun }: CardFacePropsType) {
   return (
     <div onClick={flip} className='absolute h-full w-full ' >
       <div className="relative grid grid-cols-10 w-full h-full crew-bg-purple rotate-y-180 backface-invisible  wk-backface-invisible shadow-lg border-1 border-prime-blue-rich rounded-sm" >
@@ -118,11 +119,11 @@ function CardTail({ imgSrc, flip, isArrowVanished, crewName, position, schoolLif
           </div>
           <div>
             <p className='font-semibold'>休日の過ごし方・趣味</p>
-            <p> テキストテキストテキストテキストテキス </p>
+            <p> {forFun ? forFun : '特になし'}</p>
           </div>
           <div className=''>
             <p className='font-semibold'>学生時代の部活</p>
-            <p>{schoolLife} </p>
+            <p>{schoolLife ? schoolLife : '特になし'} </p>
           </div>
         </div>
         <div className={`absolute h-8 w-28 bottom-0 right-0 flex flex-row transform translate-y-1/4 ${!isArrowVanished && 'hidden'}`}>
