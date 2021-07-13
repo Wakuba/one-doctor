@@ -18,11 +18,13 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }) => {
+  //postData全体の取得
   let postData: any = null
   const snapshot = await db.collection('fl_content')
     .where('_fl_meta_.schema', '==', 'departmentPage')
     .where('departmentName.departmentNameInEnglish', '==', params.department)
     .get()
+
   const flFileIds: string[] = []
   snapshot.docs.forEach(doc => {
     postData = {
@@ -52,6 +54,8 @@ export const getStaticProps = async ({ params }) => {
     }
   })
 
+  //postDataで得たreferenceをもとにfl_filesへアクセス
+  //file名だけ取得し、画像のダウンロードは各コンポーネントに任せる
   const snapshotForImg = await db.collection('fl_files').get()
   flFileIds.forEach((fileId, idx) => {
     postData.tabMenu.crewCardListTab[idx].crewImgFileName
