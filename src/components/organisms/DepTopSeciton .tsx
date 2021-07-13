@@ -67,8 +67,8 @@ export default function DepTopSection({ depName, educationalPoint, clinicalPoint
             {/* <Image src='/images/ichioshi-image.png' /> */}
           </div>
 
-        </div>
-      </div>
+        </div >
+      </div >
       {
         isTextModalOpen &&
         <>

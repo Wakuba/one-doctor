@@ -1,6 +1,8 @@
 //Externel Components
 import { useState } from 'react'
 import YouTube from 'react-youtube'
+import Image from 'next/image'
+import { useRouter } from 'next/dist/client/router'
 
 //Custom Components
 import Header from '../components/organisms/Header'
@@ -151,7 +153,7 @@ export default function Home({ content }: HomeProps) {
           <div className='sm:w-11/12 ov-md:w-7/10'>
             <div className='text-white sm:text-2xl ov-md:text-4xl font-semibold' >診療科一覧</div>
             <div className='sm:text-sm ov-md:text-lg mb-4'>各診療科にコンタクトを取ったり、イベント情報をチェックすることができます</div>
-            <DepartBoard />
+            <DepartBoard depList={depList} />
           </div>
           <MutedBlueBRSquare />
         </section>
