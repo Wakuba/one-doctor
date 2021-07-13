@@ -17,20 +17,20 @@ export default function DepTopSection({ depName, educationalPoint, clinicalPoint
   const PushPoints = () => (
     <>
       <PushPoint>
-        <span>教育：</span>
-        <span>{educationalPoint}</span>
+        <>教育：</>
+        <>{educationalPoint}</>
       </PushPoint>
       <PushPoint>
-        <span>臨床：</span>
-        <span>{clinicalPoint}</span>
+        <>臨床：</>
+        <>{clinicalPoint}</>
       </PushPoint>
       <PushPoint>
-        <span>研究：</span>
-        <span>{researchPoint}</span>
+        <>研究：</>
+        <>{researchPoint}</>
       </PushPoint>
       <PushPoint>
-        <span>その他：</span>
-        <span>{otherPoint}</span>
+        <>その他：</>
+        <>{otherPoint}</>
       </PushPoint>
     </>
   )
