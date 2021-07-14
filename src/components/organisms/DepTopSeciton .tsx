@@ -6,12 +6,14 @@ import Image from 'next/image'
 
 interface DepTopSectionPropsType {
   depName: string;
+  heroImg: string;
   educationalPoint: string;
   clinicalPoint: string;
   researchPoint: string;
   otherPoint: string;
 }
-export default function DepTopSection({ depName, educationalPoint, clinicalPoint, researchPoint, otherPoint }: DepTopSectionPropsType) {
+
+export default function DepTopSection({ depName, heroImg, educationalPoint, clinicalPoint, researchPoint, otherPoint }: DepTopSectionPropsType) {
   const [isTextModalOpen, setIsTextModalOpen] = useState<boolean>(false)
 
   const PushPoints = () => (
@@ -37,8 +39,8 @@ export default function DepTopSection({ depName, educationalPoint, clinicalPoint
 
   return (
     <>
-      <div onClick={() => setIsTextModalOpen(true)} className='w-full bg-white flex sm:flex-col ov-md:flex-row shadow-md'>
-        <div className='ov-md:p-8 ov-md:flex-1'>
+      <div onClick={() => setIsTextModalOpen(true)} className='w-full bg-white shadow-md flex sm:flex-col ov-md:flex-row '>
+        <div className='ov-md:p-8 sm:w-full md:w-179/2 lg:w-258/2 xl:w-269/2 2xl:w-341/2 ov-md:h-80'>
           <div className='sm:p-3 sm:h-72  overflow-y-hidden relative'>
             <div className='space-y-4 ov-md:h-72 '>
               <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
@@ -49,27 +51,28 @@ export default function DepTopSection({ depName, educationalPoint, clinicalPoint
             <div className='absolute w-full left-0 bottom-0 shadow-for-readmore h-16'></div>
           </div>
           <ThreePointLeader />
-          <button className='w-full h-8 text-xs bg-white focus:outline-none'>もっと読む</button>
+          <button className='w-full h-8 text-xs bg-white focus:outline-none '>もっと読む</button>
         </div>
-        <div className='relative ov-md:flex-1 ov-md:flex ov-md:items-start w-full h-full'>
+        <div className='relative
+        sm:w-full md:w-179/2 lg:w-258/2 xl:w-269/2 2xl:w-341/2
+        h-96'>
           <div className='border-0
-                              bg-transparent
-                              absolute
-                              z-20
-                              sm:shadow-for-narrow-ichioshi-img
-                              sm:h-24
-                              sm:w-full
-                              ov-md:shadow-for-wide-ichioshi-img
-                              ov-md:h-full
-                              ov-md:w-24
-                              ' ></div>
-          <div className='relative sm:w-full sm:h-auto ov-md:h-full ov-md:object-cover z-10 border-white'>
-            {/* <Image src='/images/ichioshi-image.png' /> */}
+                          bg-transparent
+                          absolute
+                          z-20
+                          sm:shadow-for-narrow-ichioshi-img
+                          sm:h-24
+                          sm:w-full
+                          ov-md:shadow-for-wide-ichioshi-img
+                          ov-md:h-full
+                          ov-md:w-24
+          ' ></div>
+          <div className='relative h-96 ov-md:object-cover z-10 border-white'>
+            {heroImg ? <Image layout='fill' objectFit='cover' loading='eager' src={heroImg} alt='hero image of the department' /> : <div>now loading</div>}
           </div>
         </div >
       </div >
-      {
-        isTextModalOpen &&
+      {isTextModalOpen &&
         <>
           <ModalMainArea closeModal={() => setIsTextModalOpen(false)} modalWrapperStyle='sm:w-9/12 ov-md:w-wscreen7/10 h-5/6' modalContainerStyle='w-full space-y-4'>
             <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>

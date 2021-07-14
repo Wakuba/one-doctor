@@ -1,4 +1,7 @@
-//Components
+//External components
+import { memo, useState, useEffect } from 'react'
+
+//Custom components
 import Header from '../../components/organisms/Header'
 import Footer from '../../components/organisms/Footer'
 import TabMenu from "../../components/organisms/TabMenu"
@@ -12,7 +15,10 @@ import CrewBoard from '../../components/organisms/CrewBoard'
 import TwitterTimeline from '../../components/molecules/TwitterTimeline'
 
 //Types
-import { ReactNode, memo } from 'react'
+import { ReactNode } from 'react'
+
+//Firebase
+import { storage } from '../../lib/firebase/firebase.config'
 
 const Button = (props: { children: ReactNode, href?: string }) => (
   <a rel="noopener" target='_blank' href={props.href} className='rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center'>
@@ -29,7 +35,15 @@ interface DepartmentPagePropsType {
 }
 
 export default function DepartPageTemplate({ postData }: DepartmentPagePropsType) {
-  const { departmentName, universityName, hospitalName, tabMenu, topSection, officialWebSite } = postData
+  const { heroImgFileName, departmentName, universityName, hospitalName, tabMenu, topSection, officialWebSite } = postData
+  const [heroImg, setHeroImg] = useState<string>('')
+
+  useEffect(
+    () => {
+      const storageRef = storage.ref()
+      const imgPath = storageRef.child('flamelink/media').child(heroImgFileName)
+      imgPath.getDownloadURL().then(url => setHeroImg(url)).catch(error => console.log(error));
+    }, [])
 
   return (
     <>
@@ -50,6 +64,7 @@ export default function DepartPageTemplate({ postData }: DepartmentPagePropsType
           <section className='mb-16 relative w-full flex flex-col items-center'>
             <DepTopSection
               depName={departmentName.departmentNameInJapanese}
+              heroImg={heroImg}
               educationalPoint={topSection.educationalPoint}
               clinicalPoint={topSection.clinicalPoint}
               researchPoint={topSection.researchPoint}

@@ -7,7 +7,6 @@ import { storage } from '../../lib/firebase/firebase.config'
 
 
 interface CrewCardPropsType {
-  layoutStyles?: string;
   crewData: any;
 }
 
@@ -24,7 +23,7 @@ interface CardFacePropsType {
   forFun?: string;
 }
 
-export default function CrewCard({ layoutStyles, crewData }: CrewCardPropsType) {
+export default function CrewCard({ crewData }: CrewCardPropsType) {
   const [isFliped, setIsFliped] = useState<boolean>(false)
   const [arrowVanisher, setArrowVanisher] = useState<boolean>(false)
   const [crewImg, setCrewImg] = useState<string>('')
@@ -43,10 +42,7 @@ export default function CrewCard({ layoutStyles, crewData }: CrewCardPropsType) 
       const imgPath = storageRef.child('flamelink/media').child(crewImgFileName)
       imgPath.getDownloadURL().then(url => setCrewImg(url)).catch(error => console.log(error));
     }, [])
-  // sm:w-11/12 sm:h-wscreen7/10
-  // md:w-8/12 md:h-wscreen9/20
-  // lg:w-wscreen/3 lg:h-wscreen/5
-  // ov-xl:w-wscreen2/7 ov-xl:h-wscreen/5
+
   return (
     <div className='
     perspective justify-self-center

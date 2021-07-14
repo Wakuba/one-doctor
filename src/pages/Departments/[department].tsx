@@ -25,8 +25,11 @@ export const getStaticProps = async ({ params }) => {
     .where('departmentName.departmentNameInEnglish', '==', params.department)
     .get()
 
-  const flFileIds: string[] = []
+  const flFileIdsForCrewImg: string[] = []
+  let flFileHeroImgId: string = ''
   snapshot.docs.forEach(doc => {
+    flFileHeroImgId = doc.data().heroImageOfTheDepartment[0].id
+    console.log(flFileHeroImgId)
     postData = {
       departmentName: doc.data().departmentName,
       universityName: doc.data().universityName,
@@ -37,7 +40,7 @@ export const getStaticProps = async ({ params }) => {
         geographicalInformationTab: doc.data().tabMenu.geographicalInformationTab,
         crewCardListTab: [
           ...doc.data().tabMenu.crewCardListTab.map(crewCard => {
-            flFileIds.push(crewCard.crewImage[0].id)
+            flFileIdsForCrewImg.push(crewCard.crewImage[0].id)
             return {
               crewName: crewCard.crewName,
               position: crewCard.position,
@@ -57,10 +60,11 @@ export const getStaticProps = async ({ params }) => {
   //postDataで得たreferenceをもとにfl_filesへアクセス
   //file名だけ取得し、画像のダウンロードは各コンポーネントに任せる
   const snapshotForImg = await db.collection('fl_files').get()
-  flFileIds.forEach((fileId, idx) => {
+  flFileIdsForCrewImg.forEach((fileId, idx) => {
     postData.tabMenu.crewCardListTab[idx].crewImgFileName
       = snapshotForImg.docs.find(doc => doc.data().id == fileId)?.data().file
   })
+  postData.heroImgFileName = snapshotForImg.docs.find(doc => doc.data().id == flFileHeroImgId)?.data().file
 
   return {
     props: {
