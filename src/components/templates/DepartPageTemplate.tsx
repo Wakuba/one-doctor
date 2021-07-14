@@ -86,10 +86,10 @@ export default function DepartPageTemplate({ postData }: DepartmentPagePropsType
 
           <section className='w-full flex flex-col items-center mb-16'>
             <TabMenu>
-              <div key={1}></div>
-              <CrewBoard key={2} crewDataList={tabMenu.crewCardListTab} />
-              <div key={3}></div>
-              <EventTab key={4} />
+              <div ></div>
+              <CrewBoard crewDataList={tabMenu.crewCardListTab} />
+              <div ></div>
+              <EventTab />
               <div className='w-full ov-md:p-8 sm:p-4 bg-white'>
                 <div className='space-y-8'>
                   <div className='border-l-8 inline-block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>公式サイト</div>
