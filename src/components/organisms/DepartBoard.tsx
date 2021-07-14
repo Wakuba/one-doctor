@@ -11,7 +11,7 @@ export default function DepartBoard({ depList }) {
       sm:w-for-scroll sm:justify-items-stretch
       md:w-for-scroll md:justify-items-stretch
       ov-lg:justify-strech ov-lg:w-full'>
-        {depList.map((dep, idx) => <DepartKanban pageUrl={dep.path} layoutStyle='sm:mr-4 sm:mb-4 ov-md:mb-8 ov-md:mr-3' key={idx + 1} >{dep.departmentNameInJapanese}</DepartKanban>)}
+        {depList.map((dep, idx: number) => <DepartKanban pageUrl={dep.path} layoutStyle='sm:mr-4 sm:mb-4 ov-md:mb-8 ov-md:mr-3' key={idx + 1} >{dep.departmentNameInJapanese}</DepartKanban>)}
       </div >
     </div>
   )
