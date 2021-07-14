@@ -40,7 +40,7 @@ export default function DepTopSection({ depName, heroImg, educationalPoint, clin
   return (
     <>
       <div onClick={() => setIsTextModalOpen(true)} className='w-full bg-white shadow-md flex sm:flex-col ov-md:flex-row '>
-        <div className='ov-md:p-8 sm:w-full md:w-179/2 lg:w-258/2 xl:w-269/2 2xl:w-341/2 ov-md:h-80'>
+        <div className='ov-md:p-8 sm:w-full md:w-179/2 lg:w-258/2 xl:w-269/2 2xl:w-341/2 ov-md:h-96'>
           <div className='sm:p-3 sm:h-72  overflow-y-hidden relative'>
             <div className='space-y-4 ov-md:h-72 '>
               <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
@@ -55,7 +55,7 @@ export default function DepTopSection({ depName, heroImg, educationalPoint, clin
         </div>
         <div className='relative
         sm:w-full md:w-179/2 lg:w-258/2 xl:w-269/2 2xl:w-341/2
-        h-96'>
+        sm:h-64 ov-md:h-96'>
           <div className='border-0
                           bg-transparent
                           absolute
@@ -67,7 +67,7 @@ export default function DepTopSection({ depName, heroImg, educationalPoint, clin
                           ov-md:h-full
                           ov-md:w-24
           ' ></div>
-          <div className='relative h-96 ov-md:object-cover z-10 border-white'>
+          <div className='relative sm:h-64 ov-md:h-96 z-10 border-white'>
             {heroImg ? <Image layout='fill' objectFit='cover' loading='eager' src={heroImg} alt='hero image of the department' /> : <div>now loading</div>}
           </div>
         </div >

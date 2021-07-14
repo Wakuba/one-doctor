@@ -41,7 +41,7 @@
   }
 
   .ed-back-linear {
-    background: linear-gradient(180deg, #5db0d0 0%, #5db0d0 20%, #f8fdff 20%, #f8fdff 100%);
+    background: linear-gradient(180deg, #5db0d0 0%, #5db0d0 550px, #f8fdff 550px, #f8fdff 100%);
   }
 
   .text-shadow {
@@ -81,7 +81,7 @@
       border-bottom: 7vw solid transparent;
       border-right: 3vw solid #ffffff98;
       border-left: 3vw solid transparent;
-      transform: translate(-5vw, -50%);
+      transform: translate(-6vw, -50%);
     }
 
     & .slick-next {
@@ -89,7 +89,7 @@
       border-bottom: 7vw solid transparent;
       border-right: 3vw solid transparent;
       border-left: 3vw solid #ffffff98;
-      transform: translate(5vw, -50%);
+      transform: translate(6vw, -50%);
     }
 
     & .slick-prev::before {

@@ -1,11 +1,14 @@
+//External components
 import { useState } from "react"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick'
 import YouTube from "react-youtube";
+import Image from "next/image";
+
+//Custom components
 import { ModalBackdrop, ModalMainArea } from "../atoms/Modal";
 import { sliderData } from '../../../public/staticData'
-
 
 let initModalState = {}
 for (let i = 0; i < sliderData.length; i++) { initModalState = { ...initModalState, [i]: false } }
@@ -53,7 +56,7 @@ export default function MovieCarousel() {
             openModal(key)
           }
           return (
-            <img key={idx} onClick={openModalCloser} alt='eyecatch image' src={data.eyecatchImg} />
+            <Image key={idx} loading='lazy' width='1008' height='716' layout='responsive' objectFit='cover' onClick={openModalCloser} alt='eyecatch image' src={data.eyecatchImg} />
           )
         })}
       </Slider>
