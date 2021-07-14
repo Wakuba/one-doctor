@@ -1,5 +1,6 @@
 import { db } from "../../lib/firebase/firebase.config"
 import DepartPageTemplate from "../../components/templates/DepartPageTemplate"
+import { depPostDataType } from "../../lib/types"
 
 export default function DepartmentPage({ postData }) {
   return <DepartPageTemplate postData={postData} />
@@ -19,7 +20,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   //postData全体の取得
-  let postData: any = {}
+  let postData: depPostDataType | null = null
   const snapshot = await db.collection('fl_content')
     .where('_fl_meta_.schema', '==', 'departmentPage')
     .where('departmentName.departmentNameInEnglish', '==', params.department)
