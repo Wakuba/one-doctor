@@ -10,6 +10,7 @@ import NewsBoard from '../components/organisms/NewsBoard'
 import DepartBoard from '../components/organisms/DepartBoard'
 import { RichBlueBRSquare, MutedBlueBRSquare, MutedBlueTLSquare, RichBlueTLSquare } from '../components/atoms/StyledComponents'
 import { ModalMainArea, ModalBackdrop } from '../components/atoms/Modal'
+import CustomizedParticles from '../components/molecules/CustomizedParticles'
 
 //firebase
 import { db } from '../lib/firebase/firebase.config'
@@ -34,24 +35,19 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
       <Header />
       <main>
         <section
-          className=' sm:bg-hero-narrowback-image
-                      sm:flex
-                      sm:flex-col sm:items-center
-                      sm:bg-minus66px
-                      ov-md:bg-hero-wideback-image
-                      bg-prime-blue-rich
-                      bg-cover
-                      bg-no-repeat
-                      pt-wscreen/5
-                      pb-24
-                      rounded-br-bg-corner
-                      relative
-        '>
-          <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ml-wscreen/10 mr-wscreen/20'>
+          className='
+          relative
+          sm:flex
+          sm:flex-col sm:items-center
+          pt-wscreen/5
+          pb-24
+          sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
+          '>
+          <CustomizedParticles layoutStyle='absolute top-0 left-0 w-full h-hscreen*2 -z-10' />
+          <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ml-wscreen/10 mr-wscreen/20 '>
             <div className='text-white flex items-center
                             ov-md:w-wscreen2/5
-                            lg:text-xl
-                             ov-xl:text-1.5vw
+                            ov-lg:text-xl
                             text-shadow
                             '>
               「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）
@@ -73,17 +69,33 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
               <NewsBoard layoutStyles={{ container: 'w-8/12', title: 'text-white' }} content={newsBoardData} />
             </div>
           </div>
-          <MutedBlueBRSquare />
+
+          <div className='absolute right-0 bottom-0
+          sm:w-wscreen3/20 sm:h-wscreen3/20
+          md:w-wscreen3/20 md:h-wscreen3/20
+          lg:w-wscreen3/20 lg:h-wscreen3/20
+          xl:w-wscreen3/20 xl:h-wscreen3/20
+          2xl:w-56 2xl:h-56
+          transform sm:translate-y-1/7 sm:translate-x-1/7
+          md:translate-y-1/7 md:translate-x-1/7
+          lg:translate-y-1/7 lg:translate-x-1/7
+          xl:translate-y-1/7 xl:translate-x-1/7
+          2xl:translate-y-8 2xl:translate-x-8
+          '>
+            <Image layout='fill' loading='eager' objectFit='cover' src='/svg/slideCircle-mutedBlue.svg' />
+          </div>
         </section>
 
-        <section className='w-full rounded-br-bg-corner rounded-tl-bg-corner relative bg-prime-blue-muted flex flex-col items-center py-24'>
+        <section className='
+        w-full rounded-br-bg-corner rounded-tl-bg-corner relative bg-prime-blue-muted flex flex-col items-center py-24
+        sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
+        sm:rounded-tl-bg-corner md:rounded-tl-bg-corner lg:rounded-tl-bg-corner xl:rounded-tl-bg-corner 2xl:rounded-tl-bg-corner-2xl'>
           <RichBlueBRSquare />
-          <RichBlueTLSquare />
           <div className='sm:w-11/12 ov-md:w-7/10 '>
             <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold'>新着動画</div>
             <div className='text-sm'>各診療科のやりがいやリアルな現場を動画で見ることができます</div>
             <div className='overflow-x-scroll overflow-y-hidden'>
-              <div className='w-screen*2 flex flex-row'>
+              <div className='w-wscreen*2 flex flex-row'>
                 <Movie videoId="https://www.youtube.com/embed/8jjswrh3agE" src='/images/professor.png' title="YouTube video player" />
                 <Movie videoId="https://www.youtube.com/embed/8jjswrh3agE" src='/images/professor.png' title="YouTube video player" />
                 <Movie videoId="https://www.youtube.com/embed/8jjswrh3agE" src='/images/professor.png' title="YouTube video player" />
@@ -102,7 +114,10 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
 
         </section>
 
-        <section className='relative w-full flex flex-col items-center rounded-tl-bg-corner rounded-br-bg-corner bg-prime-blue-rich py-24'>
+        <section className='relative w-full flex flex-col items-center py-24 bg-prime-blue-rich
+         sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
+         sm:rounded-tl-bg-corner md:rounded-tl-bg-corner lg:rounded-tl-bg-corner xl:rounded-tl-bg-corner 2xl:rounded-tl-bg-corner-2xl
+        '>
           <MutedBlueTLSquare />
           <div className='sm:w-11/12 ov-md:w-7/10'>
             <div className='text-white sm:text-2xl ov-md:text-4xl font-semibold' >診療科一覧</div>
@@ -112,7 +127,10 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
           <MutedBlueBRSquare />
         </section>
 
-        <section className='relative rounded-tl-bg-corner bg-prime-blue-muted py-24 flex flex-col items-center' >
+        <section className='relative rounded-tl-bg-corner bg-prime-blue-muted py-24 flex flex-col items-center
+         sm:rounded-tl-bg-corner md:rounded-tl-bg-corner lg:rounded-tl-bg-corner xl:rounded-tl-bg-corner 2xl:rounded-tl-bg-corner-2xl
+         sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
+        ' >
           <RichBlueTLSquare />
           <div className='bg-transparent flex flex-col items-center sm:w-11/12 ov-md:w-7/10'>
             <div className='w-full sm:mb-4 ov-md:mb-8'>
