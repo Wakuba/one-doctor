@@ -66,7 +66,8 @@ module.exports = {
         'prime-blue-rich': '#5DB0D0',
         'prime-blue-muted': '#F8FDFF',
         'prime-blue-pale': '#BBDFEC',
-        'off-white': '#ffffff98'
+        'off-white': '#ffffff98',
+        'purple': '#6E4E9D'
       },
       inset: {
         18: '4.5rem',

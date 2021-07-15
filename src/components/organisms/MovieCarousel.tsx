@@ -63,14 +63,3 @@ export default function MovieCarousel() {
     </>
   );
 }
-
-// 'w-full list-none flex flex-row
-
-// position: absolute;
-// bottom: -25px;
-// display: block;
-// width: 100 %;
-// padding: 0;
-// margin: 0;
-// list - style: none;
-// text - align: center;
