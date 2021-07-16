@@ -1,14 +1,18 @@
-import Particles from "react-tsparticles";
+import Particles from 'react-tsparticles'
 
-export default function CustomizedParticles({ layoutStyle }: { layoutStyle: string }) {
+export default function CustomizedParticles({
+  layoutStyle,
+}: {
+  layoutStyle: string
+}) {
   const particlesInit = (main: any) => {
-    console.log(main);
+    console.log(main)
 
     // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
   }
 
   const particlesLoaded = (container: any) => {
-    console.log(container);
+    console.log(container)
   }
 
   return (
@@ -27,7 +31,7 @@ export default function CustomizedParticles({ layoutStyle }: { layoutStyle: stri
             position: '50% 50%',
             repeat: 'no-repeat',
             size: 'cover',
-            opacity: 1
+            opacity: 1,
           },
           backgroundMask: {
             composite: 'destination-out',
@@ -35,17 +39,17 @@ export default function CustomizedParticles({ layoutStyle }: { layoutStyle: stri
               color: {
                 value: '#fff',
               },
-              opacity: 1
+              opacity: 1,
             },
-            enable: false
+            enable: false,
           },
           fpsLimit: 60,
           motion: {
             disable: false,
             reduce: {
               factor: 4,
-              value: true
-            }
+              value: true,
+            },
           },
           particles: {
             color: {
@@ -56,14 +60,14 @@ export default function CustomizedParticles({ layoutStyle }: { layoutStyle: stri
                   enable: false,
                   offset: 0,
                   speed: 0.3,
-                  sync: true
+                  sync: true,
                 },
                 s: {
                   count: 0,
                   enable: false,
                   offset: 0,
                   speed: 1,
-                  sync: true
+                  sync: true,
                 },
                 l: {
                   count: 0,
@@ -71,28 +75,28 @@ export default function CustomizedParticles({ layoutStyle }: { layoutStyle: stri
                   offset: 0,
                   speed: 1,
                   sync: true,
-                }
-              }
+                },
+              },
             },
             collisions: {
               enable: true,
             },
             move: {
-              direction: "none",
+              direction: 'none',
               angle: {
                 offset: 0,
-                value: 90
+                value: 90,
               },
               attract: {
                 distance: 200,
                 rotate: {
                   x: 3000,
-                  y: 3000
-                }
+                  y: 3000,
+                },
               },
               decay: 0,
               enable: true,
-              outMode: "out",
+              outMode: 'out',
               random: true,
               speed: 0.5,
               straight: false,
@@ -101,24 +105,24 @@ export default function CustomizedParticles({ layoutStyle }: { layoutStyle: stri
                 delay: {
                   random: {
                     enable: false,
-                    minimumValue: 0
+                    minimumValue: 0,
                   },
-                  value: 0
-                }
+                  value: 0,
+                },
               },
             },
             number: {
               value: 22,
-              limit: 0
+              limit: 0,
             },
             opacity: {
               random: {
                 enable: true,
-                minimumValue: 0.4
+                minimumValue: 0.4,
               },
               value: {
                 min: 0.4,
-                max: 0.8
+                max: 0.8,
               },
               animation: {
                 count: 0,
@@ -139,20 +143,20 @@ export default function CustomizedParticles({ layoutStyle }: { layoutStyle: stri
               enable: false,
               offset: {
                 x: 0,
-                y: 0
+                y: 0,
               },
             },
             shape: {
-              type: "circle",
+              type: 'circle',
             },
             size: {
               random: {
                 enable: true,
-                minimumValue: 20
+                minimumValue: 20,
               },
               value: {
                 max: 50,
-                min: 20
+                min: 20,
               },
               animation: {
                 count: 0,
@@ -166,9 +170,8 @@ export default function CustomizedParticles({ layoutStyle }: { layoutStyle: stri
             },
           },
           detectRetina: true,
-        }
-        }
+        }}
       />
     </div>
-  );
+  )
 }

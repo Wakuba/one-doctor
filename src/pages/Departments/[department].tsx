@@ -1,5 +1,5 @@
-import { db } from "../../lib/firebase/firebase.config"
-import DepartPageTemplate from "../../components/templates/DepartPageTemplate"
+import { db } from '../../lib/firebase/firebase.config'
+import DepartPageTemplate from '../../components/templates/DepartPageTemplate'
 
 export default function DepartmentPage({ postData }: { postData: any }) {
   return <DepartPageTemplate postData={postData} />
@@ -7,27 +7,33 @@ export default function DepartmentPage({ postData }: { postData: any }) {
 
 export const getStaticPaths = async () => {
   const paths: any = []
-  const snapshot = await db.collection('fl_content')
+  const snapshot = await db
+    .collection('fl_content')
     .where('_fl_meta_.schema', '==', 'departmentPage')
     .get()
-  snapshot.forEach(doc => paths.push({ params: { department: doc.data().departmentName.departmentNameInEnglish } }))
+  snapshot.forEach((doc) =>
+    paths.push({
+      params: { department: doc.data().departmentName.departmentNameInEnglish },
+    })
+  )
   return {
     paths,
-    fallback: false
+    fallback: false,
   }
 }
 
 export const getStaticProps = async ({ params }: { params: any }) => {
   //postData全体の取得
   let postData: any = {}
-  const snapshot = await db.collection('fl_content')
+  const snapshot = await db
+    .collection('fl_content')
     .where('_fl_meta_.schema', '==', 'departmentPage')
     .where('departmentName.departmentNameInEnglish', '==', params.department)
     .get()
 
   const flFileIdsForCrewImg: string[] = []
   let flFileHeroImgId = ''
-  snapshot.docs.forEach(doc => {
+  snapshot.docs.forEach((doc) => {
     flFileHeroImgId = doc.data().heroImageOfTheDepartment[0].id
     postData = {
       departmentName: doc.data().departmentName,
@@ -36,7 +42,8 @@ export const getStaticProps = async ({ params }: { params: any }) => {
       tabMenu: {
         basicInfoTab: doc.data().tabMenu.basicInfoTab,
         snsTab: doc.data().tabMenu.snsTab,
-        geographicalInformationTab: doc.data().tabMenu.geographicalInformationTab,
+        geographicalInformationTab:
+          doc.data().tabMenu.geographicalInformationTab,
         crewCardListTab: [
           ...doc.data().tabMenu.crewCardListTab.map((crewCard: any) => {
             flFileIdsForCrewImg.push(crewCard.crewImage[0].id)
@@ -46,13 +53,13 @@ export const getStaticProps = async ({ params }: { params: any }) => {
               licence: crewCard.licence,
               majorFiled: crewCard.majorField,
               schoolLife: crewCard.schoolLife,
-              uniqueKey: crewCard.uniqueKey
+              uniqueKey: crewCard.uniqueKey,
             }
-          })
-        ]
+          }),
+        ],
       },
       topSection: doc.data().topSection,
-      officialWebSite: doc.data().officialWebSite
+      officialWebSite: doc.data().officialWebSite,
     }
   })
 
@@ -60,14 +67,17 @@ export const getStaticProps = async ({ params }: { params: any }) => {
   //file名だけ取得し、画像のダウンロードは各コンポーネントに任せる
   const snapshotForImg = await db.collection('fl_files').get()
   flFileIdsForCrewImg.forEach((fileId, idx) => {
-    postData.tabMenu.crewCardListTab[idx].crewImgFileName
-      = snapshotForImg.docs.find(doc => doc.data().id == fileId)?.data().file
+    postData.tabMenu.crewCardListTab[idx].crewImgFileName = snapshotForImg.docs
+      .find((doc) => doc.data().id == fileId)
+      ?.data().file
   })
-  postData.heroImgFileName = snapshotForImg.docs.find(doc => doc.data().id == flFileHeroImgId)?.data().file
+  postData.heroImgFileName = snapshotForImg.docs
+    .find((doc) => doc.data().id == flFileHeroImgId)
+    ?.data().file
 
   return {
     props: {
-      postData
-    }
+      postData,
+    },
   }
 }

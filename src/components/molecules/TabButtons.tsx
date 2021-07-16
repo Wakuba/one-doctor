@@ -1,15 +1,19 @@
 import { SetStateAction } from 'react'
 
 type TabButtonsProps = {
-  buttons: string[];
-  changeTab: (value: SetStateAction<string>) => void;
-  activeTab: string;
+  buttons: string[]
+  changeTab: (value: SetStateAction<string>) => void
+  activeTab: string
 }
 
-export default function TabButtons({ buttons, changeTab, activeTab }: TabButtonsProps) {
+export default function TabButtons({
+  buttons,
+  changeTab,
+  activeTab,
+}: TabButtonsProps) {
   return (
-    <div className='space-x-2' >
-      {buttons.map((button, idx) =>
+    <div className="space-x-2">
+      {buttons.map((button, idx) => (
         <button
           key={idx}
           className={`
@@ -22,7 +26,7 @@ export default function TabButtons({ buttons, changeTab, activeTab }: TabButtons
         >
           {button}
         </button>
-      )}
+      ))}
     </div>
   )
 }

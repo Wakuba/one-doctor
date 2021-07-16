@@ -10,16 +10,16 @@ const firebaseConfig = {
   storageBucket: process.env.BROWSER_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.BROWSER_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.BROWSER_FIREBASE_APP_ID,
-  measurementId: process.env.BROWSER_FIREBASE_MEASUREMENT_ID
-};
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-} else {
-  firebase.app();
+  measurementId: process.env.BROWSER_FIREBASE_MEASUREMENT_ID,
 }
 
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig)
+} else {
+  firebase.app()
+}
 
-export const db: firebase.firestore.Firestore = firebase.firestore();
-export const firebaseFunction: firebase.functions.Functions = firebase.functions()
+export const db: firebase.firestore.Firestore = firebase.firestore()
+export const firebaseFunction: firebase.functions.Functions =
+  firebase.functions()
 export const storage: firebase.storage.Storage = firebase.storage()
