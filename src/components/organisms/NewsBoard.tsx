@@ -14,11 +14,11 @@ const NewsBoard: FC<NewsBoardProps> = ({ layoutStyles, content }) => {
   return (
     <div className="w-full">
       <div
-        className={`sm:text-2xl ov-md:text-4xl sm:text-prime-blue-rich font-semibold ${layoutStyles}`}
+        className={`mb-2 sm:text-2xl ov-md:text-4xl sm:text-prime-blue-rich font-semibold ${layoutStyles}`}
       >
         NEWS
       </div>
-      <p className="text-sm">イベントや説明会の情報をお知らせします。</p>
+      <p className="text-sm mb-4">イベントや説明会の情報をお知らせします。</p>
       <div className="flex-col items-start bg-white rounded shadow-lg p-2.5 space-y-2">
         {content.map((news: NewsLineType, idx: number): JSX.Element => {
           return (

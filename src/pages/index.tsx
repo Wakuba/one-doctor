@@ -180,7 +180,7 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
         >
           <MutedBlueTLSquare />
           <div className="sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] flex flex-col items-center">
-            <div className="text-white sm:text-2xl ov-md:text-4xl font-semibold w-full flex justify-self-start">
+            <div className="text-white sm:text-2xl ov-md:text-4xl font-semibold w-full flex justify-self-start mb-2">
               診療科一覧
             </div>
             <div className="sm:text-sm ov-md:text-lg mb-4 w-full flex justify-self-start">
