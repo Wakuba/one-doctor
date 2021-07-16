@@ -46,11 +46,11 @@ export default function CrewCard({ crewData }: CrewCardPropsType) {
   return (
     <div className='
     perspective justify-self-center
-    sm:w-112 sm:h-64
-    md:w-112 md:h-64
-    lg:w-112 lg:h-64
-    xl:w-112 xl:h-64
-    2xl:w-137 2xl:h-72 '>
+    sm:w-[448px] sm:h-64
+    md:w-[448px] md:h-64
+    lg:w-[448px] lg:h-64
+    xl:w-[448px] xl:h-64
+    2xl:w-[548px] 2xl:h-72 '>
       <div className={`w-full h-full preserve-3d duration-700 cursor-pointer relative ${isFliped && 'rotate-y-180'}`}>
         <CardHead
           flip={flip}
@@ -69,6 +69,7 @@ export default function CrewCard({ crewData }: CrewCardPropsType) {
           crewName={crewName}
           position={position}
           schoolLife={schoolLife}
+          forFun={forFun}
         />
       </div>
     </div>
@@ -100,9 +101,9 @@ function CardHead({ imgSrc, flip, isArrowVanished, crewName, position, backgroun
             <p>{majorField ? majorField : '特になし'}</p>
           </div>
         </div>
-        <div className={`absolute h-8 w-28 bottom-0 right-0 flex flex-row transform translate-y-1/4 ${isArrowVanished && 'hidden'}`}>
+        <div className={`absolute h-8 w-32 bottom-[6px] right-[-8px] flex flex-row justify-between transform translate-y-1/4 ${isArrowVanished && 'hidden'}`}>
           <p className='text-xs text-prime-blue-rich pt-4'>the other side</p>
-          <img className='h-8 w-8 bottom-0 right-0 ' src='/svg/reverse-icon.svg' />
+          <img className='h-8 w-8 bottom-0 right-0 ' src='/svg/Uturn.svg' />
         </div>
       </div>
     </div>
@@ -112,7 +113,7 @@ function CardHead({ imgSrc, flip, isArrowVanished, crewName, position, backgroun
 function CardTail({ imgSrc, flip, isArrowVanished, crewName, position, schoolLife, forFun }: CardFacePropsType) {
   return (
     <div onClick={flip} className='absolute h-full w-full ' >
-      <div className="relative grid grid-cols-10 w-full h-full crew-bg-purple rotate-y-180 backface-invisible  wk-backface-invisible shadow-lg border-1 border-prime-blue-rich rounded-sm" >
+      <div className="relative grid grid-cols-10 w-full h-full crew-bg-purple rotate-y-180 backface-invisible  wk-backface-invisible shadow-lg border-[1px] border-prime-blue-rich rounded-sm" >
         <div className='col-span-4 flex items-center justify-center'>
           {imgSrc ? <Image width={154} height={204} src={imgSrc} loading='lazy' objectFit='cover' alt='crew image' /> : <div className='w-11/12 h-11/12 text-gray-400 flex justify-center' >now <br />loading</div>}
         </div>
@@ -130,9 +131,9 @@ function CardTail({ imgSrc, flip, isArrowVanished, crewName, position, schoolLif
             <p>{schoolLife ? schoolLife : '特になし'} </p>
           </div>
         </div>
-        <div className={`absolute h-8 w-28 bottom-0 right-0 flex flex-row transform translate-y-1/4 ${!isArrowVanished && 'hidden'}`}>
+        <div className={`absolute h-8 w-32 bottom-[6px] right-[-8px] flex flex-row justify-between transform translate-y-1/4 ${!isArrowVanished && 'hidden'}`}>
           <p className='text-xs text-prime-blue-rich pt-4'>the other side</p>
-          <img className='h-8 w-8 bottom-0 right-0 ' src='/svg/reverse-icon.svg' />
+          <img className='h-8 w-8 bottom-0 right-0 ' src='/svg/Uturn.svg' />
         </div>
       </div>
     </div>

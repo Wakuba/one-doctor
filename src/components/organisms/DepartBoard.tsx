@@ -1,17 +1,72 @@
 import DepartKanban from '../molecules/DepartKanban'
 // import { depList } from '../../../public/staticData'
 
-export default function DepartBoard({ depList }) {
+export default function DepartBoard({ depList }: { depList: any }) {
   return (
-    <div className='w-full sm:overflow-x-auto sm:overflow-y-hidden md:overflow-x-auto md:overflow-y-hidden ov-lg:flex ov-lg:flex-col ov-lg:items-center'>
+    <div className='w-full sm:overflow-x-auto sm:overflow-y-hidden md:overflow-x-auto md:overflow-y-hidden'>
       <div className='
-      flex
-      flex-row
-      flex-wrap
-      sm:w-for-scroll sm:justify-items-stretch
-      md:w-for-scroll md:justify-items-stretch
-      ov-lg:justify-strech ov-lg:w-full'>
-        {depList.map((dep, idx: number) => <DepartKanban pageUrl={dep.path} layoutStyle='sm:mr-4 sm:mb-4 ov-md:mb-8 ov-md:mr-3' key={idx + 1} >{dep.departmentNameInJapanese}</DepartKanban>)}
+      sm:grid sm:grid-cols-4 sm:grid-flow-row sm:gap-6 sm:w-[900px]
+      md:grid md:grid-cols-4 md:grid-flow-row md:gap-6 md:w-[1200px]
+      lg:grid lg:grid-cols-3 lg:gap-6
+      xl:grid xl:grid-cols-3 xl:gap-6
+      2xl:grid 2xl:grid-cols-4 2xl:gap-8
+      '>
+        {depList.map((dep: any, idx: number) =>
+          <div key={idx + 1} className='flex justify-self-center self-center'>
+            <DepartKanban pageUrl={dep.path}  >{dep.departmentNameInJapanese}</DepartKanban>
+          </div>
+        )}
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
+        <div className='flex justify-self-center self-center'>
+          <DepartKanban >デコイ</DepartKanban>
+        </div>
       </div >
     </div>
   )

@@ -21,13 +21,14 @@ import { ReactNode } from 'react'
 import { storage } from '../../lib/firebase/firebase.config'
 
 const Button = (props: { children: ReactNode, href?: string }) => (
-  <a rel="noopener" target='_blank' href={props.href} className='rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center'>
+  <a rel="noreferrer" target='_blank' href={props.href} className='rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center'>
     <span className='text-white text-sm font-medium '>
       {props.children}
     </span>
   </a>
 )
 
+// eslint-disable-next-line react/display-name
 const TwitterTimelineMemo = memo(({ href }: { href: string }) => <TwitterTimeline href={href} />)
 
 interface DepartmentPagePropsType {
@@ -49,7 +50,7 @@ export default function DepartPageTemplate({ postData }: DepartmentPagePropsType
     <>
       <Header />
       <main className='ed-back-linear bg-contain bg-no-repeat w-full flex flex-col items-center'>
-        <div className='sm:w-11/12 md:w-179 lg:w-258 xl:w-269 2xl:w-341'>
+        <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
           <section className='w-full flex flex-col items-start mb-14 pt-10'>
             <div className='sm:w-11/12 ov-md:w-8/12 flex flex-col ov-md:pt-20'>
               <h1 className='text-white text-xl font-semibold mb-1' >{hospitalName.hospitalNameInJapanese}{'　'}{departmentName.departmentNameInJapanese}</h1>

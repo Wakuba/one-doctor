@@ -1,6 +1,6 @@
 import CrewCard from '../molecules/CrewCard'
 
-export default function CrewBoard({ crewDataList }) {
+const CrewBoard = ({ crewDataList }: { crewDataList: any }) => {
   return (
     <div className='
     w-full py-8
@@ -9,7 +9,7 @@ export default function CrewBoard({ crewDataList }) {
     lg:grid lg:grid-flow-row lg:grid-cols-2 lg:gap-8
     xl:grid xl:grid-flow-row xl:grid-cols-2 xl:gap-8
     2xl:grid 2xl:grid-flow-row 2xl:grid-cols-2 2xl:gap-8'>
-      {crewDataList.map(crewData =>
+      {crewDataList.map((crewData: any) =>
         <>
           <CrewCard key={crewData.uniqueKey} crewData={crewData} />
           <CrewCard key={crewData.uniqueKey} crewData={crewData} />
@@ -22,3 +22,4 @@ export default function CrewBoard({ crewDataList }) {
   )
 }
 
+export default CrewBoard

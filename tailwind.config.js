@@ -1,5 +1,13 @@
 module.exports = {
-  purge: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
+  mode: 'jit',
+  purge: [
+    './src/pages/*.{ts,tsx}',
+    './src/pages/Departments/*.{ts,tsx}',
+    './src/components/atoms/*.{ts,tsx}',
+    './src/components/molecules/*.{ts,tsx}',
+    './src/components/organisms/*.{ts,tsx}',
+    './src/components/templates/*.{ts,tsx}'
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -17,51 +25,6 @@ module.exports = {
         'for-wide-ichioshi-img': 'inset 60px 0px 30px -7px white',
         'for-readmore': 'inset 0px -50px 48px 6px white'
       },
-      spacing: {
-        104: '417px',
-        112: '448px',
-        116: '464px',
-        125: '500px',
-        137: '548px',
-        145: '580px',
-        172: '690px',
-        179: '716px',
-        '179/2': '358px',
-        258: '1008px',
-        '258/2': '504px',
-        269: '1075px',
-        '269/2': '537.5px',
-        341: '1364px',
-        '341/2': '682px',
-        '1/20': '5%',
-        '2/11': '18.1818%',
-        '1/10': '10%',
-        '7/10': '70%',
-        '1/6': '16.666667%',
-        'fit-to-screen': '216vw',
-        'fit-to-widescreen': '2150px',
-        'for-scroll': '1560px',
-        '3.5vw': '3.5vw',
-        'wscreen*2': '200vw',
-        'hscreen*2': '200vh',
-        'hscreen/2': '50vh',
-        'wscreen/2': '50vw',
-        'wscreen3/20': '15vw',
-        'wscreen9/20': '45vw',
-        'wscreen/20': '5vw',
-        'wscreen7/10': '70vw',
-        'wscreen/10': '10vw',
-        'wscreen/8': '12.5vw',
-        'wscreen2/7': '28.67vw',
-        'wscreen/7': '14.286vw',
-        'wscreen2/5': '40vw',
-        'wscreen/5': '20vw',
-        'wscreen/4': '25vw',
-        'wscreen/3': '33vw',
-      },
-      margin: {
-        '3.5vw': '3.5vw'
-      },
       borderWidth: {
         1: '1px'
       },
@@ -75,17 +38,6 @@ module.exports = {
         'prime-blue-pale': '#BBDFEC',
         'off-white': '#ffffff98',
         'purple': '#6E4E9D'
-      },
-      inset: {
-        18: '4.5rem',
-        162: '40.5rem',
-        200: '50rem',
-        238: '59.5rem',
-        '3vw': '3vw',
-        '-1%': '-1%',
-        '5vw': '5vw',
-        '15vw': '15vw',
-        '80%': '80%'
       },
       zIndex: {
         '-10': '-10',
@@ -145,4 +97,8 @@ module.exports = {
       backgroundColor: ['hover']
     },
   },
+  coreplugins: {
+    gridTemplateColumns: true,
+    gridTemplateRows: true
+  }
 }

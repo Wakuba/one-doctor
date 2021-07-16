@@ -11,12 +11,12 @@ export default function Inqueries() {
       email: { value: string };
       content: { value: string };
     };
-    let data = {
+    const data = {
       name: target.name.value,
       email: target.email.value,
       content: target.content.value
     }
-    let sendMail = firebaseFunction.httpsCallable('sendMail');
+    const sendMail = firebaseFunction.httpsCallable('sendMail');
     sendMail(data)
     target.name.value = ''
     target.email.value = ''
@@ -27,7 +27,7 @@ export default function Inqueries() {
       <Header />
       <div className='flex-col justify-center content-center bg-prime-blue-muted w-full ov-md:pt-20'>
         <main className='w-full flex flex-col items-center'>
-          <form action='' onSubmit={onSubmit} className='sm:w-11/12 ov-md:w-7/10 space-y-10'>
+          <form action='' onSubmit={onSubmit} className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] space-y-10'>
 
             <div className='mt-10'>
               <h1 className='text-2xl text-prime-blue-rich font-semibold mb-6'>お問い合わせ</h1>

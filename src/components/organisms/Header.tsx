@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function Header() {
   return (
-    <header className={`sm:static sm:top-0 sm:bg-white ov-md:fixed ov-md:bg-transparent py-1.5 sm:h-20 ov-md:min-h-20  ov-md:h-wscreen/20 w-full flex-row z-50`}>
+    <header className={`sm:static sm:top-0 sm:bg-white ov-md:fixed ov-md:bg-transparent py-1.5 sm:h-20 ov-md:min-h-20  ov-md:h-[5vw] w-full flex-row z-50`}>
       <Link href='/' >
         <div className='h-14'>
           <div className='relative h-12 w-32 '>

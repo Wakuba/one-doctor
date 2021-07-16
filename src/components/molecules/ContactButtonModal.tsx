@@ -21,7 +21,7 @@ export default function ContactButtonModal() {
         <div className='ov-md:text-3xl sm:text-sm '>contact</div>
       </div>
       {modalIsOpen &&
-        <div className='fixed ov-md:right-20 sm:right-4 ov-md:bottom-4 sm:bottom-28 ov-lg:w-wscreen/3 ov-lg:h-wscreen/3 md:w-wscreen/2 md:h-wscreen/2 sm:h-96 z-40 '>
+        <div className='fixed ov-md:right-20 sm:right-4 ov-md:bottom-4 sm:bottom-28 ov-lg:w-[33vw] ov-lg:h-[33vw] md:w-[50vw] md:h-[50vw] sm:h-96 z-40 '>
           <div className='relative w-full h-full flex flex-col justify-evenly'>
             <div className='ov-md:absolute ov-md:bottom-0 w-full flex justify-start'>
               <Modal onCancel={closeModalHandler} layoutStyles=''>見学申し込み</Modal>

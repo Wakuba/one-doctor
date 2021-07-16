@@ -1,6 +1,6 @@
 import Particles from "react-tsparticles";
 
-export default function CustomizedParticles({ layoutStyle }) {
+export default function CustomizedParticles({ layoutStyle }: { layoutStyle: string }) {
   const particlesInit = (main: any) => {
     console.log(main);
 

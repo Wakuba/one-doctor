@@ -39,42 +39,42 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
           relative
           sm:flex
           sm:flex-col sm:items-center
-          pt-wscreen/5
+          pt-[10vw]
           pb-24
           sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
           '>
-          <CustomizedParticles layoutStyle='absolute top-0 left-0 w-full h-hscreen*2 -z-10' />
-          <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ml-wscreen/10 mr-wscreen/20 '>
+          <CustomizedParticles layoutStyle='absolute top-0 left-0 w-full h-[200vh] -z-10' />
+          <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ml-[10vw] mr-[5vw] '>
             <div className='text-white flex items-center
-                            ov-md:w-wscreen2/5
+                            ov-md:w-[40vw] ov-md:mr-4
                             ov-lg:text-xl
                             text-shadow
                             '>
               「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に 「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで 彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです （ココの文章も検討お願いします）
             </div>
-            <h1 className='text-white transform -rotate-12 my-wscreen/20 w-wscreen7/10 left-wscreen/8 top-6
-                            sm:text-10vw sm:leading-10vw
-                            ov-md:text-7vw ov-md:leading-7vw
+            <h1 className='text-white transform rotate-[-10deg] my-[5vw] w-[70vw] left-[12.5vw] top-[-2vw]
+                            sm:text-[8vw] sm:leading-10vw
+                            ov-md:text-[6vw] ov-md:leading-7vw
                             ov-md:absolute'>
               キャッチコピー<br />白の手書き
             </h1>
-            <div className='relative ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10'>
-              <Image className='rounded-full ov-md:w-wscreen9/20 ov-md:h-wscreen9/20 sm:w-wscreen7/10 sm:h-wscreen7/10' layout='fill' objectFit='cover' src="/images/hero-image.jpeg" />
+            <div className='relative ov-md:w-[45vw] ov-md:h-[45vw] sm:w-[70vw] sm:h-[70vw]'>
+              <Image className='rounded-full ov-md:w-[45vw] ov-md:h-[45vw] sm:w-[70vw] sm:h-[70vw]' layout='fill' objectFit='cover' src="/images/hero-image.jpeg" />
             </div>
-
-            <ScrollArrow />
           </div>
-          <div className='sm:hidden'>
-            <div className='w-full flex justify-center mt-10 '>
-              <NewsBoard layoutStyles={{ container: 'w-8/12', title: 'text-white' }} content={newsBoardData} />
+
+          <div className='sm:hidden w-full flex justify-center '>
+            <div className='relative mt-10 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
+              <ScrollArrow />
+              <NewsBoard layoutStyles='text-white' content={newsBoardData} />
             </div>
           </div>
 
           <div className='absolute right-0 bottom-0
-          sm:w-wscreen3/20 sm:h-wscreen3/20
-          md:w-wscreen3/20 md:h-wscreen3/20
-          lg:w-wscreen3/20 lg:h-wscreen3/20
-          xl:w-wscreen3/20 xl:h-wscreen3/20
+          sm:w-[15vw] sm:h-[15vw]
+          md:w-[15vw] md:h-[15vw]
+          lg:w-[15vw] lg:h-[15vw]
+          xl:w-[15vw] xl:h-[15vw]
           2xl:w-56 2xl:h-56
           transform sm:translate-y-1/7 sm:translate-x-1/7
           md:translate-y-1/7 md:translate-x-1/7
@@ -91,11 +91,11 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
         sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
         sm:rounded-tl-bg-corner md:rounded-tl-bg-corner lg:rounded-tl-bg-corner xl:rounded-tl-bg-corner 2xl:rounded-tl-bg-corner-2xl'>
           <RichBlueBRSquare />
-          <div className='sm:w-11/12 ov-md:w-7/10 '>
+          <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
             <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold'>新着動画</div>
             <div className='text-sm'>各診療科のやりがいやリアルな現場を動画で見ることができます</div>
-            <div className='overflow-x-scroll overflow-y-hidden'>
-              <div className='w-wscreen*2 flex flex-row'>
+            <div className='sm:w-full overflow-x-scroll overflow-y-hidden'>
+              <div className='w-[1920px] flex flex-row'>
                 <Movie videoId="https://www.youtube.com/embed/8jjswrh3agE" src='/images/professor.png' title="YouTube video player" />
                 <Movie videoId="https://www.youtube.com/embed/8jjswrh3agE" src='/images/professor.png' title="YouTube video player" />
                 <Movie videoId="https://www.youtube.com/embed/8jjswrh3agE" src='/images/professor.png' title="YouTube video player" />
@@ -106,9 +106,9 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
             </div>
           </div>
 
-          <div className='ov-md:hidden'>
-            <div className='w-full flex justify-center mt-10 '>
-              <NewsBoard layoutStyles={{ container: 'w-11/12', title: 'text-prime-blue-rich' }} content={newsBoardData} />
+          <div className='ov-md:hidden w-full flex justify-center '>
+            <div className='mt-10 w-11/12'>
+              <NewsBoard layoutStyles='text-prime-blue-rich' content={newsBoardData} />
             </div>
           </div>
 
@@ -119,26 +119,26 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
          sm:rounded-tl-bg-corner md:rounded-tl-bg-corner lg:rounded-tl-bg-corner xl:rounded-tl-bg-corner 2xl:rounded-tl-bg-corner-2xl
         '>
           <MutedBlueTLSquare />
-          <div className='sm:w-11/12 ov-md:w-7/10'>
-            <div className='text-white sm:text-2xl ov-md:text-4xl font-semibold' >診療科一覧</div>
-            <div className='sm:text-sm ov-md:text-lg mb-4'>各診療科にコンタクトを取ったり、イベント情報をチェックすることができます</div>
+          <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] flex flex-col items-center'>
+            <div className='text-white sm:text-2xl ov-md:text-4xl font-semibold w-full flex justify-self-start' >診療科一覧</div>
+            <div className='sm:text-sm ov-md:text-lg mb-4 w-full flex justify-self-start'>各診療科にコンタクトを取ったり、イベント情報をチェックすることができます</div>
             <DepartBoard depList={depList} />
           </div>
           <MutedBlueBRSquare />
         </section>
 
-        <section className='relative rounded-tl-bg-corner bg-prime-blue-muted py-24 flex flex-col items-center
+        <section className='relative w-full rounded-tl-bg-corner bg-prime-blue-muted py-24 flex flex-col items-center
          sm:rounded-tl-bg-corner md:rounded-tl-bg-corner lg:rounded-tl-bg-corner xl:rounded-tl-bg-corner 2xl:rounded-tl-bg-corner-2xl
          sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
         ' >
           <RichBlueTLSquare />
-          <div className='bg-transparent flex flex-col items-center sm:w-11/12 ov-md:w-7/10'>
+          <div className='bg-transparent flex flex-col items-center sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
             <div className='w-full sm:mb-4 ov-md:mb-8'>
               <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold' >筑波大学附属病院について</div>
             </div>
-            <iframe className='w-full mb-10 h-wscreen/2' width="600" height="450" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.454268485108!2d140.09971111521065!3d36.10678911412265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2sUniversity%20of%20Tsukuba!5e0!3m2!1sen!2sjp!4v1618728410770!5m2!1sen!2sjp"  ></iframe>
+            <iframe className='w-full mb-10 h-[50vw]' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d279785.1765704249!2d140.17047807758485!3d35.991258388550875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2z562R5rOi5aSn5a2m!5e0!3m2!1sja!2sjp!4v1626441216082!5m2!1sja!2sjp" width="600" height="450" loading="lazy"></iframe>
             <div className='rounded text-white shadow-md bg-prime-blue-rich w-44 h-11 flex justify-center items-center'>
-              <a rel="noopener" target='_blank' href='http://www.hosp.tsukuba.ac.jp/' >病院公式ページ</a>
+              <a rel="noreferrer" target='_blank' href='http://www.hosp.tsukuba.ac.jp/' >病院公式ページ</a>
             </div>
           </div>
         </section>
@@ -195,7 +195,7 @@ function Movie({ src, title, videoId }: { src: string; title: string, videoId: s
       {modalActive &&
         <>
           < ModalMainArea modalWrapperStyle='w-10/12 h-5/6' modalContainerStyle='h-full w-full flex flex-col justify-center' closeModal={() => setModalActive(false)}>
-            <YouTube videoId={videoId} opts={opts} containerClassName='ov-md:h-full sm:h-wscreen7/10 w-full flex flex-col items-center justify-center' className='h-5/6 w-10/12' />
+            <YouTube videoId={videoId} opts={opts} containerClassName='ov-md:h-full sm:h-[70vw] w-full flex flex-col items-center justify-center' className='h-5/6 w-10/12' />
           </ModalMainArea >
           <ModalBackdrop closeModal={() => setModalActive(false)} />
         </>
@@ -209,7 +209,7 @@ function Movie({ src, title, videoId }: { src: string; title: string, videoId: s
 
 function ScrollArrow() {
   return (
-    <div className='sm:hidden text-white absolute border-solid border-white border-b-4 w-44 transform rotate-90 ov-md:-left-1% ov-md:top-80%'>
+    <div className='text-white text-xs absolute border-solid border-white border-b-2 w-44 transform rotate-90 ov-md:left-[-98px] ov-md:top-[-80px]'>
       scroll
     </div>
   )

@@ -27,7 +27,7 @@ export default function MovieCarousel() {
     setModalActive({ ...modalActive, [key]: true })
   }
 
-  var settings = {
+  const settings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -42,7 +42,7 @@ export default function MovieCarousel() {
           modalActive[idx] &&
           <div key={idx}>
             <ModalMainArea closeModal={closeModal} modalWrapperStyle='w-10/12 h-5/6' modalContainerStyle='h-full w-full flex flex-col justify-center '>
-              <YouTube videoId={data.videoId} opts={opts} containerClassName='ov-md:h-full sm:h-wscreen7/10 w-full flex flex-col items-center justify-center' className='h-5/6 w-10/12' />
+              <YouTube videoId={data.videoId} opts={opts} containerClassName='ov-md:h-full sm:h-[70vw] w-full flex flex-col items-center justify-center' className='h-5/6 w-10/12' />
             </ModalMainArea>
             <ModalBackdrop closeModal={closeModal} />
           </div>

@@ -1,6 +1,6 @@
 import AppealCard from '../molecules/AppealCard'
 
-export default function AppealCardBoard() {
+const AppealCardBoard = () => {
   return (
     <div className='flex flex-col items-center w-full bg-white shadow-lg'>
       <div className='flex-col text-sm my-4'>イベントや見学に参加することで、<br /> より詳しく知ることができます</div>
@@ -25,3 +25,5 @@ export default function AppealCardBoard() {
     </div>
   )
 }
+
+export default AppealCardBoard

@@ -1,8 +1,7 @@
 import { db } from "../../lib/firebase/firebase.config"
 import DepartPageTemplate from "../../components/templates/DepartPageTemplate"
-import { depPostDataType } from "../../lib/types"
 
-export default function DepartmentPage({ postData }) {
+export default function DepartmentPage({ postData }: { postData: any }) {
   return <DepartPageTemplate postData={postData} />
 }
 
@@ -18,7 +17,7 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }: { params: any }) => {
   //postData全体の取得
   let postData: any = {}
   const snapshot = await db.collection('fl_content')
@@ -27,10 +26,9 @@ export const getStaticProps = async ({ params }) => {
     .get()
 
   const flFileIdsForCrewImg: string[] = []
-  let flFileHeroImgId: string = ''
+  let flFileHeroImgId = ''
   snapshot.docs.forEach(doc => {
     flFileHeroImgId = doc.data().heroImageOfTheDepartment[0].id
-    console.log(flFileHeroImgId)
     postData = {
       departmentName: doc.data().departmentName,
       universityName: doc.data().universityName,
@@ -40,7 +38,7 @@ export const getStaticProps = async ({ params }) => {
         snsTab: doc.data().tabMenu.snsTab,
         geographicalInformationTab: doc.data().tabMenu.geographicalInformationTab,
         crewCardListTab: [
-          ...doc.data().tabMenu.crewCardListTab.map(crewCard => {
+          ...doc.data().tabMenu.crewCardListTab.map((crewCard: any) => {
             flFileIdsForCrewImg.push(crewCard.crewImage[0].id)
             return {
               crewName: crewCard.crewName,
