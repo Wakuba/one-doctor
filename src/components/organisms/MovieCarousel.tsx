@@ -46,7 +46,7 @@ export default function MovieCarousel() {
               <ModalMainArea
                 closeModal={closeModal}
                 modalWrapperStyle="w-10/12 h-5/6"
-                modalContainerStyle="h-full w-full flex flex-col justify-center "
+                modalContainerStyle="h-full w-full flex flex-col justify-center"
               >
                 <YouTube
                   videoId={data.videoId}

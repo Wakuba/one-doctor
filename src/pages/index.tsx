@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import YouTube from 'react-youtube'
 import Image from 'next/image'
+import clsx from 'clsx'
 
 // Custom Components
 import Header from '../components/organisms/Header'
@@ -39,23 +40,20 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
       <Header />
       <main>
         <section
-          className="
-          relative
-          sm:flex
-          sm:flex-col sm:items-center
-          pt-[10vw]
-          pb-24
-          sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
-          "
+          className={clsx(
+            'relative pt-[10vw] pb-24',
+            'sm:flex sm:flex-col sm:items-center',
+            'sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl'
+          )}
         >
           <CustomizedParticles layoutStyle="absolute top-0 left-0 w-full sm:h-[900px]  ov-md:h-[1500px] -z-10" />
           <div className="flex sm:flex-col-reverse ov-md:flex-row sm:items-center ml-[10vw] mr-[5vw] ">
             <div
-              className="text-white flex items-center
-                            ov-md:w-[40vw] ov-md:mr-4
-                            ov-lg:text-xl
-                            text-shadow
-                            "
+              className={clsx(
+                'text-white flex items-center text-shadow',
+                'ov-md:w-[40vw] ov-md:mr-4',
+                'ov-lg:text-xl'
+              )}
             >
               「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に
               「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで
@@ -63,10 +61,11 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
               （ココの文章も検討お願いします）
             </div>
             <h1
-              className="text-white transform rotate-[-10deg] my-[5vw] w-[70vw] left-[12.5vw] top-[-2vw]
-                            sm:text-[8vw] sm:leading-10vw
-                            ov-md:text-[6vw] ov-md:leading-7vw
-                            ov-md:absolute"
+              className={clsx(
+                'text-white transform rotate-[-10deg] my-[5vw] w-[70vw] left-[12.5vw] top-[-2vw]',
+                'sm:text-[8vw] sm:leading-10vw',
+                'ov-md:text-[6vw] ov-md:leading-7vw ov-md:absolute'
+              )}
             >
               キャッチコピー
               <br />
@@ -90,18 +89,19 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
           </div>
 
           <div
-            className="absolute right-0 bottom-0
-          sm:w-[15vw] sm:h-[15vw]
-          md:w-[15vw] md:h-[15vw]
-          lg:w-[15vw] lg:h-[15vw]
-          xl:w-[15vw] xl:h-[15vw]
-          2xl:w-56 2xl:h-56
-          transform sm:translate-y-1/7 sm:translate-x-1/7
-          md:translate-y-1/7 md:translate-x-1/7
-          lg:translate-y-1/7 lg:translate-x-1/7
-          xl:translate-y-1/7 xl:translate-x-1/7
-          2xl:translate-y-8 2xl:translate-x-8
-          "
+            className={clsx(
+              'absolute right-0 bottom-0',
+              'sm:w-[15vw] sm:h-[15vw]',
+              'md:w-[15vw] md:h-[15vw]',
+              'lg:w-[15vw] lg:h-[15vw]',
+              'xl:w-[15vw] xl:h-[15vw]',
+              '2xl:w-56 2xl:h-56',
+              'transform sm:translate-y-1/7 sm:translate-x-1/7',
+              'md:translate-y-1/7 md:translate-x-1/7',
+              'lg:translate-y-1/7 lg:translate-x-1/7',
+              'xl:translate-y-1/7 xl:translate-x-1/7',
+              '2xl:translate-y-8 2xl:translate-x-8'
+            )}
           >
             <Image
               layout="fill"

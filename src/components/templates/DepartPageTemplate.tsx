@@ -1,5 +1,6 @@
 // External components
 import { useEffect, useState } from 'react'
+import clsx from 'clsx'
 
 // Custom components
 import Header from '../../components/organisms/Header'
@@ -25,7 +26,10 @@ const Button = (props: { children: ReactNode; href?: string; id?: string }) => (
     rel="noreferrer"
     target="_blank"
     href={props.href}
-    className="rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center"
+    className={clsx(
+      'rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center border-b-4 border-gray-400',
+      'active:transform active:translate-y-[2px] active:border-none'
+    )}
   >
     <span className="text-white text-sm font-medium ">{props.children}</span>
   </a>
@@ -100,8 +104,8 @@ export default function DepartPageTemplate({
             <AppealCardBoard />
           </section>
 
-          <section className="flex flex-col items-center mb-16 max-h-[90vh]">
-            <div className="w-full bg-prime-blue-rich flex flex-col items-center py-6 ">
+          <section className="flex flex-col items-center mb-16 ">
+            <div className="w-full bg-prime-blue-rich flex flex-col items-center py-6">
               <p className="text-white sm:text-xs ov-md:text-md sm:my-2 ov-md:my-4 breakAll">
                 紹介動画を視聴して雰囲気をみてみませんか？
               </p>
