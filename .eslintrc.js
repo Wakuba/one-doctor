@@ -2,7 +2,7 @@
 module.exports = {
   ignorePatterns: ['!.eslintrc.js', '!.prettierrc.js'],
   extends: [
-    'eslint:all',
+    'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -32,6 +32,8 @@ module.exports = {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/explicit-module-boundary-types':'off'
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'sort-imports': 'off',
+    'sort-keys': 'off',
   },
 }
