@@ -1,5 +1,5 @@
 // External components
-import { memo, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // Custom components
 import Header from '../../components/organisms/Header'
@@ -21,19 +21,15 @@ import { ReactNode } from 'react'
 import { storage } from '../../lib/firebase/firebase.config'
 
 const Button = (props: { children: ReactNode; href?: string; id?: string }) => (
-    <a
-      rel="noreferrer"
-      target="_blank"
-      href={props.href}
-      className="rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center"
-    >
-      <span className="text-white text-sm font-medium ">{props.children}</span>
-    </a>
-  ),
-  // eslint-disable-next-line react/display-name
-  TwitterTimelineMemo = memo(({ href }: { href: string }) => (
-    <TwitterTimeline href={href} />
-  ))
+  <a
+    rel="noreferrer"
+    target="_blank"
+    href={props.href}
+    className="rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center"
+  >
+    <span className="text-white text-sm font-medium ">{props.children}</span>
+  </a>
+)
 
 interface DepartmentPagePropsType {
   postData: any
@@ -128,9 +124,7 @@ export default function DepartPageTemplate({
                   <div className="border-l-8 inline-block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium">
                     関連SNS
                   </div>
-                  <TwitterTimelineMemo
-                    href={tabMenu.snsTab.twitterTimelineUrl}
-                  />
+                  <TwitterTimeline href={tabMenu.snsTab.twitterTimelineUrl} />
                 </div>
               </div>
             </TabMenu>
