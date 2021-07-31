@@ -49,7 +49,7 @@ export default function DepTopSection({
         onClick={() => setIsTextModalOpen(true)}
         className="w-full bg-white shadow-md flex sm:flex-col ov-md:flex-row "
       >
-        <div className="ov-md:p-8 sm:w-full md:w-[358px] lg:w-[504px] xl:w-[1075px] 2xl:w-[681px] ov-md:h-96">
+        <div className="ov-md:p-8 sm:w-full md:w-[358px] lg:w-[504px] xl:w-[537.5px] 2xl:w-[681px] ov-md:h-96">
           <div className="sm:p-3 sm:h-72  overflow-y-hidden relative">
             <div className="space-y-4 ov-md:h-72 ">
               <div className="text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base">
