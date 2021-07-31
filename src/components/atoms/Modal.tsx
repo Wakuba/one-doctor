@@ -31,7 +31,7 @@ export const ModalMainArea = ({
   return (
     <div
       onClick={closeModal}
-      className={`${modalWrapperStyle} bg-gray-100 rounded-xl backdrop-filter backdrop-blur bg-opacity-70 fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 overflow-y-scroll shadow-xl `}
+      className={`${modalWrapperStyle} bg-gray-100 rounded-xl backdrop-filter backdrop-blur bg-opacity-70 fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 overflow-y-scroll shadow-xl backdrop-blur-none backdrop-filter-none `}
     >
       <div className={`${modalContainerStyle} ov-md:p-8 sm:p-6`}>
         {children}
