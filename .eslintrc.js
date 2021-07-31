@@ -1,14 +1,15 @@
+/* eslint-disable prettier/prettier */
 module.exports = {
   ignorePatterns: ['!.eslintrc.js', '!.prettierrc.js'],
   extends: [
-    'eslint:recommended',
+    'eslint:all',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:prettier/recommended',
     'prettier',
   ],
-  plugins: ['@typescript-eslint', 'react'],
+  plugins: ['@typescript-eslint', 'react', 'prettier', 'sort-keys-fix'],
   parser: '@typescript-eslint/parser',
   env: {
     browser: true,
