@@ -61,7 +61,7 @@ export default function MovieCarousel() {
         )
       })}
       <Slider
-        className='w-9/12 slick-slider-tw max-h-[50vh]'
+        className='w-9/12 slick-slider-tw max-h-[70vh]'
         dotsClass='slick-dots-tw'
         {...settings}
         arrows={true}
@@ -76,9 +76,7 @@ export default function MovieCarousel() {
             <Image
               key={idx}
               loading='lazy'
-              width='1008'
-              height='716'
-              layout='responsive'
+              layout='fill'
               objectFit='cover'
               onClick={openModalCloser}
               alt='eyecatch image'
