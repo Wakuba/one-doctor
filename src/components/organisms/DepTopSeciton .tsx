@@ -48,21 +48,21 @@ export default function DepTopSection({
     <>
       <div
         onClick={() => setIsTextModalOpen(true)}
-        className="w-full bg-white shadow-md flex sm:flex-col ov-md:flex-row "
+        className='w-full bg-white shadow-md flex sm:flex-col ov-md:flex-row '
       >
-        <div className="ov-md:p-8 sm:w-full md:w-[358px] lg:w-[504px] xl:w-[537.5px] 2xl:w-[681px] ov-md:h-96">
+        <div className='ov-md:p-8 sm:w-full md:w-[358px] lg:w-[504px] xl:w-[537.5px] 2xl:w-[681px] ov-md:h-96'>
           <div className={clsx('sm:p-3 sm:h-72', 'overflow-y-hidden relative')}>
-            <div className="space-y-4 ov-md:h-72 ">
-              <div className="text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base">
+            <div className='space-y-4 ov-md:h-72 '>
+              <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
                 筑波大学附属病院{'　'}
                 {depName}イチオシポイント
               </div>
               <PushPoints />
             </div>
-            <div className="absolute w-full left-0 bottom-0 shadow-for-readmore h-16"></div>
+            <div className='absolute w-full left-0 bottom-0 shadow-for-readmore h-16'></div>
           </div>
           <ThreePointLeader />
-          <button className="w-full h-8 text-xs bg-white focus:outline-none ">
+          <button className='w-full h-8 text-xs bg-white focus:outline-none '>
             もっと読む
           </button>
         </div>
@@ -80,14 +80,14 @@ export default function DepTopSection({
               'ov-md:shadow-for-wide-ichioshi-img ov-md:h-full ov-md:w-24'
             )}
           ></div>
-          <div className="relative sm:h-64 ov-md:h-96 z-10 border-white">
+          <div className='relative sm:h-64 ov-md:h-96 z-10 border-white'>
             {heroImg ? (
               <Image
-                layout="fill"
-                objectFit="cover"
-                loading="eager"
+                layout='fill'
+                objectFit='cover'
+                loading='eager'
                 src={heroImg}
-                alt="hero image of the department"
+                alt='hero image of the department'
               />
             ) : (
               <div>now loading</div>
@@ -99,10 +99,10 @@ export default function DepTopSection({
         <>
           <ModalMainArea
             closeModal={() => setIsTextModalOpen(false)}
-            modalWrapperStyle="sm:w-9/12 ov-md:w-[70vw] h-5/6"
-            modalContainerStyle="w-full space-y-4"
+            modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
+            modalContainerStyle='w-full space-y-4'
           >
-            <div className="text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base">
+            <div className='text-prime-blue-rich border-prime-blue-rich font-semibold border-b-2 text-base'>
               筑波大学附属病院{'　'}循環器内科イチオシポイント
             </div>
             <PushPoints />

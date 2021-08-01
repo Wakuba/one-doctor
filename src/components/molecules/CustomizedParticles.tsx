@@ -18,7 +18,7 @@ export default function CustomizedParticles({
     <div className={`rounded-full ${layoutStyle}`}>
       <Particles
         className={`w-full h-full`}
-        id="tsparticles"
+        id='tsparticles'
         init={particlesInit}
         loaded={particlesLoaded}
         options={{

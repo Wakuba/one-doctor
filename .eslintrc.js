@@ -9,7 +9,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'prettier',
   ],
-  plugins: ['@typescript-eslint', 'react', 'prettier', 'sort-keys-fix'],
+  plugins: ['@typescript-eslint', 'react', 'prettier'],
   parser: '@typescript-eslint/parser',
   env: {
     browser: true,
@@ -33,7 +33,5 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'sort-imports': 'off',
-    'sort-keys': 'off',
   },
 }

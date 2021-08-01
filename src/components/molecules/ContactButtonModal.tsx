@@ -1,8 +1,9 @@
+import clsx from 'clsx'
 import { ReactNode, useState } from 'react'
 
 const Backdrop = ({ onCancel }: { onCancel: () => void }) => (
     <div
-      className="w-full h-screen fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur z-20"
+      className='w-full h-screen fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur z-20'
       onClick={onCancel}
     />
   ),
@@ -40,40 +41,54 @@ export default function ContactButtonModal() {
     <>
       <div
         onClick={changeModalHandler}
-        className="fixed right-4 bottom-4 bg-contact-button bg-contain bg-no-repeat ov-md:h-32 ov-md:w-32  sm:w-20 sm:h-20 flex justify-center items-center text-white z-50"
+        className={clsx(
+          'fixed right-4 bottom-4 text-white z-50 ',
+          'bg-contact-button bg-contain bg-no-repeat',
+          'flex justify-center items-center',
+          'ov-md:h-32 ov-md:w-32',
+          'sm:w-20 sm:h-20'
+        )}
       >
-        <div className="ov-md:text-3xl sm:text-sm ">contact</div>
+        <div className='ov-md:text-3xl sm:text-sm '>contact</div>
       </div>
       {modalIsOpen && (
-        <div className="fixed ov-md:right-20 sm:right-4 ov-md:bottom-4 sm:bottom-28 ov-lg:w-[33vw] ov-lg:h-[33vw] md:w-[50vw] md:h-[50vw] sm:h-96 z-40 ">
-          <div className="relative w-full h-full flex flex-col justify-evenly">
-            <div className="ov-md:absolute ov-md:bottom-0 w-full flex justify-start">
-              <Modal onCancel={closeModalHandler} layoutStyles="">
+        <div
+          className={clsx(
+            'fixed z-40',
+            'sm:right-4 sm:bottom-28 sm:h-96',
+            'ov-md:right-20  ov-md:bottom-4',
+            'md:w-[50vw] md:h-[50vw]',
+            'ov-lg:w-[33vw] ov-lg:h-[33vw]'
+          )}
+        >
+          <div className='relative w-full h-full flex flex-col justify-evenly'>
+            <div className='ov-md:absolute ov-md:bottom-0 w-full flex justify-start'>
+              <Modal onCancel={closeModalHandler} layoutStyles=''>
                 見学申し込み
               </Modal>
             </div>
-            <div className="ov-md:absolute ov-md:bottom-0 ov-md:transform ov-md:origin-right ov-md:rotate-30 w-full flex justify-start">
+            <div className='ov-md:absolute ov-md:bottom-0 ov-md:transform ov-md:origin-right ov-md:rotate-30 w-full flex justify-start'>
               <Modal
                 onCancel={closeModalHandler}
-                layoutStyles="ov-md:transform ov-md:-rotate-30 "
+                layoutStyles='ov-md:transform ov-md:-rotate-30 '
               >
                 イベントを提案する
               </Modal>
             </div>
-            <div className="ov-md:absolute ov-md:bottom-0 ov-md:transform ov-md:origin-right ov-md:rotate-60 w-full flex justify-start">
+            <div className='ov-md:absolute ov-md:bottom-0 ov-md:transform ov-md:origin-right ov-md:rotate-60 w-full flex justify-start'>
               <Modal
                 onCancel={closeModalHandler}
-                layoutStyles="ov-md:transform ov-md:-rotate-60"
+                layoutStyles='ov-md:transform ov-md:-rotate-60'
               >
                 イベント
                 <br />
                 ページを見る
               </Modal>
             </div>
-            <div className="ov-md:absolute ov-md:bottom-0 ov-md:transform ov-md:origin-right ov-md:rotate-90 w-full flex justify-start">
+            <div className='ov-md:absolute ov-md:bottom-0 ov-md:transform ov-md:origin-right ov-md:rotate-90 w-full flex justify-start'>
               <Modal
                 onCancel={closeModalHandler}
-                layoutStyles="ov-md:transform ov-md:-rotate-90"
+                layoutStyles='ov-md:transform ov-md:-rotate-90'
               >
                 診療科
                 <br />

@@ -23,7 +23,7 @@ type NewsLineProps = {
 
 export default function NewsLine({ title, children }: NewsLineProps) {
   return (
-    <div className="grid grid-rows-1 sm:grid-cols-3 ov-md:grid-cols-5">
+    <div className='grid grid-rows-1 sm:grid-cols-3 ov-md:grid-cols-5'>
       <div>
         <div
           className={clsx(
@@ -35,7 +35,7 @@ export default function NewsLine({ title, children }: NewsLineProps) {
           {title}
         </div>
       </div>
-      <div className="sm:col-span-2 ov-md:col-span-4 text-xs leading-5 breakAll">
+      <div className='sm:col-span-2 ov-md:col-span-4 text-xs leading-5 breakAll'>
         {' '}
         {children}{' '}
       </div>

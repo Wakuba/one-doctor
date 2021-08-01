@@ -46,8 +46,8 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
             'sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl'
           )}
         >
-          <CustomizedParticles layoutStyle="absolute top-0 left-0 w-full sm:h-[900px]  ov-md:h-[1500px] -z-10" />
-          <div className="flex sm:flex-col-reverse ov-md:flex-row sm:items-center ml-[10vw] mr-[5vw] ">
+          <CustomizedParticles layoutStyle='absolute top-0 left-0 w-full sm:h-[900px]  ov-md:h-[1500px] -z-10' />
+          <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ml-[10vw] mr-[5vw] '>
             <div
               className={clsx(
                 'text-white flex items-center text-shadow',
@@ -71,20 +71,20 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
               <br />
               白の手書き
             </h1>
-            <div className="relative ov-md:w-[45vw] ov-md:h-[45vw] sm:w-[70vw] sm:h-[70vw]">
+            <div className='relative ov-md:w-[45vw] ov-md:h-[45vw] sm:w-[70vw] sm:h-[70vw]'>
               <Image
-                className="rounded-full ov-md:w-[45vw] ov-md:h-[45vw] sm:w-[70vw] sm:h-[70vw]"
-                layout="fill"
-                objectFit="cover"
-                src="/images/hero-image.jpeg"
+                className='rounded-full ov-md:w-[45vw] ov-md:h-[45vw] sm:w-[70vw] sm:h-[70vw]'
+                layout='fill'
+                objectFit='cover'
+                src='/images/hero-image.jpeg'
               />
             </div>
           </div>
 
-          <div className="sm:hidden w-full flex justify-center ">
-            <div className="relative mt-10 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]">
+          <div className='sm:hidden w-full flex justify-center '>
+            <div className='relative mt-10 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
               <ScrollArrow />
-              <NewsBoard layoutStyles="text-white" content={newsBoardData} />
+              <NewsBoard layoutStyles='text-white' content={newsBoardData} />
             </div>
           </div>
 
@@ -104,68 +104,68 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
             )}
           >
             <Image
-              layout="fill"
-              loading="eager"
-              objectFit="cover"
-              src="/svg/slideCircle-mutedBlue.svg"
+              layout='fill'
+              loading='eager'
+              objectFit='cover'
+              src='/svg/slideCircle-mutedBlue.svg'
             />
           </div>
         </section>
 
         <section
-          className="
+          className='
         w-full rounded-br-bg-corner rounded-tl-bg-corner relative bg-prime-blue-muted flex flex-col items-center py-24
         sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
-        sm:rounded-tl-bg-corner md:rounded-tl-bg-corner lg:rounded-tl-bg-corner xl:rounded-tl-bg-corner 2xl:rounded-tl-bg-corner-2xl"
+        sm:rounded-tl-bg-corner md:rounded-tl-bg-corner lg:rounded-tl-bg-corner xl:rounded-tl-bg-corner 2xl:rounded-tl-bg-corner-2xl'
         >
           <RichBlueBRSquare />
-          <div className="sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]">
-            <div className="text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold">
+          <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
+            <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold'>
               新着動画
             </div>
-            <div className="text-sm">
+            <div className='text-sm'>
               各診療科のやりがいやリアルな現場を動画で見ることができます
             </div>
-            <div className="sm:w-full overflow-x-scroll overflow-y-hidden">
-              <div className="w-[1920px] flex flex-row">
+            <div className='sm:w-full overflow-x-scroll overflow-y-hidden'>
+              <div className='w-[1920px] flex flex-row'>
                 <Movie
-                  videoId="https://www.youtube.com/embed/8jjswrh3agE"
-                  src="/images/professor.png"
-                  title="YouTube video player"
+                  videoId='https://www.youtube.com/embed/8jjswrh3agE'
+                  src='/images/professor.png'
+                  title='YouTube video player'
                 />
                 <Movie
-                  videoId="https://www.youtube.com/embed/8jjswrh3agE"
-                  src="/images/professor.png"
-                  title="YouTube video player"
+                  videoId='https://www.youtube.com/embed/8jjswrh3agE'
+                  src='/images/professor.png'
+                  title='YouTube video player'
                 />
                 <Movie
-                  videoId="https://www.youtube.com/embed/8jjswrh3agE"
-                  src="/images/professor.png"
-                  title="YouTube video player"
+                  videoId='https://www.youtube.com/embed/8jjswrh3agE'
+                  src='/images/professor.png'
+                  title='YouTube video player'
                 />
                 <Movie
-                  videoId="https://www.youtube.com/embed/8jjswrh3agE"
-                  src="/images/professor.png"
-                  title="YouTube video player"
+                  videoId='https://www.youtube.com/embed/8jjswrh3agE'
+                  src='/images/professor.png'
+                  title='YouTube video player'
                 />
                 <Movie
-                  videoId="https://www.youtube.com/embed/8jjswrh3agE"
-                  src="/images/professor.png"
-                  title="YouTube video player"
+                  videoId='https://www.youtube.com/embed/8jjswrh3agE'
+                  src='/images/professor.png'
+                  title='YouTube video player'
                 />
                 <Movie
-                  videoId="https://www.youtube.com/embed/8jjswrh3agE"
-                  src="/images/professor.png"
-                  title="YouTube video player"
+                  videoId='https://www.youtube.com/embed/8jjswrh3agE'
+                  src='/images/professor.png'
+                  title='YouTube video player'
                 />
               </div>
             </div>
           </div>
 
-          <div className="ov-md:hidden w-full flex justify-center ">
-            <div className="mt-10 w-11/12">
+          <div className='ov-md:hidden w-full flex justify-center '>
+            <div className='mt-10 w-11/12'>
               <NewsBoard
-                layoutStyles="text-prime-blue-rich"
+                layoutStyles='text-prime-blue-rich'
                 content={newsBoardData}
               />
             </div>
@@ -173,17 +173,17 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
         </section>
 
         <section
-          className="relative w-full flex flex-col items-center py-24 bg-prime-blue-rich
+          className='relative w-full flex flex-col items-center py-24 bg-prime-blue-rich
          sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
          sm:rounded-tl-bg-corner md:rounded-tl-bg-corner lg:rounded-tl-bg-corner xl:rounded-tl-bg-corner 2xl:rounded-tl-bg-corner-2xl
-        "
+        '
         >
           <MutedBlueTLSquare />
-          <div className="sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] flex flex-col items-center">
-            <div className="text-white sm:text-2xl ov-md:text-4xl font-semibold w-full flex justify-self-start mb-2">
+          <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] flex flex-col items-center'>
+            <div className='text-white sm:text-2xl ov-md:text-4xl font-semibold w-full flex justify-self-start mb-2'>
               診療科一覧
             </div>
-            <div className="sm:text-sm ov-md:text-lg mb-4 w-full flex justify-self-start">
+            <div className='sm:text-sm ov-md:text-lg mb-4 w-full flex justify-self-start'>
               各診療科にコンタクトを取ったり、イベント情報をチェックすることができます
             </div>
             <DepartBoard depList={depList} />
@@ -192,30 +192,30 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
         </section>
 
         <section
-          className="relative w-full rounded-tl-bg-corner bg-prime-blue-muted py-24 flex flex-col items-center
+          className='relative w-full rounded-tl-bg-corner bg-prime-blue-muted py-24 flex flex-col items-center
          sm:rounded-tl-bg-corner md:rounded-tl-bg-corner lg:rounded-tl-bg-corner xl:rounded-tl-bg-corner 2xl:rounded-tl-bg-corner-2xl
          sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
-        "
+        '
         >
           <RichBlueTLSquare />
-          <div className="bg-transparent flex flex-col items-center sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]">
-            <div className="w-full sm:mb-4 ov-md:mb-8">
-              <div className="text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold">
+          <div className='bg-transparent flex flex-col items-center sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
+            <div className='w-full sm:mb-4 ov-md:mb-8'>
+              <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold'>
                 筑波大学附属病院について
               </div>
             </div>
             <iframe
-              className="w-full mb-10 h-[50vw]"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d279785.1765704249!2d140.17047807758485!3d35.991258388550875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2z562R5rOi5aSn5a2m!5e0!3m2!1sja!2sjp!4v1626441216082!5m2!1sja!2sjp"
-              width="600"
-              height="450"
-              loading="lazy"
+              className='w-full mb-10 h-[50vw]'
+              src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d279785.1765704249!2d140.17047807758485!3d35.991258388550875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2z562R5rOi5aSn5a2m!5e0!3m2!1sja!2sjp!4v1626441216082!5m2!1sja!2sjp'
+              width='600'
+              height='450'
+              loading='lazy'
             ></iframe>
-            <div className="rounded text-white shadow-md bg-prime-blue-rich w-44 h-11 flex justify-center items-center">
+            <div className='rounded text-white shadow-md bg-prime-blue-rich w-44 h-11 flex justify-center items-center'>
               <a
-                rel="noreferrer"
-                target="_blank"
-                href="http://www.hosp.tsukuba.ac.jp/"
+                rel='noreferrer'
+                target='_blank'
+                href='http://www.hosp.tsukuba.ac.jp/'
               >
                 病院公式ページ
               </a>
@@ -289,15 +289,15 @@ function Movie({
       {modalActive && (
         <>
           <ModalMainArea
-            modalWrapperStyle="w-10/12 h-5/6"
-            modalContainerStyle="h-full w-full flex flex-col justify-center"
+            modalWrapperStyle='w-10/12 h-5/6'
+            modalContainerStyle='h-full w-full flex flex-col justify-center'
             closeModal={() => setModalActive(false)}
           >
             <YouTube
               videoId={videoId}
               opts={opts}
-              containerClassName="ov-md:h-full sm:h-[70vw] w-full flex flex-col items-center justify-center"
-              className="h-5/6 w-10/12"
+              containerClassName='ov-md:h-full sm:h-[70vw] w-full flex flex-col items-center justify-center'
+              className='h-5/6 w-10/12'
             />
           </ModalMainArea>
           <ModalBackdrop closeModal={() => setModalActive(false)} />
@@ -305,12 +305,12 @@ function Movie({
       )}
       <div
         onClick={() => setModalActive(true)}
-        className="relative shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2"
+        className='relative shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2'
       >
         <Image
-          layout="fill"
-          objectFit="contain"
-          loading="lazy"
+          layout='fill'
+          objectFit='contain'
+          loading='lazy'
           src={src}
           alt={title}
         />
@@ -321,7 +321,7 @@ function Movie({
 
 function ScrollArrow() {
   return (
-    <div className="text-white text-xs absolute border-solid border-white border-b-2 w-44 transform rotate-90 ov-md:left-[-98px] ov-md:top-[-80px]">
+    <div className='text-white text-xs absolute border-solid border-white border-b-2 w-44 transform rotate-90 ov-md:left-[-98px] ov-md:top-[-80px]'>
       scroll
     </div>
   )

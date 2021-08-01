@@ -24,7 +24,7 @@ export default function Tabs({ children }: TabsProps) {
         buttons.push(child.props.label)
         if (child.props.label === activeTab) content = child.props.children
       })}
-      <div className="w-full rounded-sm border-t-4 border-solid shadow-md flex-col border-prime-blue-rich ">
+      <div className='w-full rounded-sm border-t-4 border-solid shadow-md flex-col border-prime-blue-rich '>
         {content}
       </div>
     </>

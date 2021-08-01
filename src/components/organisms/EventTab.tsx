@@ -9,15 +9,15 @@ export default function EventTab() {
   if (error) return <div>failed to load</div>
   if (!data)
     return (
-      <div className="w-full ov-md:p-8 sm:p-4 bg-white text-xl text-gray-500">
+      <div className='w-full ov-md:p-8 sm:p-4 bg-white text-xl text-gray-500'>
         loading...
       </div>
     )
 
   return (
-    <div className="w-full ov-md:p-8 sm:p-4 bg-white">
-      <div className="space-y-8">
-        <div className="border-l-8 inline-block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium">
+    <div className='w-full ov-md:p-8 sm:p-4 bg-white'>
+      <div className='space-y-8'>
+        <div className='border-l-8 inline-block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
           イベント一覧
         </div>
         {data.map((event: SpreadSheetDataType, idx: number) => (

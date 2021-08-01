@@ -45,14 +45,14 @@ export default function MovieCarousel() {
             <div key={idx}>
               <ModalMainArea
                 closeModal={closeModal}
-                modalWrapperStyle="w-10/12 h-5/6"
-                modalContainerStyle="h-full w-full flex flex-col justify-center"
+                modalWrapperStyle='w-10/12 h-5/6'
+                modalContainerStyle='h-full w-full flex flex-col justify-center'
               >
                 <YouTube
                   videoId={data.videoId}
                   opts={opts}
-                  containerClassName="ov-md:h-full sm:h-[70vw] w-full flex flex-col items-center justify-center"
-                  className="h-5/6 w-10/12"
+                  containerClassName='ov-md:h-full sm:h-[70vw] w-full flex flex-col items-center justify-center'
+                  className='h-5/6 w-10/12'
                 />
               </ModalMainArea>
               <ModalBackdrop closeModal={closeModal} />
@@ -61,8 +61,8 @@ export default function MovieCarousel() {
         )
       })}
       <Slider
-        className="w-9/12 slick-slider-tw"
-        dotsClass="slick-dots-tw"
+        className='w-9/12 slick-slider-tw max-h-[50vh]'
+        dotsClass='slick-dots-tw'
         {...settings}
         arrows={true}
         dots={true}
@@ -75,13 +75,13 @@ export default function MovieCarousel() {
           return (
             <Image
               key={idx}
-              loading="lazy"
-              width="1008"
-              height="716"
-              layout="responsive"
-              objectFit="cover"
+              loading='lazy'
+              width='1008'
+              height='716'
+              layout='responsive'
+              objectFit='cover'
               onClick={openModalCloser}
-              alt="eyecatch image"
+              alt='eyecatch image'
               src={data.eyecatchImg}
             />
           )

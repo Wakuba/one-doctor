@@ -10,13 +10,13 @@ export default function TwitterTimeline({ href }: { href: string }) {
     }
   }, [])
   return (
-    <div className="border-8 border-prime-blue-rich ov-md:w-8/12 sm:w-full">
+    <div className='border-8 border-prime-blue-rich ov-md:w-8/12 sm:w-full'>
       <a
-        className="twitter-timeline"
-        data-width="100%"
-        data-height="800"
-        data-theme="light"
-        data-chrome="noheadernofooternoborders"
+        className='twitter-timeline'
+        data-width='100%'
+        data-height='800'
+        data-theme='light'
+        data-chrome='noheadernofooternoborders'
         href={href}
       >
         A Twitter List by Nr_Narumium
