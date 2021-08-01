@@ -17,6 +17,7 @@ import {
 } from '../components/atoms/StyledComponents'
 import { ModalBackdrop, ModalMainArea } from '../components/atoms/Modal'
 import CustomizedParticles from '../components/molecules/CustomizedParticles'
+import PlaneButton from '../components/atoms/PlaneButton'
 
 // Firebase
 import { db } from '../lib/firebase/firebase.config'
@@ -212,13 +213,9 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
               loading='lazy'
             ></iframe>
             <div className='rounded text-white shadow-md bg-prime-blue-rich w-44 h-11 flex justify-center items-center'>
-              <a
-                rel='noreferrer'
-                target='_blank'
-                href='http://www.hosp.tsukuba.ac.jp/'
-              >
+              <PlaneButton href='http://www.hosp.tsukuba.ac.jp/'>
                 病院公式ページ
-              </a>
+              </PlaneButton>
             </div>
           </div>
         </section>

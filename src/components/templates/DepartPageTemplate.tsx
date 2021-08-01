@@ -1,8 +1,8 @@
 // External components
 import { useEffect, useState } from 'react'
-import clsx from 'clsx'
 
 // Custom components
+import PlaneButton from '../atoms/PlaneButton'
 import Header from '../../components/organisms/Header'
 import Footer from '../../components/organisms/Footer'
 import TabMenu from '../../components/organisms/TabMenu'
@@ -15,25 +15,8 @@ import EventTab from '../../components/organisms/EventTab'
 import CrewBoard from '../../components/organisms/CrewBoard'
 import TwitterTimeline from '../../components/molecules/TwitterTimeline'
 
-// Types
-import { ReactNode } from 'react'
-
 // Firebase
 import { storage } from '../../lib/firebase/firebase.config'
-
-const Button = (props: { children: ReactNode; href?: string; id?: string }) => (
-  <a
-    rel='noreferrer'
-    target='_blank'
-    href={props.href}
-    className={clsx(
-      'rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center border-b-4 border-[#5493AA]',
-      'active:transform active:translate-y-[2px] active:border-none'
-    )}
-  >
-    <span className='text-white text-sm font-medium '>{props.children}</span>
-  </a>
-)
 
 interface DepartmentPagePropsType {
   postData: any
@@ -124,7 +107,9 @@ export default function DepartPageTemplate({
                   <div className='border-l-8 inline-block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
                     公式サイト
                   </div>
-                  <Button href={officialWebSite}>診療科公式ページ→</Button>
+                  <PlaneButton href={officialWebSite}>
+                    診療科公式ページ→
+                  </PlaneButton>
                   <div className='border-l-8 inline-block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
                     関連SNS
                   </div>
@@ -141,20 +126,22 @@ export default function DepartPageTemplate({
                   イベントや見学を通じて診療科について理解を深めましょう
                 </div>
                 <div className='flex sm:flex-col sm:items-center sm:space-y-4 ov-md:flex-row ov-md:space-x-4'>
-                  <Button id='visit'>見学申し込みをする→</Button>
-                  <Button
+                  <PlaneButton id='visit'>見学申し込みをする→</PlaneButton>
+                  <PlaneButton
                     id='propose'
                     href='https://docs.google.com/forms/d/1a5N5t44UJw2jDOHKGyx3v0sOqp9aRWYOh5YSb1cyKCI/edit'
                   >
                     イベントの提案をする→
-                  </Button>
+                  </PlaneButton>
                 </div>
               </div>
               <div className='flex flex-col items-center space-y-4'>
                 <div className='text-sm'>
                   詳しい情報については診療科のホームページをご覧ください
                 </div>
-                <Button href={officialWebSite}>診療科公式ページ→</Button>
+                <PlaneButton href={officialWebSite}>
+                  診療科公式ページ→
+                </PlaneButton>
               </div>
             </div>
           </section>
