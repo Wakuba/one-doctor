@@ -27,7 +27,7 @@ const Button = (props: { children: ReactNode; href?: string; id?: string }) => (
     target='_blank'
     href={props.href}
     className={clsx(
-      'rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center border-b-4 border-gray-400',
+      'rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center border-b-4 border-[#5493AA]',
       'active:transform active:translate-y-[2px] active:border-none'
     )}
   >
