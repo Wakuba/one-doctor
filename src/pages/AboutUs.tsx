@@ -2,6 +2,7 @@ import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import Image from 'next/image'
 import { RichBlueTLSquare } from '../components/atoms/StyledComponents'
+import PlaneButton from '../components/atoms/PlaneButton'
 
 export default function AboutUs() {
   return (
@@ -52,9 +53,7 @@ export default function AboutUs() {
               このサイトの運営は〜〜〜〜によって構成された＝＝＝がしております。
             </p>
             <div className='flex sm:justify-center ov-md:justify-start'>
-              <button className='rounded shadow-md text-white bg-prime-blue-rich w-64 h-14'>
-                メドキャリHP
-              </button>
+              <PlaneButton>メドキャリHP</PlaneButton>
             </div>
           </div>
         </section>
