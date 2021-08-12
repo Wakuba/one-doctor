@@ -2,6 +2,7 @@ import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import { firebaseFunction } from '../lib/firebase/firebase.config'
 import { SyntheticEvent } from 'react'
+import clsx from 'clsx'
 
 export default function Inqueries() {
   return (
@@ -60,7 +61,10 @@ export default function Inqueries() {
             <div className='flex justify-center pb-10'>
               <button
                 type='submit'
-                className='rounded text-white h-11 w-48 bg-prime-blue-rich'
+                className={clsx(
+                  'rounded text-white h-11 w-48 bg-prime-blue-rich border-b-4 border-[#5493AA]',
+                  'active:transfom active:translate-y-[2px] active:border-none'
+                )}
               >
                 送信する
               </button>
