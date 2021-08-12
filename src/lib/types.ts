@@ -13,50 +13,51 @@ export interface NewsLineType {
 }
 
 interface departmentNameType {
-  departmentNameInEnglish: string | null
-  departmentNameInJapanese: string | null
+  departmentNameInEnglish: string
+  departmentNameInJapanese: string
 }
 
 interface universityNameType {
-  universityNameInEnglish: string | null
-  universityNameInJapanese: string | null
+  universityNameInEnglish: string
+  universityNameInJapanese: string
 }
 
 interface hospitalNameType {
-  hospitalNameInEnglish: string | null
-  hospitalNameInJapanese: string | null
+  hospitalNameInEnglish: string
+  hospitalNameInJapanese: string
 }
 
 interface topSectionType {
-  educationalPoint: string | null
-  clinicalPoint: string | null
-  researchPoint: string | null
-  otherPoint: string | null
+  educationalPoint: string
+  clinicalPoint: string
+  researchPoint: string
+  otherPoint: string
 }
 
 interface crewCardListTabType {
-  crewImgFileName: string | null
-  crewName: string | null
-  position: string | null
-  background: string | null
-  licence: string | null
-  majorField: string | null
-  schoolLife: string | null
-  forFun: string | null
+  crewImgFileName: string
+  crewName: string
+  position: string
+  background: string
+  licence: string
+  majorField: string
+  schoolLife: string
+  forFun: string
 }
 
 interface tabMenuType {
-  basicInfoTab: string | null
-  geographicalInformationTab: string | null
-  crewCardListTab: crewCardListTabType | null
+  basicInfoTab: string
+  geographicalInformationTab: string
+  snsTab: string
+  crewCardListTab: crewCardListTabType[]
 }
 
 export interface depPostDataType {
-  key: string
-  officialWebSite: string | null
-  departmentName: departmentNameType | null
-  universityName: universityNameType | null
-  hospitalName: hospitalNameType | null
-  topSection: topSectionType | null
-  tabMenu: tabMenuType | null
+  heroImgFileName: string
+  officialWebSite: string
+  departmentName: departmentNameType
+  universityName: universityNameType
+  hospitalName: hospitalNameType
+  topSection: topSectionType
+  tabMenu: tabMenuType
 }

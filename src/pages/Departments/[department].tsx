@@ -1,5 +1,6 @@
 import { db } from '../../lib/firebase/firebase.config'
 import DepartPageTemplate from '../../components/templates/DepartPageTemplate'
+import { depPostDataType } from '../../lib/types'
 
 export default function DepartmentPage({ postData }: { postData: any }) {
   return <DepartPageTemplate postData={postData} />
@@ -24,42 +25,69 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }: { params: any }) => {
   // PostData全体の取得
-  let postData: any = {}
+  const postData: depPostDataType = {
+    heroImgFileName: '',
+    officialWebSite: '',
+    departmentName: {
+      departmentNameInEnglish: '',
+      departmentNameInJapanese: '',
+    },
+    universityName: {
+      universityNameInEnglish: '',
+      universityNameInJapanese: '',
+    },
+    hospitalName: {
+      hospitalNameInEnglish: '',
+      hospitalNameInJapanese: '',
+    },
+    topSection: {
+      educationalPoint: '',
+      researchPoint: '',
+      clinicalPoint: '',
+      otherPoint: '',
+    },
+    tabMenu: {
+      basicInfoTab: '',
+      geographicalInformationTab: '',
+      snsTab: '',
+      crewCardListTab: [],
+    },
+  }
+
   const snapshot = await db
       .collection('fl_content')
       .where('_fl_meta_.schema', '==', 'departmentPage')
       .where('departmentName.departmentNameInEnglish', '==', params.department)
       .get(),
     flFileIdsForCrewImg: string[] = []
-  let flFileHeroImgId = ''
+  const flFileHeroImgId = ''
   snapshot.docs.forEach((doc) => {
-    flFileHeroImgId = doc.data().heroImageOfTheDepartment[0].id
-    postData = {
-      departmentName: doc.data().departmentName,
-      universityName: doc.data().universityName,
-      hospitalName: doc.data().hospitalName,
-      tabMenu: {
-        basicInfoTab: doc.data().tabMenu.basicInfoTab,
-        snsTab: doc.data().tabMenu.snsTab,
-        geographicalInformationTab:
-          doc.data().tabMenu.geographicalInformationTab,
-        crewCardListTab: [
-          ...doc.data().tabMenu.crewCardListTab.map((crewCard: any) => {
-            flFileIdsForCrewImg.push(crewCard.crewImage[0].id)
-            return {
-              crewName: crewCard.crewName,
-              position: crewCard.position,
-              licence: crewCard.licence,
-              majorFiled: crewCard.majorField,
-              schoolLife: crewCard.schoolLife,
-              uniqueKey: crewCard.uniqueKey,
-            }
-          }),
-        ],
-      },
-      topSection: doc.data().topSection,
-      officialWebSite: doc.data().officialWebSite,
+    postData.departmentName = doc.data().departmentName
+    postData.universityName = doc.data().universityName
+    postData.hospitalName = doc.data().hospitalName
+    postData.tabMenu = {
+      basicInfoTab: doc.data().tabMenu.basicInfoTab,
+      snsTab: doc.data().tabMenu.snsTab,
+      geographicalInformationTab: doc.data().tabMenu.geographicalInformationTab,
+      crewCardListTab: [
+        ...doc.data().tabMenu.crewCardListTab.map((crewCard: any) => {
+          flFileIdsForCrewImg.push(crewCard.crewImage[0].id)
+          return {
+            uniqueKey: crewCard.uniqueKey,
+            crewImgFileName: '',
+            crewName: crewCard.crewName,
+            background: crewCard.background,
+            position: crewCard.position,
+            licence: crewCard.licence,
+            majorFiled: crewCard.majorField,
+            schoolLife: crewCard.schoolLife,
+            forFun: crewCard.forFun,
+          }
+        }),
+      ],
     }
+    postData.topSection = doc.data().topSection
+    postData.officialWebSite = doc.data().officialWebSite
   })
 
   /*
@@ -68,14 +96,19 @@ export const getStaticProps = async ({ params }: { params: any }) => {
    */
   const snapshotForImg = await db.collection('fl_files').get()
   flFileIdsForCrewImg.forEach((fileId, idx) => {
-    postData.tabMenu.crewCardListTab[idx].crewImgFileName = snapshotForImg.docs
-      .find((doc) => doc.data().id == fileId)
-      ?.data().file
+    if (postData) {
+      postData.tabMenu.crewCardListTab[idx].crewImgFileName =
+        snapshotForImg.docs.find((doc) => doc.data().id == fileId)?.data()
+          .file as string
+    }
   })
-  postData.heroImgFileName = snapshotForImg.docs
-    .find((doc) => doc.data().id == flFileHeroImgId)
-    ?.data().file
 
+  const preHeroImgFileName = snapshotForImg.docs
+    .find((doc) => doc.data().id == flFileHeroImgId)
+    ?.data().file as string
+
+  postData.heroImgFileName = preHeroImgFileName ? preHeroImgFileName : ''
+  console.log(postData)
   return {
     props: {
       postData,

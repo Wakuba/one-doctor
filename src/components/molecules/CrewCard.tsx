@@ -209,7 +209,7 @@ function CardTail({
           </div>
           <div>
             <p className='font-semibold'>学生時代の部活</p>
-            <p>{schoolLife ? schoolLife : '特になし'} </p>
+            <p>{schoolLife ? schoolLife : '特になし'}</p>
           </div>
         </div>
         <div
