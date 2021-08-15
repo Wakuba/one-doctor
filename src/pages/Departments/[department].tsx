@@ -1,6 +1,10 @@
 import { db } from '../../lib/firebase/firebase.config'
 import DepartPageTemplate from '../../components/templates/DepartPageTemplate'
 import { depPostDataType } from '../../lib/types'
+import {
+  getUrlFromIframe,
+  getUrlFromTwitterTimeline,
+} from '../../lib/customFunctions'
 
 export default function DepartmentPage({ postData }: { postData: any }) {
   return <DepartPageTemplate postData={postData} />
@@ -67,8 +71,10 @@ export const getStaticProps = async ({ params }: { params: any }) => {
     postData.hospitalName = doc.data().hospitalName
     postData.tabMenu = {
       basicInfoTab: doc.data().tabMenu.basicInfoTab,
-      snsTab: doc.data().tabMenu.snsTab,
-      geographicalInformationTab: doc.data().tabMenu.geographicalInformationTab,
+      snsTab: getUrlFromTwitterTimeline(doc.data().tabMenu.snsTab),
+      geographicalInformationTab: getUrlFromIframe(
+        doc.data().tabMenu.geographicalInformationTab
+      ),
       crewCardListTab: [
         ...doc.data().tabMenu.crewCardListTab.map((crewCard: any) => {
           flFileIdsForCrewImg.push(crewCard.crewImage[0].id)

@@ -1,3 +1,5 @@
+import { RmDirOptions } from "fs";
+
 export interface SpreadSheetDataType {
   date: string
   department: string
@@ -47,8 +49,8 @@ interface crewCardListTabType {
 
 interface tabMenuType {
   basicInfoTab: string
-  geographicalInformationTab: string
-  snsTab: string
+  geographicalInformationTab: RegExpMatchArray | string
+  snsTab: RegExpMatchArray | string
   crewCardListTab: crewCardListTabType[]
 }
 
