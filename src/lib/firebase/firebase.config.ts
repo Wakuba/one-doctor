@@ -16,6 +16,8 @@ const firebaseConfig = {
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig)
 else firebase.app()
 
+console.log(firebaseConfig)
+
 export const db: firebase.firestore.Firestore = firebase.firestore()
 export const firebaseFunction: firebase.functions.Functions =
   firebase.functions()
