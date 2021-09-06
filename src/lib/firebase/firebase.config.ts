@@ -13,11 +13,8 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 }
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig)
-} else {
-  firebase.app()
-}
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig)
+else firebase.app()
 
 export const db: firebase.firestore.Firestore = firebase.firestore()
 export const firebaseFunction: firebase.functions.Functions =
