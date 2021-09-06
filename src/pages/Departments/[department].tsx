@@ -79,15 +79,15 @@ export const getStaticProps = async ({ params }: { params: any }) => {
         ...doc.data().tabMenu.crewCardListTab.map((crewCard: any) => {
           flFileIdsForCrewImg.push(crewCard.crewImage[0].id)
           return {
-            uniqueKey: crewCard.uniqueKey,
+            uniqueKey: crewCard.uniqueKey ? crewCard.uniqueKey : '',
             crewImgFileName: '',
-            crewName: crewCard.crewName,
-            background: crewCard.background,
-            position: crewCard.position,
-            licence: crewCard.licence,
-            majorFiled: crewCard.majorField,
-            schoolLife: crewCard.schoolLife,
-            forFun: crewCard.forFun,
+            crewName: crewCard.crewName ? crewCard.crewName : '',
+            background: crewCard.background ? crewCard.background : '',
+            position: crewCard.position ? crewCard.position : '',
+            licence: crewCard.licence ? crewCard.licence : '',
+            majorFiled: crewCard.majorField ? crewCard.majorField : '',
+            schoolLife: crewCard.schoolLife ? crewCard.schoolLife : '',
+            forFun: crewCard.forFun ? crewCard.forFun : '',
           }
         }),
       ],

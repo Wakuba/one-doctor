@@ -1,5 +1,3 @@
-import { RmDirOptions } from "fs";
-
 export interface SpreadSheetDataType {
   date: string
   department: string
