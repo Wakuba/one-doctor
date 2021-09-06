@@ -40,6 +40,7 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
     <>
       <Header />
       <main>
+        <div>{process.env.NEXT_PUBLIC_FIREBASE_API_KEY}</div>
         <section
           className={clsx(
             'relative pt-[10vw] pb-24',
