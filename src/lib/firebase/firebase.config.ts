@@ -4,13 +4,13 @@ import '@firebase/functions'
 import '@firebase/storage'
 
 const firebaseConfig = {
-  apiKey: process.env.BROWSER_FIREBASE_API_KEY,
-  authDomain: process.env.BROWSER_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.BROWSER_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.BROWSER_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.BROWSER_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.BROWSER_FIREBASE_APP_ID,
-  measurementId: process.env.BROWSER_FIREBASE_MEASUREMENT_ID,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 }
 
 if (!firebase.apps.length) {
