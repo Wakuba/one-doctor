@@ -23,4 +23,4 @@ export const firebaseFunction: firebase.functions.Functions =
   firebase.functions()
 export const storage: firebase.storage.Storage = firebase.storage()
 
-console.log(db)
+console.log(db.collection('fl_content').doc('rA08MOb3M5FIhV4CAFbG').get())
