@@ -24,6 +24,7 @@ import { db } from '../lib/firebase/firebase.config'
 
 // Types
 import { NewsLineType } from '../lib/types'
+import { collection, getDocs, query, where } from '@firebase/firestore'
 
 const opts = {
   height: '390',
@@ -40,7 +41,6 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
     <>
       <Header />
       <main>
-        <div>{process.env.NEXT_PUBLIC_FIREBASE_API_KEY}</div>
         <section
           className={clsx(
             'relative pt-[10vw] pb-24',
@@ -231,10 +231,11 @@ export async function getStaticProps() {
     depList: any = []
 
   try {
-    const snapshotDash = await db
-      .collection('fl_content')
-      .where('_fl_meta_.schema', '==', 'topPageNewsBoard')
-      .get()
+    const q = query(
+      collection(db, 'fl_content'),
+      where('_fl_meta_.schema', '==', 'topPageNewsBoard')
+    )
+    const snapshotDash = await getDocs(q)
     snapshotDash.docs.forEach((doc) => {
       newsBoardData.push({
         id: doc.data().id,
@@ -247,10 +248,11 @@ export async function getStaticProps() {
   }
 
   try {
-    const snapshot = await db
-      .collection('fl_content')
-      .where('_fl_meta_.schema', '==', 'departmentPage')
-      .get()
+    const qDash = query(
+      collection(db, 'fl_content'),
+      where('_fl_meta_.schema', '==', 'departmentPage')
+    )
+    const snapshot = await getDocs(qDash)
     snapshot.docs.forEach((doc) => {
       depList.push({
         departmentNameInJapanese:

@@ -17,6 +17,7 @@ import TwitterTimeline from '../../components/molecules/TwitterTimeline'
 
 // Firebase
 import { storage } from '../../lib/firebase/firebase.config'
+import { getDownloadURL, ref } from '@firebase/storage'
 
 interface DepartmentPagePropsType {
   postData: any
@@ -37,12 +38,33 @@ export default function DepartPageTemplate({
     [heroImg, setHeroImg] = useState<string>('')
 
   useEffect(() => {
-    const storageRef = storage.ref(),
-      imgPath = storageRef.child('flamelink/media').child(heroImgFileName)
-    imgPath
-      .getDownloadURL()
-      .then((url) => setHeroImg(url))
-      .catch((error) => console.log(error))
+    const f = async () => {
+      await getDownloadURL(
+        ref(storage, `flamelink/media/${heroImgFileName}`)
+      ).then((url) => {
+        setHeroImg(url)
+      })
+      // imgPath = storageRef.child('flamelink/media').child(heroImgFileName)
+      // imgPath
+      //   .getDownloadURL()
+      //   .then((url) => setHeroImg(url))
+      //   .catch((error) => console.log(error))
+
+      // const f = async () => {
+      //   const storageRef = ref(storage, `flamelink/media/${crewImgFileName}`)
+      //   const url = await getDownloadURL(storageRef)
+      //   setCrewImg(url)
+
+      // const storageRef = storage.ref(),
+      //   imgPath = storageRef.child('flamelink/media').child(crewImgFileName)
+      // imgPath
+      //   .getDownloadURL()
+      //   .then((url) => setCrewImg(url))
+      //   .catch((error) => console.log(error))
+      // }
+    }
+
+    f()
   }, [])
 
   return (

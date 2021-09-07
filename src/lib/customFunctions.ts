@@ -5,7 +5,6 @@ const getUrl = (text: string, extractor: string): RegExpMatchArray | string => {
   if (text === '') return ''
   const patternExtractor = new RegExp(extractor, 'g')
   const url = String(text).match(patternExtractor)
-  console.log(url)
   return url ? url : ''
 }
 

@@ -1,7 +1,8 @@
-import firebase from 'firebase/app'
-import '@firebase/firestore'
 import '@firebase/functions'
-import '@firebase/storage'
+
+import { initializeApp, getApps } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
+import { getStorage } from 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -11,16 +12,14 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
 }
 
-if (!firebase.apps.length) firebase.initializeApp(firebaseConfig)
-else firebase.app()
+const apps = getApps()
 
-console.log(firebaseConfig)
+// Initialize Firebase
+const firebaseApp = !apps.length ? initializeApp(firebaseConfig) : apps[0]
 
-export const db: firebase.firestore.Firestore = firebase.firestore()
-export const firebaseFunction: firebase.functions.Functions =
-  firebase.functions()
-export const storage: firebase.storage.Storage = firebase.storage()
+export const db = getFirestore(firebaseApp)
+export const storage = getStorage(firebaseApp)
 
-console.log(db.collection('fl_content').doc('rA08MOb3M5FIhV4CAFbG').get())
