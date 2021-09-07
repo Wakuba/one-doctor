@@ -64,7 +64,7 @@ export default function DepartPageTemplate({
       // }
     }
 
-    f()
+    if (heroImgFileName) f()
   }, [])
 
   return (

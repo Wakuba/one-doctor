@@ -1,6 +1,7 @@
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import { firebaseFunction } from '../lib/firebase/firebase.config'
+import { httpsCallable } from 'firebase/functions'
 import { SyntheticEvent } from 'react'
 import clsx from 'clsx'
 
@@ -89,7 +90,7 @@ function onSubmit(e: SyntheticEvent): void {
       email: target.email.value,
       name: target.name.value,
     },
-    sendMail = firebaseFunction.httpsCallable('sendMail')
+    sendMail = httpsCallable(firebaseFunction, 'sendMail')
   sendMail(data)
   target.name.value = ''
   target.email.value = ''

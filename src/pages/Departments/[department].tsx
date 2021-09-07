@@ -73,7 +73,9 @@ export const getStaticProps = async ({ params }: { params: any }) => {
     postData.departmentName = doc.data().departmentName
     postData.universityName = doc.data().universityName
     postData.hospitalName = doc.data().hospitalName
-    flFileHeroImgId = doc.data().heroImageOfTheDepartment[0].id
+    flFileHeroImgId = doc.data().heroImageOfTheDepartment[0]
+      ? doc.data().heroImageOfTheDepartment[0].id
+      : ''
     postData.tabMenu = {
       basicInfoTab: doc.data().tabMenu.basicInfoTab,
       snsTab: getUrlFromTwitterTimeline(doc.data().tabMenu.snsTab),
