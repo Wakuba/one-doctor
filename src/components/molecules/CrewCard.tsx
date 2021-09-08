@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 
 // Firebase
 import { storage } from '../../lib/firebase/firebase.config'
+import { ref, getDownloadURL } from 'firebase/storage'
 
 interface CrewCardPropsType {
   crewData: any
@@ -47,12 +48,22 @@ export default function CrewCard({ crewData }: CrewCardPropsType) {
   }, [isFliped])
 
   useEffect(() => {
-    const storageRef = storage.ref(),
-      imgPath = storageRef.child('flamelink/media').child(crewImgFileName)
-    imgPath
-      .getDownloadURL()
-      .then((url) => setCrewImg(url))
-      .catch((error) => console.log(error))
+    const f = async () => {
+      await getDownloadURL(
+        ref(storage, `flamelink/media/${crewImgFileName}`)
+      ).then((url) => {
+        setCrewImg(url)
+      })
+
+      // const storageRef = storage.ref(),
+      //   imgPath = storageRef.child('flamelink/media').child(crewImgFileName)
+      // imgPath
+      //   .getDownloadURL()
+      //   .then((url) => setCrewImg(url))
+      //   .catch((error) => console.log(error))
+    }
+
+    f()
   }, [])
 
   return (

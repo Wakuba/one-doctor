@@ -1,9 +1,9 @@
-import { db } from '../../lib/firebase/firebase.config'
+//Firebase
+import { db, storage } from '../../lib/firebase/firebase.config'
+import { collection, query, where, getDocs } from 'firebase/firestore'
+import { ref, getDownloadURL } from 'firebase/storage'
 import { depPostDataType } from '../../lib/types'
-import {
-  getUrlFromIframe,
-  getUrlFromTwitterTimeline,
-} from '../../lib/customFunctions'
+
 // External components
 import { useEffect, useState } from 'react'
 
@@ -20,9 +20,10 @@ import DepTopSection from '../../components/organisms/DepTopSeciton '
 import EventTab from '../../components/organisms/EventTab'
 import CrewBoard from '../../components/organisms/CrewBoard'
 import TwitterTimeline from '../../components/molecules/TwitterTimeline'
-
-// Firebase
-import { storage } from '../../lib/firebase/firebase.config'
+import {
+  getUrlFromIframe,
+  getUrlFromTwitterTimeline,
+} from '../../lib/customFunctions'
 
 interface DepartmentPagePropsType {
   postData: any
@@ -41,12 +42,9 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
     [heroImg, setHeroImg] = useState<string>('')
 
   useEffect(() => {
-    const storageRef = storage.ref(),
-      imgPath = storageRef.child('flamelink/media').child(heroImgFileName)
-    imgPath
-      .getDownloadURL()
-      .then((url) => setHeroImg(url))
-      .catch((error) => console.log(error))
+    getDownloadURL(ref(storage, `flamelink/media/${heroImgFileName}`)).then(
+      (url) => setHeroImg(url)
+    )
   }, [])
 
   return (
@@ -184,16 +182,18 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
 }
 
 export const getStaticPaths = async () => {
-  const paths: any = [],
-    snapshot = await db
-      .collection('fl_content')
-      .where('_fl_meta_.schema', '==', 'departmentPage')
-      .get()
-  snapshot.forEach((doc) =>
+  const paths: any = []
+  const qForPaths = query(
+    collection(db, 'fl_content'),
+    where('_fl_meta_.schema', '==', 'departmentPage')
+  )
+  const querySnapshot = await getDocs(qForPaths)
+  querySnapshot.forEach((doc) => {
     paths.push({
       params: { department: doc.data().departmentName.departmentNameInEnglish },
     })
-  )
+  })
+  // console.log('path', paths)
   return {
     paths,
     fallback: false,
@@ -231,17 +231,21 @@ export const getStaticProps = async ({ params }: { params: any }) => {
     },
   }
 
-  const snapshot = await db
-      .collection('fl_content')
-      .where('_fl_meta_.schema', '==', 'departmentPage')
-      .where('departmentName.departmentNameInEnglish', '==', params.department)
-      .get(),
+  const qForPostData = query(
+    collection(db, 'fl_content'),
+    where('_fl_meta_.schema', '==', 'departmentPage'),
+    where('departmentName.departmentNameInEnglish', '==', params.department)
+  )
+  const querySnapshot = await getDocs(qForPostData),
     flFileIdsForCrewImg: string[] = []
-  const flFileHeroImgId = ''
-  snapshot.docs.forEach((doc) => {
+  let flFileHeroImgId = ''
+  querySnapshot.docs.forEach((doc) => {
     postData.departmentName = doc.data().departmentName
     postData.universityName = doc.data().universityName
     postData.hospitalName = doc.data().hospitalName
+    flFileHeroImgId = doc.data().heroImageOfTheDepartment[0]
+      ? doc.data().heroImageOfTheDepartment[0].id
+      : ''
     postData.tabMenu = {
       basicInfoTab: doc.data().tabMenu.basicInfoTab,
       snsTab: getUrlFromTwitterTimeline(doc.data().tabMenu.snsTab),
@@ -273,16 +277,17 @@ export const getStaticProps = async ({ params }: { params: any }) => {
    * PostDataで得たreferenceをもとにfl_filesへアクセス
    * file名だけ取得し、画像のダウンロードは各コンポーネントに任せる
    */
-  const snapshotForImg = await db.collection('fl_files').get()
+  const qForImg = query(collection(db, 'fl_files'))
+  const querySnapshotForImg = await getDocs(qForImg)
   flFileIdsForCrewImg.forEach((fileId, idx) => {
     if (postData) {
       postData.tabMenu.crewCardListTab[idx].crewImgFileName =
-        snapshotForImg.docs.find((doc) => doc.data().id == fileId)?.data()
+        querySnapshotForImg.docs.find((doc) => doc.data().id == fileId)?.data()
           .file as string
     }
   })
 
-  const preHeroImgFileName = snapshotForImg.docs
+  const preHeroImgFileName = querySnapshotForImg.docs
     .find((doc) => doc.data().id == flFileHeroImgId)
     ?.data().file as string
 

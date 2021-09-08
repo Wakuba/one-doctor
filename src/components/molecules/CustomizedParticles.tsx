@@ -6,12 +6,12 @@ export default function CustomizedParticles({
   layoutStyle: string
 }) {
   const particlesInit = (main: any) => {
-      console.log(main)
+      console.log('main', main)
 
       // You can initialize the tsParticles instance (main) here, adding custom shapes or presets
     },
     particlesLoaded = (container: any) => {
-      console.log(container)
+      console.log('container', container)
     }
 
   return (
