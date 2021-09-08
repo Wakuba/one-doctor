@@ -42,9 +42,12 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
     [heroImg, setHeroImg] = useState<string>('')
 
   useEffect(() => {
-    getDownloadURL(ref(storage, `flamelink/media/${heroImgFileName}`)).then(
-      (url) => setHeroImg(url)
-    )
+    const f = async () => {
+      await getDownloadURL(
+        ref(storage, `flamelink/media/${heroImgFileName}`)
+      ).then((url) => setHeroImg(url))
+    }
+    if (heroImgFileName) f()
   }, [])
 
   return (
