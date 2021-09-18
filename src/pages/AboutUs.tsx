@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { RichBlueTLSquare } from '../components/atoms/StyledComponents'
 import PlaneButton from '../components/atoms/PlaneButton'
 
-export default function AboutUs() {
+export default function AboutUsPage() {
   return (
     <>
       <Header />

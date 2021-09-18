@@ -1,7 +1,8 @@
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useAuth } from '../../lib/context'
-const ResetPasswordForm: React.FC = () => {
+const ResetPasswordForm: FC = () => {
   const {
     register,
     formState: { errors },
@@ -10,7 +11,9 @@ const ResetPasswordForm: React.FC = () => {
   const auth = useAuth()
   const router = useRouter()
   const onSubmit = (data: { email: string }) => {
+    console.log('email', data.email)
     auth.sendPasswordResetEmailToUser(data.email)
+    console.log('sendPasswordReset実行完了')
     router.push('/Dashboard')
   }
   return (
@@ -27,7 +30,7 @@ const ResetPasswordForm: React.FC = () => {
             id='email'
             className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 shadow-sm'
             type='email'
-            {...register('name', {
+            {...register('email', {
               required: 'Please enter an email',
             })}
           />

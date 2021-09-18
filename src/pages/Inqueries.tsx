@@ -5,7 +5,7 @@ import { httpsCallable } from 'firebase/functions'
 import { SyntheticEvent } from 'react'
 import clsx from 'clsx'
 
-export default function Inqueries() {
+export default function InqueriesPage() {
   return (
     <>
       <Header />
