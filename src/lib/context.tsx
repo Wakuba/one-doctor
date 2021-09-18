@@ -18,6 +18,7 @@ const AuthContext = createContext<OdUserContext>({
   signUp: async () => {},
   logIn: async () => {},
   logOut: async () => {},
+  sendPasswordResetEmailToUser: async () => {},
 })
 
 const { Provider } = AuthContext

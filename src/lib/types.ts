@@ -1,3 +1,5 @@
+import { User } from '@firebase/auth'
+
 export interface SpreadSheetDataType {
   date: string
   department: string
@@ -60,4 +62,41 @@ export interface depPostDataType {
   hospitalName: hospitalNameType
   topSection: topSectionType
   tabMenu: tabMenuType
+}
+
+export interface OdUserAuthState {
+  uid: string
+  name: string
+  email: string
+}
+
+export interface SignUpData {
+  name: string
+  email: string
+  password: string
+}
+
+export interface SignUpDataWithUid extends SignUpData {
+  uid: string
+}
+
+export interface LogInData {
+  email: string
+  password: string
+}
+export interface UserAdditionalData {
+  uid: string
+  name: string
+  email: string
+  password: string
+}
+
+export interface OdUserContext {
+  odUser: User | null
+  isLoading: boolean
+  userAdditionalData: UserAdditionalData
+  signUp: ({ name, email, password }: SignUpData) => Promise<void>
+  logIn: ({ email, password }: LogInData) => Promise<void | User>
+  logOut: () => Promise<void>
+  sendPasswordResetEmailToUser: (email: string) => Promise<void>
 }

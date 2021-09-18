@@ -9,7 +9,9 @@ import {
   signOut,
   onAuthStateChanged,
   User,
+  UserInfo,
   updateProfile,
+  sendPasswordResetEmail,
 } from 'firebase/auth'
 import {
   doc,
@@ -20,7 +22,12 @@ import {
 } from 'firebase/firestore'
 
 //Types
-import { LogInData, SignUpData, UserAdditionalData } from './types'
+import {
+  LogInData,
+  OdUserContext,
+  SignUpData,
+  UserAdditionalData,
+} from './types'
 import { useAuth } from './context'
 import { useRouter } from 'next/router'
 
@@ -40,16 +47,16 @@ export const useAuthProvider = () => {
       }
       setIsLoading(true)
       setOdUser(odUser)
-      getUserAdditionalData(odUser)
+      getUserAdditionalData(odUser.uid)
       setIsLoading(false)
     })
     return () => unsubscribe()
   }, [])
 
   //set a user infomation to a document in firesotre when signing up
-  const createUser = (userInfoOnFierstore: any) => {
+  const createUser = (userInfoOnFierstore: UserAdditionalData) => {
     setDoc(doc(db, 'od_users', userInfoOnFierstore.uid), userInfoOnFierstore)
-    getUserAdditionalData(userInfoOnFierstore)
+    getUserAdditionalData(userInfoOnFierstore.uid)
   }
 
   //clear the auth state
@@ -59,10 +66,10 @@ export const useAuthProvider = () => {
   }
 
   // get additional data we cannot get from firebase auth.
-  const getUserAdditionalData = async (odUser: User) => {
-    const docSnap = await getDoc(doc(db, 'od_users', odUser.uid))
+  const getUserAdditionalData = async (uid: UserInfo['uid']): Promise<void> => {
+    const docSnap: DocumentSnapshot = await getDoc(doc(db, 'od_users', uid))
     if (docSnap.exists()) {
-      const doc = docSnap.data()
+      const doc: DocumentData = docSnap.data()
       console.log(doc)
       setUserAdditionalData({
         uid: doc.uid,
@@ -76,12 +83,16 @@ export const useAuthProvider = () => {
     }
   }
 
-  const signUp = async ({ name, email, password }: SignUpData) => {
+  const signUp = async ({
+    name,
+    email,
+    password,
+  }: SignUpData): Promise<void> => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const odUser = userCredential.user
         setOdUser(odUser)
-        updateProfile(odUser, {displayName: name})
+        updateProfile(odUser, { displayName: name })
         return createUser({ uid: odUser.uid, name, email, password })
       })
       .catch((error) => {
@@ -98,7 +109,7 @@ export const useAuthProvider = () => {
       .then((userCredential) => {
         const odUser = userCredential.user
         setOdUser(odUser)
-        getUserAdditionalData(odUser)
+        getUserAdditionalData(odUser.uid)
         console.log(userAdditionalData)
         return userCredential.user
       })
@@ -109,7 +120,20 @@ export const useAuthProvider = () => {
         console.log('errorMessage', errorMessage)
       })
 
-  const logOut = async () => await signOut(auth).then(() => clearAuthState())
+  const logOut = async (): Promise<void> =>
+    await signOut(auth).then(() => clearAuthState())
+
+  const sendPasswordResetEmailToUser = async (email: string): Promise<void> =>
+    await sendPasswordResetEmail(auth, email)
+      .then((response) => {
+        return response
+      })
+      .catch((error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log('errorCode', errorCode)
+        console.log('errorMessage', errorMessage)
+      })
 
   return {
     odUser,
@@ -118,10 +142,11 @@ export const useAuthProvider = () => {
     signUp,
     logIn,
     logOut,
+    sendPasswordResetEmailToUser,
   }
 }
 
-export const useRequiredAuth = () => {
+export const useRequiredAuth = (): OdUserContext => {
   const auth = useAuth()
   const router = useRouter()
 
