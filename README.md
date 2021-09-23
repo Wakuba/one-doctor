@@ -21,3 +21,6 @@
     - Send grid
     - Gmail
     - Google spread sheet
+    - Slack
+  - Deploy
+    
