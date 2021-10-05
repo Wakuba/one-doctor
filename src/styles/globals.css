@@ -7,7 +7,7 @@
     perspective: 1000px;
   }
 
-  .preserve-3d {
+  .preserve3d {
     transform-style: preserve-3d;
   }
 
@@ -17,10 +17,8 @@
 
   .backface-invisible {
     backface-visibility: hidden;
-  }
-
-  .wk-backface-invisible {
-    -webkit-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;  /* for safari */
+    -moz-backface-visibility: hidden;
   }
 
   .read-more-gradient {

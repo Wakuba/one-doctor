@@ -27,20 +27,20 @@ interface CardFacePropsType {
 export default function CrewCard({ crewData }: CrewCardPropsType) {
   const [isFliped, setIsFliped] = useState<boolean>(false),
     [arrowVanisher, setArrowVanisher] = useState<boolean>(false),
-    [crewImg, setCrewImg] = useState<string>(''),
-    flip = () => {
-      setIsFliped(!isFliped)
-    },
-    {
-      crewName,
-      position,
-      background,
-      licence,
-      majorField,
-      schoolLife,
-      crewImgFileName,
-      forFun,
-    } = crewData
+    [crewImg, setCrewImg] = useState<string>('')
+  const flip = () => {
+    setIsFliped(!isFliped)
+  }
+  const {
+    crewName,
+    position,
+    background,
+    licence,
+    majorField,
+    schoolLife,
+    crewImgFileName,
+    forFun,
+  } = crewData
 
   useEffect(() => {
     if (isFliped) setTimeout(() => setArrowVanisher(true), 300)
@@ -48,28 +48,19 @@ export default function CrewCard({ crewData }: CrewCardPropsType) {
   }, [isFliped])
 
   useEffect(() => {
-    const f = async () => {
+    ;(async () => {
       await getDownloadURL(
         ref(storage, `flamelink/media/${crewImgFileName}`)
       ).then((url) => {
         setCrewImg(url)
       })
-
-      // const storageRef = storage.ref(),
-      //   imgPath = storageRef.child('flamelink/media').child(crewImgFileName)
-      // imgPath
-      //   .getDownloadURL()
-      //   .then((url) => setCrewImg(url))
-      //   .catch((error) => console.log(error))
-    }
-
-    f()
+    })()
   }, [])
 
   return (
     <div
       className={clsx(
-        'perspective justify-self-center',
+        'block perspective justify-self-center bg-transparent',
         'sm:w-[318px] sm:h-72',
         'md:w-[448px] md:h-64',
         'lg:w-[448px] lg:h-64',
@@ -79,7 +70,7 @@ export default function CrewCard({ crewData }: CrewCardPropsType) {
     >
       <div
         className={clsx(
-          'w-full h-full preserve-3d duration-700 cursor-pointer relative',
+          'inline-block w-full h-full preserve3d duration-700 cursor-pointer relative bg-transparent',
           isFliped && 'rotate-y-180'
         )}
       >
@@ -118,11 +109,8 @@ function CardHead({
   licence,
 }: CardFacePropsType) {
   return (
-    <div
-      onClick={flip}
-      className='absolute h-full w-full backface-invisible wk-backface-invisible'
-    >
-      <div className='relative grid grid-cols-10 w-full h-full shadow-lg backface-invisible wk-backface-invisible  crew-bg-blue border-1 border-prime-blue-rich rounded-sm'>
+    <div className='block absolute h-full w-full backface-invisible z-10'>
+      <div className='relative grid grid-cols-10 w-full h-full shadow-lg crew-bg-blue border-1 border-prime-blue-rich rounded-sm'>
         <div className='col-span-4 flex items-center justify-center'>
           {imgSrc ? (
             <div className='relative sm:w-[110px] sm:h-[145px] ov-md:w-[154px] ov-md:h-[204px]'>
@@ -187,8 +175,11 @@ function CardTail({
   forFun,
 }: CardFacePropsType) {
   return (
-    <div onClick={flip} className='absolute h-full w-full '>
-      <div className='relative grid grid-cols-10 w-full h-full crew-bg-purple rotate-y-180 backface-invisible  wk-backface-invisible shadow-lg border-[1px] border-prime-blue-rich rounded-sm'>
+    <div
+      onClick={flip}
+      className='block absolute h-full w-full backface-invisible'
+    >
+      <div className='relative grid grid-cols-10 w-full h-full crew-bg-purple rotate-y-180 shadow-lg border-[1px] border-prime-blue-rich rounded-sm'>
         <div className='col-span-4 flex items-center justify-center'>
           {imgSrc ? (
             <div className='relative sm:w-[110px] sm:h-[145px] ov-md:w-[154px] ov-md:h-[204px]'>

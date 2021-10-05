@@ -35,7 +35,7 @@ export const ModalMainArea = ({
       className={clsx(
         modalWrapperStyle,
         'fixed left-1/2 top-1/2  bg-opacity-70 bg-gray-100 rounded-xl shadow-xl overflow-y-scroll',
-        'backdrop-filter backdrop-blur backdrop-blur-none backdrop-filter-none ',
+        'backdrop-filter backdrop-blur',
         'transform -translate-x-1/2 -translate-y-1/2 z-50'
       )}
     >

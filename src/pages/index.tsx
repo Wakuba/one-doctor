@@ -48,7 +48,7 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
             'sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl'
           )}
         >
-          <CustomizedParticles layoutStyle='absolute top-0 left-0 w-full sm:h-[900px]  ov-md:h-[1500px] -z-10' />
+          <CustomizedParticles layoutStyle='absolute top-0 left-0 w-full h-[calc(100%+15vw)] -z-10' />
           <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ml-[10vw] mr-[5vw] '>
             <div
               className={clsx(
