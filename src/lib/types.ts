@@ -12,29 +12,29 @@ export interface NewsLineType {
   detail?: string
 }
 
-interface departmentNameType {
+interface DepartmentNameType {
   departmentNameInEnglish: string
   departmentNameInJapanese: string
 }
 
-interface universityNameType {
+interface UniversityNameType {
   universityNameInEnglish: string
   universityNameInJapanese: string
 }
 
-interface hospitalNameType {
+interface HospitalNameType {
   hospitalNameInEnglish: string
   hospitalNameInJapanese: string
 }
 
-interface topSectionType {
+interface TopSectionType {
   educationalPoint: string
   clinicalPoint: string
   researchPoint: string
   otherPoint: string
 }
 
-interface crewCardListTabType {
+interface CrewCardListTabType {
   crewImgFileName: string
   crewName: string
   position: string
@@ -45,19 +45,29 @@ interface crewCardListTabType {
   forFun: string
 }
 
-interface tabMenuType {
+interface TabMenuType {
   basicInfoTab: string
   geographicalInformationTab: RegExpMatchArray | string
   snsTab: RegExpMatchArray | string
-  crewCardListTab: crewCardListTabType[]
+  crewCardListTab: CrewCardListTabType[]
 }
 
-export interface depPostDataType {
+export interface DepPostDataType {
   heroImgFileName: string
   officialWebSite: string
-  departmentName: departmentNameType
-  universityName: universityNameType
-  hospitalName: hospitalNameType
-  topSection: topSectionType
-  tabMenu: tabMenuType
+  departmentName: DepartmentNameType
+  universityName: UniversityNameType
+  hospitalName: HospitalNameType
+  topSection: TopSectionType
+  tabMenu: TabMenuType
+}
+
+export interface DepartmentTemplatePropsType {
+  hospitalName: HospitalNameType
+  universityName: UniversityNameType
+  departmentName: DepartmentNameType
+  topSection: TopSectionType
+  tabMenu: TabMenuType
+  heroImg: string
+  officialWebSite: string
 }
