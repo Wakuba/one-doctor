@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import CrewCard from '../molecules/CrewCard'
 
-const CrewBoard = ({ crewDataList }: { crewDataList: any }) => {
+const CrewBoardTab = ({ crewDataList }: { crewDataList: any }) => {
   return (
     <div
       className={clsx(
@@ -26,4 +26,4 @@ const CrewBoard = ({ crewDataList }: { crewDataList: any }) => {
   )
 }
 
-export default CrewBoard
+export default CrewBoardTab
