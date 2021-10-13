@@ -4,7 +4,7 @@ import TwitterTimeline from '../molecules/TwitterTimeline'
 
 interface SnsTabPropsType {
   officialWebSite: string
-  twitterTimelineUrl: RegExpMatchArray | string
+  twitterTimelineUrl: string
 }
 
 const SnsTab: FC<SnsTabPropsType> = ({

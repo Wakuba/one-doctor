@@ -8,7 +8,7 @@ const getUrl = (text: string, extractor: string): RegExpMatchArray | string => {
     String(text).slice(0, 4) === 'http'
       ? text
       : String(text).match(patternExtractor)
-  return url ? url : text
+  return url ? String(url) : text
 }
 
 export const getUrlFromIframe = (text: string): RegExpMatchArray | string =>

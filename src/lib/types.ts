@@ -45,10 +45,14 @@ interface CrewCardListTabType {
   forFun: string
 }
 
+interface SnsTabType {
+  twitterTimelineUrl: string
+}
+
 interface TabMenuType {
   basicInfoTab: string
   geographicalInformationTab: RegExpMatchArray | string
-  snsTab: RegExpMatchArray | string
+  snsTab: SnsTabType
   crewCardListTab: CrewCardListTabType[]
 }
 

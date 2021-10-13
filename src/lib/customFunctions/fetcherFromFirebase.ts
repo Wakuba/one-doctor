@@ -63,9 +63,10 @@ const getDataFromFirebase = (
           }),
         ],
       }
-      postData.topSection = doc.data().topSection
-      postData.officialWebSite = doc.data().officialWebSite
+      postDataPoured.topSection = doc.data().topSection
+      postDataPoured.officialWebSite = doc.data().officialWebSite
     })
+    // console.log('postDataPoured', postDataPoured)
   })()
   return { postDataPoured, flFileHeroImgId, flFileIdsForCrewImg }
 }
@@ -99,7 +100,7 @@ const getCrewImgFileName = (
 const getHeroImgFileName = (
   postDataPoured: DepPostDataType,
   flFileHeroImgId: string,
-  querySnapshotForImg: QuerySnapshot<DocumentData> | undefined
+  querySnapshotForImg: QuerySnapshot<DocumentData>
 ) => {
   const preHeroImgFileName = querySnapshotForImg?.docs
     .find((doc) => doc.data().id == flFileHeroImgId)

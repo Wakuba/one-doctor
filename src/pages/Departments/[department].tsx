@@ -15,13 +15,12 @@ import {
   getHeroImgFileName,
 } from '../../lib/customFunctions/fetcherFromFirebase'
 
-interface DepartmentPagePropsType {
-  postData: any
-}
-
 export default function DepartmentPage({
   postDataPerfect,
-}: DepartmentPagePropsType) {
+}: {
+  postDataPerfect: DepPostDataType
+}) {
+  console.log('perfect', postDataPerfect)
   const {
       heroImgFileName,
       departmentName,
@@ -80,11 +79,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const { postDataPoured, flFileHeroImgId, flFileIdsForCrewImg } =
     getDataFromFirebase(initPostData, params)
+  // console.log('postPoured', postDataPoured)
 
   const { postDataModified, querySnapshotForImg } = getCrewImgFileName(
     postDataPoured,
     flFileIdsForCrewImg
   )
+  // console.log('postM', postDataModified)
 
   const postDataPerfect = getHeroImgFileName(
     postDataModified,
@@ -92,6 +93,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     querySnapshotForImg
   )
 
+  // console.log('postPperfect', postDataPerfect)
   return {
     props: {
       postDataPerfect,

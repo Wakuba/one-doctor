@@ -94,7 +94,7 @@ const DepartmentTemplate: FC<DepartmentTemplatePropsType> = ({
             <EventTab />
             <SnsTab
               officialWebSite={officialWebSite}
-              twitterTimelineUrl={tabMenu.snsTab}
+              twitterTimelineUrl={tabMenu.snsTab.twitterTimelineUrl}
             />
           </TabMenu>
         </section>
