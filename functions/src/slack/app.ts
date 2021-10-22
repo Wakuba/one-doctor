@@ -1,5 +1,5 @@
 import * as functions from "firebase-functions";
-import {App, ExpressReceiver} from "@slack/bolt";
+import { App, ExpressReceiver } from "@slack/bolt";
 import useActionListener from "./actionListener";
 
 // cloud functionの環境変数をexport
