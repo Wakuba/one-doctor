@@ -1,9 +1,7 @@
 import * as functions from "firebase-functions";
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+import { expressReceiver } from "./slack/app";
+import usePostMessage from "./slack/postMessage";
+
+export const slack = functions.https.onRequest(expressReceiver.app);
+export const postMessageToSlackChannelWithUserData = functions.https.onCall(() => usePostMessage());
