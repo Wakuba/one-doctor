@@ -70,7 +70,7 @@ const createMessageBlock = (
 // textはblocksの使用によって挙動が変わる
 // 用いている場合: this is used as a fallback string to display in notifications
 // 用いてない場合: this is the main body text of the message
-const usePostMessage = async (username:string, useremail: string): Promise<void> => {
+const usePostMessage = async ({username, useremail}: {username: string, useremail: string}): Promise<void> => {
 	await client.chat.postMessage({
 		channel: channelId,
 		text: "",
