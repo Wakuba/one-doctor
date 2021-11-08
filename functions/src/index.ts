@@ -4,4 +4,4 @@ import { expressReceiver } from "./slack/app";
 import usePostMessage from "./slack/postMessage";
 
 export const slack = functions.https.onRequest(expressReceiver.app);
-export const postMessageToSlackChannelWithUserData = functions.https.onCall(() => usePostMessage());
+export const postMessageToSlackChannelWithUserData = functions.https.onCall((username, useremail) => usePostMessage(username, useremail));
