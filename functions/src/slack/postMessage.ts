@@ -11,7 +11,7 @@ const channelId = "C02FE4V1V47"
 // ユーザー確認メッセージを表示するBlockを作成
 const createMessageBlock = (
 	username: string,
-	email: string
+	useremail: string
 ) => [
 	{
 		"type": "header",
@@ -24,7 +24,7 @@ const createMessageBlock = (
 		"type": "section",
 		"text": {
 			"type": "mrkdwn",
-			"text": email
+			"text": useremail
 		},
 		"block_id": "text1"
 	},
@@ -70,11 +70,11 @@ const createMessageBlock = (
 // textはblocksの使用によって挙動が変わる
 // 用いている場合: this is used as a fallback string to display in notifications
 // 用いてない場合: this is the main body text of the message
-const usePostMessage = async (): Promise<void> => {
+const usePostMessage = async (username:string, useremail: string): Promise<void> => {
 	await client.chat.postMessage({
 		channel: channelId,
 		text: "",
-		blocks: createMessageBlock("asdf;lkj", "asdf;lkj@jichi.ac.jp")
+		blocks: createMessageBlock(username, useremail)
 	});
 }
 
