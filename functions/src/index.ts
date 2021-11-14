@@ -1,7 +1,17 @@
-import * as functions from "firebase-functions";
+import * as functions from 'firebase-functions'
+import { SignUpData } from '../../src/lib/types'
 
-import { expressReceiver } from "./slack/app";
-import usePostMessage from "./slack/postMessage";
+export const config = functions.config()
 
-export const slack = functions.https.onRequest(expressReceiver.app);
-export const postMessageToSlackChannelWithUserData = functions.https.onCall((data, context) => usePostMessage(data.username, data.useremail));
+import { expressReceiver } from './slack/app'
+import usePostMessage from './slack/postMessage'
+
+export const slack = functions.https.onRequest(expressReceiver.app)
+
+export const postMessageToSlackChannelWithUserData = functions.https.onCall(
+  (data: SignUpData, context) => {
+    console.log('context', context)
+    console.log('data on firebase', data)
+    return usePostMessage(data)
+  }
+)

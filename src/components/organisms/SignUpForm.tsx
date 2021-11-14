@@ -3,8 +3,14 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-//Custom components
-import { useAuth } from '../../lib/context'
+//Firebase
+import { firebaseFunction } from '../../lib/firebase/firebase.config'
+import { httpsCallable } from 'firebase/functions'
+
+const postMessageToSlackChannelWithUserData = httpsCallable(
+  firebaseFunction,
+  'postMessageToSlackChannelWithUserData'
+)
 
 interface SignUpFormData {
   name: string
@@ -16,7 +22,6 @@ interface SignUpFormData {
 const SignUpForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
-  const auth = useAuth()
   const {
     register,
     handleSubmit,
@@ -24,15 +29,28 @@ const SignUpForm: React.FC = () => {
     formState: { errors },
   } = useForm()
 
-
   const onSubmit = (data: SignUpFormData) => {
     const { name, email, passwordOne } = data
     const password = passwordOne
     if (getValues('passwordOne') === getValues('passwordTwo')) {
-      return auth.signUp({ name, email, password }).then((user) => {
-        router.push('/Dashboard')
-        console.log('od_user', user)
+      return postMessageToSlackChannelWithUserData({
+        name,
+        email,
+        password,
       })
+        .then(() => {
+          router.push('/Dashboard')
+        })
+        .catch((error) => {
+          // Getting the Error details.
+          const code = error.code
+          const message = error.message
+          const details = error.details
+          console.log('code', code)
+          console.log('message', message)
+          console.log('details', details)
+          setError('CORS Error')
+        })
     } else {
       setError('Password Not Matched')
     }
@@ -40,7 +58,7 @@ const SignUpForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {error !== '' && error}
+      {error !== '' && <div className='text-red-500'>{error}</div>}
       <div className='rounded-md shadow-sm'>
         <label
           htmlFor='name'

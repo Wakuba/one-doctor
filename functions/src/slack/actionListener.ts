@@ -1,14 +1,17 @@
-import { App } from "@slack/bolt"
-import signUp from "../firebase/signUp";
+import { App } from '@slack/bolt'
+import signUp from '../firebase/signUp'
 
 const useActionListener = (app: App): void => {
-	app.action({ action_id: "is_medcoworker", block_id: "is_approved_or_not"}, async ({ ack, say, body }) => {
-		// const {} = body
-		await ack();
-		await say("approved!!");
-    console.log(body)
-		signUp({email: "asdflkj@jichi.ac.jp", password:"tatsujin16"})
-	})
+  app.action(
+    { action_id: 'is_medcoworker', block_id: 'is_approved_or_not' },
+    async ({ ack, say, body }) => {
+      // const {} = body
+      await ack()
+      await say('approved!!')
+      console.log(body)
+      signUp({ email: 'asdflkj@jichi.ac.jp', password: 'tatsujin16' })
+    }
+  )
 }
 
 export default useActionListener

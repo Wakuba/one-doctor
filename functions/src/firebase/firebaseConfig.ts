@@ -1,19 +1,21 @@
-import { getAuth } from "firebase/auth";
-import { initializeApp, getApps } from "firebase/app";
+import { getAuth } from 'firebase/auth'
+import { initializeApp, getApps } from 'firebase/app'
+import { config } from '../index'
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID,
-  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
-  databaseUrl: process.env.FIREBASE_DATABASE_URL
-};
+  apiKey: config.fb_project_config.firebase_api_key,
+  authDomain: config.fb_project_config.firebase_auth_domain,
+  projectId: config.fb_project_config.firebase_project_id,
+  storageBucket: config.fb_project_config.firebase_storage_bucket,
+  messagingSenderId: config.fb_project_config.firebaee_messaging_sender_id,
+  appId: config.fb_project_config.firebase_app_id,
+  measurementId: config.fb_project_config.firebase_mesuarement_id,
+  databaseUrl: config.fb_project_config.firebase_database_url,
+}
+console.log(process.env.FIREBASE_API_KEY)
 
-const apps = getApps();
+const apps = getApps()
 
-const firebaseApp = !apps.length ? initializeApp(firebaseConfig) : apps[0];
+const firebaseApp = !apps.length ? initializeApp(firebaseConfig) : apps[0]
 
-export const auth = getAuth(firebaseApp);
+export const auth = getAuth(firebaseApp)
