@@ -8,14 +8,12 @@ import { SignUpData } from '../../../src/lib/types'
 // WebClientをinstanciate
 const client = new WebClient(config.slack.token)
 
-const channelId = 'C02M1QUJX5J'
-
 // textはblocksの使用によって挙動が変わる
 // 用いている場合: this is used as a fallback string to display in notifications
 // 用いてない場合: this is the main body text of the message
 const usePostMessage = async (data: SignUpData): Promise<void> => {
   await client.chat.postMessage({
-    channel: channelId,
+    channel: config.slack.channel_id,
     text: data.password,
     blocks: createMessageBlock(data),
   })

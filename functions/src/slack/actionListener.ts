@@ -1,17 +1,21 @@
 import { App } from '@slack/bolt'
 import signUp from '../firebase/signUp'
 
-const useActionListener = (app: App): void => {
-  app.action(
-    { action_id: 'is_medcoworker', block_id: 'is_approved_or_not' },
-    async ({ ack, say, body }) => {
-      // const {} = body
-      await ack()
-      await say('approved!!')
-      console.log(body)
-      signUp({ email: 'asdflkj@jichi.ac.jp', password: 'tatsujin16' })
-    }
-  )
+const useActionListener = async (app: App) => {
+  try {
+    const result = await app.action(
+      { action_id: 'is_medcoworker', block_id: 'is_approved_or_not' },
+      async ({ body, say, ack }) => {
+        // const {} = body
+        await ack()
+        await say(body.user.id)
+        signUp({ email: 'm16065kt@jichi.ac.jp', password: 'tatsujin16' })
+      }
+    )
+    console.log(result)
+  } catch (error) {
+    console.log('error', error)
+  }
 }
 
 export default useActionListener
