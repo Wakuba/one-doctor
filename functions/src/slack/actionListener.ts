@@ -1,74 +1,67 @@
-import { App } from '@slack/bolt'
-import signUp from '../firebase/signUp'
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import {App} from "@slack/bolt";
+import signUp from "../firebase/signUp";
 
-const useActionListener = async (app: App) => {
-  try {
-    const result = await app.action(
-      { action_id: 'is_medcoworker', block_id: 'is_approved_or_not' },
-      async ({ body, say, ack }) => {
-        // const {} = body
-        await ack()
-        await say(body.user.id)
-        signUp({ email: 'm16065kt@jichi.ac.jp', password: 'tatsujin16' })
-      }
+const useActionListener = (app: App) => {
+    app.action(
+        {action_id: "is_medcoworker", block_id: "is_approved_or_not"},
+        async ({body, say, ack}) => {
+          const bodyRe: any = body
+          const password = bodyRe.message.text ? bodyRe.message.text : 'NO DATA',
+            name = bodyRe.message.blocks[0].text.text ? bodyRe.message.blocks[0].text.text : 'NO NAME',
+            email= bodyRe.message.blocks[1].text.text ? bodyRe.message.blocks[1].text.text : 'NO NAME'
+          console.log('password だよ', password)
+          console.log('nameだよ', name)
+          console.log('emailだよ', email)
+          await ack();
+          await say('とりまおっけー');
+          signUp({email: "m16065kt@jichi.ac.jp", password: "tatsujin16"});
+        }
     )
-    console.log(result)
-  } catch (error) {
-    console.log('error', error)
-  }
-}
+};
 
-export default useActionListener
+export default useActionListener;
 
-// body objectの内容
-
-// {
-//   "type": "block_actions",
-//   "team": {
-//     "id": "T9TK3CUKW",
-//     "domain": "example"
+// body {
+//   type: 'block_actions',
+//   user: {
+//     id: 'U01MY694K2R',
+//     username: '1insp99persptashtash1',
+//     name: '1insp99persptashtash1',
+//     team_id: 'T01N17LBBS6'
 //   },
-//   "user": {
-//     "id": "UA8RXUSPL",
-//     "username": "jtorrance",
-//     "team_id": "T9TK3CUKW"
+//   api_app_id: 'A02M97PCQAX',
+//   token: 'Y7VGeBkmSROXmC8M3pncjjf2',
+//   container: {
+//     type: 'message',
+//     message_ts: '1636950773.000100',
+//     channel_id: 'C02LUH7P0FR',
+//     is_ephemeral: false
 //   },
-//   "api_app_id": "AABA1ABCD",
-//   "token": "9s8d9as89d8as9d8as989",
-//   "container": {
-//     "type": "message_attachment",
-//     "message_ts": "1548261231.000200",
-//     "attachment_id": 1,
-//     "channel_id": "CBR2V3XEX",
-//     "is_ephemeral": false,
-//     "is_app_unfurl": false
+//   trigger_id: '2737176642433.1749258385890.def2056edf79b7b4867f0c872439c790',
+//   team: { id: 'T01N17LBBS6', domain: 'one-doctor' },
+//   enterprise: null,
+//   is_enterprise_install: false,
+//   channel: { id: 'C02LUH7P0FR', name: 'sec_医学生研修医認証' },
+//   message: {
+//     bot_id: 'B02M2FEH7AS',
+//     type: 'message',
+//     text: 'tatsujin',
+//     user: 'U02M97Q88F5',
+//     ts: '1636950773.000100',
+//     team: 'T01N17LBBS6',
+//     blocks: [ [Object], [Object], [Object], [Object] ]
 //   },
-//   "trigger_id": "12321423423.333649436676.d8c1bb837935619ccad0f624c448ffb3",
-//   "channel": {
-//     "id": "CBR2V3XEX",
-//     "name": "review-updates"
-//   },
-//   "message": {
-//     "bot_id": "BAH5CA16Z",
-//     "type": "message",
-//     "text": "This content can't be displayed.",
-//     "user": "UAJ2RU415",
-//     "ts": "1548261231.000200",
-//     ...
-//   },
-//   "response_url": "https://hooks.slack.com/actions/AABA1ABCD/1232321423432/D09sSasdasdAS9091209",
-//   "actions": [
+//   state: { values: {} },
+//   response_url: 'https://hooks.slack.com/actions/T01N17LBBS6/2724552244946/oSfl4YFiRmmpJ95Afgsy2Fxv',
+//   actions: [
 //     {
-//       "action_id": "WaXA",
-//       "block_id": "=qXel",
-//       "text": {
-//         "type": "plain_text",
-//         "text": "View",
-//         "emoji": true
-//       },
-//       "value": "click_me_123",
-//       "type": "button",
-//       "action_ts": "1548426417.840180"
+//       action_id: 'is_medcoworker',
+//       block_id: 'is_approved_or_not',
+//       text: [Object],
+//       style: 'primary',
+//       type: 'button',
+//       action_ts: '1636957606.902831'
 //     }
 //   ]
 // }

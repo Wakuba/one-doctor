@@ -1,13 +1,10 @@
-import { createUserWithEmailAndPassword } from '@firebase/auth'
-import { auth } from './firebaseConfig'
+import {createUserWithEmailAndPassword} from "@firebase/auth";
+import {auth} from "./firebaseConfig";
 
-interface SignupType {
-  email: string
-  password: string
-}
+import { SignupType } from "../type";
 
-const signUp = async ({ email, password }: SignupType): Promise<void> => {
-  await createUserWithEmailAndPassword(auth, email, password)
-}
+const signUp = async ({email, password}: SignupType): Promise<void> => {
+  await createUserWithEmailAndPassword(auth, email, password);
+};
 
-export default signUp
+export default signUp;

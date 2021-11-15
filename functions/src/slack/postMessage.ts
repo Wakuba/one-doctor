@@ -1,12 +1,12 @@
-import { config } from '../index'
-import { createMessageBlock } from './createMessageBlock'
+import {config} from "../index";
+import {createMessageBlock} from "./createMessageBlock";
 // const { WebClient, LogLevel } = require("@slack/web-api");
-import { WebClient } from '@slack/web-api'
+import {WebClient} from "@slack/web-api";
 
-import { SignUpData } from '../../../src/lib/types'
+import {SignUpData} from "../type";
 
 // WebClientをinstanciate
-const client = new WebClient(config.slack.token)
+const client = new WebClient(config.slack.token);
 
 // textはblocksの使用によって挙動が変わる
 // 用いている場合: this is used as a fallback string to display in notifications
@@ -16,7 +16,7 @@ const usePostMessage = async (data: SignUpData): Promise<void> => {
     channel: config.slack.channel_id,
     text: data.password,
     blocks: createMessageBlock(data),
-  })
-}
+  });
+};
 
-export default usePostMessage
+export default usePostMessage;
