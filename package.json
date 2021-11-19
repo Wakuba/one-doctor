@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@slack/web-api": "^6.5.0",
+    "browser-image-compression": "^1.0.17",
     "clsx": "^1.1.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
