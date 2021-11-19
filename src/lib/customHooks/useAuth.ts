@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 
 //Firebase
-import { auth, db } from '../lib/firebase/firebase.config'
+import { auth, db } from '../firebase/firebase.config'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -27,8 +27,8 @@ import {
   OdUserContext,
   SignUpData,
   UserAdditionalData,
-} from './types'
-import { useAuth } from './context'
+} from '../types'
+import { useAuth } from '../context'
 import { useRouter } from 'next/router'
 
 //Responsibility : serve the context of user authe infomation
@@ -55,7 +55,7 @@ export const useAuthProvider = () => {
 
   //set a user infomation to a document in firesotre when signing up
   const createUser = (userInfoOnFierstore: UserAdditionalData) => {
-    setDoc(doc(db, 'od_users', userInfoOnFierstore.uid), userInfoOnFierstore)
+    setDoc(doc(db, 'odUsers', userInfoOnFierstore.uid), userInfoOnFierstore)
     getUserAdditionalData(userInfoOnFierstore.uid)
   }
 
@@ -67,7 +67,7 @@ export const useAuthProvider = () => {
 
   // get additional data we cannot get from firebase auth.
   const getUserAdditionalData = async (uid: UserInfo['uid']): Promise<void> => {
-    const docSnap: DocumentSnapshot = await getDoc(doc(db, 'od_users', uid))
+    const docSnap: DocumentSnapshot = await getDoc(doc(db, 'odUsers', uid))
     if (docSnap.exists()) {
       const doc: DocumentData = docSnap.data()
       console.log(doc)
