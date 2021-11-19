@@ -3,7 +3,7 @@
 import { useContext, createContext, ReactNode } from 'react'
 
 //Custom functions
-import { useAuthProvider } from './customHooks'
+import { useAuthProvider } from './customHooks/useAuth'
 import { OdUserContext } from './types'
 
 const AuthContext = createContext<OdUserContext>({
