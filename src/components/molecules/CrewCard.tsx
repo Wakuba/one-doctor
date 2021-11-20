@@ -4,8 +4,9 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 // Firebase
-import { storage } from '../../lib/firebase/firebase.config'
+import { db, storage } from '../../lib/firebase/firebase.config'
 import { ref, getDownloadURL } from 'firebase/storage'
+import { doc, getDoc } from '@firebase/firestore'
 
 interface CrewCardPropsType {
   crewData: any
@@ -38,7 +39,7 @@ export default function CrewCard({ crewData }: CrewCardPropsType) {
     licence,
     majorField,
     schoolLife,
-    crewImgFileName,
+    crewImgId,
     forFun,
   } = crewData
 
@@ -49,11 +50,14 @@ export default function CrewCard({ crewData }: CrewCardPropsType) {
 
   useEffect(() => {
     ;(async () => {
-      await getDownloadURL(
-        ref(storage, `flamelink/media/${crewImgFileName}`)
-      ).then((url) => {
-        setCrewImg(url)
-      })
+      const docRef = doc(db, 'fl_files', crewImgId)
+      const docSnap = await getDoc(docRef)
+      const crewImgName = docSnap.data()?.file
+      await getDownloadURL(ref(storage, `flamelink/media/${crewImgName}`)).then(
+        (url) => {
+          setCrewImg(url)
+        }
+      )
     })()
   }, [])
 

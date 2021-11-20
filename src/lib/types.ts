@@ -37,7 +37,7 @@ interface TopSectionType {
   otherPoint: string
 }
 
-interface CrewCardListTabType {
+export interface CrewCardListTabType {
   crewImgId: string
   crewName: string
   position: string

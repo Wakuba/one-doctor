@@ -1,7 +1,12 @@
 import clsx from 'clsx'
 import CrewCard from '../molecules/CrewCard'
+import { CrewCardListTabType } from '../../lib/types'
 
-const CrewBoardTab = ({ crewDataList }: { crewDataList: any }) => {
+const CrewBoardTab = ({
+  crewDataList,
+}: {
+  crewDataList: CrewCardListTabType[]
+}) => {
   return (
     <div
       className={clsx(
