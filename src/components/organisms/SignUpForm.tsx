@@ -22,6 +22,10 @@ interface SignUpFormData {
 const SignUpForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
+  const [certificationImage, setCertificationImage] = useState<File | null>(
+    null
+  )
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const {
     register,
     handleSubmit,
@@ -29,36 +33,90 @@ const SignUpForm: React.FC = () => {
     formState: { errors },
   } = useForm()
 
+  const handleFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // ファイルがない場合
+    if (event.target.files === null || event.target.files.length === 0) {
+      return
+    }
+
+    const files = Object.values(event.target.files)
+
+    console.log(files)
+
+    const pickedPhotos = files.filter((file) => {
+      if (
+        ![
+          'image/gif',
+          'image/jpeg',
+          'image/png',
+          'image/bmp',
+          'image/svg+xml',
+        ].includes(file.type)
+      ) {
+        setIsFileTypeError(true)
+        return false
+      }
+
+      return true
+    })
+
+    // ファイルがない場合
+    if (pickedPhotos.length === 0) return
+    const picked = pickedPhotos[0]
+
+    // エラーハンドリング後, 要素が一つになったFileListをFile[]=>Fileにしてstateに格納
+    setCertificationImage(picked)
+    console.log(certificationImage)
+    setPreviewUrl(URL.createObjectURL(new Blob(files)))
+  }
+
   const onSubmit = (data: SignUpFormData) => {
+    console.log('certificationImage', certificationImage)
     const { name, email, passwordOne } = data
     const password = passwordOne
-    if (getValues('passwordOne') === getValues('passwordTwo')) {
-      return postMessageToSlackChannelWithUserData({
-        name,
-        email,
-        password,
-      })
-        .then(() => {
-          router.push('/Dashboard')
-        })
-        .catch((error) => {
-          // Getting the Error details.
-          const code = error.code
-          const message = error.message
-          const details = error.details
-          console.log('code', code)
-          console.log('message', message)
-          console.log('details', details)
-          setError('CORS Error')
-        })
+
+    /*
+    firesotreにファイル名などのファイル情報をアップロード=>id発行
+    firestoreのidをmetadataとしてstorageにアップロード
+    */
+
+    const abortCtrl = new AbortController()
+    if (getValues('passwordOne') !== getValues('passwordTwo')) {
+      setPasswordError(true)
+    } else if (!certificationImage) {
+      setNoImageError(true)
     } else {
-      setError('Password Not Matched')
+      imageUploader(certificationImage).then((id) =>
+        postSlackMessageKnocker(
+          name,
+          email,
+          password,
+          id,
+          abortCtrl,
+          previewUrl
+        )
+      )
     }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {error !== '' && <div className='text-red-500'>{error}</div>}
+      {passwordError && (
+        <div className='text-red-500'>※パスワードが一致していません</div>
+      )}
+      <button
+        onClick={() => {
+          fetch(
+            `/api/postMessageToSlack/${JSON.stringify({
+              name: 'tashiro',
+              email: 'asdf;lkj',
+            })}`,
+            { method: 'POST' }
+          )
+        }}
+      >
+        slackに投げる
+      </button>
       <div className='rounded-md shadow-sm'>
         <label
           htmlFor='name'
@@ -154,14 +212,28 @@ const SignUpForm: React.FC = () => {
               },
             })}
           />
-          {errors.password && (
+          {errors.passwordTwo && (
             <div className='mt-2 text-xs text-red-600'>
-              {errors.password.message}
+              {errors.passwordTwo.message}
             </div>
           )}
         </div>
       </div>
 
+      <div>
+        <label htmlFor='image'>image</label>
+        <input type='file' id='image' accept='image/*' onChange={handleFile} />
+        <img
+          src={previewUrl ?? 'svg/写真のフリー素材11.svg'}
+          alt='あなたの写真'
+        />
+        {/* {certificationImage && (
+          <img
+            src={URL.createObjectURL(new Blob([certificationImage]))}
+            alt=''
+          />
+        )} */}
+      </div>
       <div className='mt-6'>
         <span className='block w-full rounded-md shadow-sm'>
           <button
