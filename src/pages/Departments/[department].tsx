@@ -23,7 +23,7 @@ import TwitterTimeline from '../../components/molecules/TwitterTimeline'
 import {
   getUrlFromIframe,
   getUrlFromTwitterTimeline,
-} from '../../lib/customFunctions'
+} from '../../lib/customFunctions/urlExtractor'
 
 interface DepartmentPagePropsType {
   postData: any
