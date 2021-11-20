@@ -38,7 +38,7 @@ interface TopSectionType {
 }
 
 interface CrewCardListTabType {
-  crewImgFileName: string
+  crewImgId: string
   crewName: string
   position: string
   background: string
@@ -60,7 +60,7 @@ interface TabMenuType {
 }
 
 export interface DepPostDataType {
-  heroImgFileName: string
+  heroImgId: string
   officialWebSite: string
   departmentName: DepartmentNameType
   universityName: UniversityNameType

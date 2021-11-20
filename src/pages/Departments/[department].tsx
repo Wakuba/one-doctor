@@ -1,72 +1,203 @@
-//Firebase
-import { db, storage } from '../../lib/firebase/firebase.config'
-import { collection, query, where, getDocs } from 'firebase/firestore'
-import { ref, getDownloadURL } from 'firebase/storage'
-import { DepPostDataType } from '../../lib/types'
-
-import { useEffect, useState } from 'react'
-import { GetStaticPaths, GetStaticProps } from 'next'
-
-import DepartmentTemplate from '../../components/templates/Department'
-import {
-<<<<<<< HEAD
-  postDataInitializer,
-  getDataFromFirebase,
-  getCrewImgFileName,
-  getHeroImgFileName,
-} from '../../lib/customFunctions/fetcherFromFirebase'
-
-export default function DepartmentPage({
-  postDataPerfect,
-}: {
-  postDataPerfect: DepPostDataType
-}) {
-  console.log('perfect', postDataPerfect)
-=======
-  getUrlFromIframe,
-  getUrlFromTwitterTimeline,
-} from '../../lib/customFunctions/urlExtractor'
-
 interface DepartmentPagePropsType {
   postData: any
 }
 
+//Firebase
+import { db, storage } from '../../lib/firebase/firebase.config'
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  getDoc,
+} from 'firebase/firestore'
+import { ref, getDownloadURL } from 'firebase/storage'
+import { DepPostDataType } from '../../lib/types'
+
+// External components
+import { useEffect, useState } from 'react'
+
+// Custom components
+import PlaneButton from '../../components/atoms/PlaneButton'
+import Header from '../../components/organisms/Header'
+import Footer from '../../components/organisms/Footer'
+import TabMenu from '../../components/organisms/TabMenu'
+import Tag from '../../components/atoms/Tag'
+import AppealCardBoard from '../../components/organisms/AppealCardBoard'
+import MovieCarousel from '../../components/organisms/MovieCarousel'
+import ContactButtonModal from '../../components/molecules/ContactButtonModal'
+import DepTopSection from '../../components/organisms/DepTopSeciton '
+import EventTab from '../../components/organisms/EventTab'
+import CrewBoard from '../../components/organisms/CrewBoardTab'
+import TwitterTimeline from '../../components/molecules/TwitterTimeline'
+import {
+  getUrlFromIframe,
+  getUrlFromTwitterTimeline,
+} from '../../lib/customFunctions/urlExtractor'
+import { GetStaticProps } from 'next'
+import { ParsedUrlQuery } from 'querystring'
+
 export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
->>>>>>> feature/2021-9/wakuba/firebaseAuth
   const {
-      heroImgFileName,
+      heroImgId,
       departmentName,
       universityName,
       hospitalName,
       tabMenu,
       topSection,
       officialWebSite,
-    } = postDataPerfect,
+    } = postData,
     [heroImg, setHeroImg] = useState<string>('')
+    console.log(postData)
 
   useEffect(() => {
     const f = async () => {
-      await getDownloadURL(
-        ref(storage, `flamelink/media/${heroImgFileName}`)
-      ).then((url) => setHeroImg(url))
+      const docRef = doc(db, 'fl_files', heroImgId)
+      const docSnap = await getDoc(docRef)
+      const heroImgName = docSnap.data()?.file
+      await getDownloadURL(ref(storage, `flamelink/media/${heroImgName}`)).then(
+        (url) => setHeroImg(url)
+      )
     }
-    if (heroImgFileName) f()
+    f()
   }, [])
 
   return (
-    <DepartmentTemplate
-      heroImg={heroImg}
-      departmentName={departmentName}
-      universityName={universityName}
-      hospitalName={hospitalName}
-      tabMenu={tabMenu}
-      topSection={topSection}
-      officialWebSite={officialWebSite}
-    />
+    <>
+      <Header />
+      <main className='ed-back-linear bg-contain bg-no-repeat w-full flex flex-col items-center'>
+        <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
+          <section className='w-full flex flex-col items-start mb-14 pt-10'>
+            <div className='sm:w-11/12 ov-md:w-8/12 flex flex-col ov-md:pt-20'>
+              <h1 className='text-white text-xl font-semibold mb-1'>
+                {hospitalName.hospitalNameInJapanese}
+                {'　'}
+                {departmentName.departmentNameInJapanese}
+              </h1>
+              <p className='text-white text-xs mb-1'>
+                {hospitalName.hospitalNameInEnglish}-
+                {departmentName.departmentNameInEnglish}
+              </p>
+              <div className='flex flex-row'>
+                <Tag layoutStyle='mr-2'>
+                  {universityName.universityNameInJapanese}
+                </Tag>
+                <Tag layoutStyle='mr-2'>
+                  {departmentName.departmentNameInJapanese}
+                </Tag>
+              </div>
+            </div>
+          </section>
+
+          <section className='mb-16 relative w-full flex flex-col items-center'>
+            <DepTopSection
+              depName={departmentName.departmentNameInJapanese}
+              heroImg={heroImg}
+              educationalPoint={topSection.educationalPoint}
+              clinicalPoint={topSection.clinicalPoint}
+              researchPoint={topSection.researchPoint}
+              otherPoint={topSection.otherPoint}
+            />
+          </section>
+
+          <section className='w-full flex flex-col items-center mb-16'>
+            <AppealCardBoard />
+          </section>
+
+          <section className='flex flex-col items-center mb-16 '>
+            <div className='w-full bg-prime-blue-rich flex flex-col items-center py-6'>
+              <p className='text-white sm:text-xs ov-md:text-md sm:my-2 ov-md:my-4 breakAll'>
+                紹介動画を視聴して雰囲気をみてみませんか？
+              </p>
+              <MovieCarousel />
+            </div>
+          </section>
+
+          <section className='w-full flex flex-col items-center mb-16'>
+            <TabMenu>
+              <div className='w-full ov-md:p-8 sm:p-4 bg-white flex flex-col items-start'>
+                <div className='space-y-8'>
+                  <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
+                    研修カリキュラム
+                  </div>
+                  {/* <Image/> */}
+                  <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
+                    主な進路
+                  </div>
+                  <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
+                    取得可能な資格
+                  </div>
+                </div>
+              </div>
+              <CrewBoard crewDataList={tabMenu.crewCardListTab} />
+              <div className='w-full ov-md:p-8 sm:p-4 bg-white flex flex-col'>
+                <div className='space-y-8'>
+                  <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
+                    周辺地図
+                  </div>
+                  <iframe
+                    className='w-full mb-10 h-[50vw]'
+                    src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d279785.1765704249!2d140.17047807758485!3d35.991258388550875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2z562R5rOi5aSn5a2m!5e0!3m2!1sja!2sjp!4v1626441216082!5m2!1sja!2sjp'
+                    width='600'
+                    height='450'
+                    loading='lazy'
+                  ></iframe>
+                </div>
+              </div>
+              <EventTab />
+              <div className='w-full ov-md:p-8 sm:p-4 bg-white flex flex-col'>
+                <div className='space-y-8'>
+                  <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
+                    公式サイト
+                  </div>
+                  <PlaneButton href={officialWebSite}>
+                    診療科公式ページ→
+                  </PlaneButton>
+                  <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
+                    関連SNS
+                  </div>
+                  <TwitterTimeline href={tabMenu.snsTab.twitterTimelineUrl} />
+                </div>
+              </div>
+            </TabMenu>
+          </section>
+
+          <section className='w-full flex flex-col items-center pb-20'>
+            <div className='w-11/12 flex flex-col items-center sm:space-y-8 ov-md:space-y-20'>
+              <div className='flex flex-col items-center space-y-4'>
+                <div className='text-sm'>
+                  イベントや見学を通じて診療科について理解を深めましょう
+                </div>
+                <div className='flex sm:flex-col sm:items-center sm:space-y-4 ov-md:flex-row ov-md:space-x-4'>
+                  <PlaneButton id='visit'>見学申し込みをする→</PlaneButton>
+                  <PlaneButton
+                    id='propose'
+                    href='https://docs.google.com/forms/d/1a5N5t44UJw2jDOHKGyx3v0sOqp9aRWYOh5YSb1cyKCI/edit'
+                  >
+                    イベントの提案をする→
+                  </PlaneButton>
+                </div>
+              </div>
+              <div className='flex flex-col items-center space-y-4'>
+                <div className='text-sm'>
+                  詳しい情報については診療科のホームページをご覧ください
+                </div>
+                <PlaneButton href={officialWebSite}>
+                  診療科公式ページ→
+                </PlaneButton>
+              </div>
+            </div>
+          </section>
+          <ContactButtonModal />
+        </div>
+      </main>
+      <Footer />
+    </>
   )
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
   const paths: any = []
   const qForPaths = query(
     collection(db, 'fl_content'),
@@ -85,30 +216,101 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+interface Params extends ParsedUrlQuery {
+  department: string
+}
+
+interface Props {
+  postData: DepPostDataType
+}
+
+export const getStaticProps: GetStaticProps<Props, Params> = async ({
+  params,
+}) => {
   // PostData全体の取得
-  const initPostData: DepPostDataType = postDataInitializer
+  const postData: DepPostDataType = {
+    heroImgId: '',
+    officialWebSite: '',
+    departmentName: {
+      departmentNameInEnglish: '',
+      departmentNameInJapanese: '',
+    },
+    universityName: {
+      universityNameInEnglish: '',
+      universityNameInJapanese: '',
+    },
+    hospitalName: {
+      hospitalNameInEnglish: '',
+      hospitalNameInJapanese: '',
+    },
+    topSection: {
+      educationalPoint: '',
+      researchPoint: '',
+      clinicalPoint: '',
+      otherPoint: '',
+    },
+    tabMenu: {
+      basicInfoTab: '',
+      geographicalInformationTab: '',
+      snsTab: {
+        twitterTimelineUrl: '',
+      },
+      crewCardListTab: [],
+    },
+  }
 
-  const { postDataPoured, flFileHeroImgId, flFileIdsForCrewImg } =
-    getDataFromFirebase(initPostData, params)
-  // console.log('postPoured', postDataPoured)
+  if (!params?.department) return { props: { postData } }
 
-  const { postDataModified, querySnapshotForImg } = getCrewImgFileName(
-    postDataPoured,
-    flFileIdsForCrewImg
+  const qForPostData = query(
+    collection(db, 'fl_content'),
+    where('_fl_meta_.schema', '==', 'departmentPage'),
+    where('departmentName.departmentNameInEnglish', '==', params.department)
   )
-  // console.log('postM', postDataModified)
+  const querySnapshot = await getDocs(qForPostData),
+    flFileIdsForCrewImg: string[] = []
+  querySnapshot.docs.forEach((doc) => {
+    postData.departmentName = doc.data().departmentName
+    postData.universityName = doc.data().universityName
+    postData.hospitalName = doc.data().hospitalName
+    postData.heroImgId = doc.data().heroImageOfTheDepartment[0].id ?? ''
+    postData.tabMenu = {
+      basicInfoTab: doc.data().tabMenu.basicInfoTab,
+      snsTab: {
+        twitterTimelineUrl: getUrlFromTwitterTimeline(
+          doc.data().tabMenu.snsTab
+        ),
+      },
+      geographicalInformationTab: getUrlFromIframe(
+        doc.data().tabMenu.geographicalInformationTab
+      ),
+      crewCardListTab: [
+        ...doc.data().tabMenu.crewCardListTab.map((crewCard: any) => {
+          flFileIdsForCrewImg.push(crewCard.crewImage[0].id)
+          return {
+            uniqueKey: crewCard.uniqueKey ?? '',
+            crewImgId: crewCard.crewImage[0].id ?? '',
+            crewName: crewCard.crewName ?? '',
+            background: crewCard.background ?? '',
+            position: crewCard.position ?? '',
+            licence: crewCard.licence ?? '',
+            majorFiled: crewCard.majorField ?? '',
+            schoolLife: crewCard.schoolLife ?? '',
+            forFun: crewCard.forFun ?? '',
+          }
+        }),
+      ],
+    }
+    postData.topSection = doc.data().topSection
+    postData.officialWebSite = doc.data().officialWebSite
+  })
 
-  const postDataPerfect = getHeroImgFileName(
-    postDataModified,
-    flFileHeroImgId,
-    querySnapshotForImg
-  )
-
-  // console.log('postPperfect', postDataPerfect)
+  /*
+   * PostDataで得たreferenceをもとにfl_filesへアクセス
+   * file名だけ取得し、画像のダウンロードは各コンポーネントに任せる
+   */
   return {
     props: {
-      postDataPerfect,
+      postData,
     },
   }
 }
