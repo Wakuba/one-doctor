@@ -1,16 +1,8 @@
 //Library
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-
-//Firebase
-import { firebaseFunction } from '../../lib/firebase/firebase.config'
-import { httpsCallable } from 'firebase/functions'
-
-const postMessageToSlackChannelWithUserData = httpsCallable(
-  firebaseFunction,
-  'postMessageToSlackChannelWithUserData'
-)
+import imageUploader from '../../lib/customFunctions/imageUploader'
+import postSlackMessageKnocker from '../../lib/customFunctions/postSlackMessageHitter'
 
 interface SignUpFormData {
   name: string
@@ -20,12 +12,17 @@ interface SignUpFormData {
 }
 
 const SignUpForm: React.FC = () => {
-  const [error, setError] = useState<string | null>(null)
-  const router = useRouter()
   const [certificationImage, setCertificationImage] = useState<File | null>(
     null
   )
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+
+  // -------------error states---------------------------------------------------- //
+  const [noImageError, setNoImageError] = useState<boolean>(false)
+  const [passwordError, setPasswordError] = useState<boolean>(false)
+  const [isFileTypeError, setIsFileTypeError] = useState<boolean>(false)
+  // ----------------------------------------------------------------------------- //
+
   const {
     register,
     handleSubmit,
@@ -125,6 +122,7 @@ const SignUpForm: React.FC = () => {
           Name
         </label>
         <input
+          id='name'
           className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5'
           type='text'
           {...register('name', {
@@ -147,6 +145,7 @@ const SignUpForm: React.FC = () => {
         </label>
         <div className='mt-1 rounded-md shadow-sm'>
           <input
+            id='email'
             className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5'
             type='email'
             {...register('email', {
@@ -175,6 +174,7 @@ const SignUpForm: React.FC = () => {
         </label>
         <div className='mt-1 rounded-md shadow-sm'>
           <input
+            id='passwordOne'
             className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5'
             type='password'
             {...register('passwordOne', {
@@ -185,9 +185,9 @@ const SignUpForm: React.FC = () => {
               },
             })}
           />
-          {errors.password && (
+          {errors.passwordOne && (
             <div className='mt-2 text-xs text-red-600'>
-              {errors.password.message}
+              {errors.passwordOne.message}
             </div>
           )}
         </div>
@@ -202,6 +202,7 @@ const SignUpForm: React.FC = () => {
         </label>
         <div className='mt-1 rounded-md shadow-sm'>
           <input
+            id='passwordTwo'
             className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5'
             type='password'
             {...register('passwordTwo', {
@@ -234,6 +235,15 @@ const SignUpForm: React.FC = () => {
           />
         )} */}
       </div>
+      {isFileTypeError && (
+        <div className='text-red-500'>
+          ※jpeg, png, bmp, gif, svg以外のファイル形式は選択できません
+        </div>
+      )}
+      {noImageError && (
+        <div className='text-red-500'>※画像が選択されていません</div>
+      )}
+
       <div className='mt-6'>
         <span className='block w-full rounded-md shadow-sm'>
           <button
