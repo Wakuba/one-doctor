@@ -1,4 +1,5 @@
 import { User } from '@firebase/auth'
+import { StringDecoder } from 'string_decoder';
 
 export interface SpreadSheetDataType {
   date: string
@@ -78,6 +79,14 @@ export interface SignUpData {
 
 export interface SignUpDataWithUid extends SignUpData {
   uid: string
+}
+
+export interface SignUpAuthorizationDataWithImageId extends SignUpData {
+  certificationImageId: string
+}
+
+export interface SignUpAuthorizationDataWithImageUrl extends SignUpData {
+  certificationImageUrl: string
 }
 
 export interface LogInData {
