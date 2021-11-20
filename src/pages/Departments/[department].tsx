@@ -9,6 +9,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 
 import DepartmentTemplate from '../../components/templates/Department'
 import {
+<<<<<<< HEAD
   postDataInitializer,
   getDataFromFirebase,
   getCrewImgFileName,
@@ -21,6 +22,17 @@ export default function DepartmentPage({
   postDataPerfect: DepPostDataType
 }) {
   console.log('perfect', postDataPerfect)
+=======
+  getUrlFromIframe,
+  getUrlFromTwitterTimeline,
+} from '../../lib/customFunctions/urlExtractor'
+
+interface DepartmentPagePropsType {
+  postData: any
+}
+
+export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
+>>>>>>> feature/2021-9/wakuba/firebaseAuth
   const {
       heroImgFileName,
       departmentName,

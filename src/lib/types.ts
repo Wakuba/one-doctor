@@ -1,3 +1,6 @@
+import { User } from '@firebase/auth'
+import { StringDecoder } from 'string_decoder';
+
 export interface SpreadSheetDataType {
   date: string
   department: string
@@ -74,4 +77,49 @@ export interface DepartmentTemplatePropsType {
   tabMenu: TabMenuType
   heroImg: string
   officialWebSite: string
+}
+
+export interface OdUserAuthState {
+  uid: string
+  name: string
+  email: string
+}
+
+export interface SignUpData {
+  name: string
+  email: string
+  password: string
+}
+
+export interface SignUpDataWithUid extends SignUpData {
+  uid: string
+}
+
+export interface SignUpAuthorizationDataWithImageId extends SignUpData {
+  certificationImageId: string
+}
+
+export interface SignUpAuthorizationDataWithImageUrl extends SignUpData {
+  certificationImageUrl: string
+}
+
+export interface LogInData {
+  email: string
+  password: string
+}
+export interface UserAdditionalData {
+  uid: string
+  name: string
+  email: string
+  password: string
+}
+
+export interface OdUserContext {
+  odUser: User | null
+  isLoading: boolean
+  userAdditionalData: UserAdditionalData
+  signUp: ({ name, email, password }: SignUpData) => Promise<void>
+  logIn: ({ email, password }: LogInData) => Promise<void | User>
+  logOut: () => Promise<void>
+  sendPasswordResetEmailToUser: (email: string) => Promise<void>
 }
