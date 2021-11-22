@@ -15,9 +15,6 @@ import {
 import { ref, getDownloadURL } from 'firebase/storage'
 import { DepPostDataType } from '../../lib/types'
 
-// External components
-import { useEffect, useState } from 'react'
-
 // Custom components
 import PlaneButton from '../../components/atoms/PlaneButton'
 import Header from '../../components/organisms/Header'
@@ -35,33 +32,21 @@ import {
   getUrlFromIframe,
   getUrlFromTwitterTimeline,
 } from '../../lib/customFunctions/urlExtractor'
-import { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps, GetStaticPropsResult } from 'next'
 import { ParsedUrlQuery } from 'querystring'
+import router from 'next/router'
 
 export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
   const {
-      heroImgId,
-      departmentName,
-      universityName,
-      hospitalName,
-      tabMenu,
-      topSection,
-      officialWebSite,
-    } = postData,
-    [heroImg, setHeroImg] = useState<string>('')
-    console.log(postData)
-
-  useEffect(() => {
-    const f = async () => {
-      const docRef = doc(db, 'fl_files', heroImgId)
-      const docSnap = await getDoc(docRef)
-      const heroImgName = docSnap.data()?.file
-      await getDownloadURL(ref(storage, `flamelink/media/${heroImgName}`)).then(
-        (url) => setHeroImg(url)
-      )
-    }
-    f()
-  }, [])
+    heroImgUrl,
+    departmentName,
+    universityName,
+    hospitalName,
+    tabMenu,
+    topSection,
+    officialWebSite,
+  } = postData
+  console.log('postData on browse', postData)
 
   return (
     <>
@@ -93,7 +78,7 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
           <section className='mb-16 relative w-full flex flex-col items-center'>
             <DepTopSection
               depName={departmentName.departmentNameInJapanese}
-              heroImg={heroImg}
+              heroImgUrl={heroImgUrl}
               educationalPoint={topSection.educationalPoint}
               clinicalPoint={topSection.clinicalPoint}
               researchPoint={topSection.researchPoint}
@@ -197,7 +182,11 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
   )
 }
 
-export const getStaticPaths = async () => {
+interface ParamsType extends ParsedUrlQuery {
+  id: string
+}
+
+export const getStaticPaths: GetStaticPaths<ParamsType> = async () => {
   const paths: any = []
   const qForPaths = query(
     collection(db, 'fl_content'),
@@ -206,111 +195,125 @@ export const getStaticPaths = async () => {
   const querySnapshot = await getDocs(qForPaths)
   querySnapshot.forEach((doc) => {
     paths.push({
-      params: { department: doc.data().departmentName.departmentNameInEnglish },
+      params: { id: doc.data().id },
     })
   })
-  // console.log('path', paths)
+  console.log('path', paths)
   return {
     paths,
-    fallback: false,
+    fallback: true,
   }
 }
 
-interface Params extends ParsedUrlQuery {
-  department: string
-}
-
-interface Props {
+interface PropsType {
   postData: DepPostDataType
 }
 
-export const getStaticProps: GetStaticProps<Props, Params> = async ({
+interface PropsFetchingErrorType {
+  error: string
+}
+
+export const getStaticProps: GetStaticProps<
+  PropsType | PropsFetchingErrorType,
+  ParamsType
+> = async ({
   params,
-}) => {
-  // PostData全体の取得
-  const postData: DepPostDataType = {
-    heroImgId: '',
-    officialWebSite: '',
-    departmentName: {
-      departmentNameInEnglish: '',
-      departmentNameInJapanese: '',
-    },
-    universityName: {
-      universityNameInEnglish: '',
-      universityNameInJapanese: '',
-    },
-    hospitalName: {
-      hospitalNameInEnglish: '',
-      hospitalNameInJapanese: '',
-    },
-    topSection: {
-      educationalPoint: '',
-      researchPoint: '',
-      clinicalPoint: '',
-      otherPoint: '',
-    },
-    tabMenu: {
-      basicInfoTab: '',
-      geographicalInformationTab: '',
-      snsTab: {
-        twitterTimelineUrl: '',
-      },
-      crewCardListTab: [],
-    },
+}): Promise<GetStaticPropsResult<PropsType | PropsFetchingErrorType>> => {
+  let id = ''
+
+  if (!params) {
+    router.push('/index')
+  } else {
+    id = params.id
   }
 
-  if (!params?.department) return { props: { postData } }
+  try {
+    const docRef = doc(db, 'fl_content', id)
+    const docSnap = await getDoc(docRef)
+    const data = docSnap.data()
 
-  const qForPostData = query(
-    collection(db, 'fl_content'),
-    where('_fl_meta_.schema', '==', 'departmentPage'),
-    where('departmentName.departmentNameInEnglish', '==', params.department)
-  )
-  const querySnapshot = await getDocs(qForPostData),
-    flFileIdsForCrewImg: string[] = []
-  querySnapshot.docs.forEach((doc) => {
-    postData.departmentName = doc.data().departmentName
-    postData.universityName = doc.data().universityName
-    postData.hospitalName = doc.data().hospitalName
-    postData.heroImgId = doc.data().heroImageOfTheDepartment[0].id ?? ''
-    postData.tabMenu = {
-      basicInfoTab: doc.data().tabMenu.basicInfoTab,
-      snsTab: {
-        twitterTimelineUrl: getUrlFromTwitterTimeline(
-          doc.data().tabMenu.snsTab
-        ),
+    const heroImgId = data?.heroImageOfTheDepartment[0].id
+
+    const docRefForHeroImg = doc(db, 'fl_files', heroImgId)
+    const docSnapForHeroImg = await getDoc(docRefForHeroImg)
+    const heroImgName = docSnapForHeroImg.data()?.file
+
+    const heroImgUrl = await getDownloadURL(
+      ref(storage, `flamelink/media/${heroImgName}`)
+    )
+
+    const postData: DepPostDataType = {
+      heroImgUrl: heroImgUrl ?? '',
+      officialWebSite: data?.officialWebSite ?? '',
+      departmentName: data?.departmentName ?? '',
+      universityName: data?.universityName ?? '',
+      hospitalName: data?.hospitalName ?? '',
+      topSection: data?.topSection ?? '',
+      tabMenu: {
+        basicInfoTab: data?.tabMenu.basicInfoTab ?? '',
+        geographicalInformationTab:
+          getUrlFromIframe(data?.tabMenu.geographicalInformationTab) ?? '',
+        snsTab: {
+          twitterTimelineUrl:
+            getUrlFromTwitterTimeline(
+              data?.tabMenu.snsTab.twitterTimelineUrl
+            ) ?? '',
+        },
+        crewCardListTab: [],
       },
-      geographicalInformationTab: getUrlFromIframe(
-        doc.data().tabMenu.geographicalInformationTab
-      ),
-      crewCardListTab: [
-        ...doc.data().tabMenu.crewCardListTab.map((crewCard: any) => {
-          flFileIdsForCrewImg.push(crewCard.crewImage[0].id)
-          return {
-            uniqueKey: crewCard.uniqueKey ?? '',
-            crewImgId: crewCard.crewImage[0].id ?? '',
-            crewName: crewCard.crewName ?? '',
-            background: crewCard.background ?? '',
-            position: crewCard.position ?? '',
-            licence: crewCard.licence ?? '',
-            majorFiled: crewCard.majorField ?? '',
-            schoolLife: crewCard.schoolLife ?? '',
-            forFun: crewCard.forFun ?? '',
-          }
-        }),
-      ],
     }
-    postData.topSection = doc.data().topSection
-    postData.officialWebSite = doc.data().officialWebSite
-  })
+
+    for (const card of data?.tabMenu.crewCardListTab) {
+      const crewImgId = card.crewImage[0].id
+      const docRef = doc(db, 'fl_files', crewImgId)
+      const docSnap = await getDoc(docRef)
+      const crewImgName = docSnap.data()?.file
+      postData.tabMenu.crewCardListTab.push({
+        crewImgUrl: await getDownloadURL(
+          ref(storage, `flamelink/media/${crewImgName}`)
+        ),
+        crewName: card.crewName ?? '',
+        position: card.position ?? '',
+        background: card.background ?? '',
+        licence: card.licence ?? '',
+        majorField: card.majorField ?? '',
+        schoolLife: card.schoolLife ?? '',
+        forFun: card.forFun ?? '',
+      })
+    }
+
+    return {
+      props: {
+        postData,
+      },
+    }
+  } catch (e) {
+    // return { props: { message: e.message } }
+    if (e instanceof Error) {
+      console.error(e.message)
+      return { props: { error: e.message } }
+    }
+    throw e
+  }
+  // const querySnapshot = await getDocs(qForPostData)
+  // querySnapshot.docs.forEach(async (depDoc) => {
+  //   const stringifiedDepDoc = JSON.stringify(depDoc.data())
+  //   const parsedDepDoc = JSON.parse(stringifiedDepDoc)
+  // const docRef = doc(db, 'fl_files', heroImgId)
+  // const docSnap = await getDoc(docRef)
+  // heroImgName = docSnap.data()?.file
+  // postData.heroImgUrl = await getDownloadURL(
+  //   ref(storage, `flamelink/media/${heroImgName}`)
+  // )
+  // console.log(parsedDepDoc.departmentName.departmentNameInEnglish)
+
+  // twitter url
+  // googlemap url
+  // crewImage url
+  // heroimage url
 
   /*
    * PostDataで得たreferenceをもとにfl_filesへアクセス
    * file名だけ取得し、画像のダウンロードは各コンポーネントに任せる
    */
-  return {
-    props: {
-      postData,
-    },
-  }
 }

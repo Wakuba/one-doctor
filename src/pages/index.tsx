@@ -255,12 +255,10 @@ export async function getStaticProps() {
     const snapshot = await getDocs(qDash)
     snapshot.docs.forEach((doc) => {
       depList.push({
-        departmentNameInJapanese:
-          doc.data().departmentName.departmentNameInJapanese,
-        path: `/Departments/${
-          doc.data().departmentName.departmentNameInEnglish
-        }`,
+        id: doc.data().id,
+        path: `/Departments/${doc.data().id}`,
       })
+      console.log('depList', depList)
     })
   } catch (error) {
     console.log('Error getting depList', error)

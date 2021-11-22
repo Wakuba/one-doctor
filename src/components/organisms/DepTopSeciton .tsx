@@ -7,7 +7,7 @@ import clsx from 'clsx'
 
 interface DepTopSectionPropsType {
   depName: string
-  heroImg: string
+  heroImgUrl: string
   educationalPoint: string
   clinicalPoint: string
   researchPoint: string
@@ -16,7 +16,7 @@ interface DepTopSectionPropsType {
 
 export default function DepTopSection({
   depName,
-  heroImg,
+  heroImgUrl,
   educationalPoint,
   clinicalPoint,
   researchPoint,
@@ -81,12 +81,12 @@ export default function DepTopSection({
             )}
           ></div>
           <div className='relative sm:h-64 ov-md:h-96 z-10 border-white'>
-            {heroImg ? (
+            {heroImgUrl ? (
               <Image
                 layout='fill'
                 objectFit='cover'
                 loading='eager'
-                src={heroImg}
+                src={heroImgUrl}
                 alt='hero image of the department'
               />
             ) : (

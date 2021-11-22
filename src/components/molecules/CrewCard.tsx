@@ -1,16 +1,7 @@
-// External components
 import clsx from 'clsx'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-
-// Firebase
-import { db, storage } from '../../lib/firebase/firebase.config'
-import { ref, getDownloadURL } from 'firebase/storage'
-import { doc, getDoc } from '@firebase/firestore'
-
-interface CrewCardPropsType {
-  crewData: any
-}
+import { CrewCardListTabType } from '../../lib/types'
 
 interface CardFacePropsType {
   imgSrc?: string
@@ -25,10 +16,13 @@ interface CardFacePropsType {
   forFun?: string
 }
 
-export default function CrewCard({ crewData }: CrewCardPropsType) {
+export default function CrewCard({
+  crewData,
+}: {
+  crewData: CrewCardListTabType
+}) {
   const [isFliped, setIsFliped] = useState<boolean>(false),
-    [arrowVanisher, setArrowVanisher] = useState<boolean>(false),
-    [crewImg, setCrewImg] = useState<string>('')
+    [arrowVanisher, setArrowVanisher] = useState<boolean>(false)
   const flip = () => {
     setIsFliped(!isFliped)
   }
@@ -39,7 +33,7 @@ export default function CrewCard({ crewData }: CrewCardPropsType) {
     licence,
     majorField,
     schoolLife,
-    crewImgId,
+    crewImgUrl,
     forFun,
   } = crewData
 
@@ -47,19 +41,6 @@ export default function CrewCard({ crewData }: CrewCardPropsType) {
     if (isFliped) setTimeout(() => setArrowVanisher(true), 300)
     else setTimeout(() => setArrowVanisher(false), 300)
   }, [isFliped])
-
-  useEffect(() => {
-    ;(async () => {
-      const docRef = doc(db, 'fl_files', crewImgId)
-      const docSnap = await getDoc(docRef)
-      const crewImgName = docSnap.data()?.file
-      await getDownloadURL(ref(storage, `flamelink/media/${crewImgName}`)).then(
-        (url) => {
-          setCrewImg(url)
-        }
-      )
-    })()
-  }, [])
 
   return (
     <div
@@ -81,7 +62,7 @@ export default function CrewCard({ crewData }: CrewCardPropsType) {
         <CardHead
           flip={flip}
           isArrowVanished={arrowVanisher}
-          imgSrc={crewImg}
+          imgSrc={crewImgUrl}
           crewName={crewName}
           position={position}
           background={background}
@@ -91,7 +72,7 @@ export default function CrewCard({ crewData }: CrewCardPropsType) {
         <CardTail
           flip={flip}
           isArrowVanished={arrowVanisher}
-          imgSrc={crewImg}
+          imgSrc={crewImgUrl}
           crewName={crewName}
           position={position}
           schoolLife={schoolLife}
