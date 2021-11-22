@@ -219,6 +219,7 @@ export const getStaticProps: GetStaticProps<
 > = async ({
   params,
 }): Promise<GetStaticPropsResult<PropsType | PropsFetchingErrorType>> => {
+
   let id = ''
 
   if (!params) {
@@ -228,22 +229,16 @@ export const getStaticProps: GetStaticProps<
   }
 
   try {
-    const docRef = doc(db, 'fl_content', id)
-    const docSnap = await getDoc(docRef)
+    const docSnap = await getDoc(doc(db, 'fl_content', id))
     const data = docSnap.data()
-
     const heroImgId = data?.heroImageOfTheDepartment[0].id
-
-    const docRefForHeroImg = doc(db, 'fl_files', heroImgId)
-    const docSnapForHeroImg = await getDoc(docRefForHeroImg)
+    const docSnapForHeroImg = await getDoc(doc(db, 'fl_files', heroImgId))
     const heroImgName = docSnapForHeroImg.data()?.file
-
-    const heroImgUrl = await getDownloadURL(
+    const url = await getDownloadURL(
       ref(storage, `flamelink/media/${heroImgName}`)
     )
-
     const postData: DepPostDataType = {
-      heroImgUrl: heroImgUrl ?? '',
+      heroImgUrl: url ?? '',
       officialWebSite: data?.officialWebSite ?? '',
       departmentName: data?.departmentName ?? '',
       universityName: data?.universityName ?? '',
@@ -265,13 +260,13 @@ export const getStaticProps: GetStaticProps<
 
     for (const card of data?.tabMenu.crewCardListTab) {
       const crewImgId = card.crewImage[0].id
-      const docRef = doc(db, 'fl_files', crewImgId)
-      const docSnap = await getDoc(docRef)
+      const docSnap = await getDoc(doc(db, 'fl_files', crewImgId))
       const crewImgName = docSnap.data()?.file
+      const url = await getDownloadURL(
+        ref(storage, `flamelink/media/${crewImgName}`)
+      )
       postData.tabMenu.crewCardListTab.push({
-        crewImgUrl: await getDownloadURL(
-          ref(storage, `flamelink/media/${crewImgName}`)
-        ),
+        crewImgUrl: url ?? '',
         crewName: card.crewName ?? '',
         position: card.position ?? '',
         background: card.background ?? '',
