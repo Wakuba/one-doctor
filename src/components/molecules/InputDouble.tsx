@@ -1,4 +1,3 @@
-import { region } from 'firebase-functions/v1'
 import { VFC } from 'react'
 import { UseFormRegister, FieldValues } from 'react-hook-form'
 import Input from '../atoms/Input'
@@ -33,13 +32,13 @@ const InputDouble: VFC<InputDoublePropsType> = ({
   errors,
 }) => {
   return (
-    <div className={`${style?.wholeStyle}`}>
+    <div key={name} className={`${style?.wholeStyle} grid grid-cols-2`}>
       <Input
         name={nameOne}
         style={{
-          wholeStyle: 'inline',
+          wholeStyle: 'inline col-span-1',
           labelStyle: 'block',
-          inputStyle: style?.styleOne,
+          inputStyle: `${style?.styleOne} w-4/5`,
         }}
         type={type}
         register={register}
@@ -51,15 +50,15 @@ const InputDouble: VFC<InputDoublePropsType> = ({
       <Input
         name={nameTwo}
         style={{
-          wholeStyle: 'inline',
-          labelStyle: 'inline',
-          inputStyle: style?.styleTwo,
+          wholeStyle: 'inline col-span-1',
+          labelStyle: 'block',
+          inputStyle: `${style?.styleTwo} w-4/5`,
         }}
         type={type}
         register={register}
         errors={errors}
         placeholder={placeholderTwo}
-      ></Input>
+      >dummy</Input>
     </div>
   )
 }
