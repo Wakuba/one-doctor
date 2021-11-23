@@ -1,8 +1,13 @@
 //Library
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import imageUploader from '../../lib/customFunctions/imageUploader'
 import postSlackMessageKnocker from '../../lib/customFunctions/postSlackMessageHitter'
+import Input from '../atoms/Input'
+import Form from '../organisms/Form'
+import SimpleSelector from '../molecules/SimpleSelector'
+import InputDouble from '../molecules/InputDouble'
+import SubmitButton from '../atoms/SubmitButton'
 
 interface SignUpFormData {
   name: string
@@ -11,7 +16,7 @@ interface SignUpFormData {
   passwordTwo: string
 }
 
-const SignUpForm: React.FC = () => {
+const SignUpForm: React.FC = ({ style }) => {
   const [certificationImage, setCertificationImage] = useState<File | null>(
     null
   )
@@ -23,12 +28,7 @@ const SignUpForm: React.FC = () => {
   const [isFileTypeError, setIsFileTypeError] = useState<boolean>(false)
   // ----------------------------------------------------------------------------- //
 
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    formState: { errors },
-  } = useForm()
+  const { handleSubmit, getValues } = useForm()
 
   const handleFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     // ファイルがない場合
@@ -68,6 +68,7 @@ const SignUpForm: React.FC = () => {
   }
 
   const onSubmit = (data: SignUpFormData) => {
+    console.log(data)
     console.log('certificationImage', certificationImage)
     const { name, email, passwordOne } = data
     const password = passwordOne
@@ -77,184 +78,113 @@ const SignUpForm: React.FC = () => {
     firestoreのidをmetadataとしてstorageにアップロード
     */
 
-    const abortCtrl = new AbortController()
-    if (getValues('passwordOne') !== getValues('passwordTwo')) {
-      setPasswordError(true)
-    } else if (!certificationImage) {
-      setNoImageError(true)
-    } else {
-      imageUploader(certificationImage).then((id) =>
-        postSlackMessageKnocker(
-          name,
-          email,
-          password,
-          id,
-          abortCtrl,
-          previewUrl
-        )
-      )
-    }
+    // const abortCtrl = new AbortController()
+    // if (getValues('passwordOne') !== getValues('passwordTwo')) {
+    //   setPasswordError(true)
+    // } else if (!certificationImage) {
+    //   setNoImageError(true)
+    // } else {
+    //   imageUploader(certificationImage).then((id) =>
+    //     postSlackMessageKnocker(
+    //       name,
+    //       email,
+    //       password,
+    //       id,
+    //       abortCtrl,
+    //       previewUrl
+    //     )
+    //   )
+    // }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {passwordError && (
-        <div className='text-red-500'>※パスワードが一致していません</div>
-      )}
-      <button
-        onClick={() => {
-          fetch(
-            `/api/postMessageToSlack/${JSON.stringify({
-              name: 'tashiro',
-              email: 'asdf;lkj',
-            })}`,
-            { method: 'POST' }
-          )
-        }}
-      >
-        slackに投げる
-      </button>
-      <div className='rounded-md shadow-sm'>
-        <label
-          htmlFor='name'
-          className='block text-sm font-medium leading-5 text-gray-700'
+    <div className={style}>
+      <div>新規登録</div>
+      <Form formName='signUpForm' onSubmit={onSubmit}>
+        <InputDouble
+          {...{
+            name: 'name',
+            nameOne: 'familyName',
+            nameTwo: 'firstName',
+            type: 'text',
+            placeholderOne: '姓',
+            placeholderTwo: '名',
+          }}
         >
-          Name
-        </label>
-        <input
-          id='name'
-          className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5'
-          type='text'
-          {...register('name', {
-            required: 'Please enter an name',
-          })}
-        />
-        {errors.password && (
-          <div className='mt-2 text-xs text-red-600'>
-            {errors.password.message}
-          </div>
-        )}
-      </div>
-
-      <div className='mt-6'>
-        <label
-          htmlFor='email'
-          className='block text-sm font-medium leading-5 text-gray-700'
+          お名前
+        </InputDouble>
+        <InputDouble
+          {...{
+            name: 'ruby',
+            nameOne: 'familyRuby',
+            nameTwo: 'firstRuby',
+            type: 'text',
+            placeholderOne: 'せい',
+            placeholderTwo: 'めい',
+          }}
         >
-          Email address
-        </label>
-        <div className='mt-1 rounded-md shadow-sm'>
-          <input
-            id='email'
-            className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5'
-            type='email'
-            {...register('email', {
-              required: 'Please enter an email',
-              // pattern: {
-              //   value:
-              //     /^(([^<>()[\\]\\\\.,;:\\s@"]+(\\.[^<>()[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/,
-              //   message: 'Not a valid email',
-              // },
-            })}
-          />
-          {errors.email && (
-            <div className='mt-2 text-xs text-red-600'>
-              {errors.email.message}
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className='mt-6'>
-        <label
-          htmlFor='passwordOne'
-          className='block text-sm font-medium leading-5 text-gray-700'
+          お名前
+        </InputDouble>
+        <SimpleSelector
+          {...{
+            name: 'gender',
+            options: ['女性', '男性', 'その他'],
+            placeholder: '▼選択してください',
+          }}
         >
-          PasswordOne
-        </label>
-        <div className='mt-1 rounded-md shadow-sm'>
-          <input
-            id='passwordOne'
-            className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5'
-            type='password'
-            {...register('passwordOne', {
-              required: 'Please enter a password',
-              minLength: {
-                value: 6,
-                message: 'Should have at least 6 characters',
-              },
-            })}
-          />
-          {errors.passwordOne && (
-            <div className='mt-2 text-xs text-red-600'>
-              {errors.passwordOne.message}
-            </div>
-          )}
-        </div>
-      </div>
+          性別
+        </SimpleSelector>
 
-      <div className='mt-6'>
-        <label
-          htmlFor='passwordTwo'
-          className='block text-sm font-medium leading-5 text-gray-700'
+        <Input
+          name='emailOne'
+          type='email'
+          style={{ wholeStyle: 'block', inputStyle: 'block' }}
         >
-          PasswordTwo
-        </label>
-        <div className='mt-1 rounded-md shadow-sm'>
-          <input
-            id='passwordTwo'
-            className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5'
-            type='password'
-            {...register('passwordTwo', {
-              required: 'Please enter a password',
-              minLength: {
-                value: 6,
-                message: 'Should have at least 6 characters',
-              },
-            })}
-          />
-          {errors.passwordTwo && (
-            <div className='mt-2 text-xs text-red-600'>
-              {errors.passwordTwo.message}
-            </div>
-          )}
-        </div>
-      </div>
+          メールアドレス ※大学のメアド以外を入力してください
+        </Input>
+        <Input
+          name='emailTwo'
+          type='email'
+          style={{ wholeStyle: 'block', inputStyle: 'block' }}
+        >
+          メールアドレス※（確認用）
+        </Input>
+        <Input
+          name='emailUniv'
+          type='email'
+          style={{ wholeStyle: 'block', inputStyle: 'block' }}
+        >
+          大学のメールアドレス
+          ※医学生認証を行います。登録後にこのメアドにきたURLから本登録してください。
+        </Input>
+        <Input
+          name='passwordOne'
+          type='password'
+          style={{ wholeStyle: 'block', inputStyle: 'block' }}
+        >
+          パスワード ※（仮テキスト）半角英数を混ぜて６文字以上
+        </Input>
 
-      <div>
-        <label htmlFor='image'>image</label>
-        <input type='file' id='image' accept='image/*' onChange={handleFile} />
-        <img
-          src={previewUrl ?? 'svg/写真のフリー素材11.svg'}
-          alt='あなたの写真'
-        />
-        {/* {certificationImage && (
-          <img
-            src={URL.createObjectURL(new Blob([certificationImage]))}
-            alt=''
-          />
-        )} */}
-      </div>
-      {isFileTypeError && (
+        <Input
+          name='passwordTwo'
+          type='password'
+          style={{ wholeStyle: 'block', inputStyle: 'block' }}
+        >
+          パスワード※ （確認用）
+        </Input>
+
+        {/* {isFileTypeError && (
         <div className='text-red-500'>
           ※jpeg, png, bmp, gif, svg以外のファイル形式は選択できません
         </div>
       )}
       {noImageError && (
         <div className='text-red-500'>※画像が選択されていません</div>
-      )}
+      )} */}
 
-      <div className='mt-6'>
-        <span className='block w-full rounded-md shadow-sm'>
-          <button
-            type='submit'
-            className='w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out'
-          >
-            Sign up
-          </button>
-        </span>
-      </div>
-    </form>
+        <SubmitButton />
+      </Form>
+    </div>
   )
 }
 export default SignUpForm
