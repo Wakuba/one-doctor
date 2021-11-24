@@ -48,7 +48,7 @@ const Input: VFC<InputPropsType> = ({
           {errors[name].message}
         </div>
       ) : (
-        <div className='invisible'>message</div>
+        <div className='invisible text-xs block'>message</div>
       )}
     </div>
   )
