@@ -1,6 +1,6 @@
 import Form from '../organisms/Form'
-import Input from '../atoms/Input'
-import Textarea from '../atoms/Textarea'
+import Input from '../FormGroup/Input'
+import Textarea from '../FormGroup/Textarea'
 import SubmitButton from '../atoms/SubmitButton'
 
 const InqueriesForm = ({ style }) => {

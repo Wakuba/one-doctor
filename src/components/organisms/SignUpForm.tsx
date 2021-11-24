@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import imageUploader from '../../lib/customFunctions/imageUploader'
 import postSlackMessageKnocker from '../../lib/customFunctions/postSlackMessageHitter'
-import Input from '../atoms/Input'
+import Input from '../FormGroup/Input'
 import Form from '../organisms/Form'
-import SimpleSelector from '../molecules/SimpleSelector'
-import InputDouble from '../molecules/InputDouble'
+import SimpleSelector from '../FormGroup/SimpleSelector'
+import InputDouble from '../FormGroup/InputDouble'
 import SubmitButton from '../atoms/SubmitButton'
 
 interface SignUpFormData {
