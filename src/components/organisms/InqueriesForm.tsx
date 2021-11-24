@@ -2,7 +2,11 @@ import Form from '../organisms/Form'
 import Input from '../atoms/Input'
 import Textarea from '../atoms/Textarea'
 import SubmitButton from '../atoms/SubmitButton'
+
 const InqueriesForm = ({ style }) => {
+  const onSubmit = (data) => {
+    console.log('data', data)
+  }
   return (
     <div className={style}>
       <div className='mt-10'>
@@ -20,30 +24,11 @@ const InqueriesForm = ({ style }) => {
       >
         <Input {...{ name: 'name', type: 'text' }}>お名前(必須)</Input>
         <Input {...{ name: 'email', type: 'text' }}>メールアドレス(必須)</Input>
-        <Textarea {...{ name: 'content' }} >お問い合わせ内容(必須)</Textarea>
-        <SubmitButton />
+        <Textarea {...{ name: 'content' }}>お問い合わせ内容(必須)</Textarea>
+        <SubmitButton>送信する</SubmitButton>
       </Form>
     </div>
   )
 }
 
 export default InqueriesForm
-
-function onSubmit(data) {
-  console.log('data', data)
-  // const target = e.target as typeof e.target & {
-  //     content: { value: string }
-  //     email: { value: string }
-  //     name: { value: string }
-  //   },
-  //   data = {
-  //     content: target.content.value,
-  //     email: target.email.value,
-  //     name: target.name.value,
-  //   },
-  //   sendMail = httpsCallable(firebaseFunction, 'sendMail')
-  // sendMail(data)
-  // target.name.value = ''
-  // target.email.value = ''
-  // target.content.value = ''
-}

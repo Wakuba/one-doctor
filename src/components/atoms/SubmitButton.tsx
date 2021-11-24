@@ -1,6 +1,7 @@
 import clsx from 'clsx'
+import { VFC } from 'react'
 
-const SubmitButton = () => (
+const SubmitButton: VFC<{ children?: string }> = ({ children }) => (
   <div className='flex justify-center pb-10'>
     <button
       type='submit'
@@ -9,7 +10,7 @@ const SubmitButton = () => (
         'active:transfom active:translate-y-[2px] active:border-none'
       )}
     >
-      送信する
+      {children}
     </button>
   </div>
 )

@@ -182,7 +182,7 @@ const SignUpForm: React.FC = ({ style }) => {
         <div className='text-red-500'>※画像が選択されていません</div>
       )} */}
 
-        <SubmitButton />
+        <SubmitButton>送信する</SubmitButton>
       </Form>
     </div>
   )
