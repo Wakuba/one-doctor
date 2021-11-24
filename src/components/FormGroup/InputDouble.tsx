@@ -1,6 +1,6 @@
 import { VFC } from 'react'
 import { UseFormRegister, FieldValues } from 'react-hook-form'
-import Input from '../atoms/Input'
+import Input from './Input'
 
 interface InputDoublePropsType {
   children?: string
