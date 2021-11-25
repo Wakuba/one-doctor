@@ -9,6 +9,7 @@ import SingleSelector from '../atoms/SingleSelector'
 import InputDouble from '../atoms/InputDouble'
 import SubmitButton from '../atoms/SubmitButton'
 import MultiSelector from '../atoms/MultiSelector'
+import Link from 'next/link'
 
 interface MedStudentSignUpFormData {
   name: string
@@ -100,12 +101,22 @@ const MedStudentSignUpForm: React.FC = ({ style }) => {
 
   return (
     <div className={style}>
-      <div title='topSection' className='mb-12'>
-        <h1 className='mt-10 text-prime-blue-rich font-semibold text-2xl'>
+      <div title='topSection' className=''>
+        <h1 className='mt-10 text-prime-blue-rich font-semibold text-2xl mb-6'>
           新規登録 for 医学生
         </h1>
-        <span>研修医の方は</span>
-        <div className='inline'>こちら</div>
+        <div className='ov-md:inline sm:block mb-6'>
+          <span>研修医の方は</span>
+          <Link href='/ResidencySignUp'>
+            <a className='inline underline text-[#00B8FF]'>こちら</a>
+          </Link>
+        </div>
+      </div>
+      <div className='block mb-12'>
+        <span>すでにアカウントをお持ちの方は</span>
+        <Link href='/LogIn'>
+          <a className='inline underline text-[#00B8FF]'>こちら</a>
+        </Link>
       </div>
       <Form formName='signUpForm' onSubmit={onSubmit} style='space-y-6'>
         <InputDouble

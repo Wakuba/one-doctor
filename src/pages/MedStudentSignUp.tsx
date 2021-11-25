@@ -2,7 +2,7 @@ import MedStudentSignUpForm from '../components/organisms/MedStudentSignUpForm'
 
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
-const SignUpPage: React.FC = () => {
+const MedStudentSignUpPage: React.VFC = () => {
   return (
     <>
       <Header />
@@ -16,4 +16,4 @@ const SignUpPage: React.FC = () => {
     </>
   )
 }
-export default SignUpPage
+export default MedStudentSignUpPage
