@@ -257,8 +257,8 @@ export async function getStaticProps() {
       depList.push({
         id: doc.data().id,
         path: `/Departments/${doc.data().id}`,
+        depName: doc.data().departmentName,
       })
-      console.log('depList', depList)
     })
   } catch (error) {
     console.log('Error getting depList', error)
