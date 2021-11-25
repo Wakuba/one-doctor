@@ -1,26 +1,48 @@
-import React, { useState, VFC } from 'react'
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { ChangeEvent, useState, VFC } from 'react'
 import Image from 'next/image'
 import {
-  UseFormRegister,
+  // UseFormRegister,
   FieldValues,
   Controller,
   Control,
-  setError,
-  Field,
+  UseFormSetError,
+  UseFormGetValues,
 } from 'react-hook-form'
 
 interface ImageUploadPropsType {
   name: string
   children?: string
-  subTitle?: string
-  control: Control<FieldValues, object>
-  register: UseFormRegister<FieldValues>
-  errors: any
-  setError: UseFormSetError<FieldValues>
-  setCertificationImage: React.Dispatch<React.SetStateAction<File | null>>
+  // subTitle?: string
+  control?: Control<FieldValues, object>
+  // register: UseFormRegister<FieldValues>
+  errors?: any
+  setError?: UseFormSetError<FieldValues>
+  getValues?: UseFormGetValues<FieldValues>
+  // setCertificationImage: React.Dispatch<React.SetStateAction<File | null>>
 }
 
-const errorRenderer = (fileTypeError, noImageError) => {
+const errorRenderer = (
+  fileTypeError: {
+    message:
+      | boolean
+      | React.ReactChild
+      | React.ReactFragment
+      | React.ReactPortal
+      | null
+      | undefined
+  },
+  noImageError: {
+    message:
+      | boolean
+      | React.ReactChild
+      | React.ReactFragment
+      | React.ReactPortal
+      | null
+      | undefined
+  }
+) => {
   if (fileTypeError) {
     return <div className='text-[#FF0000] text-xs'>{fileTypeError.message}</div>
   } else if (noImageError) {
@@ -37,19 +59,20 @@ const errorRenderer = (fileTypeError, noImageError) => {
 const ImageUpload: VFC<ImageUploadPropsType> = ({
   name,
   children,
-  subTitle,
-  register,
+  // subTitle,
+  // register,
   control,
   setError,
+  getValues,
   errors,
-  setCertificationImage,
+  // setCertificationImage,
 }) => {
   const [disposalUrl, setDisposalUrl] = useState('')
 
-  const handleFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
     // ファイルがない場合
     if (event.target.files === null || event.target.files.length === 0) {
-      return
+      if (getValues) return getValues('doctorCertification') ?? null
     } else {
       const files = Object.values(event.target.files)
       setDisposalUrl(URL.createObjectURL(new Blob(files)))
@@ -57,7 +80,7 @@ const ImageUpload: VFC<ImageUploadPropsType> = ({
     }
   }
 
-  const fileTypeChecker = (event) => {
+  const fileTypeChecker = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files === null || event.target.files.length === 0) {
       return
     }
@@ -73,11 +96,12 @@ const ImageUpload: VFC<ImageUploadPropsType> = ({
         ].includes(file.type)
       ) {
         console.log(file)
-        setError('fileTypeError', {
-          type: 'manual',
-          message:
-            ' ※jpeg, png, bmp, gif, svg以外のファイル形式は選択できません',
-        })
+        if (setError)
+          setError('fileTypeError', {
+            type: 'manual',
+            message:
+              ' ※jpeg, png, bmp, gif, svg以外のファイル形式は選択できません',
+          })
       }
     })
   }
@@ -90,7 +114,7 @@ const ImageUpload: VFC<ImageUploadPropsType> = ({
         control={control}
         rules={{ required: '選択されていません' }}
         name={name}
-        render={({ field: { onChange, value, name, ref } }) => {
+        render={({ field: { onChange, name } }) => {
           // console.log('onChange', onChange)
           // console.log('value', value)
           // console.log('name', name)
@@ -113,7 +137,7 @@ const ImageUpload: VFC<ImageUploadPropsType> = ({
                 name={name}
                 type='file'
                 accept='image/*'
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   e.preventDefault()
                   fileTypeChecker(e)
                   onChange(handleFile(e))

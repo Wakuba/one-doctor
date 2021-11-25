@@ -1,8 +1,8 @@
 //Library
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import imageUploader from '../../lib/customFunctions/imageUploader'
-import postSlackMessageKnocker from '../../lib/customFunctions/postSlackMessageHitter'
+import { VFC } from 'react'
+// import { useForm } from 'react-hook-form'
+// import imageUploader from '../../lib/customFunctions/imageUploader'
+// import postSlackMessageKnocker from '../../lib/customFunctions/postSlackMessageHitter'
 import Input from '../atoms/Input'
 import Form from '../molecules/Form'
 import SingleSelector from '../atoms/SingleSelector'
@@ -18,62 +18,11 @@ interface MedStudentSignUpFormData {
   passwordTwo: string
 }
 
-const MedStudentSignUpForm: React.FC = ({ style }) => {
-  const [certificationImage, setCertificationImage] = useState<File | null>(
-    null
-  )
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
-
-  // -------------error states---------------------------------------------------- //
-  const [noImageError, setNoImageError] = useState<boolean>(false)
-  const [passwordError, setPasswordError] = useState<boolean>(false)
-  const [isFileTypeError, setIsFileTypeError] = useState<boolean>(false)
-  // ----------------------------------------------------------------------------- //
-
-  const { handleSubmit, getValues } = useForm()
-
-  const handleFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // ファイルがない場合
-    if (event.target.files === null || event.target.files.length === 0) {
-      return
-    }
-
-    const files = Object.values(event.target.files)
-
-    console.log(files)
-
-    const pickedPhotos = files.filter((file) => {
-      if (
-        ![
-          'image/gif',
-          'image/jpeg',
-          'image/png',
-          'image/bmp',
-          'image/svg+xml',
-        ].includes(file.type)
-      ) {
-        setIsFileTypeError(true)
-        return false
-      }
-
-      return true
-    })
-
-    // ファイルがない場合
-    if (pickedPhotos.length === 0) return
-    const picked = pickedPhotos[0]
-
-    // エラーハンドリング後, 要素が一つになったFileListをFile[]=>Fileにしてstateに格納
-    setCertificationImage(picked)
-    console.log(certificationImage)
-    setPreviewUrl(URL.createObjectURL(new Blob(files)))
-  }
-
+const MedStudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
   const onSubmit = (data: MedStudentSignUpFormData) => {
     console.log(data)
-    console.log('certificationImage', certificationImage)
-    const { name, email, passwordOne } = data
-    const password = passwordOne
+    // const { name, email, passwordOne } = data
+    // const password = passwordOne
 
     /*
     firesotreにファイル名などのファイル情報をアップロード=>id発行
@@ -148,7 +97,7 @@ const MedStudentSignUpForm: React.FC = ({ style }) => {
             name: 'gender',
             options: ['女性', '男性', 'その他'],
             placeholder: '▼選択してください',
-            isSearchable: false
+            isSearchable: false,
           }}
         >
           性別
@@ -194,7 +143,13 @@ const MedStudentSignUpForm: React.FC = ({ style }) => {
           希望就職地
         </MultiSelector>
 
-        <SingleSelector {...{ name: 'grade', isSearchable: true, options: [1, 2, 3, 4, 5, 6] }}>
+        <SingleSelector
+          {...{
+            name: 'grade',
+            isSearchable: true,
+            options: ['1', '2', '3', '4', '5', '6'],
+          }}
+        >
           学年
         </SingleSelector>
         <SingleSelector

@@ -1,4 +1,4 @@
-import { useAuth } from '../lib/context'
+// import { useAuth } from '../lib/context'
 import { useRequiredAuth } from '../lib/customHooks/useAuth'
 
 const DashBoardPage: React.FC = () => {

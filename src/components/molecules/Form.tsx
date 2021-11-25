@@ -21,6 +21,7 @@ const Form: VFC<FormPropsType> = ({ formName, children, onSubmit, style }) => {
     register,
     control,
     setError,
+    getValues,
     formState: { errors },
   } = useForm()
 
@@ -35,6 +36,7 @@ const Form: VFC<FormPropsType> = ({ formName, children, onSubmit, style }) => {
                     register,
                     errors,
                     setError,
+                    getValues,
                     control,
                     key: child.props.name,
                   },

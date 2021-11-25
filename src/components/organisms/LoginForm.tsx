@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useAuth } from '../../lib/context'
+// import { useRouter } from 'next/router'
+import { VFC } from 'react'
+// import { useForm } from 'react-hook-form'
+// import { useAuth } from '../../lib/context'
 import Form from '../molecules/Form'
 import Input from '../atoms/Input'
 import InputDouble from '../atoms/InputDouble'
@@ -15,29 +15,24 @@ interface LoginFormData {
   passwordTwo: string
 }
 
-const LoginForm = ({ style }) => {
-  const [error, setError] = useState<string | null>(null)
-  const auth = useAuth()
-  const router = useRouter()
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    formState: { errors },
-  } = useForm()
+const LoginForm: VFC<{ style: string }> = ({ style }) => {
+  // const [error, setError] = useState<string | null>(null)
+  // const auth = useAuth()
+  // const router = useRouter()
 
   const onSubmit = (data: LoginFormData) => {
-    const { email, passwordOne } = data
-    const password = passwordOne
-    if (getValues('passwordOne') === getValues('passwordTwo')) {
-      return auth.logIn({ email, password }).then((user) => {
-        // console.log('logIn function', data)
-        router.push('/Dashboard')
-        console.log('logInData', user)
-      })
-    } else {
-      setError('Password Not Matched')
-    }
+    console.log(data)
+    // const { email, passwordOne } = data
+    // const password = passwordOne
+    // if (getValues('passwordOne') === getValues('passwordTwo')) {
+    //   return auth.logIn({ email, password }).then((user) => {
+    //     // console.log('logIn function', data)
+    //     router.push('/Dashboard')
+    //     console.log('logInData', user)
+    //   })
+    // } else {
+    //   setError('Password Not Matched')
+    // }
   }
 
   return (
@@ -53,7 +48,7 @@ const LoginForm = ({ style }) => {
           </Link>
         </div>
       </div>
-      <Form onSubmit={onSubmit} style={`space-y-6`}>
+      <Form formName='login' onSubmit={onSubmit} style={`space-y-6`}>
         <InputDouble
           {...{
             name: 'name',

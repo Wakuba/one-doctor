@@ -29,4 +29,3 @@ export default async function postSlackMessageHitter(
     URL.revokeObjectURL(disposalUrl)
   })
 }
-

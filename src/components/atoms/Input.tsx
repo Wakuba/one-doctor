@@ -1,4 +1,4 @@
-import { VFC, ReactNode, useEffect } from 'react'
+import { VFC } from 'react'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
 
 type InputPropsType = {
@@ -8,8 +8,8 @@ type InputPropsType = {
   style?: { wholeStyle?: string; labelStyle?: string; inputStyle?: string }
   type: 'email' | 'password' | 'text'
   placeholder?: string
-  register: UseFormRegister<FieldValues>
-  errors: any
+  register?: UseFormRegister<FieldValues>
+  errors?: any
 }
 
 const Input: VFC<InputPropsType> = ({
@@ -27,7 +27,6 @@ const Input: VFC<InputPropsType> = ({
   else if (type === 'password') errorMessage = 'パスワードを入力してください'
   else errorMessage = '入力されていません'
 
-
   return (
     <div className={`${style?.wholeStyle}`}>
       <label
@@ -37,17 +36,19 @@ const Input: VFC<InputPropsType> = ({
         }`}
       >
         {children}
-      <p className='text-[#FF0000] inline '>*</p>
-      <div className='text-sm'>{subTitle}</div>
+        <p className='text-[#FF0000] inline '>*</p>
+        <div className='text-sm'>{subTitle}</div>
       </label>
-      <input
-        className={`${style?.inputStyle} text-sm h-[40px] w-full rounded border-1 border-solid border-[#707070] bg-white }`}
-        type={type}
-        placeholder={placeholder}
-        {...register(name, {
-          required: errorMessage,
-        })}
-      />
+      {register && (
+        <input
+          className={`${style?.inputStyle} text-sm h-[40px] w-full rounded border-1 border-solid border-[#707070] bg-white }`}
+          type={type}
+          placeholder={placeholder}
+          {...register(name, {
+            required: errorMessage,
+          })}
+        />
+      )}
       {errors[name] ? (
         <div className='block mt-2 text-xs text-[#FF0000]'>
           {errors[name].message}

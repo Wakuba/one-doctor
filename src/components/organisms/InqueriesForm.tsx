@@ -1,10 +1,12 @@
+/* eslint-disable no-alert, no-console */
 import Form from '../molecules/Form'
 import Input from '../atoms/Input'
-import Textarea from '../atoms/TextArea'
+import TextArea from '../atoms/TextArea'
 import SubmitButton from '../atoms/SubmitButton'
+import { VFC } from 'react'
 
-const InqueriesForm = ({ style }) => {
-  const onSubmit = (data) => {
+const InqueriesForm: VFC<{ style: string }> = ({ style }) => {
+  const onSubmit = (data: any) => {
     console.log('data', data)
   }
   return (
@@ -24,7 +26,7 @@ const InqueriesForm = ({ style }) => {
       >
         <Input {...{ name: 'name', type: 'text' }}>お名前(必須)</Input>
         <Input {...{ name: 'email', type: 'text' }}>メールアドレス(必須)</Input>
-        <Textarea {...{ name: 'content' }}>お問い合わせ内容(必須)</Textarea>
+        <TextArea {...{ name: 'content' }}>お問い合わせ内容(必須)</TextArea>
         <SubmitButton>送信する</SubmitButton>
       </Form>
     </div>

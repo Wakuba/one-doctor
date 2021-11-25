@@ -201,12 +201,12 @@ export const getStaticPaths: GetStaticPaths<ParamsType> = async () => {
   console.log('path', paths)
   return {
     paths,
-    fallback: true,
+    fallback: false,
   }
 }
 
 interface PropsType {
-  postData: DepPostDataType
+  postData: DepPostDataType | { errors: any }
 }
 
 interface PropsFetchingErrorType {
@@ -219,7 +219,6 @@ export const getStaticProps: GetStaticProps<
 > = async ({
   params,
 }): Promise<GetStaticPropsResult<PropsType | PropsFetchingErrorType>> => {
-
   let id = ''
 
   if (!params) {
@@ -276,7 +275,6 @@ export const getStaticProps: GetStaticProps<
         forFun: card.forFun ?? '',
       })
     }
-
     return {
       props: {
         postData,
@@ -288,7 +286,12 @@ export const getStaticProps: GetStaticProps<
       console.error(e.message)
       return { props: { error: e.message } }
     }
-    throw e
+    console.log(e)
+    return {
+      props: {
+        postData: { errors: e },
+      },
+    }
   }
   // const querySnapshot = await getDocs(qForPostData)
   // querySnapshot.docs.forEach(async (depDoc) => {

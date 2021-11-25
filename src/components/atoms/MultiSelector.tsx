@@ -1,26 +1,21 @@
-import { useEffect, VFC } from 'react'
-import {
-  Control,
-  Controller,
-  FieldValues,
-  UseFormRegister,
-} from 'react-hook-form'
-import Select, { MultiValue } from 'react-select'
+/* eslint-disable @typescript-eslint/ban-types */
+import { VFC } from 'react'
+import { Control, Controller, FieldValues } from 'react-hook-form'
+import Select from 'react-select'
 
 interface MultiSelectorPropsType {
   children?: string
   subTitle?: string
-  register: UseFormRegister<FieldValues>
-  errors: any
+  // register: UseFormRegister<FieldValues>
+  errors?: any
   options: string[]
   name: string
   style?: { wholeStyle: string; selectorStyle: string }
-  placeholder: string
-  control: Control<FieldValues, object>
+  control?: Control<FieldValues, object>
 }
 
 const customStyles = {
-  control: (provided) => {
+  control: (provided: any) => {
     const result = {
       ...provided,
       height: '40px',
@@ -33,7 +28,7 @@ const customStyles = {
     }
     return result
   },
-  container: (provided) => {
+  container: (provided: any) => {
     return {
       ...provided,
       height: '40px',

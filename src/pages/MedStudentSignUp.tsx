@@ -12,7 +12,7 @@ const MedStudentSignUpPage: React.VFC = () => {
       >
         <MedStudentSignUpForm style='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]' />
       </div>
-      <Footer/>
+      <Footer />
     </>
   )
 }

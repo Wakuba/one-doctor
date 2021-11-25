@@ -1,8 +1,7 @@
 //Library
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import imageUploader from '../../lib/customFunctions/imageUploader'
-import postSlackMessageKnocker from '../../lib/customFunctions/postSlackMessageHitter'
+// import { useForm } from 'react-hook-form'
+// import imageUploader from '../../lib/customFunctions/imageUploader'
+// import postSlackMessageKnocker from '../../lib/customFunctions/postSlackMessageHitter'
 import Input from '../atoms/Input'
 import Form from '../molecules/Form'
 import SingleSelector from '../atoms/SingleSelector'
@@ -11,6 +10,7 @@ import SubmitButton from '../atoms/SubmitButton'
 import MultiSelector from '../atoms/MultiSelector'
 import ImageUpload from '../atoms/ImageUpload'
 import Link from 'next/link'
+import { VFC } from 'react'
 
 interface RecidencySignUpFormData {
   name: string
@@ -19,17 +19,13 @@ interface RecidencySignUpFormData {
   passwordTwo: string
 }
 
-const RecidencySignUpForm: React.FC = ({ style }) => {
-  const [certificationImage, setCertificationImage] = useState<File | null>(
-    null
-  )
-  const [passwordError, setPasswordError] = useState<boolean>(false)
+const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
+  // const [passwordError, setPasswordError] = useState<boolean>(false)
 
   const onSubmit = (data: RecidencySignUpFormData) => {
     console.log(data)
-    console.log('certificationImage', certificationImage)
-    const { name, email, passwordOne } = data
-    const password = passwordOne
+    // const { name, email, passwordOne } = data
+    // const password = passwordOne
 
     /*
     firesotreにファイル名などのファイル情報をアップロード=>id発行
@@ -107,7 +103,6 @@ const RecidencySignUpForm: React.FC = ({ style }) => {
         >
           性別
         </SingleSelector>
-
         <Input
           name='emailOne'
           type='email'
@@ -147,7 +142,7 @@ const RecidencySignUpForm: React.FC = ({ style }) => {
         >
           希望就職地
         </MultiSelector>
-        <ImageUpload name='doctorCertification' setCertificationImage={setCertificationImage}>医師認証</ImageUpload>
+        <ImageUpload name='doctorCertification'>医師認証</ImageUpload>
         <Input
           name='passwordOne'
           type='password'
@@ -163,8 +158,6 @@ const RecidencySignUpForm: React.FC = ({ style }) => {
         >
           パスワード※ （確認用）
         </Input>
-
-
 
         <SubmitButton>送信する</SubmitButton>
       </Form>

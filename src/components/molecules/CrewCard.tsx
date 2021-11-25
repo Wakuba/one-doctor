@@ -5,7 +5,7 @@ import { CrewCardListTabType } from '../../lib/types'
 
 interface CardFacePropsType {
   imgSrc?: string
-  flip: () => void
+  flip?: () => void
   isArrowVanished?: boolean
   crewName?: string
   position?: string
@@ -85,7 +85,7 @@ export default function CrewCard({
 
 function CardHead({
   imgSrc,
-  flip,
+  // flip,
   isArrowVanished,
   crewName,
   position,

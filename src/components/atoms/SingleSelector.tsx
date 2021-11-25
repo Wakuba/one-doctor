@@ -1,26 +1,20 @@
-import { useEffect, VFC } from 'react'
-import {
-  Control,
-  Controller,
-  FieldValues,
-  UseFormRegister,
-} from 'react-hook-form'
+/* eslint-disable @typescript-eslint/ban-types */
+import { VFC } from 'react'
+import { Control, Controller, FieldValues } from 'react-hook-form'
 import Select from 'react-select'
 
 interface SingleSelectorPropsType {
   children?: string
-  register: UseFormRegister<FieldValues>
-  errors: any
+  errors?: any
   options: string[]
   name: string
   style?: { wholeStyle: string; selectorStyle: string }
-  placeholder: string
-  control: Control<FieldValues, object>
+  control?: Control<FieldValues, object>
   isSearchable: any
 }
 
 const customStyles = {
-  control: (provided) => {
+  control: (provided: any) => {
     const result = {
       ...provided,
       height: '40px',
@@ -33,7 +27,7 @@ const customStyles = {
     }
     return result
   },
-  container: (provided) => {
+  container: (provided: any) => {
     return {
       ...provided,
       height: '40px',
@@ -57,7 +51,10 @@ const SingleSelector: VFC<SingleSelectorPropsType> = ({
 
   return (
     <div className={`${style?.wholeStyle}`}>
-      <label className='block text-sm'>{children}<span className='text-[#FF0000]'>*</span></label>
+      <label className='block text-sm'>
+        {children}
+        <span className='text-[#FF0000]'>*</span>
+      </label>
       <Controller
         control={control}
         name={name}

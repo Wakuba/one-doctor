@@ -15,8 +15,8 @@ interface InputDoublePropsType {
   type: 'text' | 'email' | 'password'
   placeholderOne: string
   placeholderTwo: string
-  register: UseFormRegister<FieldValues>
-  errors: any
+  register?: UseFormRegister<FieldValues>
+  errors?: any
 }
 
 const InputDouble: VFC<InputDoublePropsType> = ({
@@ -45,7 +45,7 @@ const InputDouble: VFC<InputDoublePropsType> = ({
         errors={errors}
         placeholder={placeholderOne}
       >
-        {children}
+        {children ?? ''}
       </Input>
       <Input
         name={nameTwo}
@@ -58,7 +58,9 @@ const InputDouble: VFC<InputDoublePropsType> = ({
         register={register}
         errors={errors}
         placeholder={placeholderTwo}
-      >dummy</Input>
+      >
+        dummy
+      </Input>
     </div>
   )
 }

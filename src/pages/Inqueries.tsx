@@ -1,9 +1,5 @@
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
-// import { firebaseFunction } from '../lib/firebase/firebase.config'
-// import { httpsCallable } from 'firebase/functions'
-// import { SyntheticEvent } from 'react'
-import clsx from 'clsx'
 import InqueriesForm from '../components/organisms/InqueriesForm'
 
 export default function InqueriesPage() {
