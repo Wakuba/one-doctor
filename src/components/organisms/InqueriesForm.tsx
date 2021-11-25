@@ -1,4 +1,3 @@
-/* eslint-disable no-alert, no-console */
 import Form from '../molecules/Form'
 import Input from '../atoms/Input'
 import TextArea from '../atoms/TextArea'
