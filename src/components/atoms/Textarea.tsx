@@ -1,7 +1,7 @@
 import { VFC } from 'react'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
 
-type TextareaPropsType = {
+type TextAreaPropsType = {
   children?: string
   name: string
   style?: { wholeStyle?: string; labelStyle?: string; textareaStyle?: string }
@@ -10,7 +10,7 @@ type TextareaPropsType = {
   errors: any
 }
 
-const Textarea: VFC<TextareaPropsType> = ({
+const TextArea: VFC<TextAreaPropsType> = ({
   name,
   children,
   style,
@@ -41,4 +41,4 @@ const Textarea: VFC<TextareaPropsType> = ({
   )
 }
 
-export default Textarea
+export default TextArea
