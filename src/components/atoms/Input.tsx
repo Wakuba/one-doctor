@@ -1,9 +1,10 @@
-import { VFC } from 'react'
+import { VFC, ReactNode, useEffect } from 'react'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
 
 type InputPropsType = {
-  children?: string
   name: string
+  children: string
+  subTitle?: string
   style?: { wholeStyle?: string; labelStyle?: string; inputStyle?: string }
   type: 'email' | 'password' | 'text'
   placeholder?: string
@@ -14,6 +15,7 @@ type InputPropsType = {
 const Input: VFC<InputPropsType> = ({
   name,
   children,
+  subTitle,
   style,
   type,
   placeholder,
@@ -25,6 +27,7 @@ const Input: VFC<InputPropsType> = ({
   else if (type === 'password') errorMessage = 'パスワードを入力してください'
   else errorMessage = '入力されていません'
 
+
   return (
     <div className={`${style?.wholeStyle}`}>
       <label
@@ -34,6 +37,8 @@ const Input: VFC<InputPropsType> = ({
         }`}
       >
         {children}
+      <p className='text-[#FF0000] inline text-[0.5px] align-top'>※</p>
+      <div className='text-sm'>{subTitle}</div>
       </label>
       <input
         className={`${style?.inputStyle} text-sm h-[40px] w-full rounded border-1 border-solid border-[#707070] bg-white }`}
