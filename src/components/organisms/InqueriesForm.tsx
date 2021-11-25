@@ -1,6 +1,6 @@
 import Form from '../molecules/Form'
 import Input from '../atoms/Input'
-import TextArea from '../atoms/TextArea'
+import Textarea from '../atoms/Textarea'
 import SubmitButton from '../atoms/SubmitButton'
 import { VFC } from 'react'
 
@@ -25,7 +25,7 @@ const InqueriesForm: VFC<{ style: string }> = ({ style }) => {
       >
         <Input {...{ name: 'name', type: 'text' }}>お名前(必須)</Input>
         <Input {...{ name: 'email', type: 'text' }}>メールアドレス(必須)</Input>
-        <TextArea {...{ name: 'content' }}>お問い合わせ内容(必須)</TextArea>
+        <Textarea {...{ name: 'content' }}>お問い合わせ内容(必須)</Textarea>
         <SubmitButton>送信する</SubmitButton>
       </Form>
     </div>
