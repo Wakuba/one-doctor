@@ -3,20 +3,21 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import imageUploader from '../../lib/customFunctions/imageUploader'
 import postSlackMessageKnocker from '../../lib/customFunctions/postSlackMessageHitter'
-import Input from '../FormGroup/Input'
-import Form from '../organisms/Form'
-import SimpleSelector from '../FormGroup/SimpleSelector'
-import InputDouble from '../FormGroup/InputDouble'
+import Input from '../atoms/Input'
+import Form from '../molecules/Form'
+import SingleSelector from '../atoms/SingleSelector'
+import InputDouble from '../atoms/InputDouble'
 import SubmitButton from '../atoms/SubmitButton'
+import MultiSelector from '../atoms/MultiSelector'
 
-interface SignUpFormData {
+interface MedStudentSignUpFormData {
   name: string
   email: string
   passwordOne: string
   passwordTwo: string
 }
 
-const SignUpForm: React.FC = ({ style }) => {
+const MedStudentSignUpForm: React.FC = ({ style }) => {
   const [certificationImage, setCertificationImage] = useState<File | null>(
     null
   )
@@ -67,7 +68,7 @@ const SignUpForm: React.FC = ({ style }) => {
     setPreviewUrl(URL.createObjectURL(new Blob(files)))
   }
 
-  const onSubmit = (data: SignUpFormData) => {
+  const onSubmit = (data: MedStudentSignUpFormData) => {
     console.log(data)
     console.log('certificationImage', certificationImage)
     const { name, email, passwordOne } = data
@@ -99,8 +100,14 @@ const SignUpForm: React.FC = ({ style }) => {
 
   return (
     <div className={style}>
-      <div>新規登録</div>
-      <Form formName='signUpForm' onSubmit={onSubmit}>
+      <div title='topSection' className='mb-12'>
+        <h1 className='mt-10 text-prime-blue-rich font-semibold text-2xl'>
+          新規登録 for 医学生
+        </h1>
+        <span>研修医の方は</span>
+        <div className='inline'>こちら</div>
+      </div>
+      <Form formName='signUpForm' onSubmit={onSubmit} style='space-y-6'>
         <InputDouble
           {...{
             name: 'name',
@@ -123,48 +130,86 @@ const SignUpForm: React.FC = ({ style }) => {
             placeholderTwo: 'めい',
           }}
         >
-          お名前
+          ふりがな
         </InputDouble>
-        <SimpleSelector
+        <SingleSelector
           {...{
             name: 'gender',
             options: ['女性', '男性', 'その他'],
             placeholder: '▼選択してください',
+            isSearchable: false
           }}
         >
           性別
-        </SimpleSelector>
+        </SingleSelector>
 
         <Input
           name='emailOne'
           type='email'
           style={{ wholeStyle: 'block', inputStyle: 'block' }}
+          subTitle='大学のメアド以外を入力してください'
         >
-          メールアドレス ※大学のメアド以外を入力してください
+          メールアドレス
         </Input>
         <Input
           name='emailTwo'
           type='email'
           style={{ wholeStyle: 'block', inputStyle: 'block' }}
         >
-          メールアドレス※（確認用）
+          メールアドレス
         </Input>
         <Input
           name='emailUniv'
           type='email'
           style={{ wholeStyle: 'block', inputStyle: 'block' }}
+          subTitle='医学生認証を行います。登録後にこのメアドにきたURLから本登録してください'
         >
           大学のメールアドレス
-          ※医学生認証を行います。登録後にこのメアドにきたURLから本登録してください。
         </Input>
+        <MultiSelector
+          {...{
+            name: 'departmentWishFor',
+            options: ['総合診療科', '精神科', '消化器内科', '循環器内科'],
+          }}
+        >
+          希望診療科
+        </MultiSelector>
+        <MultiSelector
+          {...{
+            name: 'workplaceWishFor',
+            options: ['東京', '栃木県', '茨城県', '大阪府'],
+          }}
+        >
+          希望就職地
+        </MultiSelector>
+
+        <SingleSelector {...{ name: 'grade', isSearchable: true, options: [1, 2, 3, 4, 5, 6] }}>
+          学年
+        </SingleSelector>
+        <SingleSelector
+          {...{
+            name: 'university',
+            isSearchable: true,
+            options: [
+              '順天堂大学',
+              '筑波大学',
+              '自治医科大学',
+              '東京大学',
+              '群馬大学',
+              '杏林大学',
+            ],
+          }}
+        >
+          大学名
+        </SingleSelector>
         <Input
           name='passwordOne'
           type='password'
           style={{ wholeStyle: 'block', inputStyle: 'block' }}
+          subTitle='（仮テキスト）半角英数を混ぜて６文字以上'
         >
-          パスワード ※（仮テキスト）半角英数を混ぜて６文字以上
+          パスワード
         </Input>
-
         <Input
           name='passwordTwo'
           type='password'
@@ -187,4 +232,4 @@ const SignUpForm: React.FC = ({ style }) => {
     </div>
   )
 }
-export default SignUpForm
+export default MedStudentSignUpForm
