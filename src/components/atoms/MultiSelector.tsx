@@ -58,7 +58,7 @@ const MultiSelector: VFC<MultiSelectorPropsType> = ({
     <div className={`${style?.wholeStyle}`}>
       <label htmlFor={name} className='block text-sm'>
         {children}
-        <p className='text-[#FF0000] inline text-[0.5px] align-top'>※</p>
+        <span className='text-[#FF0000]'>*</span>
         <div className='text-sm'>{subTitle}</div>
       </label>
       <Controller

@@ -57,7 +57,7 @@ const SingleSelector: VFC<SingleSelectorPropsType> = ({
 
   return (
     <div className={`${style?.wholeStyle}`}>
-      <label className='block text-sm'>{children}</label>
+      <label className='block text-sm'>{children}<span className='text-[#FF0000]'>*</span></label>
       <Controller
         control={control}
         name={name}

@@ -37,7 +37,7 @@ const Input: VFC<InputPropsType> = ({
         }`}
       >
         {children}
-      <p className='text-[#FF0000] inline text-[0.5px] align-top'>※</p>
+      <p className='text-[#FF0000] inline '>*</p>
       <div className='text-sm'>{subTitle}</div>
       </label>
       <input
