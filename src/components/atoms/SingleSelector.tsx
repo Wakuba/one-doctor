@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { useEffect, VFC } from 'react'
 import {
   Control,
   Controller,
@@ -7,7 +7,7 @@ import {
 } from 'react-hook-form'
 import Select from 'react-select'
 
-interface SimpleSelectorPropsType {
+interface SingleSelectorPropsType {
   children?: string
   register: UseFormRegister<FieldValues>
   errors: any
@@ -16,6 +16,7 @@ interface SimpleSelectorPropsType {
   style?: { wholeStyle: string; selectorStyle: string }
   placeholder: string
   control: Control<FieldValues, object>
+  isSearchable: any
 }
 
 const customStyles = {
@@ -41,20 +42,22 @@ const customStyles = {
   },
 }
 
-const SimpleSelector: VFC<SimpleSelectorPropsType> = ({
+const SingleSelector: VFC<SingleSelectorPropsType> = ({
   children,
   errors,
   options,
   name,
   style,
   control,
+  isSearchable,
 }) => {
   const optionsTmp: { value: string; label: string }[] = options.map(
     (option: string) => ({ value: option, label: option })
   )
+
   return (
     <div className={`${style?.wholeStyle}`}>
-      <label className='block'>{children}</label>
+      <label className='block text-sm'>{children}</label>
       <Controller
         control={control}
         name={name}
@@ -69,6 +72,7 @@ const SimpleSelector: VFC<SimpleSelectorPropsType> = ({
               onChange={(val) => onChange(val?.value)}
               options={optionsTmp}
               placeholder='▼選択してください'
+              isSearchable={isSearchable}
             />
           )
         }}
@@ -84,4 +88,4 @@ const SimpleSelector: VFC<SimpleSelectorPropsType> = ({
   )
 }
 
-export default SimpleSelector
+export default SingleSelector
