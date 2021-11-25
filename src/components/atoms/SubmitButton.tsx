@@ -1,8 +1,13 @@
 import clsx from 'clsx'
 import { VFC } from 'react'
 
-const SubmitButton: VFC<{ children?: string }> = ({ children }) => (
-  <div className='flex justify-center pb-10'>
+interface SubmitButtonPropsType {
+  children?: string
+  style?: string
+}
+
+const SubmitButton: VFC<SubmitButtonPropsType> = ({ children, style }) => (
+  <div className={`${style} flex justify-center pb-10`}>
     <button
       type='submit'
       className={clsx(
