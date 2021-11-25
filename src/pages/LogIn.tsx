@@ -1,28 +1,19 @@
 import Link from 'next/link'
-import React from 'react'
+import Footer from '../components/organisms/Footer'
+import Header from '../components/organisms/Header'
 import LoginForm from '../components/organisms/LoginForm'
-const LoginPage: React.FC = () => {
+const Login: React.FC = () => {
   return (
-    <div className='min-h-screen flex flex-col justify-center bg-gray-200'>
-      <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
-        <div className='text-center mt-24'>
-          <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
-            Log in
-          </h2>
-          <p className='mt-2 text-center text-md text-gray-600'>
-            {"Don't have an account? "}
-            <Link href='/SignUp'>
-              <a href='#' className='text-blue-500'>
-                Sign Up
-              </a>
-            </Link>
-          </p>
+    <>
+    <Header/>
+    <div
+        title='wrapper'
+        className='w-full ov-md:pt-20 flex flex-col justify-center items-center bg-prime-blue-muted'
+      >
+          <LoginForm style='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] mb-12' />
         </div>
-        <div className='mt-8 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
-          <LoginForm />
-        </div>
-      </div>
-    </div>
+        <Footer/>
+        </>
   )
 }
-export default LoginPage
+export default Login
