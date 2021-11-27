@@ -10,7 +10,6 @@ const app = new App({
   signingSecret: process.env.SLACK_FORM_RECEIVER_SECRET,
   clientId: process.env.SLACK_FORM_RECEIVER_CLIENT_ID,
   clientSecret: process.env.SLACK_FORM_RECEIVER_CLIENT_SECRET,
-  socketMode: true,
 })
 
 // const proxy = new HttpsProxyAgent(
