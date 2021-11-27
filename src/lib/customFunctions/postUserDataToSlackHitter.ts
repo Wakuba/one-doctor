@@ -10,7 +10,7 @@ export default async function postUserDataToSlackHitter(
 
   const stringifiedPostData = JSON.stringify(postData)
 
-  await fetch(`/api/postMessageToSlack/${stringifiedPostData}`, {
+  await fetch(`/api/postUserDataToSlack/${stringifiedPostData}`, {
     method: 'POST',
     signal,
   }).then(() => {
