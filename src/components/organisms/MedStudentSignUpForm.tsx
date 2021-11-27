@@ -1,5 +1,5 @@
 //Library
-import { VFC } from 'react'
+import { useState, VFC } from 'react'
 // import { useForm } from 'react-hook-form'
 // import imageUploader from '../../lib/customFunctions/imageUploader'
 // import postSlackMessageKnocker from '../../lib/customFunctions/postSlackMessageHitter'
@@ -10,19 +10,41 @@ import InputDouble from '../atoms/InputDouble'
 import SubmitButton from '../atoms/SubmitButton'
 import MultiSelector from '../atoms/MultiSelector'
 import Link from 'next/link'
+import DoubleBindPasswordCheck from '../molecules/DoubleBindPasswordCheck'
+import univEmailValidator from '../../lib/customFunctions/univEmailValidator'
+import { ModalBackdrop, ModalMainArea } from '../atoms/Modal'
 
 interface MedStudentSignUpFormData {
-  name: string
-  email: string
+  departmentWishFor: string[]
+  emailOne: string
+  emailTwo: string
+  emailUniv: string
+  familyName: string
+  familyRuby: string
+  firstName: string
+  firstRuby: string
+  gender: string
+  grade: string
   passwordOne: string
   passwordTwo: string
+  university: string
+  workplaceWishFor: string[]
 }
 
 const MedStudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
+  const [isMedStudentAuthErrorModalOpen, setIsMedStudentAuthErrorModalOpen] =
+    useState(false)
   const onSubmit = (data: MedStudentSignUpFormData) => {
     console.log(data)
-    // const { name, email, passwordOne } = data
-    // const password = passwordOne
+    // const name = `${data.familyName} ${data.firstName}`
+    // const ruby = `${data.familyRuby} ${data.firstRuby}`
+    // const password = data.passwordOne
+    // const email = data.emailOne
+    if (univEmailValidator(data.emailUniv)) {
+      console.log('医学生認証完了')
+    } else {
+      setIsMedStudentAuthErrorModalOpen(true)
+    }
 
     /*
     firesotreにファイル名などのファイル情報をアップロード=>id発行
@@ -30,10 +52,6 @@ const MedStudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
     */
 
     // const abortCtrl = new AbortController()
-    // if (getValues('passwordOne') !== getValues('passwordTwo')) {
-    //   setPasswordError(true)
-    // } else if (!certificationImage) {
-    //   setNoImageError(true)
     // } else {
     //   imageUploader(certificationImage).then((id) =>
     //     postSlackMessageKnocker(
@@ -50,7 +68,21 @@ const MedStudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
 
   return (
     <div className={style}>
-      <div title='topSection' className=''>
+      {isMedStudentAuthErrorModalOpen && (
+        <>
+          <ModalMainArea
+            closeModal={() => setIsMedStudentAuthErrorModalOpen(false)}
+            modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
+            modalContainerStyle='w-full space-y-4'
+          >
+            医学生認証ができませんでした
+          </ModalMainArea>
+          <ModalBackdrop
+            closeModal={() => setIsMedStudentAuthErrorModalOpen(false)}
+          />
+        </>
+      )}
+      <div title='topSection'>
         <h1 className='mt-10 text-prime-blue-rich font-semibold text-2xl mb-6'>
           新規登録 for 医学生
         </h1>
@@ -104,25 +136,23 @@ const MedStudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
         </SingleSelector>
 
         <Input
-          name='emailOne'
-          type='email'
-          style={{ wholeStyle: 'block', inputStyle: 'block' }}
-          subTitle='大学のメアド以外を入力してください'
+          {...{
+            name: 'emailOne',
+            type: 'email',
+            style: { wholeStyle: 'block', inputStyle: 'block' },
+            subTitle: '大学のメアド以外を入力してください',
+          }}
         >
           メールアドレス
         </Input>
         <Input
-          name='emailTwo'
-          type='email'
-          style={{ wholeStyle: 'block', inputStyle: 'block' }}
-        >
-          メールアドレス
-        </Input>
-        <Input
-          name='emailUniv'
-          type='email'
-          style={{ wholeStyle: 'block', inputStyle: 'block' }}
-          subTitle='医学生認証を行います。登録後にこのメアドにきたURLから本登録してください'
+          {...{
+            name: 'emailUniv',
+            type: 'email',
+            style: { wholeStyle: 'block', inputStyle: 'block' },
+            subTitle:
+              '医学生認証を行います。登録後にこのメアドにきたURLから本登録してください',
+          }}
         >
           大学のメールアドレス
         </Input>
@@ -168,31 +198,14 @@ const MedStudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
         >
           大学名
         </SingleSelector>
-        <Input
-          name='passwordOne'
-          type='password'
-          style={{ wholeStyle: 'block', inputStyle: 'block' }}
-          subTitle='（仮テキスト）半角英数を混ぜて６文字以上'
-        >
-          パスワード
-        </Input>
-        <Input
-          name='passwordTwo'
-          type='password'
-          style={{ wholeStyle: 'block', inputStyle: 'block' }}
-        >
-          パスワード※ （確認用）
-        </Input>
-
-        {/* {isFileTypeError && (
-        <div className='text-red-500'>
-          ※jpeg, png, bmp, gif, svg以外のファイル形式は選択できません
-        </div>
-      )}
-      {noImageError && (
-        <div className='text-red-500'>※画像が選択されていません</div>
-      )} */}
-
+        <DoubleBindPasswordCheck
+          {...{
+            name: 'doubleBindPasswordCheck',
+            titleOne: 'パスワード',
+            titleTwo: 'パスワード(確認用)',
+            subTitleOne: '（仮テキスト）半角英数を混ぜて６文字以上',
+          }}
+        />
         <SubmitButton>送信する</SubmitButton>
       </Form>
     </div>

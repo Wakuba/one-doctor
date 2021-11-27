@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { VFC, ChangeEvent } from 'react'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
 
 type InputPropsType = {
@@ -10,6 +10,7 @@ type InputPropsType = {
   placeholder?: string
   register?: UseFormRegister<FieldValues>
   errors?: any
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 const Input: VFC<InputPropsType> = ({
@@ -21,6 +22,7 @@ const Input: VFC<InputPropsType> = ({
   placeholder,
   register,
   errors,
+  onChange,
 }) => {
   let errorMessage = ''
   if (type === 'email') errorMessage = 'メールアドレスが記入されていません'
@@ -46,6 +48,9 @@ const Input: VFC<InputPropsType> = ({
           placeholder={placeholder}
           {...register(name, {
             required: errorMessage,
+            onChange: (e) => {
+              if (onChange) onChange(e)
+            },
           })}
         />
       )}
