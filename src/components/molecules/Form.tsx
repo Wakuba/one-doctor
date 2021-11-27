@@ -1,17 +1,10 @@
 import { createElement, VFC } from 'react'
 import { useForm } from 'react-hook-form'
 
-interface SignUpFormData {
-  name: string
-  email: string
-  passwordOne: string
-  passwordTwo: string
-}
-
 interface FormPropsType {
   formName: string
   children: any
-  onSubmit: (data: SignUpFormData) => void
+  onSubmit: (data: any) => void
   style?: string
 }
 
@@ -22,6 +15,7 @@ const Form: VFC<FormPropsType> = ({ formName, children, onSubmit, style }) => {
     control,
     setError,
     getValues,
+    clearErrors,
     formState: { errors },
   } = useForm()
 
@@ -38,6 +32,7 @@ const Form: VFC<FormPropsType> = ({ formName, children, onSubmit, style }) => {
                     setError,
                     getValues,
                     control,
+                    clearErrors,
                     key: child.props.name,
                   },
                 })

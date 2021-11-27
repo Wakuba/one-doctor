@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { SignUpAuthorizationDataWithImageUrl } from '../types'
+import { SignUpAuthorizationDataWithImageUrl, FormData } from '../types'
 
 //  ユーザー確認メッセージを表示するBlockを作成
-export default function createMessageBlock (
+export const createMessageBlockForResidencyAuthorization = (
   data: SignUpAuthorizationDataWithImageUrl
-) {
+) => {
   const { name, email, password, certificationImageUrl } = data
   return [
     {
@@ -57,3 +57,32 @@ export default function createMessageBlock (
     },
   ];
 };
+
+export const createMessageBlockForFormReceiver = (formData: FormData) => {
+  const { name, email, content } = formData
+  return [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": name ? name : "No name",
+      },
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "plain_text",
+        "text":  email ?? "No email address",
+      },
+      "block_id": "text1",
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "plain_text",
+        "text": content ?? "No content text",
+      },
+      "block_id": "text2",
+    },
+  ]
+}

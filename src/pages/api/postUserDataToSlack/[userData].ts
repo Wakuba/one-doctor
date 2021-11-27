@@ -4,7 +4,7 @@ import {
   SignUpAuthorizationDataWithImageUrl,
   SignUpAuthorizationDataWithImageId,
 } from '../../../lib/types'
-import createMessageBlock from '../../../lib/customFunctions/createMessageBlock'
+import { createMessageBlockForResidencyAuthorization } from '../../../lib/customFunctions/createMessageBlock'
 import { storage } from '../../../lib/firebase/firebase.config'
 import {
   FullMetadata,
@@ -16,7 +16,7 @@ import { ref } from 'firebase/storage'
 
 if (!process.env.SLACK_TOKEN) console.log('No slack bot token')
 
-const client = new WebClient(process.env.SLACK_TOKEN)
+const client = new WebClient(process.env.SLACK_RESIDENCY_AUTHORIZATION_TOKEN)
 
 type Response = {
   message: string
@@ -41,12 +41,17 @@ export default (req: NextApiRequest, res: NextApiResponse<Response>) => {
                   email: parsedData.email,
                   password: parsedData.password,
                   certificationImageUrl: url,
+                  certificationImageId: '',
                 }
-                if (process.env.SLACK_CHANNEL_ID) {
+                if (process.env.SLACK_RESIDENCY_AUTHORIZATION_CHANNEL_ID) {
                   client.chat.postMessage({
-                    channel: process.env.SLACK_CHANNEL_ID,
+                    channel:
+                      process.env.SLACK_RESIDENCY_AUTHORIZATION_CHANNEL_ID,
                     text: parsedData.password,
-                    blocks: createMessageBlock(dataWithImageUrl),
+                    blocks:
+                      createMessageBlockForResidencyAuthorization(
+                        dataWithImageUrl
+                      ),
                   })
                 } else console.log('No slack channel id')
               })

@@ -1,22 +1,12 @@
 import router from 'next/router'
 import { SignUpAuthorizationDataWithImageId } from '../types'
 
-export default async function postSlackMessageHitter(
-  name: string,
-  email: string,
-  password: string,
-  id: string,
+export default async function postUserDataToSlackHitter(
+  postData: SignUpAuthorizationDataWithImageId,
   abortCtrl: AbortController,
   disposalUrl: string
 ) {
   const { signal } = abortCtrl
-
-  const postData: SignUpAuthorizationDataWithImageId = {
-    name,
-    email,
-    password,
-    certificationImageId: id,
-  }
 
   const stringifiedPostData = JSON.stringify(postData)
 

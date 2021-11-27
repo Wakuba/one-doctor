@@ -3,10 +3,13 @@ import Input from '../atoms/Input'
 import Textarea from '../atoms/Textarea'
 import SubmitButton from '../atoms/SubmitButton'
 import { VFC } from 'react'
+import postFormToSlackHitter from '../../lib/customFunctions/postFormToSlackHitter'
 
 const InqueriesForm: VFC<{ style: string }> = ({ style }) => {
   const onSubmit = (data: any) => {
     console.log('data', data)
+    const abortCtrl = new AbortController()
+    postFormToSlackHitter(data, abortCtrl)
   }
   return (
     <div className={style}>

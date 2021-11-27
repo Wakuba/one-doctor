@@ -98,7 +98,8 @@ export interface SignUpAuthorizationDataWithImageId extends SignUpData {
   certificationImageId: string
 }
 
-export interface SignUpAuthorizationDataWithImageUrl extends SignUpData {
+export interface SignUpAuthorizationDataWithImageUrl
+  extends SignUpAuthorizationDataWithImageId {
   certificationImageUrl: string
 }
 
@@ -121,4 +122,10 @@ export interface OdUserContext {
   logIn: ({ email, password }: LogInData) => Promise<void | User>
   logOut: () => Promise<void>
   sendPasswordResetEmailToUser: (email: string) => Promise<void>
+}
+
+export interface FormData {
+  name: string
+  email: string
+  content: string
 }
