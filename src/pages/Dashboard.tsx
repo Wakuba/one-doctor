@@ -3,7 +3,6 @@ import { useRequiredAuth } from '../lib/customHooks/useAuth'
 
 const DashBoardPage: React.FC = () => {
   const auth = useRequiredAuth()
-  console.log('displayName', auth)
   if (!auth.odUser) return <div>Hello World</div>
   return (
     <div className='min-h-screen flex bg-gray-200'>

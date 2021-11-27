@@ -46,7 +46,6 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
     topSection,
     officialWebSite,
   } = postData
-  console.log('postData on browse', postData)
 
   return (
     <>
@@ -198,7 +197,6 @@ export const getStaticPaths: GetStaticPaths<ParamsType> = async () => {
       params: { id: doc.data().id },
     })
   })
-  console.log('path', paths)
   return {
     paths,
     fallback: false,
