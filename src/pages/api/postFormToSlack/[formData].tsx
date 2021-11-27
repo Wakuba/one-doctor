@@ -1,24 +1,30 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { LogLevel, retryPolicies, WebClient } from '@slack/web-api'
+// import { LogLevel, retryPolicies, WebClient } from '@slack/web-api'
 import { createMessageBlockForFormReceiver } from '../../../lib/customFunctions/createMessageBlock'
 import { FormData } from '../../../lib/types'
-import { HttpsProxyAgent } from 'https-proxy-agent'
+// import { HttpsProxyAgent } from 'https-proxy-agent'
+import { App } from '@slack/bolt'
 
-const proxy = new HttpsProxyAgent(
-  process.env.http_proxy || 'http://168.63.76.32:3128'
-)
-
-if (!process.env.SLACK_FORM_RECEIVER_TOKEN) console.log('No slack bot token')
-console.log('token', process.env.SLACK_FORM_RECEIVER_TOKEN)
-
-const client = new WebClient(process.env.SLACK_FORM_RECEIVER_TOKEN, {
-  maxRequestConcurrency: 5,
-  retryConfig: retryPolicies.fiveRetriesInFiveMinutes,
-  logLevel: LogLevel.DEBUG,
-  agent: proxy,
+const app = new App({
+  token: process.env.SLACK_FORM_RECEIVER_TOKEN,
+  signingSecret: process.env.SLACK_FORM_RECEIVER_SECRET,
 })
 
-console.log('client', client)
+// const proxy = new HttpsProxyAgent(
+//   process.env.http_proxy || 'http://168.63.76.32:3128'
+// )
+
+// if (!process.env.SLACK_FORM_RECEIVER_TOKEN) console.log('No slack bot token')
+// console.log('token', process.env.SLACK_FORM_RECEIVER_TOKEN)
+
+// const client = new WebClient(process.env.SLACK_FORM_RECEIVER_TOKEN, {
+//   maxRequestConcurrency: 5,
+//   retryConfig: retryPolicies.fiveRetriesInFiveMinutes,
+//   logLevel: LogLevel.DEBUG,
+//   agent: proxy,
+// })
+
+// console.log('client', client)
 type Response = {
   message: string
 }
@@ -32,7 +38,7 @@ export default (req: NextApiRequest, res: NextApiResponse<Response>) => {
       console.log('parsed', parsedData)
       if (process.env.SLACK_FORM_RECEIVER_CHANNEL_ID) {
         console.log(process.env.SLACK_FORM_RECEIVER_CHANNEL_ID)
-        client.chat
+        app.client.chat
           .postMessage({
             channel: process.env.SLACK_FORM_RECEIVER_CHANNEL_ID,
             text: parsedData.name,
