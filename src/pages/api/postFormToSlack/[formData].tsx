@@ -12,7 +12,7 @@ if (!process.env.SLACK_FORM_RECEIVER_TOKEN) console.log('No slack bot token')
 console.log('token', process.env.SLACK_FORM_RECEIVER_TOKEN)
 
 const client = new WebClient(process.env.SLACK_FORM_RECEIVER_TOKEN, {
-  maxRequestConcurrency: 1,
+  maxRequestConcurrency: 5,
   retryConfig: retryPolicies.fiveRetriesInFiveMinutes,
   logLevel: LogLevel.DEBUG,
   agent: proxy,
