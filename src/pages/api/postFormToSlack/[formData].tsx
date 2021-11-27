@@ -4,9 +4,11 @@ import { createMessageBlockForFormReceiver } from '../../../lib/customFunctions/
 import { FormData } from '../../../lib/types'
 
 if (!process.env.SLACK_FORM_RECEIVER_TOKEN) console.log('No slack bot token')
+console.log('token', process.env.SLACK_FORM_RECEIVER_TOKEN)
 
 const client = new WebClient(process.env.SLACK_FORM_RECEIVER_TOKEN)
 
+console.log('client', client)
 type Response = {
   message: string
 }
@@ -19,6 +21,7 @@ export default (req: NextApiRequest, res: NextApiResponse<Response>) => {
       const parsedData: FormData = JSON.parse(formData)
       console.log('parsed', parsedData)
       if (process.env.SLACK_FORM_RECEIVER_CHANNEL_ID) {
+        console.log(process.env.SLACK_FORM_RECEIVER_CHANNEL_IF)
         client.chat.postMessage({
           channel: process.env.SLACK_FORM_RECEIVER_CHANNEL_ID,
           text: parsedData.name,
