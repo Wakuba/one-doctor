@@ -95,7 +95,6 @@ const ImageUpload: VFC<ImageUploadPropsType> = ({
           'image/svg+xml',
         ].includes(file.type)
       ) {
-        console.log(file)
         if (setError)
           setError('fileTypeError', {
             type: 'manual',
@@ -115,11 +114,6 @@ const ImageUpload: VFC<ImageUploadPropsType> = ({
         rules={{ required: '選択されていません' }}
         name={name}
         render={({ field: { onChange, name } }) => {
-          // console.log('onChange', onChange)
-          // console.log('value', value)
-          // console.log('name', name)
-          // console.log('ref', ref)
-          console.log('errors', errors)
           return (
             <label className='block border-solid rounded bg-prime-blue-rich text-white border-b-4 border-[#5493AA] active:transfom active:translate-y-[2px] active:border-none w-1/2 min-w-[270px] h-[300px]'>
               <div className='pl-[8px] h-[40px] leading-[40px]'>

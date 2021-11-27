@@ -61,9 +61,6 @@ const MultiSelector: VFC<MultiSelectorPropsType> = ({
         name={name}
         rules={{ required: '選択されていません' }}
         render={({ field: { onChange } }) => {
-          // console.log('onChange', onChange)
-          // console.log('ref', ref)
-          // console.log('value', value)
           return (
             <Select
               styles={customStyles}

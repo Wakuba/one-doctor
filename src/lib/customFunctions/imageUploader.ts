@@ -13,7 +13,6 @@ const imageUploader = async (certificationImage: File) => {
   await addDoc(collection(db, 'odAuthorizationImageFiles'), {
     certificationlmageName: certificationImage?.name,
   }).then((res) => {
-    console.log('addDocRes', res)
     metadata.customMetadata.certificationImageId = res.id
   })
 
