@@ -1,24 +1,39 @@
+import { FC } from 'react'
 import NewsLine from '../molecules/NewsLine'
 import { NewsLineType } from '../../lib/types'
+import clsx from 'clsx'
 
 type NewsBoardProps = {
-  content: NewsLineType[];
-  layoutStyles?: any;
+  content: NewsLineType[]
+  layoutStyles?: any
 }
 
-export default function NewsBoard({ layoutStyles, content }: NewsBoardProps) {
-  if (content == undefined) content = [{ title: '特になし', article: '特になし' }]
+const NewsBoard: FC<NewsBoardProps> = ({ layoutStyles, content }) => {
+  if (content == undefined)
+    content = [{ title: '特になし', detail: '特になし' }]
 
   return (
-    <div className={`${layoutStyles.container}`}>
-      <div className={`text-2xl sm:text-prime-blue-rich font-semibold ${layoutStyles.title}`}>NEWS</div>
-      <p className='text-sm'>イベントや説明会の情報をお知らせします。</p>
+    <div className='w-full'>
+      <div
+        className={clsx(
+          'mb-2 sm:text-2xl ov-md:text-4xl sm:text-prime-blue-rich font-semibold',
+          layoutStyles
+        )}
+      >
+        NEWS
+      </div>
+      <p className='text-sm mb-4'>イベントや説明会の情報をお知らせします。</p>
       <div className='flex-col items-start bg-white rounded shadow-lg p-2.5 space-y-2'>
         {content.map((news: NewsLineType, idx: number): JSX.Element => {
-          return <NewsLine key={idx} title={news.title}>{news.article} </NewsLine>
-        })
-        }
+          return (
+            <NewsLine key={idx} title={news.title}>
+              {news.detail}{' '}
+            </NewsLine>
+          )
+        })}
       </div>
     </div>
   )
 }
+
+export default NewsBoard

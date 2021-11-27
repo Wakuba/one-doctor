@@ -1,12 +1,17 @@
 interface EventKanbanPropsType {
-  key: number;
-  eventName: string;
-  date: string;
-  place: string;
-  detail: string;
+  key: number
+  eventName: string
+  date: string
+  place: string
+  detail: string
 }
 
-export default function EventKanban({ eventName, date, place, detail }: EventKanbanPropsType) {
+export default function EventKanban({
+  eventName,
+  date,
+  place,
+  detail,
+}: EventKanbanPropsType) {
   return (
     <div className='border-b border-black '>
       <div className=''>

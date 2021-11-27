@@ -19,7 +19,11 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext"
+    "target": "es2017",
+    "types": [
+      "node"
+    ],
+    "incremental": true
   },
   "exclude": [
     "node_modules"

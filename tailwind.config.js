@@ -1,82 +1,81 @@
 module.exports = {
-  purge: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  mode: 'jit',
+  purge: [
+    './src/pages/*.{ts,tsx}',
+    './src/pages/Departments/*.{ts,tsx}',
+    './src/components/atoms/*.{ts,tsx}',
+    './src/components/molecules/*.{ts,tsx}',
+    './src/components/organisms/*.{ts,tsx}',
+    './src/components/templates/*.{ts,tsx}',
+  ],
+  darkMode: false, // Or 'media' or 'class'
   theme: {
+    fontFamily: {
+      body: ['ヒラギノ角ゴシック'],
+    },
     extend: {
       backgroundImage: {
-        'hero-wideback-image': "url(/svg/bg-top-m-l.svg)",
-        'hero-narrowback-image': "url(/svg/bg-top-s.svg)",
-        'ed-narrowback': 'url(/svg/bg-ed-s.svg)',
-        'ed-wideback': 'url(/svg/bg-ed-m-l.svg)',
+        'hero-wideback-image': 'url(/svg/bg-top-m-l.svg)',
+        'hero-narrowback-image': 'url(/svg/bg-top-s.svg)',
         'cc-back': 'url(/svg/bg-cc.svg)',
-        'contact-button': 'url(/svg/contact-button.svg)'
+        'contact-button': 'url(/svg/contact-button.svg)',
       },
       backgroundPosition: {
-        'minus66px': '0 -66px'
+        minus66px: '0 -66px',
       },
       boxShadow: {
         'for-narrow-ichioshi-img': 'inset 0px 60px 30px -7px white',
         'for-wide-ichioshi-img': 'inset 60px 0px 30px -7px white',
-        'for-readmore': 'inset 0px -50px 48px 6px white'
-      },
-      spacing: {
-        '1/20': '5%',
-        '2/11': '18.1818%',
-        '1/10': '10%',
-        '1/6': '16.666667%',
-        'fit-to-screen': '216vw',
-        'fit-to-widescreen': '2150px',
-        'for-scroll': '1560px',
-        'screen*2': '200vw',
-        'hscreen/2': '50vh',
-        'wscreen/2': '50vw',
-        'wscreen9/20': '45vw',
-        'wscreen/20': '5vw',
-        'wscreen7/10': '70vw',
-        'wscreen/10': '10vw',
-        'wscreen/8': '12.5vw',
-        'wscreen2/7': '28.67vw',
-        'wscreen/7': '14.286vw',
-        'wscreen2/5': '40vw',
-        'wscreen/5': '20vw',
-        'wscreen/4': '25vw',
-        'wscreen/3': '33vw',
+        'for-readmore': 'inset 0px -50px 48px 6px white',
       },
       borderWidth: {
-        1: '1px'
+        1: '1px',
       },
       borderRadius: {
-        'bg-corner': '15vw'
+        'bg-corner-2xl': '216px',
+        'bg-corner': '15vw',
       },
       colors: {
         'prime-blue-rich': '#5DB0D0',
         'prime-blue-muted': '#F8FDFF',
         'prime-blue-pale': '#BBDFEC',
-      },
-      inset: {
-        18: '4.5rem',
-        162: '40.5rem',
-        200: '50rem',
-        238: '59.5rem',
-        '3vw': '3vw',
-        '5vw': '5vw',
-        '15vw': '15vw',
+        'off-white': '#ffffff98',
+        purple: '#6E4E9D',
       },
       zIndex: {
-        '-10': '-10'
+        '-10': '-10',
+        '-20': '-20',
+      },
+      fontSize: {
+        '10vw': '10vw',
+        '8vw': '8vw',
+        '7vw': '7vw',
+        '6vw': '6vw',
+        '1.5vw': '1.5vw',
+        '1vw': '1vw',
+      },
+      lineHeight: {
+        '10vw': '10vw',
+        '8vw': '8vw',
+        '7vw': '7vw',
+        '6vw': '6vw',
+      },
+      translate: {
+        '1/7': '14.2857143%',
       },
     },
     screens: {
-      'sm': { 'max': '767px' },
-      'md': { 'min': '768px', 'max': '1023px' },
-      'lg': { 'min': '1024px', 'max': '1279px' },
-      'xl': { 'min': '1280px', 'max': '1535px' },
-      '2xl': { 'min': '1536px' },
+      sm: { max: '767px' },
+      md: { min: '768px', max: '1023px' },
+      lg: { min: '1024px', max: '1279px' },
+      xl: { min: '1280px', max: '1535px' },
+      '2xl': { min: '1536px' },
       'ov-md': '768px',
-      'ov-lg': '1024px'
+      'ov-lg': '1024px',
+      'ov-xl': '1280px',
     },
     backdropFilter: {
-      'blur': 'blur(20px)',
+      blur: 'blur(20px)',
     },
     rotate: {
       '-180': '-180deg',
@@ -85,22 +84,24 @@ module.exports = {
       '-45': '-45deg',
       '-30': '-30deg',
       '-12': '-12deg',
-      '0': '0',
-      '12': '12deg',
-      '30': '30deg',
-      '45': '45deg',
-      '60': '60deg',
-      '90': '90deg',
-      '135': '135deg',
-      '180': '180deg',
-      '270': '270deg',
+      0: '0',
+      12: '12deg',
+      30: '30deg',
+      45: '45deg',
+      60: '60deg',
+      90: '90deg',
+      135: '135deg',
+      180: '180deg',
+      270: '270deg',
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundColor: ['hover'],
+    },
   },
-  plugins: [
-
-  ],
-  important: true,
+  coreplugins: {
+    gridTemplateColumns: true,
+    gridTemplateRows: true,
+  },
 }
