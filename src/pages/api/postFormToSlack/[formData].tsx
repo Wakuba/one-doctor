@@ -28,8 +28,8 @@ export default (req: NextApiRequest, res: NextApiResponse<Response>) => {
           blocks: createMessageBlockForFormReceiver(parsedData),
         })
       }
-      res.status(200).json({ message: 'Post message completed' })
     }
+    res.status(200).json({ message: 'Post message completed' })
   } catch (e) {
     console.log(e)
     res.status(400).json({ message: 'No postData' })
