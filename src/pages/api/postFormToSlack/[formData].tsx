@@ -13,9 +13,10 @@ type Response = {
 
 export default (req: NextApiRequest, res: NextApiResponse<Response>) => {
   const formData = req.query.formData as string
-  console.log(formData)
+  console.log('form', formData)
   if (formData) {
     const parsedData: FormData = JSON.parse(formData)
+  console.log('parsed', parsedData)
     if (process.env.SLACK_FORM_RECEIVER_CHANNEL_ID) {
       client.chat.postMessage({
         channel: process.env.SLACK_FORM_RECEIVER_CHANNEL_ID,
