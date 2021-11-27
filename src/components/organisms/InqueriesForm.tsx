@@ -27,7 +27,9 @@ const InqueriesForm: VFC<{ style: string }> = ({ style }) => {
         style='flex flex-col bg-prime-blue-muted space-y-6'
       >
         <Input {...{ name: 'name', type: 'text' }}>お名前(必須)</Input>
-        <Input {...{ name: 'email', type: 'email' }}>メールアドレス(必須)</Input>
+        <Input {...{ name: 'email', type: 'email' }}>
+          メールアドレス(必須)
+        </Input>
         <Textarea {...{ name: 'content' }}>お問い合わせ内容(必須)</Textarea>
         <SubmitButton>送信する</SubmitButton>
       </Form>
