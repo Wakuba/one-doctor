@@ -3,13 +3,21 @@ import Input from '../atoms/Input'
 import Textarea from '../atoms/Textarea'
 import SubmitButton from '../atoms/SubmitButton'
 import { VFC } from 'react'
-import postFormToSlackHitter from '../../lib/customFunctions/postFormToSlackHitter'
+import { firebaseFunction } from '../../lib/firebase/firebase.config'
+import { httpsCallable } from '@firebase/functions'
+// import postFormToSlackHitter from '../../lib/customFunctions/postFormToSlackHitter'
+const postFormDataToSlack = httpsCallable(
+  firebaseFunction,
+  'postFormDataToSlack'
+)
 
 const InqueriesForm: VFC<{ style: string }> = ({ style }) => {
   const onSubmit = (data: any) => {
-    console.log('data', data)
-    const abortCtrl = new AbortController()
-    postFormToSlackHitter(data, abortCtrl)
+    // console.log('data', data)
+    // const abortCtrl = new AbortController()
+    // postFormToSlackHitter(data, abortCtrl)
+    console.log(data)
+    postFormDataToSlack(data).then((res) => console.log(res))
   }
   return (
     <div className={style}>

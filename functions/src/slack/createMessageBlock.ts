@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {SignUpData} from "../type";
+import { FormData } from "../type";
 
 //  ユーザー確認メッセージを表示するBlockを作成
 export const createMessageBlock = (data: SignUpData) => {
@@ -50,3 +51,33 @@ export const createMessageBlock = (data: SignUpData) => {
     },
   ];
 };
+
+
+export const createMessageBlockForFormReceiver = (formData: FormData) => {
+  const { name, email, content } = formData
+  return [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": name ? name : "No name",
+      },
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "plain_text",
+        "text":  email ?? "No email address",
+      },
+      "block_id": "text1",
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "plain_text",
+        "text": content ?? "No content text",
+      },
+      "block_id": "text2",
+    },
+  ]
+}
