@@ -3,7 +3,7 @@ import { WebClient } from '@slack/web-api'
 import { createMessageBlockForFormReceiver } from '../../../lib/customFunctions/createMessageBlock'
 import { FormData } from '../../../lib/types'
 
-if (!process.env.SLACK_TOKEN) console.log('No slack bot token')
+if (!process.env.SLACK_FORM_RECEIVER_TOKEN) console.log('No slack bot token')
 
 const client = new WebClient(process.env.SLACK_FORM_RECEIVER_TOKEN)
 

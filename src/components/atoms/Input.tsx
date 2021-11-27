@@ -48,6 +48,13 @@ const Input: VFC<InputPropsType> = ({
           placeholder={placeholder}
           {...register(name, {
             required: errorMessage,
+            pattern:
+              type === 'email'
+                ? {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i,
+                    message: '無効なメールアドレスです',
+                  }
+                : undefined,
             onChange: (e) => {
               if (onChange) onChange(e)
             },

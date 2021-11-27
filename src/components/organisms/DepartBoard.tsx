@@ -3,7 +3,6 @@ import DepartKanban from '../molecules/DepartKanban'
 // Import { depList } from '../../../public/staticData'
 
 export default function DepartBoard({ depList }: { depList: any }) {
-  console.log('depList', depList)
   return (
     <div className='w-full sm:overflow-x-auto sm:overflow-y-hidden md:overflow-x-auto md:overflow-y-hidden'>
       <div
