@@ -6,7 +6,9 @@ import { FormData } from '../../../lib/types'
 if (!process.env.SLACK_FORM_RECEIVER_TOKEN) console.log('No slack bot token')
 console.log('token', process.env.SLACK_FORM_RECEIVER_TOKEN)
 
-const client = new WebClient(process.env.SLACK_FORM_RECEIVER_TOKEN)
+const client = new WebClient(process.env.SLACK_FORM_RECEIVER_TOKEN, {
+  maxRequestConcurrency: 5,
+})
 
 console.log('client', client)
 type Response = {
@@ -22,12 +24,13 @@ export default (req: NextApiRequest, res: NextApiResponse<Response>) => {
       console.log('parsed', parsedData)
       if (process.env.SLACK_FORM_RECEIVER_CHANNEL_ID) {
         console.log(process.env.SLACK_FORM_RECEIVER_CHANNEL_ID)
-        const result = client.chat.postMessage({
-          channel: process.env.SLACK_FORM_RECEIVER_CHANNEL_ID,
-          text: parsedData.name,
-          blocks: createMessageBlockForFormReceiver(parsedData),
-        })
-        console.log('result', result)
+        client.chat
+          .postMessage({
+            channel: process.env.SLACK_FORM_RECEIVER_CHANNEL_ID,
+            text: parsedData.name,
+            blocks: createMessageBlockForFormReceiver(parsedData),
+          })
+          .then((result) => console.log('result', result))
       }
     }
     res.status(200).json({ message: 'Post message completed' })
