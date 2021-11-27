@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { WebClient } from '@slack/web-api'
+import { LogLevel, retryPolicies, WebClient } from '@slack/web-api'
 import { createMessageBlockForFormReceiver } from '../../../lib/customFunctions/createMessageBlock'
 import { FormData } from '../../../lib/types'
 
@@ -7,7 +7,9 @@ if (!process.env.SLACK_FORM_RECEIVER_TOKEN) console.log('No slack bot token')
 console.log('token', process.env.SLACK_FORM_RECEIVER_TOKEN)
 
 const client = new WebClient(process.env.SLACK_FORM_RECEIVER_TOKEN, {
-  maxRequestConcurrency: 5,
+  maxRequestConcurrency: 10,
+  retryConfig: retryPolicies.rapidRetryPolicy,
+  logLevel: LogLevel.DEBUG,
 })
 
 console.log('client', client)
