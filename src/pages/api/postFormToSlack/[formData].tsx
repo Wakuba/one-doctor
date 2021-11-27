@@ -21,7 +21,7 @@ export default (req: NextApiRequest, res: NextApiResponse<Response>) => {
       const parsedData: FormData = JSON.parse(formData)
       console.log('parsed', parsedData)
       if (process.env.SLACK_FORM_RECEIVER_CHANNEL_ID) {
-        console.log(process.env.SLACK_FORM_RECEIVER_CHANNEL_IF)
+        console.log(process.env.SLACK_FORM_RECEIVER_CHANNEL_ID)
         client.chat.postMessage({
           channel: process.env.SLACK_FORM_RECEIVER_CHANNEL_ID,
           text: parsedData.name,
