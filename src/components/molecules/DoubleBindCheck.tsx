@@ -8,8 +8,11 @@ import {
 } from 'react-hook-form'
 import Input from '../atoms/Input'
 
-interface DoubleBindPasswordCheckPropsType {
+interface DoubleBindCheckPropsType {
   name: string
+  nameOne: string
+  nameTwo: string
+  type: 'password' | 'email'
   titleOne: string
   titleTwo: string
   subTitleOne?: string
@@ -17,36 +20,42 @@ interface DoubleBindPasswordCheckPropsType {
   style?: string
   register?: UseFormRegister<FieldValues>
   errors?: any
+  errorSetting: { errorName: string; errorMessage: string }
   setError?: UseFormSetError<FieldValues>
   getValues?: UseFormGetValues<FieldValues>
   clearErrors?: UseFormClearErrors<FieldValues>
 }
 
-const DoubleBindPasswordCheck: VFC<DoubleBindPasswordCheckPropsType> = ({
+const DoubleBindCheck: VFC<DoubleBindCheckPropsType> = ({
   name,
+  nameOne,
+  nameTwo,
   titleOne,
   titleTwo,
   subTitleOne,
   subTitleTwo,
   style,
+  type,
   register,
   errors,
   setError,
+  errorSetting,
   getValues,
   clearErrors,
 }) => {
+  const { errorName, errorMessage } = errorSetting
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
-    console.log('target', typeof e.target.value)
-    console.log('errors', errors)
     if (getValues && setError && clearErrors) {
-      if (getValues('passwordOne') !== e.target.value) {
-        setError('passwordMismatch', {
+      if (getValues(nameOne) !== e.target.value) {
+        setError(errorName, {
           type: 'manual',
-          message: 'パスワードが一致していません',
+          message: errorMessage,
         })
+        console.log(errors)
+        console.log(errors[errorName])
       } else {
-        clearErrors('passwordMismatch')
+        clearErrors(errorName)
       }
     }
   }
@@ -54,10 +63,10 @@ const DoubleBindPasswordCheck: VFC<DoubleBindPasswordCheckPropsType> = ({
     <div title={name} className={`${style}`}>
       <Input
         {...{
-          name: 'passwordOne',
-          type: 'password',
+          name: nameOne,
+          type: type,
           subTitle: subTitleOne,
-          style: { wholeStyle: 'block', inputStyle: 'block' },
+          style: { wholeStyle: 'block mb-6', inputStyle: 'block' },
           register: register,
           errors: errors,
         }}
@@ -66,8 +75,8 @@ const DoubleBindPasswordCheck: VFC<DoubleBindPasswordCheckPropsType> = ({
       </Input>
       <Input
         {...{
-          name: 'passwordTwo',
-          type: 'password',
+          name: nameTwo,
+          type: type,
           subTitle: subTitleTwo,
           style: { wholeStyle: 'block', inputStyle: 'block' },
           register: register,
@@ -77,9 +86,9 @@ const DoubleBindPasswordCheck: VFC<DoubleBindPasswordCheckPropsType> = ({
       >
         {titleTwo}
       </Input>
-      {errors.passwordMismatch ? (
+      {errors[errorName] ? (
         <div className='block mt-2 text-xs text-[#FF0000]'>
-          {errors.passwordMismatch.message}
+          {errors[errorName].message}
         </div>
       ) : (
         <div className='invisible text-xs block'>message</div>
@@ -88,4 +97,4 @@ const DoubleBindPasswordCheck: VFC<DoubleBindPasswordCheckPropsType> = ({
   )
 }
 
-export default DoubleBindPasswordCheck
+export default DoubleBindCheck

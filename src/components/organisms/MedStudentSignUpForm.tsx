@@ -10,7 +10,7 @@ import InputDouble from '../atoms/InputDouble'
 import SubmitButton from '../atoms/SubmitButton'
 import MultiSelector from '../atoms/MultiSelector'
 import Link from 'next/link'
-import DoubleBindPasswordCheck from '../molecules/DoubleBindPasswordCheck'
+import DoubleBindCheck from '../molecules/DoubleBindCheck'
 import univEmailValidator from '../../lib/customFunctions/univEmailValidator'
 import { ModalBackdrop, ModalMainArea } from '../atoms/Modal'
 
@@ -134,17 +134,22 @@ const MedStudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
         >
           性別
         </SingleSelector>
-
-        <Input
+        <DoubleBindCheck
           {...{
-            name: 'emailOne',
+            name: 'doubleBindEmailCheck',
             type: 'email',
-            style: { wholeStyle: 'block', inputStyle: 'block' },
-            subTitle: '大学のメアド以外を入力してください',
+            errorSetting: {
+              errorName: 'emailNotMatched',
+              errorMessage: 'メールアドレスが一致していません',
+            },
+            nameOne: 'emailOne',
+            titleOne: 'メールアドレス',
+            subTitleOne: '大学のメアド以外を入力してください',
+            nameTwo: 'emailTwo',
+            titleTwo: 'メールアドレス(確認用)',
+            subTitleTwo: '確認のためもう一度入力してください',
           }}
-        >
-          メールアドレス
-        </Input>
+        />
         <Input
           {...{
             name: 'emailUniv',
@@ -198,12 +203,19 @@ const MedStudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
         >
           大学名
         </SingleSelector>
-        <DoubleBindPasswordCheck
+        <DoubleBindCheck
           {...{
             name: 'doubleBindPasswordCheck',
+            type: 'password',
+            errorSetting: {
+              errorName: 'passwordNotMatched',
+              errorMessage: 'パスワードが一致していません',
+            },
+            nameOne: 'passwordOne',
             titleOne: 'パスワード',
-            titleTwo: 'パスワード(確認用)',
             subTitleOne: '（仮テキスト）半角英数を混ぜて６文字以上',
+            nameTwo: 'passwordTwo',
+            titleTwo: 'パスワード(確認用)',
           }}
         />
         <SubmitButton>送信する</SubmitButton>
