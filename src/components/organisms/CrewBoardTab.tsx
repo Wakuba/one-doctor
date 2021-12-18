@@ -4,11 +4,14 @@ import { CrewCardListTabType } from '../../lib/types'
 
 const CrewBoardTab = ({
   crewDataList,
+  title,
 }: {
   crewDataList: CrewCardListTabType[]
+  title: string
 }) => {
   return (
     <div
+      title={title}
       className={clsx(
         'w-full py-8',
         'sm:flex sm:flex-col sm:items-center sm:space-y-8',

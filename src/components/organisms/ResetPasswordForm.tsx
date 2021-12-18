@@ -14,7 +14,7 @@ const ResetPasswordForm: FC = () => {
     console.log('email', data.email)
     auth.sendPasswordResetEmailToUser(data.email)
     console.log('sendPasswordReset実行完了')
-    router.push('/Dashboard')
+    router.push('/UserDashboard')
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

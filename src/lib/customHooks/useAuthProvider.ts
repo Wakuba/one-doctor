@@ -26,16 +26,18 @@ import {
   LogInData,
   OdUserContext,
   SignUpData,
-  UserAdditionalData,
+  SignUpDataWithUid,
 } from '../types'
 import { useAuth } from '../context'
 import { useRouter } from 'next/router'
+import { userInfo } from 'os'
+
+type odUserData = SignUpDataWithUid
 
 //Responsibility : serve the context of user authe infomation
 export const useAuthProvider = () => {
   const [odUser, setOdUser] = useState<User | null>(null)
-  const [userAdditionalData, setUserAdditionalData] =
-    useState<UserAdditionalData>({ uid: '', name: '', email: '', password: '' })
+  const [odUserData, setOdUserData] = useState<odUserData>({})
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
@@ -53,8 +55,9 @@ export const useAuthProvider = () => {
     return () => unsubscribe()
   }, [])
 
-  //set a user infomation to a document in firesotre when signing up
-  const createUser = (userInfoOnFierstore: UserAdditionalData) => {
+  // ユーザーデータのうちfirebase authアカウント作成には必須でないがfiresotreに入れるもの
+  const addUserDataOnFirestore = (userInfoOnFierstore: SignUpDataWithUid) => {
+    console.log('userinfo', userInfoOnFierstore)
     setDoc(doc(db, 'odUsers', userInfoOnFierstore.uid), userInfoOnFierstore)
     getUserAdditionalData(userInfoOnFierstore.uid)
   }
@@ -65,35 +68,28 @@ export const useAuthProvider = () => {
     setIsLoading(true)
   }
 
-  // get additional data we cannot get from firebase auth.
   const getUserAdditionalData = async (uid: UserInfo['uid']): Promise<void> => {
     const docSnap: DocumentSnapshot = await getDoc(doc(db, 'odUsers', uid))
     if (docSnap.exists()) {
       const doc: DocumentData = docSnap.data()
       console.log(doc)
-      setUserAdditionalData({
-        uid: doc.uid,
-        name: doc.name,
-        email: doc.email,
-        password: doc.password,
-      })
-      console.log('userAddti', userAdditionalData)
+      setOdUserData(doc)
+      // console.log('userAddti', userAdditionalData)
     } else {
       console.log('No such a document')
     }
   }
 
-  const signUp = async ({
-    name,
-    email,
-    password,
-  }: SignUpData): Promise<void> => {
-    await createUserWithEmailAndPassword(auth, email, password)
+  const signUp = (data: SignUpData): void => {
+    createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const odUser = userCredential.user
         setOdUser(odUser)
-        updateProfile(odUser, { displayName: name })
-        return createUser({ uid: odUser.uid, name, email, password })
+        updateProfile(odUser, { displayName: data.name })
+        addUserDataOnFirestore({
+          uid: userCredential.user.uid,
+          ...data,
+        })
       })
       .catch((error) => {
         const errorCode = error.code
@@ -104,14 +100,13 @@ export const useAuthProvider = () => {
     // if (odUser) updateProfile(odUser, { displayName: name })
   }
 
-  const logIn = async ({ email, password }: LogInData): Promise<void | User> =>
-    await signInWithEmailAndPassword(auth, email, password)
+  const logIn = ({ email, password }: LogInData): Promise<void | User> =>
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const odUser = userCredential.user
         setOdUser(odUser)
         getUserAdditionalData(odUser.uid)
-        console.log(userAdditionalData)
-        return userCredential.user
+        console.log(odUserData)
       })
       .catch((error) => {
         const errorCode = error.code
@@ -120,11 +115,10 @@ export const useAuthProvider = () => {
         console.log('errorMessage', errorMessage)
       })
 
-  const logOut = async (): Promise<void> =>
-    await signOut(auth).then(() => clearAuthState())
+  const logOut = (): Promise<void> => signOut(auth).then(() => clearAuthState())
 
-  const sendPasswordResetEmailToUser = async (email: string): Promise<void> =>
-    await sendPasswordResetEmail(auth, email)
+  const sendPasswordResetEmailToUser = (email: string): Promise<void> =>
+    sendPasswordResetEmail(auth, email)
       .then((response) => {
         return response
       })
@@ -137,7 +131,7 @@ export const useAuthProvider = () => {
 
   return {
     odUser,
-    userAdditionalData,
+    odUserData,
     isLoading,
     signUp,
     logIn,

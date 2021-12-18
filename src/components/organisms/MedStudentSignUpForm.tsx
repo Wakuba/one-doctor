@@ -13,6 +13,7 @@ import Link from 'next/link'
 import DoubleBindCheck from '../molecules/DoubleBindCheck'
 import univEmailValidator from '../../lib/customFunctions/univEmailValidator'
 import { ModalBackdrop, ModalMainArea } from '../atoms/Modal'
+import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 
 interface MedStudentSignUpFormData {
   departmentWishFor: string[]
@@ -32,16 +33,26 @@ interface MedStudentSignUpFormData {
 }
 
 const MedStudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
+  const { signUp } = useAuthProvider()
   const [isMedStudentAuthErrorModalOpen, setIsMedStudentAuthErrorModalOpen] =
     useState(false)
   const onSubmit = (data: MedStudentSignUpFormData) => {
     console.log(data)
-    // const name = `${data.familyName} ${data.firstName}`
-    // const ruby = `${data.familyRuby} ${data.firstRuby}`
-    // const password = data.passwordOne
-    // const email = data.emailOne
+    const cleansedData = {
+      name: `${data.familyName} ${data.firstName}`,
+      password: data.passwordOne,
+      email: data.emailOne,
+      ruby: `${data.familyRuby} ${data.firstRuby}`,
+      workplaceWishFor: data.workplaceWishFor,
+      departmentWishFor: data.departmentWishFor,
+      gender: data.gender,
+      grade: data.grade,
+      university: data.university,
+    }
+    console.log('cleansed', data)
     if (univEmailValidator(data.emailUniv)) {
       console.log('医学生認証完了')
+      signUp(cleansedData)
     } else {
       setIsMedStudentAuthErrorModalOpen(true)
     }

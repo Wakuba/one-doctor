@@ -1,10 +1,9 @@
 import clsx from 'clsx'
-import { SetStateAction } from 'react'
 
 type TabButtonsProps = {
-  buttons: string[]
-  changeTab: (value: SetStateAction<string>) => void
-  activeTab: string
+  buttons: { tabIdx: number; title: string }[]
+  changeTab: (value: number) => void
+  activeTab: number
 }
 
 export default function TabButtons({
@@ -14,19 +13,22 @@ export default function TabButtons({
 }: TabButtonsProps) {
   return (
     <div className='space-x-2'>
-      {buttons.map((button, idx) => (
+      {buttons.map((button) => (
         <button
-          key={idx}
+          key={button.tabIdx}
           className={clsx(
-            button === activeTab ? 'bg-prime-blue-rich' : 'bg-prime-blue-pale',
-            'h-10 text-white cursor-pointer focus:outline-none rounded-t shadow-lg',
-            'sm:w-2/12 sm:text-xs',
-            'md:w-24 md:text-md',
-            'ov-lg:w-32 ov-lg:text-md'
+            button.tabIdx === activeTab
+              ? 'bg-prime-blue-rich'
+              : 'bg-prime-blue-pale',
+            'h-10 px-3 text-white cursor-pointer focus:outline-none rounded-t shadow-lg'
+            // 'sm:w-2/12 sm:text-xs',
+            // 'md:w-24 md:text-md',
+            // 'ov-lg:w-32',
+            // 'ov-lg:text-md'
           )}
-          onClick={() => changeTab(button)}
+          onClick={() => changeTab(button.tabIdx)}
         >
-          {button}
+          {button.title}
         </button>
       ))}
     </div>

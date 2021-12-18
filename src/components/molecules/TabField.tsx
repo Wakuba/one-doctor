@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 type TabFieldProps = {
   key: number
   children?: ReactNode
-  label?: string
+  title?: string
 }
 
 export default function TabField(props: TabFieldProps) {

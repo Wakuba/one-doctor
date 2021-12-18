@@ -3,7 +3,6 @@ import { FormData } from '../type'
 import { config } from '../index'
 import { app } from '../slack/app'
 
-
 const postFormData = (formData: FormData): void => {
   console.log('formdata', formData)
   app.client.chat

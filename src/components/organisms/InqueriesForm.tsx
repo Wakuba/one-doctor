@@ -20,7 +20,7 @@ const InqueriesForm: VFC<{ style: string }> = ({ style }) => {
     postFormDataToSlack(data).then((res) => console.log(res))
   }
   return (
-    <div className={style}>
+    <main className={style}>
       <div className='mt-10'>
         <h1 className='text-2xl text-prime-blue-rich font-semibold mb-6'>
           お問い合わせ
@@ -41,7 +41,7 @@ const InqueriesForm: VFC<{ style: string }> = ({ style }) => {
         <Textarea {...{ name: 'content' }}>お問い合わせ内容(必須)</Textarea>
         <SubmitButton>送信する</SubmitButton>
       </Form>
-    </div>
+    </main>
   )
 }
 

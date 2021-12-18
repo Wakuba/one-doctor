@@ -88,6 +88,12 @@ export interface SignUpData {
   name: string
   email: string
   password: string
+  ruby: string
+  workplaceWishFor: string[]
+  departmentWishFor: string[]
+  gender: string
+  grade: string
+  university: string
 }
 
 export interface SignUpDataWithUid extends SignUpData {
@@ -107,18 +113,12 @@ export interface LogInData {
   email: string
   password: string
 }
-export interface UserAdditionalData {
-  uid: string
-  name: string
-  email: string
-  password: string
-}
 
 export interface OdUserContext {
   odUser: User | null
   isLoading: boolean
-  userAdditionalData: UserAdditionalData
-  signUp: ({ name, email, password }: SignUpData) => Promise<void>
+  userData: SignUpData
+  signUp: ({ name, email, password, ...rest }: SignUpData) => void
   logIn: ({ email, password }: LogInData) => Promise<void | User>
   logOut: () => Promise<void>
   sendPasswordResetEmailToUser: (email: string) => Promise<void>

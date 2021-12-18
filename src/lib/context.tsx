@@ -3,7 +3,7 @@
 import { useContext, createContext, ReactNode } from 'react'
 
 //Custom functions
-import { useAuthProvider } from './customHooks/useAuth'
+import { useAuthProvider } from './customHooks/useAuthProvider'
 import { OdUserContext } from './types'
 
 const AuthContext = createContext<OdUserContext>({
@@ -21,11 +21,11 @@ const AuthContext = createContext<OdUserContext>({
   sendPasswordResetEmailToUser: async () => {},
 })
 
-const { Provider } = AuthContext
-
 export function AuthProvider(props: { children: ReactNode }): JSX.Element {
   const auth = useAuthProvider()
-  return <Provider value={auth}>{props.children}</Provider>
+  return (
+    <AuthContext.Provider value={auth}>{props.children}</AuthContext.Provider>
+  )
 }
 
 export const useAuth = () => {
