@@ -30,7 +30,6 @@ import {
 } from '../types'
 import { useAuth } from '../context'
 import { useRouter } from 'next/router'
-import { userInfo } from 'os'
 
 type odUserData = SignUpDataWithUid
 

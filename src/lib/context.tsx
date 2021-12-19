@@ -9,7 +9,7 @@ import { OdUserContext } from './types'
 const AuthContext = createContext<OdUserContext>({
   odUser: null,
   isLoading: true,
-  userAdditionalData: {
+  odUserData: {
     uid: '',
     name: '',
     email: '',

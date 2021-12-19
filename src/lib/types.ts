@@ -117,7 +117,7 @@ export interface LogInData {
 export interface OdUserContext {
   odUser: User | null
   isLoading: boolean
-  userData: SignUpData
+  odUserData: SignUpDataWithUid
   signUp: ({ name, email, password, ...rest }: SignUpData) => void
   logIn: ({ email, password }: LogInData) => Promise<void | User>
   logOut: () => Promise<void>
