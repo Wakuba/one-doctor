@@ -1,8 +1,8 @@
-import ResidencySignUpForm from '../components/organisms/ResidencySignUpForm'
+import NotStudentSignUpForm from '../components/organisms/NotStudentSignUpForm'
 
 import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
-const ResidencySignUp: React.VFC = () => {
+const NotStudentSignUp: React.VFC = () => {
   return (
     <>
       <Header />
@@ -10,10 +10,10 @@ const ResidencySignUp: React.VFC = () => {
         title='wrapper'
         className='w-full ov-md:pt-20 flex flex-col justify-center items-center bg-prime-blue-muted'
       >
-        <ResidencySignUpForm style='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]' />
+        <NotStudentSignUpForm style='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]' />
       </div>
       <Footer />
     </>
   )
 }
-export default ResidencySignUp
+export default NotStudentSignUp
