@@ -15,7 +15,7 @@ import univEmailValidator from '../../lib/customFunctions/univEmailValidator'
 import { ModalBackdrop, ModalMainArea } from '../atoms/Modal'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 
-interface MedStudentSignUpFormData {
+interface StudentSignUpFormData {
   departmentWishFor: string[]
   emailOne: string
   emailTwo: string
@@ -32,12 +32,11 @@ interface MedStudentSignUpFormData {
   workplaceWishFor: string[]
 }
 
-const MedStudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
+const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
   const { signUp } = useAuthProvider()
-  const [isMedStudentAuthErrorModalOpen, setIsMedStudentAuthErrorModalOpen] =
+  const [isStudentAuthErrorModalOpen, setIsStudentAuthErrorModalOpen] =
     useState(false)
-  const onSubmit = (data: MedStudentSignUpFormData) => {
-    console.log(data)
+  const onSubmit = (data: StudentSignUpFormData) => {
     const cleansedData = {
       name: `${data.familyName} ${data.firstName}`,
       password: data.passwordOne,
@@ -54,42 +53,23 @@ const MedStudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
       console.log('医学生認証完了')
       signUp(cleansedData)
     } else {
-      setIsMedStudentAuthErrorModalOpen(true)
+      setIsStudentAuthErrorModalOpen(true)
     }
-
-    /*
-    firesotreにファイル名などのファイル情報をアップロード=>id発行
-    firestoreのidをmetadataとしてstorageにアップロード
-    */
-
-    // const abortCtrl = new AbortController()
-    // } else {
-    //   imageUploader(certificationImage).then((id) =>
-    //     postSlackMessageKnocker(
-    //       name,
-    //       email,
-    //       password,
-    //       id,
-    //       abortCtrl,
-    //       previewUrl
-    //     )
-    //   )
-    // }
   }
 
   return (
     <div className={style}>
-      {isMedStudentAuthErrorModalOpen && (
+      {isStudentAuthErrorModalOpen && (
         <>
           <ModalMainArea
-            closeModal={() => setIsMedStudentAuthErrorModalOpen(false)}
+            closeModal={() => setIsStudentAuthErrorModalOpen(false)}
             modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
             modalContainerStyle='w-full space-y-4'
           >
             医学生認証ができませんでした
           </ModalMainArea>
           <ModalBackdrop
-            closeModal={() => setIsMedStudentAuthErrorModalOpen(false)}
+            closeModal={() => setIsStudentAuthErrorModalOpen(false)}
           />
         </>
       )}
@@ -99,7 +79,7 @@ const MedStudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
         </h1>
         <div className='ov-md:inline sm:block mb-6'>
           <span>研修医の方は</span>
-          <Link href='/ResidencySignUp'>
+          <Link href='/NotStudentSignUp'>
             <a className='inline underline text-[#00B8FF]'>こちら</a>
           </Link>
         </div>
@@ -234,4 +214,4 @@ const MedStudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
     </div>
   )
 }
-export default MedStudentSignUpForm
+export default StudentSignUpForm

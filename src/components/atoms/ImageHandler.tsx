@@ -11,7 +11,7 @@ import {
   UseFormGetValues,
 } from 'react-hook-form'
 
-interface ImageUploadPropsType {
+interface ImageHandlerPropsType {
   name: string
   children?: string
   // subTitle?: string
@@ -56,7 +56,7 @@ const errorRenderer = (
   }
 }
 
-const ImageUpload: VFC<ImageUploadPropsType> = ({
+const ImageHandler: VFC<ImageHandlerPropsType> = ({
   name,
   children,
   // subTitle,
@@ -167,4 +167,4 @@ const ImageUpload: VFC<ImageUploadPropsType> = ({
   )
 }
 
-export default ImageUpload
+export default ImageHandler

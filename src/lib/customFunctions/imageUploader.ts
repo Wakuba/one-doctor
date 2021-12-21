@@ -10,6 +10,8 @@ const imageUploader = async (certificationImage: File) => {
       certificationImageId: '',
     },
   }
+
+  // storageの画像にidをふるために、firestoreに登録してidを作る
   await addDoc(collection(db, 'odAuthorizationImageFiles'), {
     certificationlmageName: certificationImage?.name,
   }).then((res) => {

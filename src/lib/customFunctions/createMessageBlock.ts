@@ -2,7 +2,7 @@
 import { SignUpAuthorizationDataWithImageUrl, FormData } from '../types'
 
 //  ユーザー確認メッセージを表示するBlockを作成
-export const createMessageBlockForResidencyAuthorization = (
+export const createMessageBlockForNotStudentAuthorization = (
   data: SignUpAuthorizationDataWithImageUrl
 ) => {
   const { name, email, password, certificationImageUrl } = data

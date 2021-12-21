@@ -12,7 +12,7 @@ const postFormData = (formData: FormData): void => {
       blocks: createMessageBlockForFormReceiver(formData),
     })
     .then((result) => console.log('result', result))
-    .catch((error) => console.log(error))
+    .catch((error) => console.log('error', error))
 }
 
 export default postFormData
