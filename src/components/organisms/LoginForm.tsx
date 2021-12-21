@@ -1,38 +1,28 @@
-// import { useRouter } from 'next/router'
 import { VFC } from 'react'
-// import { useForm } from 'react-hook-form'
-// import { useAuth } from '../../lib/context'
 import Form from '../molecules/Form'
 import Input from '../atoms/Input'
-import InputDouble from '../atoms/InputDouble'
 import SubmitButton from '../atoms/SubmitButton'
 import Link from 'next/link'
+import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
+import { useRouter } from 'next/router'
 
 interface LoginFormData {
-  name: string
   email: string
-  passwordOne: string
-  passwordTwo: string
+  password: string
 }
 
 const LoginForm: VFC<{ style: string }> = ({ style }) => {
-  // const [error, setError] = useState<string | null>(null)
-  // const auth = useAuth()
-  // const router = useRouter()
+  const auth = useAuthProvider()
+  const router = useRouter()
 
   const onSubmit = (data: LoginFormData) => {
     console.log(data)
-    // const { email, passwordOne } = data
-    // const password = passwordOne
-    // if (getValues('passwordOne') === getValues('passwordTwo')) {
-    //   return auth.logIn({ email, password }).then((user) => {
-    //     // console.log('logIn function', data)
-    //     router.push('/Dashboard')
-    //     console.log('logInData', user)
-    //   })
-    // } else {
-    //   setError('Password Not Matched')
-    // }
+    const { email, password } = data
+    return auth.logIn({ email, password }).then((user) => {
+      console.log('logIn function', data)
+      router.push('/UserDashboard')
+      console.log('logInData', user)
+    })
   }
 
   return (
@@ -49,20 +39,8 @@ const LoginForm: VFC<{ style: string }> = ({ style }) => {
         </div>
       </div>
       <Form formName='login' onSubmit={onSubmit} style={`space-y-6`}>
-        <InputDouble
-          {...{
-            name: 'name',
-            nameOne: 'familyName',
-            nameTwo: 'firstName',
-            type: 'text',
-            placeholderOne: '姓',
-            placeholderTwo: '名',
-          }}
-        >
-          お名前
-        </InputDouble>
         <Input
-          name='emailOne'
+          name='email'
           type='email'
           style={{ wholeStyle: 'block', inputStyle: 'block' }}
           subTitle='大学のメアド以外を入力してください'
@@ -70,7 +48,7 @@ const LoginForm: VFC<{ style: string }> = ({ style }) => {
           メールアドレス
         </Input>
         <Input
-          name='passwordOne'
+          name='password'
           type='password'
           style={{ wholeStyle: 'block', inputStyle: 'block' }}
           subTitle='（仮テキスト）半角英数を混ぜて６文字以上'
