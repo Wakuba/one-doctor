@@ -1,26 +1,36 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {App} from "@slack/bolt";
 import signUp from "../firebase/signUp";
+// import { SignUpAuthorizationDataWithImageId } from "../type";
+import axios from 'axios'
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const useActionListener = (app: App) => {
     app.action(
         {action_id: "is_medcoworker", block_id: "is_approved_or_not"},
         async ({body, say, ack}) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const bodyRe: any = body
-          const password = bodyRe.message.text ? bodyRe.message.text : 'NO DATA',
-            name = bodyRe.message.blocks[0].text.text ? bodyRe.message.blocks[0].text.text : 'NO NAME',
-            email= bodyRe.message.blocks[1].text.text ? bodyRe.message.blocks[1].text.text : 'NO NAME'
-          console.log('password だよ', password)
-          console.log('nameだよ', name)
-          console.log('emailだよ', email)
+          const certificationImageId: string= bodyRe.message.text ?? 'NO DATA'
+          const data = await checkAuthorizedAndGetDataOnSpreadSheet(certificationImageId)
+          console.log('data', data)
           await ack();
-          await say('とりまおっけー');
-          signUp({email: "m16065kt@jichi.ac.jp", password: "tatsujin16"});
+          await say('認可しました');
+          signUp(data);
         }
     )
 };
 
+const checkAuthorizedAndGetDataOnSpreadSheet = async (id: string) => {
+  const url = `https://script.google.com/macros/s/AKfycbxVkjCPglhyc3WJxOO0RuomqGIRm--iQYl3KoW1N9IaRYHDCshw4MW9MAFLG8s8alA4/exec?id=${id}`
+  const response = await axios.get(url)
+  // const response = await fetch(url, { method: 'GET'})
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const data = (await response.data ?? 'NO USER') as any
+  return data
+}
+
 export default useActionListener;
+
 
 // body {
 //   type: 'block_actions',
