@@ -1,23 +1,26 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import {SignUpData} from "../type";
-import { FormData } from "../type";
 
 //  ユーザー確認メッセージを表示するBlockを作成
-export const createMessageBlock = (data: SignUpData) => {
-  const {name, email, password} = data;
+import { SignUpAuthorizationDataWithImageUrl, FormData } from '../type'
+
+//  ユーザー確認メッセージを表示するBlockを作成
+export const createMessageBlockForAuthorization = (
+  data: SignUpAuthorizationDataWithImageUrl
+) => {
+  const { name, email, password, certificationImageUrl } = data
   return [
     {
       "type": "header",
       "text": {
         "type": "plain_text",
-        "text": name ? `${name}` : "No name",
+        "text": name ? name : "No name",
       },
     },
     {
       "type": "section",
       "text": {
         "type": "plain_text",
-        "text": email ? `${email}` : "No email address",
+        "text": email ?? "No email address",
       },
       "block_id": "text1",
     },
@@ -25,15 +28,20 @@ export const createMessageBlock = (data: SignUpData) => {
       "type": "section",
       "text": {
         "type": "plain_text",
-        "text": password ? `${password}`: "No password",
+        "text": password ?? "No password",
       },
       "block_id": "text2",
     },
-    // {
-    //   "type": "image",
-    //   "image_url": "http://placekitten.com/700/500",
-    //   "alt_text": "Multiple cute kittens"
-    // },
+    {
+      "type": "image",
+      "title": {
+        "type": "plain_text",
+        "text": "医学生および研修医の証明となるもの",
+        "emoji": true,
+      },
+      "image_url": certificationImageUrl ?? "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+      "alt_text": "cute cat",
+    },
     {
       "type": "actions",
       "block_id": "is_approved_or_not",
@@ -52,7 +60,6 @@ export const createMessageBlock = (data: SignUpData) => {
   ];
 };
 
-
 export const createMessageBlockForFormReceiver = (formData: FormData) => {
   const { name, email, content } = formData
   return [
@@ -67,7 +74,7 @@ export const createMessageBlockForFormReceiver = (formData: FormData) => {
       "type": "section",
       "text": {
         "type": "plain_text",
-        "text":  email ?? "No email address",
+        "text": email ?? "No email address",
       },
       "block_id": "text1",
     },
