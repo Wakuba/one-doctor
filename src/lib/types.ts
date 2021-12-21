@@ -89,23 +89,39 @@ export interface SignUpData {
   email: string
   password: string
   ruby: string
-  workplaceWishFor: string[]
-  departmentWishFor: string[]
   gender: string
-  grade: string
-  university: string
+  isStudent: boolean
 }
 
-export interface SignUpDataWithUid extends SignUpData {
+export interface SignUpDataForStudent extends SignUpData {
+  grade: string
+  university: string
+  workplaceWishFor: string[]
+  departmentWishFor: string[]
+}
+
+export interface SignUpDataForNotStudent extends SignUpData {
+  departmentWishFor: string[]
+  workplace: string
+  workplaceWishFor: string[]
+}
+
+export interface SignUpDataForNotStudentWithUid
+  extends SignUpDataForNotStudent {
   uid: string
 }
 
-export interface SignUpAuthorizationDataWithImageId extends SignUpData {
+export interface SignUpDataForStudentWithUid extends SignUpDataForStudent {
+  uid: string
+}
+
+export interface SignUpAuthorizationDataWithImageId
+  extends SignUpDataForNotStudent {
   certificationImageId: string
 }
 
 export interface SignUpAuthorizationDataWithImageUrl
-  extends SignUpAuthorizationDataWithImageId {
+  extends SignUpDataForNotStudent {
   certificationImageUrl: string
 }
 
@@ -114,10 +130,14 @@ export interface LogInData {
   password: string
 }
 
+export type odUserData =
+  | SignUpDataForStudentWithUid
+  | SignUpDataForNotStudentWithUid
+
 export interface OdUserContext {
   odUser: User | null
   isLoading: boolean
-  odUserData: SignUpDataWithUid
+  odUserData: odUserData
   signUp: ({ name, email, password, ...rest }: SignUpData) => void
   logIn: ({ email, password }: LogInData) => Promise<void | User>
   logOut: () => Promise<void>

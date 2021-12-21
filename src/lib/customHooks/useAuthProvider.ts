@@ -25,13 +25,12 @@ import {
 import {
   LogInData,
   OdUserContext,
-  SignUpData,
-  SignUpDataWithUid,
+  odUserData,
+  SignUpDataForStudentWithUid,
+  SignUpDataForStudent,
 } from '../types'
 import { useAuth } from '../context'
 import { useRouter } from 'next/router'
-
-type odUserData = SignUpDataWithUid
 
 //Responsibility : serve the context of user authe infomation
 export const useAuthProvider = () => {
@@ -55,8 +54,9 @@ export const useAuthProvider = () => {
   }, [])
 
   // ユーザーデータのうちfirebase authアカウント作成には必須でないがfiresotreに入れるもの
-  const addUserDataOnFirestore = (userInfoOnFierstore: SignUpDataWithUid) => {
-    console.log('userinfo', userInfoOnFierstore)
+  const addUserDataOnFirestore = (
+    userInfoOnFierstore: SignUpDataForStudentWithUid
+  ) => {
     setDoc(doc(db, 'odUsers', userInfoOnFierstore.uid), userInfoOnFierstore)
     getUserAdditionalData(userInfoOnFierstore.uid)
   }
@@ -71,15 +71,14 @@ export const useAuthProvider = () => {
     const docSnap: DocumentSnapshot = await getDoc(doc(db, 'odUsers', uid))
     if (docSnap.exists()) {
       const doc: DocumentData = docSnap.data()
-      console.log(doc)
-      setOdUserData(doc)
-      // console.log('userAddti', userAdditionalData)
+      setOdUserData(doc as odUserData)
+      console.log('userAdditionalData', doc)
     } else {
       console.log('No such a document')
     }
   }
 
-  const signUp = (data: SignUpData): void => {
+  const signUp = (data: SignUpDataForStudent): void => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const odUser = userCredential.user
