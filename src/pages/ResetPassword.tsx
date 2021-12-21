@@ -1,27 +1,16 @@
-import Link from 'next/link'
+import Footer from '../components/organisms/Footer'
+import Header from '../components/organisms/Header'
 import ResetPasswordForm from '../components/organisms/ResetPasswordForm'
-const ResetPasswordPage: React.FC = () => {
+
+const ResetPasswordPage: React.VFC = () => {
   return (
-    <div className='min-h-screen flex bg-gray-200'>
-      <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
-        <div className='text-center mt-24'>
-          <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
-            Reset password
-          </h2>
-          <p className='mt-2 text-center text-md text-gray-600'>
-            {"Didn't forgot? "}
-            <Link href='/login'>
-              <a href='#' className='text-blue-500'>
-                Login
-              </a>
-            </Link>
-          </p>
-        </div>
-        <div className='mt-8 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
-          <ResetPasswordForm />
-        </div>
+    <>
+      <Header />
+      <div className='flex flex-col items-center ov-md:pt-20 bg-prime-blue-muted'>
+        <ResetPasswordForm style='w-11/12 sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] bg-prime-blue-muted' />
       </div>
-    </div>
+      <Footer />
+    </>
   )
 }
 export default ResetPasswordPage

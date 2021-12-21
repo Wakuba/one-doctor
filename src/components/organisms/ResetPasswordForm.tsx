@@ -1,13 +1,9 @@
-import { FC } from 'react'
-import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useAuth } from '../../lib/context'
-const ResetPasswordForm: FC = () => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm()
+import Form from '../molecules/Form'
+import Input from '../atoms/Input'
+import SubmitButton from '../atoms/SubmitButton'
+const ResetPasswordForm: React.VFC<{ style: string }> = ({ style }) => {
   const auth = useAuth()
   const router = useRouter()
   const onSubmit = (data: { email: string }) => {
@@ -17,41 +13,27 @@ const ResetPasswordForm: FC = () => {
     router.push('/UserDashboard')
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className='rounded-md'>
-        <label
-          htmlFor='email'
-          className='block text-sm font-medium leading-5 text-gray-700'
-        >
-          Email address
-        </label>
-        <div className='mt-1 rounded-md'>
-          <input
-            id='email'
-            className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 shadow-sm'
-            type='email'
-            {...register('email', {
-              required: 'Please enter an email',
-            })}
-          />
-          {errors.email && (
-            <div className='mt-2 text-xs text-red-600'>
-              {errors.email.message}
-            </div>
-          )}
-        </div>
+    <main className={style}>
+      <div className='mt-10'>
+        <h1 className='text-2xl text-prime-blue-rich font-semibold mb-6'>
+          パスワードの変更
+        </h1>
+        <p className='text-sm mb-6'>
+          以下のフォームに必要事項をご記入のうえ、「送信する」をクリックしてください
+        </p>
       </div>
-      <div className='mt-4'>
-        <span className='block w-full rounded-md shadow-sm'>
-          <button
-            type='submit'
-            className='w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out'
-          >
-            Send reset link
-          </button>
-        </span>
-      </div>
-    </form>
+      <Form
+        formName='resetPassword'
+        onSubmit={onSubmit}
+        style='flex flex-col bg-prime-blue-muted space-y-6'
+      >
+        <Input {...{ name: 'name', type: 'text' }}>お名前(必須)</Input>
+        <Input {...{ name: 'email', type: 'email' }}>
+          メールアドレス(必須)
+        </Input>
+        <SubmitButton>送信する</SubmitButton>
+      </Form>
+    </main>
   )
 }
 export default ResetPasswordForm
