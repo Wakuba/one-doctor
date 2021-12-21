@@ -1,10 +1,25 @@
-import {createUserWithEmailAndPassword} from "@firebase/auth";
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
 import {auth} from "./firebase.config";
+import {setDoc, doc} from 'firebase/firestore'
+import {db} from '../firebase/firebase.config'
+// import { SignUpAuthorizationDataWithImageId } from "../type";
 
-import { SignupType } from "../type";
-
-const signUp = async ({email, password}: SignupType): Promise<void> => {
-  await createUserWithEmailAndPassword(auth, email, password);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const signUp = (data: any): void => {
+  console.log('signUpData',  data)
+  createUserWithEmailAndPassword(auth, data.email, data.password)
+  .then(userCredential => {
+    const odUser = userCredential.user;
+    updateProfile(odUser, {displayName: data.name})
+    console.log('uid', odUser.uid)
+    setDoc(doc(db, 'odUsers', odUser.uid), data).then(res => console.log('setDocResult', res))
+  }).catch((error) => {
+    const errorCode = error.code
+    const errorMessage = error.message
+    console.log('errorCode', errorCode)
+    console.log('errorMessage', errorMessage)
+  })
 };
 
 export default signUp;
