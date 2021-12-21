@@ -11,9 +11,10 @@ import {
   getDocs,
   doc,
   getDoc,
+  setDoc,
 } from 'firebase/firestore'
 import { ref, getDownloadURL } from 'firebase/storage'
-import { DepPostDataType } from '../../lib/types'
+import { DepPostDataType, OdUserContext } from '../../lib/types'
 
 // Custom components
 import PlaneButton from '../../components/atoms/PlaneButton'
@@ -49,8 +50,6 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
     officialWebSite,
   } = postData
 
-  const auth = useAuthProvider()
-
   return (
     <>
       <Header />
@@ -77,7 +76,10 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
                     {departmentName.departmentNameInJapanese}
                   </Tag>
                 </div>
-                <FavoriteButton layoutStyle='' />
+                <FavoriteButton
+                  layoutStyle=''
+                  department={departmentName.departmentNameInEnglish}
+                />
               </div>
             </div>
           </section>

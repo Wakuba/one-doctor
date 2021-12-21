@@ -45,6 +45,7 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
       gender: '',
       certificationImageId: '',
       isStudent: false,
+      favoDeparts: [],
     }
     await imageUploader(data.doctorCertification).then(
       (certificationImageId) => {
@@ -59,6 +60,7 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
           gender: data.gender,
           certificationImageId: certificationImageId,
           isStudent: false,
+          favoDeparts: [],
         }
       }
     )

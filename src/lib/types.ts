@@ -91,6 +91,7 @@ export interface SignUpData {
   ruby: string
   gender: string
   isStudent: boolean
+  favoDeparts: string[]
 }
 
 export interface SignUpDataForStudent extends SignUpData {
@@ -138,7 +139,7 @@ export interface OdUserContext {
   odUser: User | null
   isLoading: boolean
   odUserData: odUserData
-  signUp: ({ name, email, password, ...rest }: SignUpData) => void
+  signUp: ({ name, email, password, ...rest }: SignUpDataForStudent) => void
   logIn: ({ email, password }: LogInData) => Promise<void | User>
   logOut: () => Promise<void>
   sendPasswordResetEmailToUser: (email: string) => Promise<void>

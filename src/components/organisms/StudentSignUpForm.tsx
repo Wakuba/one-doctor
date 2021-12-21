@@ -47,6 +47,8 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
       gender: data.gender,
       grade: data.grade,
       university: data.university,
+      isStudent: true,
+      favoDeparts: [],
     }
     console.log('cleansed', data)
     if (univEmailValidator(data.emailUniv)) {
