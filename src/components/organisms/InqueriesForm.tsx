@@ -5,11 +5,9 @@ import SubmitButton from '../atoms/SubmitButton'
 import { VFC } from 'react'
 import { firebaseFunction } from '../../lib/firebase/firebase.config'
 import { httpsCallable } from '@firebase/functions'
-// import postFormToSlackHitter from '../../lib/customFunctions/postFormToSlackHitter'
-const postFormDataToSlack = httpsCallable(
-  firebaseFunction,
-  'postFormDataToSlack'
-)
+
+const postFormData = httpsCallable(firebaseFunction, 'postFormDataToSlack')
+const consoler = httpsCallable(firebaseFunction, 'consolerTest')
 
 const InqueriesForm: VFC<{ style: string }> = ({ style }) => {
   const onSubmit = (data: any) => {
@@ -17,7 +15,8 @@ const InqueriesForm: VFC<{ style: string }> = ({ style }) => {
     // const abortCtrl = new AbortController()
     // postFormToSlackHitter(data, abortCtrl)
     console.log(data)
-    postFormDataToSlack(data).then((res) => console.log(res))
+    postFormData(data)
+    consoler()
   }
   return (
     <main className={style}>
