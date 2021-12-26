@@ -23,7 +23,10 @@
     "types": [
       "node"
     ],
-    "incremental": true
+    "incremental": true,
+    "typeRoots": [
+      "/src/lib/react-twitter-embed.d.ts"
+    ]
   },
   "exclude": [
     "node_modules"
