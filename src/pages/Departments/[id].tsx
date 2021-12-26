@@ -148,7 +148,11 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
                   ></iframe>
                 </div>
               </div>
-              <EventTab title='イベント' />
+              <EventTab
+                title='イベント'
+                dep={departmentName.departmentNameInJapanese}
+                univ={universityName.universityNameInEnglish}
+              />
               <div
                 title='SNS'
                 className='w-full ov-md:p-8 sm:p-4 bg-white flex flex-col'
@@ -163,7 +167,7 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
                   <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
                     関連SNS
                   </div>
-                  <TwitterTimeline href={tabMenu.snsTab.twitterTimelineUrl} />
+                  <TwitterTimeline userId={tabMenu.snsTab.twitterUserId} />
                 </div>
               </div>
             </TabMenu>
