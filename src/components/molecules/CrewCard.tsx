@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { CrewCardListTabType } from '../../lib/types'
 
 interface CardFacePropsType {
   imgSrc?: string
@@ -16,11 +15,12 @@ interface CardFacePropsType {
   forFun?: string
 }
 
-export default function CrewCard({
-  crewData,
-}: {
-  crewData: CrewCardListTabType
-}) {
+interface CrewCardPropsType {
+  crewData: any
+  layoutStyle?: string
+}
+
+const CrewCard: React.VFC<CrewCardPropsType> = ({ crewData, layoutStyle }) => {
   const [isFliped, setIsFliped] = useState<boolean>(false),
     [arrowVanisher, setArrowVanisher] = useState<boolean>(false)
   const flip = () => {
@@ -46,11 +46,12 @@ export default function CrewCard({
     <div
       className={clsx(
         'block perspective justify-self-center bg-transparent',
-        'sm:w-[318px] sm:h-72',
-        'md:w-[448px] md:h-64',
-        'lg:w-[448px] lg:h-64',
-        'xl:w-[448px] xl:h-64',
-        '2xl:w-[548px] 2xl:h-72'
+        'sm:min-w-[318px] sm:max-w-[400px] sm:w-4/6 sm:h-72',
+        'md:w-[456px] md:h-72',
+        'lg:w-[420px] lg:h-80',
+        'xl:w-[420px] xl:h-80',
+        '2xl:w-[548px] 2xl:h-72',
+        layoutStyle
       )}
     >
       <div
@@ -95,7 +96,7 @@ function CardHead({
 }: CardFacePropsType) {
   return (
     <div className='block absolute h-full w-full backface-invisible z-10'>
-      <div className='relative grid grid-cols-10 w-full h-full shadow-lg crew-bg-blue border-1 border-prime-blue-rich rounded-sm'>
+      <div className='relative grid grid-cols-10 w-full h-full shadow-lg border-1 bg-gradient-to-b from-prime-blue-rich via-white to-white  border-prime-blue-rich rounded-sm'>
         <div className='col-span-4 flex items-center justify-center'>
           {imgSrc ? (
             <div className='relative sm:w-[110px] sm:h-[145px] ov-md:w-[154px] ov-md:h-[204px]'>
@@ -164,7 +165,7 @@ function CardTail({
       onClick={flip}
       className='block absolute h-full w-full backface-invisible'
     >
-      <div className='relative grid grid-cols-10 w-full h-full crew-bg-purple rotate-y-180 shadow-lg border-[1px] border-prime-blue-rich rounded-sm'>
+      <div className='relative grid grid-cols-10 w-full h-full bg-gradient-to-b from-purple via-white to-white rotate-y-180 shadow-lg border-[1px] border-prime-blue-rich rounded-sm'>
         <div className='col-span-4 flex items-center justify-center'>
           {imgSrc ? (
             <div className='relative sm:w-[110px] sm:h-[145px] ov-md:w-[154px] ov-md:h-[204px]'>
@@ -212,3 +213,5 @@ function CardTail({
     </div>
   )
 }
+
+export default CrewCard
