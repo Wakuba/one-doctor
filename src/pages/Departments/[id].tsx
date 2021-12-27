@@ -38,6 +38,7 @@ import { ParsedUrlQuery } from 'querystring'
 import router from 'next/router'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 import FavoriteButton from '../../components/atoms/FavoriteButton'
+import BasicInfoTab from '../../components/organisms/BasicInfoTab'
 
 export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
   const {
@@ -110,23 +111,10 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
 
           <section className='w-full flex flex-col items-center mb-16'>
             <TabMenu>
-              <div
+              <BasicInfoTab
                 title='基本情報'
-                className='w-full ov-md:p-8 sm:p-4 bg-white flex flex-col items-start'
-              >
-                <div className='space-y-8'>
-                  <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
-                    研修カリキュラム
-                  </div>
-                  {/* <Image/> */}
-                  <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
-                    主な進路
-                  </div>
-                  <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
-                    取得可能な資格
-                  </div>
-                </div>
-              </div>
+                basicInfo={postData.tabMenu.basicInfo}
+              />
               <CrewBoardTab
                 title='医局員'
                 crewDataList={tabMenu.crewCardListTab}
@@ -268,9 +256,12 @@ export const getStaticProps: GetStaticProps<
       hospitalName: data?.hospitalName ?? '',
       topSection: data?.topSection ?? '',
       tabMenu: {
-        basicInfoTab: data?.tabMenu.basicInfoTab ?? '',
-        geographicalInformationTab:
-          getUrlFromIframe(data?.tabMenu.geographicalInformationTab) ?? '',
+        basicInfoTab: {
+          curriculum: data?.tabMenu.curriculum ?? '',
+          route: data?.tabMenu.route ?? '',
+          licence: data?.tabMenu.licence ?? '',
+          others: data?.tabMenu.others ?? '',
+        },
         snsTab: {
           twitterTimelineUrl:
             getUrlFromTwitterTimeline(

@@ -42,26 +42,6 @@
     word-break: break-all;
   }
 
-  .crew-bg-blue {
-    background: linear-gradient(
-      to bottom,
-      #5db0d0 0%,
-      #5db0d0 30%,
-      #f8fdff 30%,
-      #f8fdff 100%
-    );
-  }
-
-  .crew-bg-purple {
-    background: linear-gradient(
-      to bottom,
-      #6e4e9d 0%,
-      #6e4e9d 30%,
-      #f8fdff 30%,
-      #f8fdff 100%
-    );
-  }
-
   .ed-back-linear {
     background: linear-gradient(
       180deg,
