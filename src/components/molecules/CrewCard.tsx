@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 
 interface CardFacePropsType {
   imgSrc?: string
-  flip?: () => void
   isArrowVanished?: boolean
   crewName?: string
   position?: string
@@ -25,6 +24,7 @@ const CrewCard: React.VFC<CrewCardPropsType> = ({ crewData, layoutStyle }) => {
     [arrowVanisher, setArrowVanisher] = useState<boolean>(false)
   const flip = () => {
     setIsFliped(!isFliped)
+    console.log('fliped')
   }
   const {
     crewName,
@@ -44,6 +44,7 @@ const CrewCard: React.VFC<CrewCardPropsType> = ({ crewData, layoutStyle }) => {
 
   return (
     <div
+      onClick={flip}
       className={clsx(
         'block perspective justify-self-center bg-transparent',
         'sm:min-w-[318px] sm:max-w-[400px] sm:w-4/6 sm:h-72',
@@ -61,7 +62,6 @@ const CrewCard: React.VFC<CrewCardPropsType> = ({ crewData, layoutStyle }) => {
         )}
       >
         <CardHead
-          flip={flip}
           isArrowVanished={arrowVanisher}
           imgSrc={crewImgUrl}
           crewName={crewName}
@@ -71,7 +71,6 @@ const CrewCard: React.VFC<CrewCardPropsType> = ({ crewData, layoutStyle }) => {
           majorField={majorField}
         />
         <CardTail
-          flip={flip}
           isArrowVanished={arrowVanisher}
           imgSrc={crewImgUrl}
           crewName={crewName}
@@ -86,7 +85,6 @@ const CrewCard: React.VFC<CrewCardPropsType> = ({ crewData, layoutStyle }) => {
 
 function CardHead({
   imgSrc,
-  // flip,
   isArrowVanished,
   crewName,
   position,
@@ -153,7 +151,6 @@ function CardHead({
 
 function CardTail({
   imgSrc,
-  flip,
   isArrowVanished,
   crewName,
   position,
@@ -161,11 +158,8 @@ function CardTail({
   forFun,
 }: CardFacePropsType) {
   return (
-    <div
-      onClick={flip}
-      className='block absolute h-full w-full backface-invisible'
-    >
-      <div className='relative grid grid-cols-10 w-full h-full bg-gradient-to-b from-purple via-white to-white rotate-y-180 shadow-lg border-[1px] border-prime-blue-rich rounded-sm'>
+    <div className='absolute h-full w-full backface-invisible rotate-y-180'>
+      <div className='relative grid grid-cols-10 w-full h-full bg-gradient-to-b from-purple via-white to-white shadow-lg border-[1px] border-prime-blue-rich rounded-sm'>
         <div className='col-span-4 flex items-center justify-center'>
           {imgSrc ? (
             <div className='relative sm:w-[110px] sm:h-[145px] ov-md:w-[154px] ov-md:h-[204px]'>
