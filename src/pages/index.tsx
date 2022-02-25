@@ -1,5 +1,5 @@
 // Externel Components
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import YouTube from 'react-youtube'
 import Image from 'next/image'
 import clsx from 'clsx'
@@ -9,22 +9,30 @@ import Header from '../components/organisms/Header'
 import Footer from '../components/organisms/Footer'
 import NewsBoard from '../components/organisms/NewsBoard'
 import DepartBoard from '../components/organisms/DepartBoard'
-import {
-  MutedBlueBRSquare,
-  MutedBlueTLSquare,
-  RichBlueBRSquare,
-  RichBlueTLSquare,
-} from '../components/atoms/StyledComponents'
 import { ModalBackdrop, ModalMainArea } from '../components/atoms/Modal'
 import CustomizedParticles from '../components/molecules/CustomizedParticles'
 import PlaneButton from '../components/atoms/PlaneButton'
 
 // Firebase
 import { db } from '../lib/firebase/firebase.config'
+import { getDownloadURL, ref } from 'firebase/storage'
+import { getDoc, doc, QueryDocumentSnapshot } from 'firebase/firestore'
+import { storage } from '../lib/firebase/firebase.config'
 
 // Types
-import { NewsLineType } from '../lib/types'
+import {
+  NewsLineType,
+  OfficialWebSiteDataType,
+  newMovieInfo,
+  depPathInfo,
+} from '../lib/types'
 import { collection, getDocs, query, where } from '@firebase/firestore'
+import VoiceBoard from '../components/organisms/VoiceBoard'
+import OriginalContentsBoard from '../components/organisms/OriginalContentsBoard'
+import useSWR from 'swr'
+import { DocumentData, QuerySnapshot } from '@google-cloud/firestore'
+import { GetStaticProps } from 'next/types'
+import { requestErrorWithOriginal } from '../../functions/node_modules/@slack/web-api/dist/errors'
 
 const opts = {
   height: '390',
@@ -37,9 +45,19 @@ interface HomeProps {
   depList: depPathInfo[]
   officialWebSiteData: OfficialWebSiteDataType[]
 }
+// 'after:h-[15vw] after:w-[15vw] after:max-w-[216px] after:max-h-[216px] after:absolute after:bg-prime-blue-rich after:right-0 after:bottom-0 after:-z-10',
+//             'before:h-[15vw] before:w-[15vw] before:max-w-[216px] before:max-h-[216px] before:absolute before:bg-prime-blue-rich before:left-0 before:top-0 before:-z-10'
 
 export default function Home(props: HomeProps) {
   const { newsBoardData, newMovies, depList, officialWebSiteData } = props
+  console.log('props', props)
+  console.log(officialWebSiteData)
+  // const { data, error } = useSWR(
+  //   'https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyBPWdOhQK4MIm9GCg2WkMol7ptJU7lxuvU&part=snippet&id=PIrZ9QRXYzI'
+  // )
+  // console.log('imagedata', data.items[1].snippet.thumbnails.high.url)
+  console.log('newMovie', newMovies)
+
   return (
     <>
       <Header />
@@ -48,47 +66,72 @@ export default function Home(props: HomeProps) {
           className={clsx(
             'relative pt-[10vw] pb-24',
             'sm:flex sm:flex-col sm:items-center',
-            'sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl'
+            'rounded-br-[15vw] 2xl:rounded-br-[216px]'
           )}
         >
-          <CustomizedParticles layoutStyle='absolute top-0 left-0 w-full h-[calc(100%+15vw)] -z-10' />
-          <div className='flex sm:flex-col-reverse ov-md:flex-row sm:items-center ml-[10vw] mr-[5vw] '>
-            <div
-              className={clsx(
-                'text-white flex items-center text-shadow',
-                'ov-md:w-[40vw] ov-md:mr-4',
-                'ov-lg:text-xl'
-              )}
-            >
-              「One CDoctor」は、将来に対して漠然とした不安を持っている医学生に
-              「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで
-              彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです
-              （ココの文章も検討お願いします）
+          <CustomizedParticles layoutStyle='absolute top-0 left-0 w-full h-[calc(100%+19vw)] -z-10' />
+          <div
+            className={clsx(
+              'flex sm:flex-col-reverse ov-md:flex-row sm:w-11/12 ov-md:ml-[10vw] ov-md:mr-[5vw]',
+              'sm:flex-col sm:items-center',
+              'ov-md:grid ov-md:grid-cols-2'
+            )}
+          >
+            <div>
+              <div
+                className={clsx(
+                  'sm:h-[25vw] ov-md:h-[16vw] relative' //left-[12.5vw] top-[-2vw] my-[5vw] w-[70vw]
+                )}
+              >
+                <h1
+                  className={clsx(
+                    'text-white absolute transform z-10 -rotate-12',
+                    'sm:top-[-4vw] sm:text-[8vw] sm:leading-10vw',
+                    'ov-md:top-[-3vw] md:text-[6vw] ov-md:leading-7vw',
+                    'lg:text-[6vw] xl:text-[6vw]',
+                    '2xl:text-[80px]'
+                  )}
+                >
+                  キャッチコピー
+                  <br />
+                  白の手書き文字
+                </h1>
+              </div>
+              <div
+                className={clsx(
+                  'text-white flex items-center text-shadow mb-4',
+                  'ov-md:w-[40vw] ov-md:mr-4',
+                  'ov-lg:text-xl'
+                )}
+              >
+                「One
+                CDoctor」は、将来に対して漠然とした不安を持っている医学生に
+                「必要な情報」と「一人の先生のキャリアから見る”医療の面白さ”」を伝えることで
+                彼ら一人一人が納得のいくキャリアを選択できるようにするサービスです
+                （ココの文章も検討お願いします）
+              </div>
+              <div className='relative w-full h-[200px]'>
+                <Image
+                  layout='fill'
+                  src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAADCCAMAAAB6zFdcAAAATlBMVEWZmZmUlJSTk5Pf39/b29uampqjo6Pj4+OQkJCfn5/U1NSxsbHc3Nyrq6vOzs6np6e6urrp6enGxsbQ0NDAwMC3t7fJycnu7u709PT7+/sIspz5AAAEuElEQVR4nO3XgXajKBQGYO4VBEFUEM3s+7/oXtCkyUw7TTM9Z/fs/t8pSUwQ8RfQKgUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/ylUPVVzMA/78bP73fZ4uiKrLzb9Z6jrxi4/V7O/39rt2E3DF7ra+ycr02S7zj55XfrP63yKEzMt6ZmmtuFug3xgCnZ7PoQ+8XMV0+KeHmLb+g0DhpO8UC+xt8aozY3a2XOOtC0p8vH6bdtPMqivSd3vR6pVpEP7ePxY9ZbP/a8Nt6bejnM2PJXrab39wvS2qe725jA5eqj5SiQtA8V6XnJt05LeRp1mZbSMx0yks05xH9MmH3tFRYbpcpfBsnNHdZy7qWibt86uRH7Rtixd2rk1St0tgzD5UfejtUR7J7NQqWi93jUpPWp9nPjFXU9p7/Q4075pbRdSfTfqlcw4aBtpkr29UnuXvB8odKOdiMqy2Gcn3K8ZUN4oOemRd8kTz5qMYXaJ+FIc/yiOEst6QNHywzhQvXZ15srbOjo3ana2Z+2ds1KSUUejdMvgh3I5KTctNBC7fSFriJfkxsgcWr1+JFXWaQ1UdseD5f0iXZEZmwbZoSjbzTKe6t7SA7OsZpBZRiTXgEvKzy+8v2ZQCq9B8TiwlVlv5NqSidHKZhscUo0kA/bzdb8zg2G8ZuCjorWWwHXAtDK3RrvhNg62nVSoRa6ammPOwygnZCxZWQJcnSxK8peVrg/edYrJaTPJmkOdkUMQD5p+9G3wqxglSNom+XGvq5Jcw2LdCwncMlgjDR3LnxytZqB496VI9LLZckhyLj3b2+3xzCCs9xm0cp+BDODa6EMGrawcxlx8lnki48Cbi9cy4mtF017VLCNSvtJJTXIgGofYqng6+rvpXLRMkJaBHFa+slTyawvkmYGcnBwnS7JHBrR5R677OYO32+ORAfvIv82gNrqpdzKQeSYnn50fvfZq6OoVpKND5szAtuPQNQPf1mTTvjUyNTlfM1jb0mRdKa9mIOuP8zXBLWujrhkUiUP99VMGlPP1/ibnWk9Cc13xuHQfZHA0+k4GLOPWyaJrB+dc68W1R0HWHEWSgRyhHujMgOqtldSRgWSuXJIMwsptMCqKo8uvZnApZa/Lbp1RcrOtI6JO0P4SNi3jQDbrUKkZWDktm+O2HRmsJXf1KmQ/F+/vM5DRQq3MtdHp7NgsJ1EvWysy0kvwa5Zz1XWdjynMWzjSLXaJm5/IpGUOS11SpKmByhjnMqtj3KYlaF9vFmkOhvU+b3aQK/Tiw0JYlnhchGOk17klLzTnombTNmuRjkRTJ+Kej/kwL0swLbotB4pqlpXvLLXitbxNHyPNDPOtmJJ7U0OS548Lq6Hsy/kMRvK5xLrMyXvfGq1NSY/ydnRIGihlaM+IUW4VtVdFjtX/8UMjzfrhQe6Dx413vv5N+hT1R0+HdHt+cm2Y0/1P9PD+zqFvn89mvuX/i36xw+e1vtpo+aRRs24xjC/O428Xyj/SaF9y6f8lEXzhX9vvbfS1R3wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4H/gbFpguL+p+mTcAAAAASUVORK5CYII='
+                  loading='lazy'
+                  objectFit='cover'
+                  alt=''
+                />
+                <ScrollArrow />
+              </div>
             </div>
-            <h1
-              className={clsx(
-                'text-white transform rotate-[-10deg] my-[5vw] w-[70vw] left-[12.5vw] top-[-2vw]',
-                'sm:text-[8vw] sm:leading-10vw',
-                'ov-md:text-[6vw] ov-md:leading-7vw ov-md:absolute'
-              )}
-            >
-              キャッチコピー
-              <br />
-              白の手書き
-            </h1>
             <div className='relative ov-md:w-[45vw] ov-md:h-[45vw] sm:w-[70vw] sm:h-[70vw]'>
               <Image
-                className='rounded-full ov-md:w-[45vw] ov-md:h-[45vw] sm:w-[70vw] sm:h-[70vw]'
+                className='rounded-full '
                 layout='fill'
                 objectFit='cover'
                 src='/images/hero-image.jpeg'
               />
             </div>
           </div>
-
           <div className='sm:hidden w-full flex justify-center '>
             <div className='relative mt-10 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
-              <ScrollArrow />
               <NewsBoard layoutStyles='text-white' content={newsBoardData} />
             </div>
           </div>
@@ -118,23 +161,22 @@ export default function Home(props: HomeProps) {
         </section>
 
         <section
-          className='
-        w-full rounded-br-bg-corner rounded-tl-bg-corner relative bg-prime-blue-muted flex flex-col items-center py-24
-        sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
-        sm:rounded-tl-bg-corner md:rounded-tl-bg-corner lg:rounded-tl-bg-corner xl:rounded-tl-bg-corner 2xl:rounded-tl-bg-corner-2xl'
+          className={clsx(
+            'w-full relative bg-prime-blue-muted flex flex-col items-center py-24 rounded-tl-[15vw] rounded-br-[15vw] 2xl:rounded-tl-[216px] 2xl:rounded-br-[216px]',
+            'after:h-[15vw] after:w-[15vw] after:max-h-[216px] after:max-w-[216px] after:bg-prime-blue-rich after:-z-10 after:absolute after:bottom-0 after:right-0'
+          )}
         >
-          <RichBlueBRSquare />
           <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
-            <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold'>
+            <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold mb-2'>
               新着動画
             </div>
-            <div className='text-sm'>
+            <div className='text-sm mb-4'>
               各診療科のやりがいやリアルな現場を動画で見ることができます
             </div>
             <div className='sm:w-full overflow-x-scroll overflow-y-hidden'>
               <div className='w-[1920px] flex flex-row'>
                 <Movie
-                  videoId='https://www.youtube.com/embed/8jjswrh3agE'
+                  videoId='PIrZ9QRXYzI'
                   src='/images/professor.png'
                   title='YouTube video player'
                 />
@@ -178,31 +220,65 @@ export default function Home(props: HomeProps) {
         </section>
 
         <section
-          className='relative w-full flex flex-col items-center py-24 bg-prime-blue-rich
-         sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
-         sm:rounded-tl-bg-corner md:rounded-tl-bg-corner lg:rounded-tl-bg-corner xl:rounded-tl-bg-corner 2xl:rounded-tl-bg-corner-2xl
-        '
+          className={clsx(
+            'bg-prime-blue-rich relative flex flex-col items-center',
+            'rounded-tl-[15vw] 2xl:rounded-tl-[216px] rounded-br-[15vw] 2xl:rounded-br-[216px]',
+            'after:absolute after:h-[15vw] after:w-[15vw] after:max-h-[261px] after:max-w-[216px] after:bg-prime-blue-muted after:bottom-0 after:right-0 after:-z-10',
+            'before:absolute before:h-[15vw] before:w-[15vw] before:max-h-[216px] before:max-w-[216px] before:bg-prime-blue-muted before:-z-10 before:top-0 before:left-0'
+          )}
         >
-          <MutedBlueTLSquare />
+          <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] flex flex-col items-center py-24'>
+            <div className='text-white sm:text-2xl ov-md:text-4xl font-semibold w-full flex justify-self-start mb-2'>
+              医学生の声
+            </div>
+            <div className='text-sm mb-4 w-full flex justify-self-start'>
+              （例文）実習に参加した医学生によるリアルな体験談を見ることができます。あなたも記入しませんか？
+            </div>
+            <VoiceBoard />
+          </div>
+        </section>
+        <section
+          className={clsx(
+            'h-[600px] bg-prime-blue-muted relative flex flex-col items-center',
+            'rounded-tl-[15vw] 2xl:rounded-tl-[216px] rounded-br-[15vw] 2xl:rounded-br-[216px]',
+            'after:absolute after:h-[15vw] after:w-[15vw] after:max-h-[261px] after:max-w-[216px] after:bg-prime-blue-rich after:bottom-0 after:right-0 after:-z-10',
+            'before:absolute before:h-[15vw] before:w-[15vw] before:max-h-[216px] before:max-w-[216px] before:bg-prime-blue-rich before:-z-10 before:top-0 before:left-0'
+          )}
+        >
+          <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] flex flex-col items-center py-24'>
+            <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold w-full flex justify-self-start mb-2'>
+              One Doctor オリジナルコンテンツ
+            </div>
+            <div className='text-sm mb-4 w-full flex justify-self-start'>
+              （テキスト要編集）ここでは本サイトでしか見れない…テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります
+            </div>
+            <OriginalContentsBoard depList={depList} />
+          </div>
+        </section>
+        <section
+          className={clsx(
+            'relative w-full flex flex-col items-center py-24 bg-prime-blue-rich rounded-tl-[15vw] rounded-br-[15vw] 2xl:rounded-tl-[216px] 2xl:rounded-br-[216px]',
+            'before:absolute before:h-[15vw] before:w-[15vw] before:max-h-[216px] before:max-w-[216px] before:bg-prime-blue-muted before:-z-10 before:top-0 before:left-0',
+            'after:absolute after:h-[15vw] after:w-[15vw] after:max-h-[261px] after:max-w-[216px] after:bg-prime-blue-muted after:bottom-0 after:right-0 after:-z-10'
+          )}
+        >
           <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] flex flex-col items-center'>
             <div className='text-white sm:text-2xl ov-md:text-4xl font-semibold w-full flex justify-self-start mb-2'>
               診療科一覧
             </div>
-            <div className='sm:text-sm ov-md:text-lg mb-4 w-full flex justify-self-start'>
-              各診療科にコンタクトを取ったり、イベント情報をチェックすることができます
+            <div className='text-sm mb-4 w-full flex justify-self-start'>
+              各診療科の公式ページに飛ぶことができます
             </div>
-            <DepartBoard depList={depList} />
+            <DepartBoard wsData={officialWebSiteData} />
           </div>
-          <MutedBlueBRSquare />
         </section>
 
         <section
-          className='relative w-full rounded-tl-bg-corner bg-prime-blue-muted py-24 flex flex-col items-center
-         sm:rounded-tl-bg-corner md:rounded-tl-bg-corner lg:rounded-tl-bg-corner xl:rounded-tl-bg-corner 2xl:rounded-tl-bg-corner-2xl
-         sm:rounded-br-bg-corner md:rounded-br-bg-corner lg:rounded-br-bg-corner xl:rounded-br-bg-corner 2xl:rounded-br-bg-corner-2xl
-        '
+          className={clsx(
+            'relative w-full rounded-[15vw] 2xl:rounded-[216px] bg-prime-blue-muted py-24 flex flex-col items-center ',
+            'after:absolute after:h-[15vw] after:w-[15vw] after:max-h-[216px] after:max-w-[216px] after:bg-prime-blue-rich after:top-0 after:left-0 after:-z-10'
+          )}
         >
-          <RichBlueTLSquare />
           <div className='bg-transparent flex flex-col items-center sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
             <div className='w-full sm:mb-4 ov-md:mb-8'>
               <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold'>
@@ -418,7 +494,7 @@ function Movie({
 
 function ScrollArrow() {
   return (
-    <div className='text-white text-xs absolute border-solid border-white border-b-2 w-44 transform rotate-90 ov-md:left-[-98px] ov-md:top-[-80px]'>
+    <div className='text-white text-xs absolute border-solid border-white border-b-2 w-44 transform rotate-90 top-[30px] left-[-140px]'>
       scroll
     </div>
   )
