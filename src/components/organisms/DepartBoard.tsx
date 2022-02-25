@@ -1,8 +1,13 @@
 import clsx from 'clsx'
+import { OfficialWebSiteDataType } from '../../lib/types'
 import DepartKanban from '../molecules/DepartKanban'
 // Import { depList } from '../../../public/staticData'
+interface DepartBoardPropsType {
+  wsData: OfficialWebSiteDataType[]
+}
 
-export default function DepartBoard({ depList }: { depList: any }) {
+const DepartBoard: React.VFC<DepartBoardPropsType> = ({ wsData }) => {
+  console.log(wsData)
   return (
     <div className='w-full sm:overflow-x-auto sm:overflow-y-hidden md:overflow-x-auto md:overflow-y-hidden'>
       <div
@@ -14,65 +19,16 @@ export default function DepartBoard({ depList }: { depList: any }) {
           '2xl:grid 2xl:grid-cols-4 2xl:gap-8'
         )}
       >
-        {depList.map((dep: any, idx: number) => (
+         {wsData.map((data: OfficialWebSiteDataType, idx: number) => (
           <div key={idx + 1} className='flex justify-self-center self-center'>
-            <DepartKanban pageUrl={dep.path}>
-              {dep.depName.departmentNameInJapanese}
+            <DepartKanban pageUrl={data.url}>
+              {data.departmentNameInJapanese}
             </DepartKanban>
           </div>
         ))}
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
-        <div className='flex justify-self-center self-center'>
-          <DepartKanban>デコイ</DepartKanban>
-        </div>
       </div>
     </div>
   )
 }
+
+export default DepartBoard
