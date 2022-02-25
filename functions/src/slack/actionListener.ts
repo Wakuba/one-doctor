@@ -2,22 +2,24 @@ import {App} from "@slack/bolt";
 import signUp from "../firebase/signUp";
 // import { SignUpAuthorizationDataWithImageId } from "../type";
 import axios from 'axios'
+import {config} from '../index'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const useActionListener = (app: App) => {
-    app.action(
-        {action_id: "is_medcoworker", block_id: "is_approved_or_not"},
-        async ({body, say, ack}) => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const bodyRe: any = body
-          const certificationImageId: string= bodyRe.message.text ?? 'NO DATA'
-          const data = await checkAuthorizedAndGetDataOnSpreadSheet(certificationImageId)
-          console.log('data', data)
-          await ack();
-          await say('認可しました');
-          signUp(data);
-        }
-    )
+  app.action(
+    {action_id: "is_medcoworker", block_id: "is_approved_or_not"},
+      async ({body, ack}) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const bodyRe: any = body
+        const certificationImageId: string= bodyRe.message.text ?? 'NO DATA'
+        const data = await checkAuthorizedAndGetDataOnSpreadSheet(certificationImageId)
+        console.log('data', data)
+        await ack();
+        signUp(data);
+        const ts: string = bodyRe.container.message_ts
+        app.client.chat.delete({channel: config.slack.channel_id, ts}).then(res => console.log(res)).catch(e => console.log(e))
+      }
+  )
 };
 
 const checkAuthorizedAndGetDataOnSpreadSheet = async (id: string) => {
