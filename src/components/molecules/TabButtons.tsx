@@ -12,7 +12,7 @@ export default function TabButtons({
   activeTab,
 }: TabButtonsProps) {
   return (
-    <div className='space-x-2'>
+    <div className='space-x-1'>
       {buttons.map((button) => (
         <button
           key={button.tabIdx}
@@ -20,11 +20,9 @@ export default function TabButtons({
             button.tabIdx === activeTab
               ? 'bg-prime-blue-rich'
               : 'bg-prime-blue-pale',
-            'h-10 px-3 text-white cursor-pointer focus:outline-none rounded-t shadow-lg'
-            // 'sm:w-2/12 sm:text-xs',
-            // 'md:w-24 md:text-md',
-            // 'ov-lg:w-32',
-            // 'ov-lg:text-md'
+            ' text-white cursor-pointer focus:outline-none rounded-t shadow-lg',
+            'sm:px-2 sm:text-xs sm:h-8 sm:w-16',
+            'ov-md:px-3 ov-md:text-sm ov-md:h-10 ov-md:w-24 '
           )}
           onClick={() => changeTab(button.tabIdx)}
         >
