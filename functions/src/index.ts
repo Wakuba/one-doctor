@@ -6,6 +6,7 @@ export const config = functions.config()
 import { expressReceiver } from './slack/app'
 import postFormData from './slack/postFormData'
 import postNewUserData from "./slack/postNewUserData";
+import postPreUserData from "./firebase/postPreUserData";
 
 export const slack1 = functions.https.onRequest(expressReceiver.app)
 
@@ -24,4 +25,10 @@ export const postFormDataToSlack = functions.https.onCall(
     return postFormData(formData)
   }
 )
+
+export const postPreUserDataToSS= functions.https.onCall((data: SignUpAuthorizationDataWithImageId, context) => {
+  console.log('context', context)
+  console.log('data of sign up applicants', data)
+  return postPreUserData(data)
+})
 
