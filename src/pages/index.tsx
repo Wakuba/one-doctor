@@ -33,10 +33,13 @@ const opts = {
 
 interface HomeProps {
   newsBoardData: NewsLineType[]
-  depList: string[]
+  newMovies: newMovieInfo[]
+  depList: depPathInfo[]
+  officialWebSiteData: OfficialWebSiteDataType[]
 }
 
-export default function Home({ newsBoardData, depList }: HomeProps) {
+export default function Home(props: HomeProps) {
+  const { newsBoardData, newMovies, depList, officialWebSiteData } = props
   return (
     <>
       <Header />
@@ -226,49 +229,145 @@ export default function Home({ newsBoardData, depList }: HomeProps) {
   )
 }
 
-export async function getStaticProps() {
-  const newsBoardData: any = [],
-    depList: any = []
-
-  try {
-    const q = query(
-      collection(db, 'fl_content'),
-      where('_fl_meta_.schema', '==', 'topPageNewsBoard')
-    )
-    const snapshotDash = await getDocs(q)
-    snapshotDash.docs.forEach((doc) => {
-      newsBoardData.push({
-        id: doc.data().id,
-        title: doc.data().newsTitle,
-        detail: doc.data().newsDetail,
-      })
-    })
-  } catch (error) {
-    console.log('Error getting news documents from FlameLink; ', error)
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const props: HomeProps = {
+    newsBoardData: [],
+    depList: [],
+    officialWebSiteData: [],
+    newMovies: [],
   }
 
   try {
-    const qDash = query(
-      collection(db, 'fl_content'),
-      where('_fl_meta_.schema', '==', 'departmentPage')
-    )
-    const snapshot = await getDocs(qDash)
-    snapshot.docs.forEach((doc) => {
-      depList.push({
-        id: doc.data().id,
-        path: `/Departments/${doc.data().id}`,
-        depName: doc.data().departmentName,
+    // get top page news data
+    try {
+      const q = query(
+        collection(db, 'fl_content'),
+        where('_fl_meta_.schema', '==', 'topPageNewsBoard')
+      )
+      const snapshotDash = await getDocs(q)
+      const newsBoardData = snapshotDash.docs.map((doc) => {
+        return {
+          id: doc.data().id,
+          title: doc.data().newsTitle,
+          detail: doc.data().newsDetail,
+        }
       })
-    })
-  } catch (error) {
-    console.log('Error getting depList', error)
-  }
+      props.newsBoardData = newsBoardData
+    } catch (error) {
+      console.log('Error getting news documents from FlameLink; ', error)
+    }
 
-  return {
-    props: {
-      newsBoardData,
-      depList,
-    },
+    // create department page url
+    try {
+      const qDash = query(
+        collection(db, 'fl_content'),
+        where('_fl_meta_.schema', '==', 'departmentPage')
+      )
+      const snapshot = await getDocs(qDash)
+      const depList = snapshot.docs.map((doc) => {
+        if (doc.data().id) {
+          return {
+            id: doc.data().id ?? 'toppage',
+            path: `/Departments/${doc.data().id}`,
+            depName: doc.data().departmentName,
+          }
+        } else {
+          return {
+            id: 'no department page',
+            path: '/',
+            depName: 'topPage',
+          }
+        }
+      })
+      props.depList = depList
+    } catch (error) {
+      console.log('Error getting depList', error)
+    }
+
+    // get web site url
+    try {
+      const q = query(
+        collection(db, 'fl_content'),
+        where('_fl_meta_.schema', '==', 'topPageOfficialWebSiteUrls')
+      )
+      const snap = await getDocs(q)
+      const officialWebSiteData = snap.docs.map(
+        (doc): OfficialWebSiteDataType => {
+          const data = doc.data()
+          return {
+            universityNameInJapanese: data.universityNameInJapanese,
+            departmentNameInJapanese: data.departmentNameInJapanese,
+            url: data.officialWebSiteUrl,
+          }
+        }
+      )
+      props.officialWebSiteData = officialWebSiteData
+    } catch (error) {
+      console.log(error)
+    }
+
+    //新着動画一覧を取得
+    try {
+      const q = query(
+        collection(db, 'fl_content'),
+        where('_fl_meta_.schema', '==', 'topPageNewMovies')
+      )
+      const snapshotDash = await getDocs(q)
+
+      const thumbnailIdExtractor = (
+        doc: QueryDocumentSnapshot<DocumentData>
+      ): Promise<{ movieUrl: string; verticalThumbnailId: string }> => {
+        return new Promise((res, rej) => {
+          const movieUrl = doc.data().movieUrl ?? ''
+          const verticalThumbnailId = doc.data().verticalThumbnail[0]
+            ? doc.data().verticalThumbnail[0].id
+            : ''
+          res({ movieUrl, verticalThumbnailId })
+          rej('thumbnailExtractor was rejected')
+        })
+      }
+
+      const newMovies = await Promise.all(
+        snapshotDash.docs.map(async (document) => {
+          const movieInfo = await thumbnailIdExtractor(document).then(
+            async (res) => {
+              console.log('response', res)
+              const verticalThumbnailId = res.verticalThumbnailId
+              if (verticalThumbnailId === '') {
+                return { movieUrl: res.movieUrl, verticalThumbnailUrl: '' }
+              } else {
+                const snapshot = await getDoc(
+                  doc(db, 'fl_files', verticalThumbnailId)
+                )
+                const verticalThumbnailName = snapshot.data()?.file
+                const url = await getDownloadURL(
+                  ref(storage, `flamelink/media/${verticalThumbnailName}`)
+                )
+                return { movieUrl: res.movieUrl, verticalThumbnailUrl: url }
+              }
+            }
+          )
+          return movieInfo
+        })
+      )
+      props.newMovies = newMovies
+    } catch (e) {
+      console.log(e)
+    }
+
+    return {
+      props,
+    }
+  } catch (e) {
+    // return { props: { message: e.message } }
+    if (e instanceof Error) {
+      console.error(e.message)
+      return { props }
+    }
+    console.log(e)
+    return {
+      props,
+    }
   }
 }
 
