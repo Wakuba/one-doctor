@@ -31,6 +31,7 @@ const postNewUserData = httpsCallable(
   firebaseFunction,
   'postNewUserDataToSlack'
 )
+const postNewUserData = httpsCallable(firebaseFunction, 'postNewUserDataToSS')
 
 const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
   const onSubmit = async (data: NotStudentSignUpFormDataType) => {
@@ -46,6 +47,7 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
       certificationImageId: '',
       isStudent: false,
       favoDeparts: [],
+      favoEvents: [],
     }
     await imageUploader(data.doctorCertification).then(
       (certificationImageId) => {
@@ -61,20 +63,16 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
           certificationImageId: certificationImageId,
           isStudent: false,
           favoDeparts: [],
+          favoEvents: [],
         }
       }
     )
+
     postNewUserData(cleansedData)
       .then((res) => console.log('スラックへの送信成功', res))
       .catch((e) => console.log('スラックへの送信失敗', e))
-    fetch(
-      `https://script.google.com/macros/s/AKfycbyNLGQ84mlRwO5B-qtdNtVpqq1k3l0QNmW4QgDBerOpB8KQXx2crD9OO8Un9oeyazve/exec?data=${JSON.stringify(
-        cleansedData
-      )}`,
-      {
-        method: 'POST',
-      }
-    )
+
+    postNewUserData(cleansedData)
       .then((res) => console.log('スプレッドシートへ送信成功', res))
       .catch((e) => console.log('スプレッドシートへ送信失敗', e))
     // fetch(

@@ -71,7 +71,7 @@ export const useAuthProvider = () => {
     const docSnap: DocumentSnapshot = await getDoc(doc(db, 'odUsers', uid))
     if (docSnap.exists()) {
       const doc: DocumentData = docSnap.data()
-      setOdUserData(doc as odUserData)
+      setOdUserData(doc as odUserDataType)
       console.log('userAdditionalData', doc)
     } else {
       console.log('No such a document')

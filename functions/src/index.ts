@@ -25,9 +25,9 @@ export const postFormDataToSlack = functions.https.onCall(
   }
 )
 
-export const postPreUserDataToSS= functions.https.onCall((data: SignUpAuthorizationDataWithImageId, context) => {
+export const postNewUserDataToSS = functions.https.onCall((data: SignUpAuthorizationDataTypeDataWithImageId, context) => {
   console.log('context', context)
   console.log('data of sign up applicants', data)
-  return postPreUserData(data)
+  return postNewUserData(data)
 })
 
