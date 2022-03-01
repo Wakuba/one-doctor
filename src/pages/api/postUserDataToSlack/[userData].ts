@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { WebClient } from '@slack/web-api'
 import {
-  SignUpAuthorizationDataWithImageUrl,
-  SignUpAuthorizationDataWithImageId,
+  SignUpAuthorizationDataTypeDataWithImageUrl,
+  SignUpAuthorizationDataTypeDataWithImageId,
 } from '../../../lib/types'
 import { createMessageBlockForResidencyAuthorization } from '../../../lib/customFunctions/createMessageBlock'
 import { storage } from '../../../lib/firebase/firebase.config'
@@ -25,7 +25,7 @@ type Response = {
 export default (req: NextApiRequest, res: NextApiResponse<Response>) => {
   const postData = req.query.postData as string
   if (postData) {
-    const parsedData: SignUpAuthorizationDataWithImageId = JSON.parse(postData)
+    const parsedData: SignUpAuthorizationDataTypeDataWithImageId = JSON.parse(postData)
     const listRef = ref(storage, 'odUser/certificationImage')
     listAll(listRef).then((res) => {
       res.items.map((ref) => {
@@ -36,7 +36,7 @@ export default (req: NextApiRequest, res: NextApiResponse<Response>) => {
               parsedData.certificationImageId
             ) {
               getDownloadURL(ref).then((url) => {
-                const dataWithImageUrl: SignUpAuthorizationDataWithImageUrl = {
+                const dataWithImageUrl: SignUpAuthorizationDataTypeDataWithImageUrl = {
                   name: parsedData.name,
                   email: parsedData.email,
                   password: parsedData.password,

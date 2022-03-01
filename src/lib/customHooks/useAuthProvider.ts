@@ -23,11 +23,11 @@ import {
 
 //Types
 import {
-  LogInData,
-  OdUserContext,
-  odUserData,
-  SignUpDataForStudentWithUid,
-  SignUpDataForStudent,
+  LoginDataType,
+  odUserContextType,
+  odUserDataType,
+  SignUpDataTypeForStudentWithUid,
+  SignUpDataTypeForStudent,
 } from '../types'
 import { useAuth } from '../context'
 import { useRouter } from 'next/router'
@@ -35,7 +35,7 @@ import { useRouter } from 'next/router'
 //Responsibility : serve the context of user authe infomation
 export const useAuthProvider = () => {
   const [odUser, setOdUser] = useState<User | null>(null)
-  const [odUserData, setOdUserData] = useState<odUserData>({})
+  const [odUserData, setOdUserData] = useState<odUserDataType>({})
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
@@ -54,9 +54,9 @@ export const useAuthProvider = () => {
   }, [])
 
   // ユーザーデータのうちfirebase authアカウント作成には必須でないがfiresotreに入れるもの
-  const addUserDataOnFirestore = (
-    userInfoOnFierstore: SignUpDataForStudentWithUid
-  ) => {
+  const addUserDataOnFirestore = (data: SignUpDataTypeForStudentWithUid) => {
+    setDoc(doc(db, 'odUsers', data.uid), data)
+    getUserAdditionalData(data.uid)
     setDoc(doc(db, 'odUsers', userInfoOnFierstore.uid), userInfoOnFierstore)
     getUserAdditionalData(userInfoOnFierstore.uid)
   }
@@ -78,7 +78,7 @@ export const useAuthProvider = () => {
     }
   }
 
-  const signUp = (data: SignUpDataForStudent): void => {
+  const signUp = (data: SignUpDataTypeForStudent): void => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const odUser = userCredential.user
@@ -98,7 +98,7 @@ export const useAuthProvider = () => {
     // if (odUser) updateProfile(odUser, { displayName: name })
   }
 
-  const logIn = ({ email, password }: LogInData): Promise<void | User> =>
+  const logIn = ({ email, password }: LoginDataType): Promise<void | User> =>
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const odUser = userCredential.user
@@ -138,7 +138,7 @@ export const useAuthProvider = () => {
   }
 }
 
-export const useRequiredAuth = (): OdUserContext => {
+export const useRequiredAuth = (): odUserContextType => {
   const auth = useAuth()
   const router = useRouter()
 

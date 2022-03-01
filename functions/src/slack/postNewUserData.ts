@@ -8,10 +8,10 @@ import {
 } from '@firebase/storage'
 import { ref } from 'firebase/storage'
 import { app } from '../slack/app'
-import { SignUpAuthorizationDataWithImageId, SignUpAuthorizationDataWithImageUrl } from "../type";
+import { SignUpAuthorizationDataTypeDataWithImageId, SignUpAuthorizationDataTypeDataWithImageUrl } from "../type";
 import { config } from '../index';
 
-const postNewUserData = (data: SignUpAuthorizationDataWithImageId): string=> {
+const postNewUserData = (data: SignUpAuthorizationDataTypeDataWithImageId): string => {
   try {
     const listRef = ref(storage, 'odUser/certificationImage')
     listAll(listRef).then((res) => {
@@ -23,7 +23,7 @@ const postNewUserData = (data: SignUpAuthorizationDataWithImageId): string=> {
               data.certificationImageId
             ) {
               getDownloadURL(ref).then((url) => {
-                const dataWithImageUrl: SignUpAuthorizationDataWithImageUrl = {
+                const dataWithImageUrl: SignUpAuthorizationDataTypeDataWithImageUrl = {
                   ...data,
                   certificationImageUrl: url,
                 }
@@ -39,7 +39,7 @@ const postNewUserData = (data: SignUpAuthorizationDataWithImageId): string=> {
       })
     })
     return 'firebase cloud functionsからslackへのデータ送信完了'
-  } catch(e) {
+  } catch (e) {
     return 'firebase cloud functionsからslackへのデータ送信完了'
   }
 }

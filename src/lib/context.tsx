@@ -4,9 +4,9 @@ import { useContext, createContext, ReactNode } from 'react'
 
 //Custom functions
 import { useAuthProvider } from './customHooks/useAuthProvider'
-import { OdUserContext } from './types'
+import { odUserContextType } from './types'
 
-const AuthContext = createContext<OdUserContext>({
+const AuthContext = createContext<odUserContextType>({
   odUser: null,
   isLoading: true,
   odUserData: {

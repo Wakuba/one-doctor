@@ -1,9 +1,9 @@
 import { createMessageBlockForFormReceiver } from './createMessageBlock'
-import { FormData } from '../type'
+import { FormDataType } from '../type'
 import { config } from '../index'
 import { app } from '../slack/app'
 
-const postFormData = (formData: FormData): void => {
+const postFormData = (formData: FormDataType): void => {
   console.log('formdata', formData)
   app.client.chat
     .postMessage({

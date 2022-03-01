@@ -15,7 +15,7 @@ import univEmailValidator from '../../lib/customFunctions/univEmailValidator'
 import { ModalBackdrop, ModalMainArea } from '../atoms/Modal'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 
-interface StudentSignUpFormData {
+interface StudentSignUpFormDataType {
   departmentWishFor: string[]
   emailOne: string
   emailTwo: string
@@ -36,7 +36,7 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
   const { signUp } = useAuthProvider()
   const [isStudentAuthErrorModalOpen, setIsStudentAuthErrorModalOpen] =
     useState(false)
-  const onSubmit = (data: StudentSignUpFormData) => {
+  const onSubmit = (data: StudentSignUpFormDataType) => {
     const cleansedData = {
       name: `${data.familyName} ${data.firstName}`,
       password: data.passwordOne,

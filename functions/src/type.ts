@@ -1,10 +1,10 @@
-export interface FormData {
+export interface FormDataType {
   name: string
   email: string
   content: string
 }
 
-export interface SignUpData {
+export interface SignUpDataType {
   name: string
   email: string
   password: string
@@ -12,34 +12,34 @@ export interface SignUpData {
   gender: string
 }
 
-export interface SignUpDataForStudent extends SignUpData {
+export interface SignUpDataTypeForStudent extends SignUpDataType {
   grade: string
   university: string
   workplaceWishFor: string[]
   departmentWishFor: string[]
 }
 
-export interface SignUpDataForNotStudent extends SignUpData {
+export interface SignUpDataTypeForNotStudent extends SignUpDataType {
   departmentWishFor: string[]
   workplace: string
   workplaceWishFor: string[]
 }
 
-export interface SignUpDataForNotStudentWithUid
-  extends SignUpDataForNotStudent {
+export interface SignUpDataTypeForNotStudentWithUid
+  extends SignUpDataTypeForNotStudent {
   uid: string
 }
 
-export interface SignUpDataForStudentWithUid {
+export interface SignUpDataTypeForStudentWithUid {
   uid: string
 }
 
-export interface SignUpAuthorizationDataWithImageId
-  extends SignUpDataForNotStudent {
+export interface SignUpAuthorizationDataTypeDataWithImageId
+  extends SignUpDataTypeForNotStudent {
   certificationImageId: string
 }
 
-export interface SignUpAuthorizationDataWithImageUrl
-  extends SignUpDataForNotStudent {
+export interface SignUpAuthorizationDataTypeDataWithImageUrl
+  extends SignUpDataTypeForNotStudent {
   certificationImageUrl: string
 }

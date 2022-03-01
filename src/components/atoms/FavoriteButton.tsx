@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 import { db } from '../../lib/firebase/firebase.config'
-import { OdUserContext } from '../../lib/types'
+import { odUserContextType } from '../../lib/types'
 import { ModalBackdrop, ModalMainArea } from './Modal'
 
 interface FavoriteButtonPropsType {
@@ -38,7 +38,7 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
     else setIsFavorite(false)
   }, [favoDeparts])
 
-  const onFavorite = (auth: OdUserContext) => {
+  const onFavorite = (auth: odUserContextType) => {
     console.log(department)
     console.log(auth.odUser)
     if (auth.odUser !== null) {

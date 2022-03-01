@@ -7,12 +7,12 @@ import SubmitButton from '../atoms/SubmitButton'
 import MultiSelector from '../atoms/MultiSelector'
 import Link from 'next/link'
 import { VFC } from 'react'
-import { SignUpAuthorizationDataWithImageId } from '../../lib/types'
+import { SignUpAuthorizationDataTypeDataWithImageId } from '../../lib/types'
 import ImageHandler from '../atoms/ImageHandler'
 import { httpsCallable } from 'firebase/functions'
 import { firebaseFunction } from '../../lib/firebase/firebase.config'
 
-interface NotStudentSignUpFormData {
+interface NotStudentSignUpFormDataType {
   departmentWishFor: string[]
   doctorCertification: File
   emailOne: string
@@ -33,8 +33,8 @@ const postNewUserData = httpsCallable(
 )
 
 const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
-  const onSubmit = async (data: NotStudentSignUpFormData) => {
-    let cleansedData: SignUpAuthorizationDataWithImageId = {
+  const onSubmit = async (data: NotStudentSignUpFormDataType) => {
+    let cleansedData: SignUpAuthorizationDataTypeDataWithImageId = {
       name: '',
       password: '',
       email: '',
@@ -77,6 +77,17 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
     )
       .then((res) => console.log('スプレッドシートへ送信成功', res))
       .catch((e) => console.log('スプレッドシートへ送信失敗', e))
+    // fetch(
+    //   `https://script.google.com/macros/s/AKfycbxVkjCPglhyc3WJxOO0RuomqGIRm--iQYl3KoW1N9IaRYHDCshw4MW9MAFLG8s8alA4/exec?data=${JSON.stringify(
+
+    //     cleansedData
+    //   )}`,
+    //   {
+    //     method: 'POST',
+    //   }
+    // )
+    //   .then((res) => console.log('スプレッドシートへ送信成功', res))
+    //   .catch((e) => console.log('スプレッドシートへ送信失敗', e))
   }
 
   return (

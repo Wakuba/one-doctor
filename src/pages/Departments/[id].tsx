@@ -14,9 +14,7 @@ import {
   setDoc,
 } from 'firebase/firestore'
 import { ref, getDownloadURL } from 'firebase/storage'
-import { DepPostDataType, OdUserContext } from '../../lib/types'
-
-// Custom components
+import { DepPostDataType, odUserContextType } from '../../lib/types' // Custom components
 import PlaneButton from '../../components/atoms/PlaneButton'
 import Header from '../../components/organisms/Header'
 import Footer from '../../components/organisms/Footer'

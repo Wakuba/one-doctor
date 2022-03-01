@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { SignUpAuthorizationDataWithImageUrl, FormData } from '../types'
+import { SignUpAuthorizationDataTypeDataWithImageUrl, FormDataType } from '../types'
 
 //  ユーザー確認メッセージを表示するBlockを作成
 export const createMessageBlockForNotStudentAuthorization = (
-  data: SignUpAuthorizationDataWithImageUrl
+  data: SignUpAuthorizationDataTypeDataWithImageUrl
 ) => {
   const { name, email, password, certificationImageUrl } = data
   return [
@@ -58,7 +58,7 @@ export const createMessageBlockForNotStudentAuthorization = (
   ];
 };
 
-export const createMessageBlockForFormReceiver = (formData: FormData) => {
+export const createMessageBlockForFormReceiver = (formData: FormDataType) => {
   const { name, email, content } = formData
   return [
     {

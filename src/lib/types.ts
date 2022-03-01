@@ -1,12 +1,25 @@
 import { User } from '@firebase/auth'
 
 export interface SpreadSheetDataType {
+  timeStamp: string
   date: string
   department: string
-  detail: string
-  eventName: string
+  details: string
+  name: string
   place: string
-  timeStamp: string
+  university: string
+  contact: string
+  emailAdress: string
+  supervisor: string
+  phoneNumber: string
+  imageUrlOnDrive: string
+  eventId: string
+  ssId: string
+  formUrl: string
+  deadline: string
+  // タイムスタンプ	診療科	イベント名	イベント日時	開催場所	イベント詳細	大学名	問い合わせ先	メールアドレス	イベント責任者	電話番号	イベント画像	イベントID	SSID	formUrl
+  // const keyNameArray = ['timeStamp', 'department', 'name', 'date', 'place', 'details',
+  // 'university', 'contact', 'emailAdress', 'supervisor', 'phoneNumber', 'imageUrlOnDrive', 'eventId', 'ssId', 'formUrl']
 }
 
 export interface NewsLineType {
@@ -36,6 +49,15 @@ interface TopSectionType {
   otherPoint: string
 }
 
+export interface BasicInfoTabType {
+  curriculum?: string
+  curriculumImgUrl?: string
+  route?: string
+  licence?: string
+  others?: string
+  othersImgUrl?: string
+}
+
 export interface CrewCardListTabType {
   crewImgUrl: string
   crewName: string
@@ -52,8 +74,11 @@ interface SnsTabType {
 }
 
 interface TabMenuType {
-  basicInfoTab: string
-  geographicalInformationTab: RegExpMatchArray | string
+  basicInfoTab: BasicInfoTabType
+  geographicalInformationTab: {
+    googleMapIframe: RegExpMatchArray | string
+    geographicalInformationDescription: string
+  }
   snsTab: SnsTabType
   crewCardListTab: CrewCardListTabType[]
 }
@@ -84,7 +109,7 @@ export interface OdUserAuthState {
   email: string
 }
 
-export interface SignUpData {
+export interface SignUpDataType {
   name: string
   email: string
   password: string
@@ -92,61 +117,88 @@ export interface SignUpData {
   gender: string
   isStudent: boolean
   favoDeparts: string[]
+  favoEvents: string[]
 }
 
-export interface SignUpDataForStudent extends SignUpData {
+export interface SignUpDataTypeForStudent extends SignUpDataType {
   grade: string
   university: string
   workplaceWishFor: string[]
   departmentWishFor: string[]
 }
 
-export interface SignUpDataForNotStudent extends SignUpData {
+export interface SignUpDataTypeForNotStudent extends SignUpDataType {
   departmentWishFor: string[]
   workplace: string
   workplaceWishFor: string[]
 }
 
-export interface SignUpDataForNotStudentWithUid
-  extends SignUpDataForNotStudent {
+export interface SignUpDataTypeForNotStudentWithUid
+  extends SignUpDataTypeForNotStudent {
   uid: string
 }
 
-export interface SignUpDataForStudentWithUid extends SignUpDataForStudent {
+export interface SignUpDataTypeForStudentWithUid
+  extends SignUpDataTypeForStudent {
   uid: string
 }
 
-export interface SignUpAuthorizationDataWithImageId
-  extends SignUpDataForNotStudent {
+export interface SignUpAuthorizationDataTypeDataWithImageId
+  extends SignUpDataTypeForNotStudent {
   certificationImageId: string
 }
 
-export interface SignUpAuthorizationDataWithImageUrl
-  extends SignUpDataForNotStudent {
+export interface SignUpAuthorizationDataTypeDataWithImageUrl
+  extends SignUpDataTypeForNotStudent {
   certificationImageUrl: string
 }
 
-export interface LogInData {
+export interface LoginDataType {
   email: string
   password: string
 }
 
-export type odUserData =
-  | SignUpDataForStudentWithUid
-  | SignUpDataForNotStudentWithUid
+export type odUserDataType =
+  | SignUpDataTypeForStudentWithUid
+  | SignUpDataTypeForNotStudentWithUid
 
-export interface OdUserContext {
+export interface odUserContextType {
   odUser: User | null
   isLoading: boolean
-  odUserData: odUserData
-  signUp: ({ name, email, password, ...rest }: SignUpDataForStudent) => void
-  logIn: ({ email, password }: LogInData) => Promise<void | User>
+  odUserData: odUserDataType
+  signUp: ({ name, email, password, ...rest }: SignUpDataTypeForStudent) => void
+  logIn: ({ email, password }: LoginDataType) => Promise<void | User>
   logOut: () => Promise<void>
   sendPasswordResetEmailToUser: (email: string) => Promise<void>
 }
 
-export interface FormData {
+export interface FormDataType {
   name: string
   email: string
   content: string
+}
+
+export interface OfficialWebSiteDataType {
+  universityNameInJapanese: string
+  departmentNameInJapanese: string
+  url: string
+}
+
+export interface newVideoDataType {
+  title: string
+  videoUrl: string
+  thumbnailUrl: string
+}
+
+export interface depPathDataType {
+  id: string
+  path: string
+  depName: string
+}
+
+export interface voiceDataType {
+  contributor: string
+  contents: string
+  departmentNameInJapanese: string
+  universityNameInJapanese: string
 }

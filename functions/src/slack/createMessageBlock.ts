@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 //  ユーザー確認メッセージを表示するBlockを作成
-import { SignUpAuthorizationDataWithImageUrl, FormData } from '../type'
+import { SignUpAuthorizationDataTypeDataWithImageUrl, FormDataType } from '../type'
 
 //  ユーザー確認メッセージを表示するBlockを作成
 export const createMessageBlockForAuthorization = (
-  data: SignUpAuthorizationDataWithImageUrl
+  data: SignUpAuthorizationDataTypeDataWithImageUrl
 ) => {
   const { name, email, password, certificationImageUrl } = data
   return [
@@ -60,7 +60,7 @@ export const createMessageBlockForAuthorization = (
   ];
 };
 
-export const createMessageBlockForFormReceiver = (formData: FormData) => {
+export const createMessageBlockForFormReceiver = (formData: FormDataType) => {
   const { name, email, content } = formData
   return [
     {

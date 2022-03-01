@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 import { useRouter } from 'next/router'
 
-interface LoginFormData {
+interface LoginFormDataType {
   email: string
   password: string
 }
@@ -15,7 +15,7 @@ const LoginForm: VFC<{ style: string }> = ({ style }) => {
   const auth = useAuthProvider()
   const router = useRouter()
 
-  const onSubmit = (data: LoginFormData) => {
+  const onSubmit = (data: LoginFormDataType) => {
     console.log(data)
     const { email, password } = data
     return auth.logIn({ email, password }).then((user) => {

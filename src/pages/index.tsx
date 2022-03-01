@@ -23,8 +23,9 @@ import { storage } from '../lib/firebase/firebase.config'
 import {
   NewsLineType,
   OfficialWebSiteDataType,
-  newMovieInfo,
-  depPathInfo,
+  newVideoDataType,
+  depPathDataType,
+  voiceDataType,
 } from '../lib/types'
 import { collection, getDocs, query, where } from '@firebase/firestore'
 import VoiceBoard from '../components/organisms/VoiceBoard'
@@ -41,9 +42,11 @@ const opts = {
 
 interface HomeProps {
   newsBoardData: NewsLineType[]
-  newMovies: newMovieInfo[]
+  depList: depPathDataType[]
   depList: depPathInfo[]
   officialWebSiteData: OfficialWebSiteDataType[]
+  newVideos: newVideoDataType[]
+  voices: voiceDataType[]
 }
 // 'after:h-[15vw] after:w-[15vw] after:max-w-[216px] after:max-h-[216px] after:absolute after:bg-prime-blue-rich after:right-0 after:bottom-0 after:-z-10',
 //             'before:h-[15vw] before:w-[15vw] before:max-w-[216px] before:max-h-[216px] before:absolute before:bg-prime-blue-rich before:left-0 before:top-0 before:-z-10'
