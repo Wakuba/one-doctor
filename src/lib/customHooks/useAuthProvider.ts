@@ -6,6 +6,7 @@ import { auth, db } from '../firebase/firebase.config'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendEmailVerification,
   signOut,
   onAuthStateChanged,
   User,
@@ -24,17 +25,15 @@ import {
 //Types
 import {
   LoginDataType,
-  odUserContextType,
   odUserDataType,
   SignUpDataTypeForStudentWithUid,
   SignUpDataTypeForStudent,
 } from '../types'
-import { useAuth } from '../context'
-import { useRouter } from 'next/router'
 
 //Responsibility : serve the context of user authe infomation
 export const useAuthProvider = () => {
   const [odUser, setOdUser] = useState<User | null>(null)
+  // odUserDataはアカウント作成には必須では無いユーザー情報
   const [odUserData, setOdUserData] = useState<odUserDataType>({})
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
@@ -57,8 +56,6 @@ export const useAuthProvider = () => {
   const addUserDataOnFirestore = (data: SignUpDataTypeForStudentWithUid) => {
     setDoc(doc(db, 'odUsers', data.uid), data)
     getUserAdditionalData(data.uid)
-    setDoc(doc(db, 'odUsers', userInfoOnFierstore.uid), userInfoOnFierstore)
-    getUserAdditionalData(userInfoOnFierstore.uid)
   }
 
   //clear the auth state
@@ -88,12 +85,15 @@ export const useAuthProvider = () => {
           uid: userCredential.user.uid,
           ...data,
         })
+        sendEmailVerificationToUser(odUser)
       })
       .catch((error) => {
         const errorCode = error.code
         const errorMessage = error.message
         console.log('errorCode', errorCode)
         console.log('errorMessage', errorMessage)
+        if (errorCode === 'auth/email-already-in-use')
+          alert('アカウントはすでに存在しています')
       })
     // if (odUser) updateProfile(odUser, { displayName: name })
   }
@@ -127,6 +127,16 @@ export const useAuthProvider = () => {
         console.log('errorMessage', errorMessage)
       })
 
+  const sendEmailVerificationToUser = (
+    odUser: User
+  ): Promise<void> | undefined => {
+    const acctionCodeSetting = {
+      url: 'http://localhost:3000/',
+    }
+    if (odUser) return sendEmailVerification(odUser, acctionCodeSetting)
+    else console.log('odUser is null')
+  }
+
   return {
     odUser,
     odUserData,
@@ -136,17 +146,4 @@ export const useAuthProvider = () => {
     logOut,
     sendPasswordResetEmailToUser,
   }
-}
-
-export const useRequiredAuth = (): odUserContextType => {
-  const auth = useAuth()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (!auth.odUser) {
-      router.push('/LogIn')
-    }
-  }, [auth, router])
-
-  return auth
 }

@@ -7,10 +7,9 @@ import {
   updateDoc,
 } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
+import { useRequiredPermission } from '../../lib/customHooks/useRequiredPermission'
 import { db } from '../../lib/firebase/firebase.config'
 import { odUserContextType } from '../../lib/types'
-import { ModalBackdrop, ModalMainArea } from './Modal'
 
 interface FavoriteButtonPropsType {
   layoutStyle: string
@@ -21,11 +20,15 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
   layoutStyle,
   department,
 }) => {
-  const auth = useAuthProvider()
+  const {
+    auth,
+    NotEmailVerifiedAlert,
+    AccountNotExistAlert,
+    permissionChecker,
+  } = useRequiredPermission()
 
   const [isFavorite, setIsFavorite] = useState<boolean | null>(null)
   const [favoDeparts, setFavoDeparts] = useState<string[] | null>(null)
-  const [openModal, setOpenModal] = useState<boolean | null>(null)
 
   useEffect(() => {
     if (auth.odUser !== null)
@@ -39,19 +42,14 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
   }, [favoDeparts])
 
   const onFavorite = (auth: odUserContextType) => {
-    console.log(department)
-    console.log(auth.odUser)
-    if (auth.odUser !== null) {
+    const isPermitted = permissionChecker()
+    if (isPermitted && auth.odUser) {
       const uid = auth.odUser.uid
-      console.log('not null')
-      setOpenModal(false)
       if (isFavorite === false) {
-        console.log(' not isFavorite')
         updateDoc(doc(db, 'odUsers', uid), {
           favoDeparts: arrayUnion(department),
         })
         setIsFavorite(true)
-        console.log(isFavorite)
       }
       if (isFavorite === true) {
         console.log('isFavorite')
@@ -59,11 +57,7 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
           favoDeparts: arrayRemove(department),
         })
         setIsFavorite(false)
-        console.log(isFavorite)
       }
-    } else {
-      console.log('open modal for not-signup user', auth.odUser)
-      setOpenModal(true)
     }
   }
 
@@ -80,18 +74,8 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
       >
         ★お気に入り
       </button>
-      {openModal && (
-        <>
-          <ModalMainArea
-            closeModal={() => setOpenModal(false)}
-            modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
-            modalContainerStyle='w-full space-y-4'
-          >
-            <p>アカウントを作成することでお気に入り機能を使うことができます</p>
-          </ModalMainArea>
-          <ModalBackdrop closeModal={() => setOpenModal(false)} />
-        </>
-      )}
+      <NotEmailVerifiedAlert />
+      <AccountNotExistAlert />
     </>
   )
 }
