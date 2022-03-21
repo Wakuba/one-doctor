@@ -1,16 +1,21 @@
 import imageUploader from '../../lib/customFunctions/imageUploader'
-import Input from '../atoms/Input'
-import Form from '../molecules/Form'
-import SingleSelector from '../atoms/SingleSelector'
-import InputDouble from '../atoms/InputDouble'
-import SubmitButton from '../atoms/SubmitButton'
-import MultiSelector from '../atoms/MultiSelector'
+import Input from './formAtoms/Input'
+import Form from './Form'
+import SingleSelector from './formAtoms/SingleSelector'
+import InputDouble from './formAtoms/InputDouble'
+import SubmitButton from './formAtoms/SubmitButton'
+import MultiSelector from './formAtoms/MultiSelector'
 import Link from 'next/link'
 import { VFC } from 'react'
 import { SignUpAuthorizationDataTypeDataWithImageId } from '../../lib/types'
-import ImageHandler from '../atoms/ImageHandler'
+import ImageHandler from './formAtoms/ImageHandler'
 import { httpsCallable } from 'firebase/functions'
 import { firebaseFunction } from '../../lib/firebase/firebase.config'
+import {
+  departmentCategoryList,
+  prifectureList,
+} from '../../../public/staticData'
+import postPreUserData from '../../lib/customFunctions/postPreUserData'
 
 interface NotStudentSignUpFormDataType {
   departmentWishFor: string[]
@@ -31,7 +36,6 @@ const postNewUserData = httpsCallable(
   firebaseFunction,
   'postNewUserDataToSlack'
 )
-const postNewUserData = httpsCallable(firebaseFunction, 'postNewUserDataToSS')
 
 const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
   const onSubmit = async (data: NotStudentSignUpFormDataType) => {
@@ -49,8 +53,8 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
       favoDeparts: [],
       favoEvents: [],
     }
-    await imageUploader(data.doctorCertification).then(
-      (certificationImageId) => {
+    await imageUploader(data.doctorCertification)
+      .then((certificationImageId) => {
         cleansedData = {
           name: `${data.familyName} ${data.firstName}`,
           password: data.passwordOne,
@@ -65,27 +69,17 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
           favoDeparts: [],
           favoEvents: [],
         }
-      }
-    )
+        return cleansedData
+      })
+      .then((res) => console.log('clean', res))
 
     postNewUserData(cleansedData)
       .then((res) => console.log('スラックへの送信成功', res))
       .catch((e) => console.log('スラックへの送信失敗', e))
 
-    postNewUserData(cleansedData)
-      .then((res) => console.log('スプレッドシートへ送信成功', res))
-      .catch((e) => console.log('スプレッドシートへ送信失敗', e))
-    // fetch(
-    //   `https://script.google.com/macros/s/AKfycbxVkjCPglhyc3WJxOO0RuomqGIRm--iQYl3KoW1N9IaRYHDCshw4MW9MAFLG8s8alA4/exec?data=${JSON.stringify(
-
-    //     cleansedData
-    //   )}`,
-    //   {
-    //     method: 'POST',
-    //   }
-    // )
-    //   .then((res) => console.log('スプレッドシートへ送信成功', res))
-    //   .catch((e) => console.log('スプレッドシートへ送信失敗', e))
+    postPreUserData(cleansedData).then((res) =>
+      console.log('スプレッドシートへの送信成功', res)
+    )
   }
 
   return (
@@ -168,7 +162,7 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
         <MultiSelector
           {...{
             name: 'departmentWishFor',
-            options: ['総合診療科', '精神科', '消化器内科', '循環器内科'],
+            options: departmentCategoryList,
           }}
         >
           希望診療科
@@ -176,7 +170,7 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
         <MultiSelector
           {...{
             name: 'workplaceWishFor',
-            options: ['東京', '栃木県', '茨城県', '大阪府'],
+            options: prifectureList,
           }}
         >
           希望就職地
@@ -198,7 +192,9 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
           パスワード※ （確認用）
         </Input>
 
-        <SubmitButton>送信する</SubmitButton>
+        <SubmitButton style={{ buttonStyle: 'h-11 w-48' }}>
+          送信する
+        </SubmitButton>
       </Form>
     </div>
   )
