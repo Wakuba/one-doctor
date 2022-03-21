@@ -1,4 +1,4 @@
-import AppealCard from '../molecules/AppealCard'
+import AppealCard from './AppealCard'
 
 const AppealCardBoard = () => {
   return (

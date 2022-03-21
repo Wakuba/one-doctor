@@ -1,7 +1,7 @@
-import NotStudentSignUpForm from '../components/organisms/NotStudentSignUpForm'
+import NotStudentSignUpForm from '../components/forms/NotStudentSignUpForm'
 
-import Header from '../components/organisms/Header'
-import Footer from '../components/organisms/Footer'
+import Header from '../components/UIAtoms/Header'
+import Footer from '../components/UIAtoms/Footer'
 const NotStudentSignUp: React.VFC = () => {
   return (
     <>

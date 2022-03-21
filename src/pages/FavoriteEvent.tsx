@@ -1,6 +1,6 @@
-import Footer from '../components/organisms/Footer'
-import Header from '../components/organisms/Header'
-import TabMenu from '../components/organisms/TabMenu'
+import Footer from '../components/UIAtoms/Footer'
+import Header from '../components/UIAtoms/Header'
+import TabMenu from '../components/tabs/TabMenu'
 
 const FavoriteEvent = () => {
   return (

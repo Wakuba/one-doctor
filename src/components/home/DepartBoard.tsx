@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import { OfficialWebSiteDataType } from '../../lib/types'
-import DepartKanban from '../molecules/DepartKanban'
-// Import { depList } from '../../../public/staticData'
+import DepartKanban from './DepartKanban'
 interface DepartBoardPropsType {
   wsData: OfficialWebSiteDataType[]
 }

@@ -1,5 +1,5 @@
-import Header from '../components/organisms/Header'
-import Footer from '../components/organisms/Footer'
+import Header from '../components/UIAtoms/Header'
+import Footer from '../components/UIAtoms/Footer'
 import Link from 'next/link'
 
 const SignUpDashboard = () => {

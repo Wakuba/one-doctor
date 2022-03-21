@@ -1,4 +1,4 @@
-import EventKanban from '../molecules/EventKanban'
+import EventKanban from '../departments/EventKanban'
 import { SpreadSheetDataType } from '../../lib/types'
 import useSWR from 'swr'
 import { useEffect, useState } from 'react'

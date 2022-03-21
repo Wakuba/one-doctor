@@ -1,8 +1,8 @@
-import Header from '../components/organisms/Header'
-import Footer from '../components/organisms/Footer'
+import Header from '../components/UIAtoms/Header'
+import Footer from '../components/UIAtoms/Footer'
 import Image from 'next/image'
-import { RichBlueTLSquare } from '../components/atoms/StyledComponents'
-import PlaneButton from '../components/atoms/PlaneButton'
+import { RichBlueTLSquare } from '../components/UIAtoms/StyledComponents'
+import PlaneButton from '../components/UIAtoms/PlaneButton'
 
 export default function AboutUsPage() {
   return (

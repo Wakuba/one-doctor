@@ -1,5 +1,5 @@
-import Tabs from '../molecules/Tabs'
-import TabField from '../molecules/TabField'
+import Tabs from './Tabs'
+import TabField from './TabField'
 import { ReactNode, Children } from 'react'
 
 interface TabMenuPropsType {

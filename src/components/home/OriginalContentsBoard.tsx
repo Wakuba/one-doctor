@@ -1,7 +1,6 @@
-import DepartKanban from "../molecules/DepartKanban"
+import DepartKanban from "./DepartKanban"
 
 const OriginalContentsBoard = ({ depList }) => {
-  console.log('depList', depList)
   return (
     <div className='bg-prime-blue-muted w-full'>
       <div className='text-[#B7B7B7] sm:text-2xl ov-md:text-4xl font-semibold mb-6'>

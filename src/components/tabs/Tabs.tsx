@@ -1,5 +1,5 @@
 import { Children, ReactNode, useState } from 'react'
-import TabButtons from '../molecules/TabButtons'
+import TabButtons from '../tabs/TabButtons'
 
 interface TabsProps {
   children?: ReactNode

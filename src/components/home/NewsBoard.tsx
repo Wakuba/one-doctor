@@ -1,11 +1,11 @@
 import { FC } from 'react'
-import NewsLine from '../molecules/NewsLine'
+import NewsLine from './NewsLine'
 import { NewsLineType } from '../../lib/types'
 import clsx from 'clsx'
 
 type NewsBoardProps = {
   content: NewsLineType[]
-  layoutStyles?: any
+  layoutStyles?: string
 }
 
 const NewsBoard: FC<NewsBoardProps> = ({ layoutStyles, content }) => {

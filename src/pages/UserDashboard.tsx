@@ -1,8 +1,8 @@
 // import { useAuth } from '../lib/context'
-import Footer from '../components/organisms/Footer'
-import Header from '../components/organisms/Header'
+import Footer from '../components/UIAtoms/Footer'
+import Header from '../components/UIAtoms/Header'
 // import { useRequiredAuth } from '../lib/customHooks/useAuth'
-import DashboardElmBoard from '../components/organisms/DashboardElmBoard'
+import DashboardElmBoard from '../components/userDashboard/DashboardElmBoard'
 
 const UserDashboard: React.FC = () => {
   // const auth = useRequiredAuth()

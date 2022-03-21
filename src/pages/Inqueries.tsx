@@ -1,6 +1,6 @@
-import Header from '../components/organisms/Header'
-import Footer from '../components/organisms/Footer'
-import InqueriesForm from '../components/organisms/InqueriesForm'
+import Header from '../components/UIAtoms/Header'
+import Footer from '../components/UIAtoms/Footer'
+import InqueriesForm from '../components/forms/InqueriesForm'
 
 export default function InqueriesPage() {
   return (

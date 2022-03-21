@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import PlaneButton from '../atoms/PlaneButton'
-import TwitterTimeline from '../molecules/TwitterTimeline'
+import PlaneButton from '../UIAtoms/PlaneButton'
+import TwitterTimeline from './TwitterTimeline'
 
 interface SnsTabPropsType {
   officialWebSite: string
