@@ -6,7 +6,7 @@ import {
   UseFormSetError,
   UseFormClearErrors,
 } from 'react-hook-form'
-import Input from '../atoms/Input'
+import Input from './Input'
 
 interface DoubleBindCheckPropsType {
   name: string
@@ -87,7 +87,7 @@ const DoubleBindCheck: VFC<DoubleBindCheckPropsType> = ({
         {titleTwo}
       </Input>
       {errors[errorName] ? (
-        <div className='block mt-2 text-xs text-[#FF0000]'>
+        <div className='block text-xs text-[#FF0000]'>
           {errors[errorName].message}
         </div>
       ) : (

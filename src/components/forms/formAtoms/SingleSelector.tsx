@@ -3,15 +3,15 @@ import { VFC } from 'react'
 import { Control, Controller, FieldValues } from 'react-hook-form'
 import Select from 'react-select'
 
-interface MultiSelectorPropsType {
+interface SingleSelectorPropsType {
   children?: string
-  subTitle?: string
-  // register: UseFormRegister<FieldValues>
+  placeholder? : string
   errors?: any
   options: string[]
   name: string
-  style?: { wholeStyle: string; selectorStyle: string }
+  style?: { wholeStyle?: string; selectorStyle?: string }
   control?: Control<FieldValues, object>
+  isSearchable: any
 }
 
 const customStyles = {
@@ -37,24 +37,25 @@ const customStyles = {
   },
 }
 
-const MultiSelector: VFC<MultiSelectorPropsType> = ({
+const SingleSelector: VFC<SingleSelectorPropsType> = ({
   children,
-  subTitle,
+  placeholder,
   errors,
   options,
   name,
   style,
   control,
+  isSearchable,
 }) => {
   const optionsTmp: { value: string; label: string }[] = options.map(
     (option: string) => ({ value: option, label: option })
   )
+
   return (
     <div className={`${style?.wholeStyle}`}>
-      <label htmlFor={name} className='block text-sm'>
+      <label className='block text-sm'>
         {children}
-        <span className='text-[#FF0000]'>*</span>
-        <div className='text-sm'>{subTitle}</div>
+        {children && <span className='text-[#FF0000]'>*</span>}
       </label>
       <Controller
         control={control}
@@ -64,26 +65,23 @@ const MultiSelector: VFC<MultiSelectorPropsType> = ({
           return (
             <Select
               styles={customStyles}
-              onChange={(val) => {
-                onChange([...val.map((v) => v.value)])
-              }}
+              onChange={(val) => onChange(val?.value)}
               options={optionsTmp}
-              placeholder='選択してください(検索可能)'
-              isSearchable
-              isMulti
+              placeholder={placeholder ?? '▼選択してください'}
+              isSearchable={isSearchable}
             />
           )
         }}
       />
       {errors[name] ? (
         <div className='block mt-2 text-xs text-[#FF0000]'>
-          {`${children}が${errors[name].message}`}
+          {/* {`${children}が${errors[name].message}`} */}
         </div>
       ) : (
-        <div className='invisible block'>message</div>
+        <div className='invisible block mt-2 text-xs'>message</div>
       )}
     </div>
   )
 }
 
-export default MultiSelector
+export default SingleSelector

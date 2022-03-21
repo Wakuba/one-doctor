@@ -1,10 +1,10 @@
 import { VFC } from 'react'
-import Form from '../molecules/Form'
-import Input from '../atoms/Input'
-import SubmitButton from '../atoms/SubmitButton'
+import Form from './Form'
+import Input from './formAtoms/Input'
 import Link from 'next/link'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 import { useRouter } from 'next/router'
+import SubmitButton from './formAtoms/SubmitButton'
 
 interface LoginFormDataType {
   email: string
@@ -55,7 +55,9 @@ const LoginForm: VFC<{ style: string }> = ({ style }) => {
         >
           パスワード
         </Input>
-        <SubmitButton>ログイン</SubmitButton>
+        <SubmitButton style={{ buttonStyle: 'h-11 w-48' }}>
+          ログイン
+        </SubmitButton>
       </Form>
     </div>
   )

@@ -1,7 +1,7 @@
-import Form from '../molecules/Form'
-import Input from '../atoms/Input'
-import Textarea from '../atoms/Textarea'
-import SubmitButton from '../atoms/SubmitButton'
+import Form from './Form'
+import Input from './formAtoms/Input'
+import Textarea from './formAtoms/Textarea'
+import SubmitButton from './formAtoms/SubmitButton'
 import { VFC } from 'react'
 import { firebaseFunction } from '../../lib/firebase/firebase.config'
 import { httpsCallable } from '@firebase/functions'
@@ -38,7 +38,7 @@ const InqueriesForm: VFC<{ style: string }> = ({ style }) => {
           メールアドレス(必須)
         </Input>
         <Textarea {...{ name: 'content' }}>お問い合わせ内容(必須)</Textarea>
-        <SubmitButton>送信する</SubmitButton>
+        <SubmitButton style={{buttonStyle: 'h-11 w-48'}} >送信する</SubmitButton>
       </Form>
     </main>
   )
