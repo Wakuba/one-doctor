@@ -1,7 +1,7 @@
-import { ModalBackdrop, ModalMainArea } from '../atoms/Modal'
+import { ModalBackdrop, ModalMainArea } from '../UIAtoms/Modal'
 import Image from 'next/image'
-import PushPoint from '../atoms/PushPoint'
-import ThreePointLeader from '../atoms/ThreePointLeader'
+import PushPoint from '../home/PushPoint'
+import ThreePointLeader from '../home/ThreePointLeader'
 import { useState } from 'react'
 import clsx from 'clsx'
 
@@ -73,11 +73,18 @@ export default function DepTopSection({
             'sm:h-64 ov-md:h-96'
           )}
         >
-          <div
+          {/* <div
             className={clsx(
               'border-0 bg-transparent absolute z-20',
               'sm:shadow-for-narrow-ichioshi-img sm:h-24 sm:w-full',
               'ov-md:shadow-for-wide-ichioshi-img ov-md:h-full ov-md:w-24'
+            )}
+          ></div> */}
+          <div
+            className={clsx(
+              'border-0 bg-transparent absolute z-20',
+              'sm:h-24 sm:w-full sm:bg-gradient-to-b sm:from-white sm:to-transparent',
+              'ov-md:h-full ov-md:w-24 ov-md:bg-gradient-to-r ov-md:from-white ov-md:to-transparent'
             )}
           ></div>
           <div className='relative sm:h-64 ov-md:h-96 z-10 border-white'>
