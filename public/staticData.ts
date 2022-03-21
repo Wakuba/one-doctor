@@ -1,37 +1,45 @@
-const depCategory = [
+export const departmentCategoryList: string[] = [
   '循環器内科',
   '消化器内科',
-  '脳神経内科 ',
-  'リウマチ科',
+  '呼吸器内科',
+  '脳神経内科',
+  '腎臓内科',
+  '血液内科',
+  '内分泌代謝科',
+  '糖尿病',
   'アレルギー科',
-  '',
-]
-export const depList: { name: string; page: string }[] = [
-  { name: '循環器', page: 'Departments/EachDepart' },
-  { name: '消化器内科', page: 'Departments/EachDepart' },
-  { name: '脳神経内科', page: 'Departments/EachDepart' },
-  { name: '腎臓内科', page: 'Departments/EachDepart' },
-  { name: '血液内科', page: 'Departments/EachDepart' },
-  { name: 'アレルギーリウマチ', page: 'Departments/EachDepart' },
-  { name: '皮膚科', page: 'Departments/EachDepart' },
-  { name: '泌尿器科', page: 'Departments/EachDepart' },
-  { name: '脳神経外科', page: 'Departments/EachDepart' },
-  { name: '心臓血管外科', page: 'Departments/EachDepart' },
-  { name: '呼吸器外科', page: 'Departments/EachDepart' },
-  { name: '消化器外科', page: 'Departments/EachDepart' },
-  { name: '移植外科', page: 'Departments/EachDepart' },
-  { name: '緩和ケア', page: 'Departments/EachDepart' },
-  { name: '放射線診断・IVR科', page: 'Departments/Radiology' },
-  { name: '総合診断科', page: 'Departments/EachDepart' },
-  { name: '感染症科', page: 'Departments/EachDepart' },
-  { name: '救急', page: 'Departments/EachDepart' },
-  { name: '整形外科', page: 'Departments/EachDepart' },
-  { name: '耳鼻咽喉科', page: 'Departments/EachDepart' },
-  { name: '麻酔科', page: 'Departments/EachDepart' },
-  { name: '眼科', page: 'Departments/EachDepart' },
-  { name: '形成外科', page: 'Departments/EachDepart' },
-  { name: '公衆衛生', page: 'Departments/EachDepart' },
-  { name: '外傷外科', page: 'Departments/EachDepart' },
+  'リウマチ科',
+  '皮膚科',
+  '外科',
+  '脳神経外科',
+  '心臓血管外科',
+  '消化器外科',
+  '移植外科',
+  '整形外科',
+  '形成外科',
+  '緩和ケア',
+  '放射線科',
+  '総合診療科',
+  '感染症科',
+  '救急医学',
+  '耳鼻咽喉科',
+  '麻酔科',
+  '眼科',
+  '内分泌外科',
+  '公衆衛生',
+  '外傷外科',
+  '小児科',
+  '精神科',
+  '産婦人科',
+  '泌尿器科',
+  '病理',
+  '臨床検査',
+  'リハビリテーション科',
+  '頭頸部外科',
+  '集中治療',
+  '外傷',
+  '老年医学',
+  '東洋医学',
 ]
 
 export const sliderData = [
@@ -66,7 +74,7 @@ export const sliderData = [
   },
 ]
 
-const prifectureList = [
+export const prifectureList = [
   '北海道',
   '青森県',
   '岩手県',
@@ -115,7 +123,7 @@ const prifectureList = [
   '鹿児島県',
   '沖縄県',
 ]
-const universityList = [
+export const universityList = [
   '旭川医科大学',
   '北海道大学',
   '弘前大学',
@@ -198,3 +206,27 @@ const universityList = [
   '福岡大学',
   '防衛医科大学校',
 ]
+
+export const gradeList = ['1', '2', '3', '4', '5', '6']
+
+export const month = [
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12',
+]
+
+const newYear = new Date().getFullYear()
+const years: string[] = []
+for (let i = 0; i < 10; i++) {
+  years.push(String(newYear - i))
+}
+export { years }
