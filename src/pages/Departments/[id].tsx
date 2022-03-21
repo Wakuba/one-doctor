@@ -15,18 +15,18 @@ import {
 } from 'firebase/firestore'
 import { ref, getDownloadURL } from 'firebase/storage'
 import { DepPostDataType, odUserContextType } from '../../lib/types' // Custom components
-import PlaneButton from '../../components/atoms/PlaneButton'
-import Header from '../../components/organisms/Header'
-import Footer from '../../components/organisms/Footer'
-import TabMenu from '../../components/organisms/TabMenu'
-import Tag from '../../components/atoms/Tag'
-import AppealCardBoard from '../../components/organisms/AppealCardBoard'
-import MovieCarousel from '../../components/organisms/MovieCarousel'
-import ContactButtonModal from '../../components/molecules/ContactButtonModal'
-import DepTopSection from '../../components/organisms/DepTopSeciton '
-import EventTab from '../../components/organisms/EventTab'
-import CrewBoardTab from '../../components/organisms/CrewBoardTab'
-import TwitterTimeline from '../../components/molecules/TwitterTimeline'
+import PlaneButton from '../../components/UIAtoms/PlaneButton'
+import Header from '../../components/UIAtoms/Header'
+import Footer from '../../components/UIAtoms/Footer'
+import TabMenu from '../../components/tabs/TabMenu'
+import Tag from '../../components/departments/Tag'
+import AppealCardBoard from '../../components/departments/AppealCardBoard'
+import VideoCarousel from '../../components/departments/VideoCarousel'
+import ContactButtonModal from '../../components/UIAtoms/ContactButtonModal'
+import DepTopSection from '../../components/departments/DepTopSeciton '
+import EventTab from '../../components/tabs/EventTab'
+import CrewBoardTab from '../../components/tabs/CrewBoardTab'
+import TwitterTimeline from '../../components/tabs/TwitterTimeline'
 import {
   getUrlFromIframe,
   getUrlFromTwitterTimeline,
@@ -35,8 +35,9 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsResult } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import router from 'next/router'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
-import FavoriteButton from '../../components/atoms/FavoriteButton'
-import BasicInfoTab from '../../components/organisms/BasicInfoTab'
+import FavoriteButton from '../../components/departments/FavoriteButton'
+import BasicInfoTab from '../../components/tabs/BasicInfoTab'
+import GeoInfoTab from '../../components/tabs/GeoInfoTab'
 
 export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
   const {
@@ -48,6 +49,7 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
     topSection,
     officialWebSite,
   } = postData
+  console.log('on frontenc', postData)
 
   return (
     <>
@@ -103,7 +105,7 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
               <p className='text-white sm:text-xs ov-md:text-md sm:my-2 ov-md:my-4 breakAll'>
                 紹介動画を視聴して雰囲気をみてみませんか？
               </p>
-              <MovieCarousel />
+              <VideoCarousel />
             </div>
           </section>
 
@@ -247,6 +249,7 @@ export const getStaticProps: GetStaticProps<
           licence: data?.tabMenu.licence ?? '',
           others: data?.tabMenu.others ?? '',
         },
+        geographicalInformationTab: data?.tabMenu.geographicalInformationTab,
         snsTab: {
           twitterTimelineUrl:
             getUrlFromTwitterTimeline(
@@ -258,12 +261,15 @@ export const getStaticProps: GetStaticProps<
     }
 
     for (const card of data?.tabMenu.crewCardListTab) {
-      const crewImgId = card.crewImage[0].id
-      const docSnap = await getDoc(doc(db, 'fl_files', crewImgId))
-      const crewImgName = docSnap.data()?.file
-      const url = await getDownloadURL(
-        ref(storage, `flamelink/media/${crewImgName}`)
-      )
+      const crewImgId = card.crewImage[0]?.id
+      let url = ''
+      if (crewImgId) {
+        const docSnap = await getDoc(doc(db, 'fl_files', crewImgId))
+        const crewImgName = docSnap.data()?.file
+        url = await getDownloadURL(
+          ref(storage, `flamelink/media/${crewImgName}`)
+        )
+      }
       postData.tabMenu.crewCardListTab.push({
         crewImgUrl: url ?? '',
         crewName: card.crewName ?? '',

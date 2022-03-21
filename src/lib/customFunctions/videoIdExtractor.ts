@@ -1,2 +1,2 @@
-export const videoIdExtractor = (movieUrl: string): string =>
-  String(movieUrl.match(new RegExp('(?<=v=).+')))
+export const videoIdExtractor = (videoUrl: string): string =>
+  String(videoUrl.match(new RegExp('(?<=v=).+')))

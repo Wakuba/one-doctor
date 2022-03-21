@@ -7,7 +7,7 @@ import YouTube from 'react-youtube'
 import Image from 'next/image'
 
 // Custom components
-import { ModalBackdrop, ModalMainArea } from '../atoms/Modal'
+import { ModalBackdrop, ModalMainArea } from '../UIAtoms/Modal'
 import { sliderData } from '../../../public/staticData'
 
 let initModalState = {}
@@ -20,7 +20,7 @@ const opts = {
   width: '640',
 }
 
-export default function MovieCarousel() {
+export default function VideoCarousel() {
   const [modalActive, setModalActive] =
       useState<{ [key: number]: boolean }>(initModalState),
     closeModal = () => {

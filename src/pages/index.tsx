@@ -1,17 +1,15 @@
 // Externel Components
 import { useEffect, useState } from 'react'
-import YouTube from 'react-youtube'
 import Image from 'next/image'
 import clsx from 'clsx'
 
 // Custom Components
-import Header from '../components/organisms/Header'
-import Footer from '../components/organisms/Footer'
-import NewsBoard from '../components/organisms/NewsBoard'
-import DepartBoard from '../components/organisms/DepartBoard'
-import { ModalBackdrop, ModalMainArea } from '../components/atoms/Modal'
-import CustomizedParticles from '../components/molecules/CustomizedParticles'
-import PlaneButton from '../components/atoms/PlaneButton'
+import Header from '../components/UIAtoms/Header'
+import Footer from '../components/UIAtoms/Footer'
+import NewsBoard from '../components/home/NewsBoard'
+import DepartBoard from '../components/home/DepartBoard'
+import CustomizedParticles from '../components/home/CustomizedParticles'
+import PlaneButton from '../components/UIAtoms/PlaneButton'
 
 // Firebase
 import { db } from '../lib/firebase/firebase.config'
@@ -28,22 +26,17 @@ import {
   voiceDataType,
 } from '../lib/types'
 import { collection, getDocs, query, where } from '@firebase/firestore'
-import VoiceBoard from '../components/organisms/VoiceBoard'
-import OriginalContentsBoard from '../components/organisms/OriginalContentsBoard'
-import useSWR from 'swr'
+import VoiceBoard from '../components/home/VoiceBoard'
+import OriginalContentsBoard from '../components/home/OriginalContentsBoard'
+// import useSWR from 'swr'
 import { DocumentData, QuerySnapshot } from '@google-cloud/firestore'
 import { GetStaticProps } from 'next/types'
-import { requestErrorWithOriginal } from '../../functions/node_modules/@slack/web-api/dist/errors'
-
-const opts = {
-  height: '390',
-  width: '640',
-}
+// import { requestErrorWithOriginal } from '../../functions/node_modules/@slack/web-api/dist/errors'
+import NewVideosBoard from '../components/home/NewVideosBoard'
 
 interface HomeProps {
   newsBoardData: NewsLineType[]
   depList: depPathDataType[]
-  depList: depPathInfo[]
   officialWebSiteData: OfficialWebSiteDataType[]
   newVideos: newVideoDataType[]
   voices: voiceDataType[]
@@ -52,14 +45,16 @@ interface HomeProps {
 //             'before:h-[15vw] before:w-[15vw] before:max-w-[216px] before:max-h-[216px] before:absolute before:bg-prime-blue-rich before:left-0 before:top-0 before:-z-10'
 
 export default function Home(props: HomeProps) {
-  const { newsBoardData, newMovies, depList, officialWebSiteData } = props
+  const { newsBoardData, newVideos, depList, officialWebSiteData, voices } =
+    props
   console.log('props', props)
   console.log(officialWebSiteData)
   // const { data, error } = useSWR(
   //   'https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyBPWdOhQK4MIm9GCg2WkMol7ptJU7lxuvU&part=snippet&id=PIrZ9QRXYzI'
   // )
   // console.log('imagedata', data.items[1].snippet.thumbnails.high.url)
-  console.log('newMovie', newMovies)
+  console.log('newMovie', newVideos)
+  console.log('voice', voices)
 
   return (
     <>
@@ -170,46 +165,7 @@ export default function Home(props: HomeProps) {
           )}
         >
           <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
-            <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold mb-2'>
-              新着動画
-            </div>
-            <div className='text-sm mb-4'>
-              各診療科のやりがいやリアルな現場を動画で見ることができます
-            </div>
-            <div className='sm:w-full overflow-x-scroll overflow-y-hidden'>
-              <div className='w-[1920px] flex flex-row'>
-                <Movie
-                  videoId='PIrZ9QRXYzI'
-                  src='/images/professor.png'
-                  title='YouTube video player'
-                />
-                <Movie
-                  videoId='https://www.youtube.com/embed/8jjswrh3agE'
-                  src='/images/professor.png'
-                  title='YouTube video player'
-                />
-                <Movie
-                  videoId='https://www.youtube.com/embed/8jjswrh3agE'
-                  src='/images/professor.png'
-                  title='YouTube video player'
-                />
-                <Movie
-                  videoId='https://www.youtube.com/embed/8jjswrh3agE'
-                  src='/images/professor.png'
-                  title='YouTube video player'
-                />
-                <Movie
-                  videoId='https://www.youtube.com/embed/8jjswrh3agE'
-                  src='/images/professor.png'
-                  title='YouTube video player'
-                />
-                <Movie
-                  videoId='https://www.youtube.com/embed/8jjswrh3agE'
-                  src='/images/professor.png'
-                  title='YouTube video player'
-                />
-              </div>
-            </div>
+            <NewVideosBoard videosData={newVideos} />
           </div>
 
           <div className='ov-md:hidden w-full flex justify-center '>
@@ -313,7 +269,8 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     newsBoardData: [],
     depList: [],
     officialWebSiteData: [],
-    newMovies: [],
+    newVideos: [],
+    voices: [],
   }
 
   try {
@@ -389,47 +346,60 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     try {
       const q = query(
         collection(db, 'fl_content'),
-        where('_fl_meta_.schema', '==', 'topPageNewMovies')
+        where('_fl_meta_.schema', '==', 'topPageNewVideos')
       )
       const snapshotDash = await getDocs(q)
 
-      const thumbnailIdExtractor = (
-        doc: QueryDocumentSnapshot<DocumentData>
-      ): Promise<{ movieUrl: string; verticalThumbnailId: string }> => {
-        return new Promise((res, rej) => {
-          const movieUrl = doc.data().movieUrl ?? ''
-          const verticalThumbnailId = doc.data().verticalThumbnail[0]
-            ? doc.data().verticalThumbnail[0].id
-            : ''
-          res({ movieUrl, verticalThumbnailId })
-          rej('thumbnailExtractor was rejected')
-        })
-      }
-
-      const newMovies = await Promise.all(
+      const newVideos = await Promise.all(
         snapshotDash.docs.map(async (document) => {
-          const movieInfo = await thumbnailIdExtractor(document).then(
+          const videoInfo = await thumbnailIdExtractor(document).then(
             async (res) => {
               console.log('response', res)
-              const verticalThumbnailId = res.verticalThumbnailId
-              if (verticalThumbnailId === '') {
-                return { movieUrl: res.movieUrl, verticalThumbnailUrl: '' }
+              const thumbnailId = res.thumbnailId
+              if (thumbnailId === '') {
+                return {
+                  title: res.title,
+                  videoUrl: res.videoUrl,
+                  thumbnailUrl: '',
+                }
               } else {
-                const snapshot = await getDoc(
-                  doc(db, 'fl_files', verticalThumbnailId)
-                )
-                const verticalThumbnailName = snapshot.data()?.file
+                const snapshot = await getDoc(doc(db, 'fl_files', thumbnailId))
+                const thumbnailName = snapshot.data()?.file
                 const url = await getDownloadURL(
-                  ref(storage, `flamelink/media/${verticalThumbnailName}`)
+                  ref(storage, `flamelink/media/${thumbnailName}`)
                 )
-                return { movieUrl: res.movieUrl, verticalThumbnailUrl: url }
+                return {
+                  title: res.title,
+                  videoUrl: res.videoUrl,
+                  thumbnailUrl: url,
+                }
               }
             }
           )
-          return movieInfo
+          return videoInfo
         })
       )
-      props.newMovies = newMovies
+      props.newVideos = newVideos
+    } catch (e) {
+      console.log(e)
+    }
+
+    // トップページの医学生の声をfirebaseから取ってくる
+    try {
+      const q = query(
+        collection(db, 'fl_content'),
+        where('_fl_meta_.schema', '==', 'topPageStudentsVoices')
+      )
+      const snapshot = await getDocs(q)
+      const voices = snapshot.docs.map((doc) => {
+        return {
+          contributor: doc.data().contributor ?? '',
+          contents: doc.data().contents ?? '',
+          departmentNameInJapanese: doc.data().departmentNameInJapanese,
+          universityNameInJapanese: doc.data().universityNameInJapanese,
+        }
+      })
+      props.voices = voices
     } catch (e) {
       console.log(e)
     }
@@ -450,55 +420,28 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   }
 }
 
-function Movie({
-  src,
-  title,
-  videoId,
-}: {
-  src: string
-  title: string
-  videoId: string
-}) {
-  const [modalActive, setModalActive] = useState(false)
-  return (
-    <>
-      {modalActive && (
-        <>
-          <ModalMainArea
-            modalWrapperStyle='w-10/12 h-5/6'
-            modalContainerStyle='h-full w-full flex flex-col justify-center'
-            closeModal={() => setModalActive(false)}
-          >
-            <YouTube
-              videoId={videoId}
-              opts={opts}
-              containerClassName='ov-md:h-full sm:h-[70vw] w-full flex flex-col items-center justify-center'
-              className='h-5/6 w-10/12'
-            />
-          </ModalMainArea>
-          <ModalBackdrop closeModal={() => setModalActive(false)} />
-        </>
-      )}
-      <div
-        onClick={() => setModalActive(true)}
-        className='relative shadow-lg w-72 h-96 mr-3 border-2 border-gray-300 rounded-2'
-      >
-        <Image
-          layout='fill'
-          objectFit='contain'
-          loading='lazy'
-          src={src}
-          alt={title}
-        />
-      </div>
-    </>
-  )
-}
-
 function ScrollArrow() {
   return (
     <div className='text-white text-xs absolute border-solid border-white border-b-2 w-44 transform rotate-90 top-[30px] left-[-140px]'>
       scroll
     </div>
   )
+}
+
+const thumbnailIdExtractor = (
+  doc: QueryDocumentSnapshot<DocumentData>
+): Promise<{
+  title: string
+  videoUrl: string
+  thumbnailId: string
+}> => {
+  return new Promise((response, reject) => {
+    const title = doc.data().title ?? 'ブランク動画'
+    const videoUrl = doc.data().videoUrl ?? ''
+    const thumbnailId = doc.data().thumbnail[0]
+      ? doc.data().thumbnail[0].id
+      : ''
+    response({ title, videoUrl, thumbnailId })
+    reject('thumbnailExtractor was rejected')
+  })
 }
