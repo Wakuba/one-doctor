@@ -3,17 +3,19 @@ import { useState, VFC } from 'react'
 // import { useForm } from 'react-hook-form'
 // import imageUploader from '../../lib/customFunctions/imageUploader'
 // import postSlackMessageKnocker from '../../lib/customFunctions/postSlackMessageHitter'
-import Input from '../atoms/Input'
-import Form from '../molecules/Form'
-import SingleSelector from '../atoms/SingleSelector'
-import InputDouble from '../atoms/InputDouble'
-import SubmitButton from '../atoms/SubmitButton'
-import MultiSelector from '../atoms/MultiSelector'
+import Input from './formAtoms/Input'
+import Form from './Form'
+import SingleSelector from './formAtoms/SingleSelector'
+import InputDouble from './formAtoms/InputDouble'
+import SubmitButton from './formAtoms/SubmitButton'
+import MultiSelector from './formAtoms/MultiSelector'
 import Link from 'next/link'
-import DoubleBindCheck from '../molecules/DoubleBindCheck'
+import DoubleBindCheck from './formAtoms/DoubleBindCheck'
 import univEmailValidator from '../../lib/customFunctions/univEmailValidator'
-import { ModalBackdrop, ModalMainArea } from '../atoms/Modal'
+import { ModalBackdrop, ModalMainArea } from '../UIAtoms/Modal'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
+import { sendEmailVerification } from 'firebase/auth'
+import { gradeList, prifectureList, universityList } from '../../../public/staticData'
 
 interface StudentSignUpFormDataType {
   departmentWishFor: string[]
@@ -102,6 +104,7 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
             type: 'text',
             placeholderOne: '姓',
             placeholderTwo: '名',
+            style: { wholeStyle: 'mb-10' },
           }}
         >
           お名前
@@ -114,6 +117,7 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
             type: 'text',
             placeholderOne: 'せい',
             placeholderTwo: 'めい',
+            style: { wholeStyle: 'pb-20' },
           }}
         >
           ふりがな
@@ -166,7 +170,7 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
         <MultiSelector
           {...{
             name: 'workplaceWishFor',
-            options: ['東京', '栃木県', '茨城県', '大阪府'],
+            options: prifectureList,
           }}
         >
           希望就職地
@@ -176,7 +180,7 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
           {...{
             name: 'grade',
             isSearchable: true,
-            options: ['1', '2', '3', '4', '5', '6'],
+            options: gradeList,
           }}
         >
           学年
@@ -185,14 +189,7 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
           {...{
             name: 'university',
             isSearchable: true,
-            options: [
-              '順天堂大学',
-              '筑波大学',
-              '自治医科大学',
-              '東京大学',
-              '群馬大学',
-              '杏林大学',
-            ],
+            options: universityList,
           }}
         >
           大学名
@@ -212,7 +209,7 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
             titleTwo: 'パスワード(確認用)',
           }}
         />
-        <SubmitButton>送信する</SubmitButton>
+        <SubmitButton style={{ buttonStyle: 'h-11 w-48' }}>送信する</SubmitButton>
       </Form>
     </div>
   )
