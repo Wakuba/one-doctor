@@ -7,7 +7,10 @@ import SubmitButton from './formAtoms/SubmitButton'
 import MultiSelector from './formAtoms/MultiSelector'
 import Link from 'next/link'
 import { VFC } from 'react'
-import { SignUpAuthorizationDataTypeDataWithImageId } from '../../lib/types'
+import {
+  SignUpAuthorizationDataTypeDataWithImageId,
+  SignUpDataTypeForNotStudent,
+} from '../../lib/types'
 import ImageHandler from './formAtoms/ImageHandler'
 import { httpsCallable } from 'firebase/functions'
 import { firebaseFunction } from '../../lib/firebase/firebase.config'
@@ -16,6 +19,8 @@ import {
   prifectureList,
 } from '../../../public/staticData'
 import postPreUserData from '../../lib/customFunctions/postPreUserData'
+import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
+import { isUidIdentifier } from 'firebase-admin/lib/auth/identifier'
 
 interface NotStudentSignUpFormDataType {
   departmentWishFor: string[]
@@ -38,48 +43,48 @@ const postNewUserData = httpsCallable(
 )
 
 const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
+  const { signUp } = useAuthProvider()
   const onSubmit = async (data: NotStudentSignUpFormDataType) => {
-    let cleansedData: SignUpAuthorizationDataTypeDataWithImageId = {
-      name: '',
-      password: '',
-      email: '',
-      ruby: '',
-      workplaceWishFor: [],
-      departmentWishFor: [],
-      workplace: '',
-      gender: '',
-      certificationImageId: '',
+    const certificationImageId = await imageUploader(data.doctorCertification)
+    const cleansedData: SignUpAuthorizationDataTypeDataWithImageId = {
+      name: `${data.familyName} ${data.firstName}`,
+      password: data.passwordOne,
+      email: data.emailOne,
+      ruby: `${data.familyRuby} ${data.firstRuby}`,
+      workplaceWishFor: data.workplaceWishFor,
+      departmentWishFor: data.departmentWishFor,
+      workplace: data.workplace,
+      gender: data.gender,
+      certificationImageId: certificationImageId,
       isStudent: false,
+      authorizedByAdmin: false,
       favoDeparts: [],
       favoEvents: [],
     }
-    await imageUploader(data.doctorCertification)
-      .then((certificationImageId) => {
-        cleansedData = {
-          name: `${data.familyName} ${data.firstName}`,
-          password: data.passwordOne,
-          email: data.emailOne,
-          ruby: `${data.familyRuby} ${data.firstRuby}`,
-          workplaceWishFor: data.workplaceWishFor,
-          departmentWishFor: data.departmentWishFor,
-          workplace: data.workplace,
-          gender: data.gender,
-          certificationImageId: certificationImageId,
-          isStudent: false,
-          favoDeparts: [],
-          favoEvents: [],
-        }
-        return cleansedData
-      })
-      .then((res) => console.log('clean', res))
 
-    postNewUserData(cleansedData)
-      .then((res) => console.log('スラックへの送信成功', res))
-      .catch((e) => console.log('スラックへの送信失敗', e))
+    const signUpData: SignUpDataTypeForNotStudent = {
+      name: `${data.familyName} ${data.firstName}`,
+      password: data.passwordOne,
+      email: data.emailOne,
+      ruby: `${data.familyRuby} ${data.firstRuby}`,
+      workplaceWishFor: data.workplaceWishFor,
+      departmentWishFor: data.departmentWishFor,
+      workplace: data.workplace,
+      gender: data.gender,
+      isStudent: false,
+      authorizedByAdmin: false,
+      favoDeparts: [],
+      favoEvents: [],
+    }
+    signUp(signUpData).then((odUser) => {
+      postNewUserData({ ...cleansedData, uid: odUser.uid })
+        .then((res) => console.log('スラックへの送信成功', res))
+        .catch((e) => console.log('スラックへの送信失敗', e))
 
-    postPreUserData(cleansedData).then((res) =>
-      console.log('スプレッドシートへの送信成功', res)
-    )
+      postPreUserData({ ...cleansedData, uid: odUser.uid }).then((res) =>
+        console.log('スプレッドシートへの送信成功', res)
+      )
+    })
   }
 
   return (

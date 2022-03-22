@@ -1,11 +1,11 @@
-import Link from 'next/link'
 import { ReactNode } from 'react'
+import Link from 'next/link'
 
 const StyledList = (props: { children: ReactNode }) => (
-    <li className='justify-center content-center cursor-pointer'>
-      {props.children}
-    </li>
-  ),
+  <li className='justify-center content-center cursor-pointer'>
+    {props.children}
+  </li>
+),
   StyledUnorderedLi = (props: { children: ReactNode }) => (
     <ul className='flex sm:flex-col sm:items-center ov-md:space-x-6 list-none '>
       {props.children}

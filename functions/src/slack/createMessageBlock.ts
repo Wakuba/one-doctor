@@ -7,13 +7,20 @@ import { SignUpAuthorizationDataTypeDataWithImageUrl, FormDataType } from '../ty
 export const createMessageBlockForAuthorization = (
   data: SignUpAuthorizationDataTypeDataWithImageUrl
 ) => {
-  const { name, email, password, certificationImageUrl } = data
+  const { name, email, password, certificationImageUrl, uid } = data
   return [
     {
       "type": "header",
       "text": {
         "type": "plain_text",
         "text": name ? name : "No name",
+      },
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "plain_text",
+        "text": uid ? uid : "No name",
       },
     },
     {

@@ -15,7 +15,11 @@ import univEmailValidator from '../../lib/customFunctions/univEmailValidator'
 import { ModalBackdrop, ModalMainArea } from '../UIAtoms/Modal'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 import { sendEmailVerification } from 'firebase/auth'
-import { gradeList, prifectureList, universityList } from '../../../public/staticData'
+import {
+  gradeList,
+  prifectureList,
+  universityList,
+} from '../../../public/staticData'
 
 interface StudentSignUpFormDataType {
   departmentWishFor: string[]
@@ -209,7 +213,9 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
             titleTwo: 'パスワード(確認用)',
           }}
         />
-        <SubmitButton style={{ buttonStyle: 'h-11 w-48' }}>送信する</SubmitButton>
+        <SubmitButton style={{ buttonStyle: 'h-11 w-48' }}>
+          送信する
+        </SubmitButton>
       </Form>
     </div>
   )

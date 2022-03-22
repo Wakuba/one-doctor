@@ -21,7 +21,7 @@ const SignUpDashboard = () => {
                 <span className='ov-md:ml-[20px] text-sm'>
                   すでにアカウントを持っている場合は
                 </span>
-                <Link href='/'>
+                <Link href='/LogIn'>
                   <a className='text-sm inline text-[#00B8FF] underline'>
                     こちら
                   </a>

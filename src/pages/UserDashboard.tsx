@@ -1,12 +1,14 @@
 // import { useAuth } from '../lib/context'
 import Footer from '../components/UIAtoms/Footer'
 import Header from '../components/UIAtoms/Header'
-// import { useRequiredAuth } from '../lib/customHooks/useAuth'
+// import { useRequiredPermission } from '../lib/customHooks/useAuth'
 import DashboardElmBoard from '../components/userDashboard/DashboardElmBoard'
+import { useRequiredPermission } from '../lib/customHooks/useAuthProvider'
 
-const UserDashboard: React.FC = () => {
-  // const auth = useRequiredAuth()
-  // if (!auth.odUser) return <div>Hello World</div>
+const UserDashboard: React.VFC = () => {
+  // const { auth, accountExist } = useRequiredPermission()
+  // console.log('auth at UserDashboard', auth)
+  // if (accountExist) {
   return (
     <>
       <Header />

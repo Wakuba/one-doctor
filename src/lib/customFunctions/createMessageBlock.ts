@@ -18,7 +18,7 @@ export const createMessageBlockForNotStudentAuthorization = (
       "type": "section",
       "text": {
         "type": "plain_text",
-        "text":  email ?? "No email address",
+        "text": email ?? "No email address",
       },
       "block_id": "text1",
     },
@@ -72,7 +72,7 @@ export const createMessageBlockForFormReceiver = (formData: FormDataType) => {
       "type": "section",
       "text": {
         "type": "plain_text",
-        "text":  email ?? "No email address",
+        "text": email ?? "No email address",
       },
       "block_id": "text1",
     },

@@ -5,6 +5,7 @@ export interface FormDataType {
 }
 
 export interface SignUpDataType {
+  uid: string
   name: string
   email: string
   password: string
@@ -23,15 +24,6 @@ export interface SignUpDataTypeForNotStudent extends SignUpDataType {
   departmentWishFor: string[]
   workplace: string
   workplaceWishFor: string[]
-}
-
-export interface SignUpDataTypeForNotStudentWithUid
-  extends SignUpDataTypeForNotStudent {
-  uid: string
-}
-
-export interface SignUpDataTypeForStudentWithUid {
-  uid: string
 }
 
 export interface SignUpAuthorizationDataTypeDataWithImageId

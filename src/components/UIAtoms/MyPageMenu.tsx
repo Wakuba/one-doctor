@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-const MyPageMenu = () => {
+const MyPageMenu: React.VFC<{ layoutStyle: string }> = ({ layoutStyle }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   return (
-    <div className='relative'>
+    <div className={`relative ${layoutStyle}`}>
       <div
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className='h-[40px] w-[135px] border-prime-blue-rich border-1 bg-prime-blue-pale text-prime-blue-rich flex flex-row items-center p-3 mr-3'
@@ -29,14 +29,12 @@ const MyPageMenu = () => {
   )
 }
 
-export default MyPageMenu
-
-function List({ children }) {
+const List: React.VFC<{ children: string }> = ({ children }) => {
   return (
     <li className='h-[40px] w-full text-prime-blue-rich bg-prime-blue-pale border-1 border-prime-blue-rich flex flex-col justify-center items-center'>
-      <a>
-      {children}
-      </a>
+      <a>{children}</a>
     </li>
   )
 }
+
+export default MyPageMenu

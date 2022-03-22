@@ -13,8 +13,10 @@ const postPreUserData = async (
     workplace,
     gender,
     certificationImageId,
+    uid,
   } = data
   const cleansedData = {
+    uid,
     name,
     password,
     email,
@@ -26,7 +28,7 @@ const postPreUserData = async (
     certificationImageId,
   }
   const response = await fetch(
-    'https://script.google.com/macros/s/AKfycbxUyoM4vm-XzlIk7s9aNpI03DHLKRdZ6xBUTfSGjUh5YSK3PuvhVvXpVtfkyFLago_fWA/exec',
+    'https://script.google.com/macros/s/AKfycbweUv9YLuIfub3c3iVzC3fZVQEX4cUR5EZNMOyZzvLmYhoDL4agp6op-6-MUUPmzujYWQ/exec',
     {
       method: 'POST',
       mode: 'no-cors',

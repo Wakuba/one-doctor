@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import { useAuth } from '../../lib/context'
-import Form from '../molecules/Form'
-import Input from '../atoms/Input'
-import SubmitButton from '../atoms/SubmitButton'
+import Form from './Form'
+import Input from './formAtoms/Input'
+import SubmitButton from './formAtoms/SubmitButton'
 const ResetPasswordForm: React.VFC<{ style: string }> = ({ style }) => {
   const auth = useAuth()
   const router = useRouter()
@@ -31,7 +31,7 @@ const ResetPasswordForm: React.VFC<{ style: string }> = ({ style }) => {
         <Input {...{ name: 'email', type: 'email' }}>
           メールアドレス(必須)
         </Input>
-        <SubmitButton>送信する</SubmitButton>
+        <SubmitButton style={{ buttonStyle: 'h-11 w-48' }}>送信する</SubmitButton>
       </Form>
     </main>
   )

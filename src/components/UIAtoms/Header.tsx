@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import MyPageMenu from '../molecules/MyPageMenu'
+import MyPageMenu from './MyPageMenu'
 
 export default function Header() {
   return (
-    <header className='flex justify-between sm:static sm:top-0 sm:bg-white ov-md:fixed ov-md:bg-transparent py-1.5 sm:h-20 ov-md:min-h-20  ov-md:h-[5vw] w-full flex-row z-50'>
+    <header className='flex justify-between sm:static sm:top-0 sm:bg-white ov-md:fixed ov-md:bg-transparent py-1.5 sm:h-20 ov-md:min-h-20  ov-md:h-[5vw] w-full flex-row z-50 pointer-events-none'>
       <Link href='/'>
-        <div className='h-14'>
+        <div className='h-14 pointer-events-auto'>
           <div className='relative h-12 w-32 '>
             <Image
               layout='fill'
@@ -21,7 +21,7 @@ export default function Header() {
           </div>
         </div>
       </Link>
-        <MyPageMenu />
+      <MyPageMenu layoutStyle='pointer-events-auto' />
     </header>
   )
 }

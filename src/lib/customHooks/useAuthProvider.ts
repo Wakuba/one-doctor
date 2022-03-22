@@ -26,8 +26,8 @@ import {
 import {
   LoginDataType,
   odUserDataType,
-  SignUpDataTypeForStudentWithUid,
   SignUpDataTypeForStudent,
+  SignUpDataTypeForNotStudent,
 } from '../types'
 
 //Responsibility : serve the context of user authe infomation
@@ -53,9 +53,13 @@ export const useAuthProvider = () => {
   }, [])
 
   // ユーザーデータのうちfirebase authアカウント作成には必須でないがfiresotreに入れるもの
-  const addUserDataOnFirestore = (data: SignUpDataTypeForStudentWithUid) => {
-    setDoc(doc(db, 'odUsers', data.uid), data)
-    getUserAdditionalData(data.uid)
+  const addUserDataOnFirestore = (
+    data: SignUpDataTypeForStudent | SignUpDataTypeForNotStudent
+  ) => {
+    if (data.uid) {
+      setDoc(doc(db, 'odUsers', data.uid), data)
+      getUserAdditionalData(data.uid)
+    }
   }
 
   //clear the auth state
@@ -75,27 +79,23 @@ export const useAuthProvider = () => {
     }
   }
 
-  const signUp = (data: SignUpDataTypeForStudent): void => {
-    createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        const odUser = userCredential.user
-        setOdUser(odUser)
-        updateProfile(odUser, { displayName: data.name })
-        addUserDataOnFirestore({
-          uid: userCredential.user.uid,
-          ...data,
-        })
-        sendEmailVerificationToUser(odUser)
-      })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log('errorCode', errorCode)
-        console.log('errorMessage', errorMessage)
-        if (errorCode === 'auth/email-already-in-use')
-          alert('アカウントはすでに存在しています')
-      })
-    // if (odUser) updateProfile(odUser, { displayName: name })
+  const signUp = async (
+    data: SignUpDataTypeForStudent | SignUpDataTypeForNotStudent
+  ): Promise<User> => {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      data.email,
+      data.password
+    )
+    const odUser = userCredential.user
+    setOdUser(odUser)
+    sendEmailVerificationToUser(odUser)
+    updateProfile(odUser, { displayName: data.name })
+    addUserDataOnFirestore({
+      uid: userCredential.user.uid,
+      ...data,
+    })
+    return odUser
   }
 
   const logIn = ({ email, password }: LoginDataType): Promise<void | User> =>

@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import Footer from '../components/organisms/Footer'
-import Header from '../components/organisms/Header'
+import Footer from '../components/UIAtoms/Footer'
+import Header from '../components/UIAtoms/Header'
 
 const Advertisement: React.VFC = () => {
   return (
@@ -11,7 +11,7 @@ const Advertisement: React.VFC = () => {
         <section
           className={clsx(
             'bg-prime-blue-rich rounded-br-[15vw] relative flex flex-col items-center pt-20',
-            'after:h-[15vw] after:w-[15vw] after:absolute after:bg-prime-blue-muted after:right-0 after:bottom-0 after:-z-10'
+            'after:h-[15vw] after:w-[15vw] after:max-w-[216px] after:max-h-[216px] after:absolute after:bg-prime-blue-muted after:right-0 after:bottom-0 after:-z-10'
           )}
         >
           <div className='w-11/12 sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
@@ -27,8 +27,8 @@ const Advertisement: React.VFC = () => {
         <section
           className={clsx(
             'h-[400px] bg-prime-blue-muted rounded-tl-[15vw] rounded-br-[15vw] relative flex flex-col items-center',
-            'after:h-[15vw] after:w-[15vw] after:absolute after:bg-prime-blue-rich after:right-0 after:bottom-0 after:-z-10',
-            'before:h-[15vw] before:w-[15vw] before:absolute before:bg-prime-blue-rich before:left-0 before:top-0 before:-z-10'
+            'after:h-[15vw] after:w-[15vw] after:max-w-[216px] after:max-h-[216px] after:absolute after:bg-prime-blue-rich after:right-0 after:bottom-0 after:-z-10',
+            'before:h-[15vw] before:w-[15vw] before:max-w-[216px] before:max-h-[216px] before:absolute before:bg-prime-blue-rich before:left-0 before:top-0 before:-z-10'
           )}
         >
           <div className='w-11/12 sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
@@ -40,8 +40,8 @@ const Advertisement: React.VFC = () => {
         <section
           className={clsx(
             'h-[400px] bg-prime-blue-rich rounded-tl-[15vw] rounded-br-[15vw] relative flex flex-col items-center',
-            'after:h-[15vw] after:w-[15vw] after:absolute after:bg-prime-blue-muted after:right-0 after:bottom-0 after:-z-10',
-            'before:h-[15vw] before:w-[15vw] before:absolute before:bg-prime-blue-muted before:left-0 before:top-0 before:-z-10'
+            'after:h-[15vw] after:w-[15vw] after:max-w-[216px] after:max-h-[216px] after:absolute after:bg-prime-blue-muted after:right-0 after:bottom-0 after:-z-10',
+            'before:h-[15vw] before:w-[15vw] before:max-w-[216px] before:max-h-[216px] before:absolute before:bg-prime-blue-muted before:left-0 before:top-0 before:-z-10'
           )}
         >
           <div className='w-11/12 sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] '>
@@ -53,7 +53,7 @@ const Advertisement: React.VFC = () => {
         <section
           className={clsx(
             'h-[400px] bg-prime-blue-muted rounded-tl-[15vw] rounded-br-[15vw] relative flex flex-col items-center',
-            'before:h-[15vw] before:w-[15vw] before:absolute before:bg-prime-blue-rich before:left-0 before:top-0 before:-z-10'
+            'before:h-[15vw] before:w-[15vw] before:max-w-[216px] before:max-h-[216px] before:absolute before:bg-prime-blue-rich before:left-0 before:top-0 before:-z-10'
           )}
         >
           <div className='w-11/12 sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>

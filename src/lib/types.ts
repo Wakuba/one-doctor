@@ -110,6 +110,7 @@ export interface OdUserAuthState {
 }
 
 export interface SignUpDataType {
+  uid?: string
   name: string
   email: string
   password: string
@@ -131,16 +132,7 @@ export interface SignUpDataTypeForNotStudent extends SignUpDataType {
   departmentWishFor: string[]
   workplace: string
   workplaceWishFor: string[]
-}
-
-export interface SignUpDataTypeForNotStudentWithUid
-  extends SignUpDataTypeForNotStudent {
-  uid: string
-}
-
-export interface SignUpDataTypeForStudentWithUid
-  extends SignUpDataTypeForStudent {
-  uid: string
+  authorizedByAdmin: boolean
 }
 
 export interface SignUpAuthorizationDataTypeDataWithImageId
@@ -159,8 +151,8 @@ export interface LoginDataType {
 }
 
 export type odUserDataType =
-  | SignUpDataTypeForStudentWithUid
-  | SignUpDataTypeForNotStudentWithUid
+  | SignUpDataTypeForStudent
+  | SignUpDataTypeForNotStudent
 
 export interface odUserContextType {
   odUser: User | null

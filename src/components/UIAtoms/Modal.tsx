@@ -52,7 +52,7 @@ export const ModalBackdrop = ({
   closeModal: MouseEventHandler<HTMLDivElement>
 }) => (
   <div
-    className='w-full h-full fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur z-20'
+    className='w-full h-full fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur z-40'
     onClick={closeModal}
   >
     <CancelButton onCancel={closeModal} />
