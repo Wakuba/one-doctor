@@ -14,7 +14,6 @@ import DoubleBindCheck from './formAtoms/DoubleBindCheck'
 import univEmailValidator from '../../lib/customFunctions/univEmailValidator'
 import { ModalBackdrop, ModalMainArea } from '../UIAtoms/Modal'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
-import { sendEmailVerification } from 'firebase/auth'
 import {
   gradeList,
   prifectureList,

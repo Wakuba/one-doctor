@@ -20,7 +20,6 @@ import {
 } from '../../../public/staticData'
 import postPreUserData from '../../lib/customFunctions/postPreUserData'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
-import { isUidIdentifier } from 'firebase-admin/lib/auth/identifier'
 
 interface NotStudentSignUpFormDataType {
   departmentWishFor: string[]

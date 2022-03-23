@@ -34,7 +34,37 @@ import {
 export const useAuthProvider = () => {
   const [odUser, setOdUser] = useState<User | null>(null)
   // odUserDataはアカウント作成には必須では無いユーザー情報
-  const [odUserData, setOdUserData] = useState<odUserDataType>({})
+  const [odUserData, setOdUserData] = useState<odUserDataType>(
+    {
+      uid: '',
+      name: '',
+      email: '',
+      ruby: '',
+      password: '',
+      gender: '',
+      isStudent: true,
+      favoDeparts: [],
+      favoEvents: [],
+      grade: '',
+      university: '',
+      workplaceWishFor: [],
+      departmentWishFor: [],
+    } || {
+      uid: '',
+      name: '',
+      email: '',
+      ruby: '',
+      password: '',
+      gender: '',
+      isStudent: true,
+      favoDeparts: [],
+      favoEvents: [],
+      departmentWishFor: [],
+      workplace: '',
+      workplaceWishFor: [],
+      authorizedByAdmin: false,
+    }
+  )
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {

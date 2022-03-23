@@ -1,6 +1,4 @@
 import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
 import StudentVoice from './StudentVoice'
 
 const VoiceBoard: React.VFC = () => {

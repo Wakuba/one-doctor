@@ -1,15 +1,15 @@
 import EventKanban from '../departments/EventKanban'
 import { SpreadSheetDataType } from '../../lib/types'
 import useSWR from 'swr'
-import { useEffect, useState } from 'react'
 
 interface EventTabPropsType {
   title: string
-  dep: string
-  univ: string
+  univ: any
+  dep: any
 }
 
-const EventTab: React.VFC<EventTabPropsType> = ({ title, dep, univ}) => {
+const EventTab: React.VFC<EventTabPropsType> = ({ title, univ, dep }) => {
+  console.log(univ, dep)
   const { data, error } = useSWR(
     // `https://script.google.com/macros/s/AKfycbyiGZnlA_4tgcPB6hSSvpnFQp-jdVWSFiWoOtFivgjvARqSOF3A-FjbLdEL8qI2SEof/exec?dep=${dep}&univ=${univ}`
     // 'https://script.google.com/macros/s/AKfycbwIE5xLmREZ6vdmqdq32pYK1cU8zUC1z_c9wNBnI08qPkf1UENLRfdcYyZqZ0dJqSvj/exec?dep=脳神経内科&univ=自治医科大学'

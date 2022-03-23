@@ -1,13 +1,11 @@
-import { audioOgg } from '@cloudinary/url-gen/qualifiers/format'
 import clsx from 'clsx'
-import { createElement, useEffect, useState, VFC } from 'react'
+import { Dispatch, ReactNode, SetStateAction, useState, VFC } from 'react'
 import {
   departmentCategoryList,
   gradeList,
   universityList,
 } from '../../../public/staticData'
 import Form from './Form'
-import Input from './formAtoms/Input'
 import MultiSelector from './formAtoms/MultiSelector'
 import SingleSelector from './formAtoms/SingleSelector'
 import SubmitButton from './formAtoms/SubmitButton'
@@ -18,9 +16,14 @@ interface MyNoteFormPropsType {
   style: string
 }
 
-const MyNoteForm: VFC<MyNoteFormPropsType> = ({ style }) => {
+interface SlecetButtonPropsType {
+  children: ReactNode
+  state: boolean
+  setState: Dispatch<SetStateAction<boolean>>
+}
 
-  const onSubmit = (data) => console.log('onsubmitだよ', data)
+const MyNoteForm: VFC<MyNoteFormPropsType> = ({ style }) => {
+  const onSubmit = (data: any) => console.log('onsubmitだよ', data)
   const [facility, setFacility] = useState(true)
   const [coaching, setCoaching] = useState(true)
   const [clinicalCase, setClinicalCase] = useState(true)
@@ -31,7 +34,11 @@ const MyNoteForm: VFC<MyNoteFormPropsType> = ({ style }) => {
   const [messageToStudents, setMessageToStudents] = useState(true)
   const [allState, setAllState] = useState<boolean | null>(null)
 
-  const SelectButton = ({ children, state, setState }) => {
+  const SelectButton: VFC<SlecetButtonPropsType> = ({
+    children,
+    state,
+    setState,
+  }) => {
     return (
       <div
         className={`cusor-pointer px-2 rounded border-1 border-gray-400 basis-1 mr-2 mb-2 text-sm ${

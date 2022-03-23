@@ -5,7 +5,10 @@ interface BasicInfoTabPropsType {
   basicInfo: BasicInfoTabType
 }
 
-const BasicInfoTab: React.VFC<BasicInfoTabPropsType> = ({ title, basicInfo}) => (
+const BasicInfoTab: React.VFC<BasicInfoTabPropsType> = ({
+  title,
+  basicInfo,
+}) => (
   <div
     title={title}
     className='w-full ov-md:p-8 sm:p-4 bg-white flex flex-col items-start'

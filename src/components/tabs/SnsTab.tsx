@@ -21,7 +21,7 @@ const SnsTab: FC<SnsTabPropsType> = ({
         <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
           関連SNS
         </div>
-        <TwitterTimeline href={twitterTimelineUrl} />
+        <TwitterTimeline userId={twitterTimelineUrl} />
       </div>
     </div>
   )

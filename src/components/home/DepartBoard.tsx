@@ -18,7 +18,7 @@ const DepartBoard: React.VFC<DepartBoardPropsType> = ({ wsData }) => {
           '2xl:grid 2xl:grid-cols-4 2xl:gap-8'
         )}
       >
-         {wsData.map((data: OfficialWebSiteDataType, idx: number) => (
+        {wsData.map((data: OfficialWebSiteDataType, idx: number) => (
           <div key={idx + 1} className='flex justify-self-center self-center'>
             <DepartKanban pageUrl={data.url}>
               {data.departmentNameInJapanese}

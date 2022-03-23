@@ -1,14 +1,17 @@
 import { odUserContextType } from '../types'
 import { useAuth } from '../context'
 // import { useRouter } from 'next/router'
-import { useState, Dispatch, SetStateAction, ReactNode } from 'react'
+import { useState, Dispatch, SetStateAction, ReactNode, VFC } from 'react'
 import { ModalBackdrop, ModalMainArea } from '../../components/UIAtoms/Modal'
 import PlaneButton from '../../components/UIAtoms/PlaneButton'
 
+const NotAuthorizedMessage = 'このアカウントは運営による認可を受けていません'
+
 export const useRequiredPermission = (): {
   auth: odUserContextType
-  NotEmailVerifiedAlert: React.VFC
-  AccountNotExistAlert: React.VFC
+  NotEmailVerifiedAlert: VFC
+  AccountNotExistAlert: VFC
+  NotAuthorizedAlert: VFC
   permissionChecker: () => boolean
 } => {
   const auth = useAuth()
@@ -17,6 +20,9 @@ export const useRequiredPermission = (): {
     useState<boolean>(false)
   const [openNotEmailVerifiedModal, setOpenNotEmailVerifiedModal] =
     useState<boolean>(false)
+  const [openNotAuthorized, setOpenNotAuthorized] = useState<boolean | null>(
+    null
+  )
 
   const permissionChecker = () => {
     console.log('permissionCheckerが発火しました')
@@ -26,6 +32,12 @@ export const useRequiredPermission = (): {
       setOpenAccountNotExistModal(true)
       return false
     } else {
+      if ('authorizedByAdmin' in auth.odUserData) {
+        if (auth.odUserData.authorizedByAdmin === false) {
+          console.log(NotAuthorizedMessage)
+          setOpenNotAuthorized(false)
+        }
+      }
       if (!auth.odUser.emailVerified) {
         console.log('メール認証がされていません')
         // router.push('/SignUpDashboard')
@@ -37,7 +49,7 @@ export const useRequiredPermission = (): {
     }
   }
 
-  const NotEmailVerifiedAlert: React.VFC = () => {
+  const NotEmailVerifiedAlert: VFC = () => {
     return (
       <>
         {openNotEmailVerifiedModal && (
@@ -56,7 +68,7 @@ export const useRequiredPermission = (): {
     )
   }
 
-  const AccountNotExistAlert: React.VFC = () => {
+  const AccountNotExistAlert: VFC = () => {
     return (
       <>
         {openAccountNotExist && (
@@ -75,10 +87,29 @@ export const useRequiredPermission = (): {
     )
   }
 
+  const NotAuthorizedAlert: VFC = () => {
+    return (
+      <>
+        {openNotAuthorized && (
+          <AlertComponent setState={setOpenNotAuthorized}>
+            <p className='mb-4'>{NotAuthorizedMessage}が作成されていません</p>
+            <div className='mb-4 flex justify-around'>
+              <PlaneButton href='/SignUpDashboard'>新規作成</PlaneButton>
+              <PlaneButton color='gray' href='/LogIn'>
+                ログイン
+              </PlaneButton>
+            </div>
+          </AlertComponent>
+        )}
+      </>
+    )
+  }
+
   return {
     auth,
     NotEmailVerifiedAlert,
     AccountNotExistAlert,
+    NotAuthorizedAlert,
     permissionChecker,
   }
 }
@@ -88,7 +119,9 @@ const AlertComponent = ({
   setState,
 }: {
   children: ReactNode
-  setState: Dispatch<SetStateAction<boolean>>
+  setState:
+    | Dispatch<SetStateAction<boolean>>
+    | Dispatch<SetStateAction<boolean | null>>
 }) => {
   return (
     <>

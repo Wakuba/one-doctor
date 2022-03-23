@@ -4,7 +4,6 @@
     "alwaysStrict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
     "jsx": "preserve",
     "lib": [
       "dom",
@@ -16,6 +15,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noImplicitAny": false,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
@@ -25,8 +25,14 @@
     ],
     "incremental": true,
     "typeRoots": [
-      "/src/lib/react-twitter-embed.d.ts"
-    ]
+      "/src/@types"
+    ],
+    "isolatedModules": true
+    // "paths": {
+    //   "*": [
+    //     "/src/lib/react-twitter-embed"
+    //   ]
+    // }
   },
   "exclude": [
     "node_modules"

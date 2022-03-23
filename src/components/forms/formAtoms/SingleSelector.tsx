@@ -5,7 +5,7 @@ import Select from 'react-select'
 
 interface SingleSelectorPropsType {
   children?: string
-  placeholder? : string
+  placeholder?: string
   errors?: any
   options: string[]
   name: string

@@ -3,7 +3,7 @@ import Footer from '../components/UIAtoms/Footer'
 import Header from '../components/UIAtoms/Header'
 // import { useRequiredPermission } from '../lib/customHooks/useAuth'
 import DashboardElmBoard from '../components/userDashboard/DashboardElmBoard'
-import { useRequiredPermission } from '../lib/customHooks/useAuthProvider'
+// import { useRequiredPermission } from '../lib/customHooks/useAuthProvider'
 
 const UserDashboard: React.VFC = () => {
   // const { auth, accountExist } = useRequiredPermission()

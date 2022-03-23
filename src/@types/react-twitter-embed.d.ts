@@ -1,5 +1,5 @@
 declare module 'react-twitter-embed' {
-  import { ReactNode, Component } from 'react'
+  import { Component, ReactNode } from 'react'
   interface PropType {
     sourceType: any
     userId: any
@@ -15,3 +15,5 @@ declare module 'react-twitter-embed' {
     render(): ReactNode
   }
 }
+
+export {}

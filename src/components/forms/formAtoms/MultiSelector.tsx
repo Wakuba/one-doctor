@@ -56,7 +56,8 @@ const MultiSelector: VFC<MultiSelectorPropsType> = ({
   return (
     <div className={`${style?.wholeStyle}`}>
       <label htmlFor={name} className='block text-sm'>
-        {children}{'(検索可能, 複数選択可能)'}
+        {children}
+        {'(検索可能, 複数選択可能)'}
         {children && (
           <>
             <span className='text-[#FF0000]'>*</span>
@@ -68,19 +69,16 @@ const MultiSelector: VFC<MultiSelectorPropsType> = ({
         control={control}
         name={name}
         rules={{ required: '選択されていません' }}
-        render={({ field: { onChange, value, ref } }) => {
+        render={({ field: { onChange } }) => {
           return (
             <Select
               defaultValue={defaultValue}
               styles={customStyles}
-              onChange={(val, meta, ref) => {
-                onChange([...val.map((v) => v.value)])
+              onChange={(val: any) => {
+                return onChange([...val.map((v: any) => v.value)])
               }}
-              inputRef={ref}
               options={optionsTmp}
-              placeholder={
-                placeholder ?? '▼選択してください'
-              }
+              placeholder={placeholder ?? '▼選択してください'}
               isSearchable
               isMulti
               isClearable

@@ -38,7 +38,9 @@ const InqueriesForm: VFC<{ style: string }> = ({ style }) => {
           メールアドレス(必須)
         </Input>
         <Textarea {...{ name: 'content' }}>お問い合わせ内容(必須)</Textarea>
-        <SubmitButton style={{buttonStyle: 'h-11 w-48'}} >送信する</SubmitButton>
+        <SubmitButton style={{ buttonStyle: 'h-11 w-48' }}>
+          送信する
+        </SubmitButton>
       </Form>
     </main>
   )

@@ -11,10 +11,9 @@ import {
   getDocs,
   doc,
   getDoc,
-  setDoc,
 } from 'firebase/firestore'
 import { ref, getDownloadURL } from 'firebase/storage'
-import { DepPostDataType, odUserContextType } from '../../lib/types' // Custom components
+import { DepPostDataType } from '../../lib/types' // Custom components
 import PlaneButton from '../../components/UIAtoms/PlaneButton'
 import Header from '../../components/UIAtoms/Header'
 import Footer from '../../components/UIAtoms/Footer'
@@ -27,14 +26,10 @@ import DepTopSection from '../../components/departments/DepTopSeciton '
 import EventTab from '../../components/tabs/EventTab'
 import CrewBoardTab from '../../components/tabs/CrewBoardTab'
 import TwitterTimeline from '../../components/tabs/TwitterTimeline'
-import {
-  getUrlFromIframe,
-  getUrlFromTwitterTimeline,
-} from '../../lib/customFunctions/urlExtractor'
+import { getUrlFromTwitterTimeline } from '../../lib/customFunctions/urlExtractor'
 import { GetStaticPaths, GetStaticProps, GetStaticPropsResult } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import router from 'next/router'
-import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 import FavoriteButton from '../../components/departments/FavoriteButton'
 import BasicInfoTab from '../../components/tabs/BasicInfoTab'
 import GeoInfoTab from '../../components/tabs/GeoInfoTab'

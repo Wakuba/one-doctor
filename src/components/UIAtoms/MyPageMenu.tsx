@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useState } from 'react'
 
 const MyPageMenu: React.VFC<{ layoutStyle: string }> = ({ layoutStyle }) => {
@@ -19,21 +20,26 @@ const MyPageMenu: React.VFC<{ layoutStyle: string }> = ({ layoutStyle }) => {
       </div>
       {isMenuOpen && (
         <ul className='absolute w-[135px]'>
-          <List>お気に入り</List>
-          <List>参加予定イベント</List>
-          <List>自分の記録帳</List>
-          <List>登録情報の変更</List>
+          <List href='/'>お気に入り</List>
+          <List href='/'>参加予定イベント</List>
+          <List href='/MyNote'>医学生の声を投稿</List>
+          <List href='/UserProfile'>登録情報の変更</List>
         </ul>
       )}
     </div>
   )
 }
 
-const List: React.VFC<{ children: string }> = ({ children }) => {
+const List: React.VFC<{ children: string; href: string }> = ({
+  children,
+  href,
+}) => {
   return (
-    <li className='h-[40px] w-full text-prime-blue-rich bg-prime-blue-pale border-1 border-prime-blue-rich flex flex-col justify-center items-center'>
-      <a>{children}</a>
-    </li>
+    <Link href={href}>
+      <a className='h-[40px] w-full text-prime-blue-rich bg-prime-blue-pale border-1 border-prime-blue-rich flex flex-col justify-center items-center'>
+        {children}
+      </a>
+    </Link>
   )
 }
 

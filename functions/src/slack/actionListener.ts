@@ -16,7 +16,7 @@ const useActionListener = (app: App) => {
       const data = await checkAuthorizedAndGetDataOnSpreadSheet(certificationImageId)
       console.log('data', data)
       const ref = doc(db, 'odUsers', data.uid)
-      updateDoc(ref, {authorizedByAdmin: true}).then(res => authMailer(data.email))
+      updateDoc(ref, {authorizedByAdmin: true}).then(() => authMailer(data.email))
       // const ts: string = bodyRe.container.message_ts
       // app.client.chat.delete({ channel: config.slack.channel_id, ts }).then(res => console.log(res)).catch(e => console.log(e))
     }

@@ -31,7 +31,9 @@ const EventKanban: React.VFC<EventKanbanPropsType> = ({
   console.log(imageUrl)
   return (
     <div>
-      <div className='font-normal px-2 bg-prime-blue-pale inline-block'>{name}</div>
+      <div className='font-normal px-2 bg-prime-blue-pale inline-block'>
+        {name}
+      </div>
       <div className='w-full flex ov-md:flex-row sm:flex-col'>
         <div className='ov-md:w-1/5 sm:w-full pt-2 box-border'>
           <button

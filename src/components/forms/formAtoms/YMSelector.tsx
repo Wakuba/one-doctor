@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import { FC } from 'react';
-import { Control, FieldValues } from 'react-hook-form';
+import { FC } from 'react'
+import { Control, FieldValues } from 'react-hook-form'
 import { month, years } from '../../../../public/staticData'
 import SingleSelector from './SingleSelector'
 

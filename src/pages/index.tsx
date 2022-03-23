@@ -1,5 +1,4 @@
 // Externel Components
-import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import clsx from 'clsx'
 
@@ -29,7 +28,7 @@ import { collection, getDocs, query, where } from '@firebase/firestore'
 import VoiceBoard from '../components/home/VoiceBoard'
 import OriginalContentsBoard from '../components/home/OriginalContentsBoard'
 // import useSWR from 'swr'
-import { DocumentData, QuerySnapshot } from '@google-cloud/firestore'
+import { DocumentData } from '@google-cloud/firestore'
 import { GetStaticProps } from 'next/types'
 // import { requestErrorWithOriginal } from '../../functions/node_modules/@slack/web-api/dist/errors'
 import NewVideosBoard from '../components/home/NewVideosBoard'

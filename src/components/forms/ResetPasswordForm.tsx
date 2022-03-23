@@ -31,7 +31,9 @@ const ResetPasswordForm: React.VFC<{ style: string }> = ({ style }) => {
         <Input {...{ name: 'email', type: 'email' }}>
           メールアドレス(必須)
         </Input>
-        <SubmitButton style={{ buttonStyle: 'h-11 w-48' }}>送信する</SubmitButton>
+        <SubmitButton style={{ buttonStyle: 'h-11 w-48' }}>
+          送信する
+        </SubmitButton>
       </Form>
     </main>
   )
