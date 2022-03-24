@@ -1,7 +1,7 @@
 import { odUserContextType } from '../types'
 import { useAuth } from '../context'
 // import { useRouter } from 'next/router'
-import { useState, Dispatch, SetStateAction, ReactNode, VFC } from 'react'
+import { useState, ReactNode, VFC } from 'react'
 import { ModalBackdrop, ModalMainArea } from '../../components/UIAtoms/Modal'
 import PlaneButton from '../../components/UIAtoms/PlaneButton'
 import { useRouter } from 'next/router'
@@ -54,7 +54,7 @@ export const useRequiredPermission = (): {
     return (
       <>
         {openNotEmailVerifiedModal && (
-          <AlertComponent setState={setOpenNotEmailVerifiedModal}>
+          <AlertComponent>
             <p>メールアドレスが承認されていません</p>
             <p>
               アカウント新規作成後に運営よりメールを送らせていただいておりますので
@@ -73,7 +73,7 @@ export const useRequiredPermission = (): {
     return (
       <>
         {openAccountNotExist && (
-          <AlertComponent setState={setOpenAccountNotExistModal}>
+          <AlertComponent>
             <p className='mb-4'>アカウントが作成されていません</p>
             <div className='mb-4 flex justify-around'>
               <PlaneButton href='/SignUpDashboard'>新規作成</PlaneButton>
@@ -92,7 +92,7 @@ export const useRequiredPermission = (): {
     return (
       <>
         {openNotAuthorized && (
-          <AlertComponent setState={setOpenNotAuthorized}>
+          <AlertComponent>
             <p className='mb-4'>{NotAuthorizedMessage}が作成されていません</p>
             <div className='mb-4 flex justify-around'>
               <PlaneButton href='/SignUpDashboard'>新規作成</PlaneButton>
@@ -115,11 +115,7 @@ export const useRequiredPermission = (): {
   }
 }
 
-const AlertComponent = ({
-  children,
-}: {
-  children: ReactNode
-}) => {
+const AlertComponent = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
   return (
     <>
