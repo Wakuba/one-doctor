@@ -65,7 +65,7 @@ const NameUpdateForm: React.VFC<NameUpdateFormPropsType> = ({ data }) => {
         </Form>
       ) : (
         <p className='breakAll pl-2 mb-[24px] h-[40px] py-2'>
-          {data ?? 'NO DATA'}
+          {data ? data : 'NO DATA'}
         </p>
       )}
     </div>

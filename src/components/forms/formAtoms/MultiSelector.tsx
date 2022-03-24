@@ -57,7 +57,7 @@ const MultiSelector: VFC<MultiSelectorPropsType> = ({
     <div className={`${style?.wholeStyle}`}>
       <label htmlFor={name} className='block text-sm'>
         {children}
-        {'(検索可能, 複数選択可能)'}
+        {children && '(検索可能, 複数選択可能)'}
         {children && (
           <>
             <span className='text-[#FF0000]'>*</span>
