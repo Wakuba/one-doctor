@@ -10,9 +10,19 @@ import DepartmentWishForUpdateForm from '../components/forms/updateForms/Departm
 import GradeUpdateForm from '../components/forms/updateForms/GradeUpdateForm'
 import UniversityUpdateForm from '../components/forms/updateForms/UniversityUpdateForm'
 import WorkplaceUpdateForm from '../components/forms/updateForms/WorkplaceUpdateForm'
+import { useEffect } from 'react'
 
 const UserProfile: React.VFC = () => {
-  const { auth } = useRequiredPermission()
+  const {
+    auth,
+    NotEmailVerifiedAlert,
+    AccountNotExistAlert,
+    NotAuthorizedAlert,
+    permissionChecker,
+  } = useRequiredPermission()
+  useEffect(() => {
+    permissionChecker()
+  }, [auth])
   const userData = auth.odUserData
   console.log('userdata', userData)
   return (
@@ -23,6 +33,9 @@ const UserProfile: React.VFC = () => {
           <h1 className='text-2xl text-prime-blue-rich font-semibold mb-6'>
             ユーザー情報
           </h1>
+          <AccountNotExistAlert />
+          <NotAuthorizedAlert />
+          <NotEmailVerifiedAlert />
           {'grade' in userData ? (
             <>
               <NameUpdateForm data={userData.name} />
