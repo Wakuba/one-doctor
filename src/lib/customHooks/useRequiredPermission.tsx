@@ -4,6 +4,7 @@ import { useAuth } from '../context'
 import { useState, Dispatch, SetStateAction, ReactNode, VFC } from 'react'
 import { ModalBackdrop, ModalMainArea } from '../../components/UIAtoms/Modal'
 import PlaneButton from '../../components/UIAtoms/PlaneButton'
+import { useRouter } from 'next/router'
 
 const NotAuthorizedMessage = 'このアカウントは運営による認可を受けていません'
 
@@ -116,23 +117,20 @@ export const useRequiredPermission = (): {
 
 const AlertComponent = ({
   children,
-  setState,
 }: {
   children: ReactNode
-  setState:
-    | Dispatch<SetStateAction<boolean>>
-    | Dispatch<SetStateAction<boolean | null>>
 }) => {
+  const router = useRouter()
   return (
     <>
       <ModalMainArea
-        closeModal={() => setState(false)}
+        closeModal={() => router.back()}
         modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
         modalContainerStyle='w-full space-y-4'
       >
         {children}
       </ModalMainArea>
-      <ModalBackdrop closeModal={() => setState(false)} />
+      <ModalBackdrop closeModal={() => router.back()} />
     </>
   )
 }
