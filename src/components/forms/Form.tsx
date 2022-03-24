@@ -7,7 +7,10 @@ import {
   UseFormGetValues,
   UseFormRegister,
   UseFormSetError,
+  UseFormSetValue,
+  UseFormWatch,
 } from 'react-hook-form'
+import useFormPersist from 'react-hook-form-persist'
 
 interface FormPropsType {
   formName: string
@@ -24,8 +27,12 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
     setError,
     getValues,
     clearErrors,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm()
+
+  useFormPersist('form', { watch, setValue })
 
   return (
     <form name={formName} onSubmit={handleSubmit(onSubmit)} className={style}>
@@ -43,6 +50,8 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
                     setError,
                     getValues,
                     control,
+                    watch,
+                    setValue,
                     clearErrors,
                     key: gChild.props.name,
                   },
@@ -57,6 +66,8 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
                   setError,
                   getValues,
                   control,
+                  watch,
+                  setValue,
                   clearErrors,
                   key: child.props.name,
                 },
@@ -70,6 +81,8 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
               errors,
               setError,
               getValues,
+              watch,
+              setValue,
               control,
               clearErrors,
             },
@@ -85,6 +98,8 @@ const Nest = ({
   register,
   errors,
   setError,
+  watch,
+  setValue,
   getValues,
   control,
   clearErrors,
@@ -96,6 +111,8 @@ const Nest = ({
   control?: Control<FieldValues, object>
   errors?: any
   setError?: UseFormSetError<FieldValues>
+  watch?: UseFormWatch<FieldValues>
+  setValue?: UseFormSetValue<FieldValues>
   getValues?: UseFormGetValues<FieldValues>
   clearErrors?: UseFormClearErrors<FieldValues>
   style?: string
@@ -111,6 +128,8 @@ const Nest = ({
                 errors,
                 setError,
                 getValues,
+                watch,
+                setValue,
                 control,
                 clearErrors,
                 key: child.props.name,
@@ -123,6 +142,8 @@ const Nest = ({
               register,
               errors,
               setError,
+              watch,
+              setValue,
               getValues,
               control,
               clearErrors,
