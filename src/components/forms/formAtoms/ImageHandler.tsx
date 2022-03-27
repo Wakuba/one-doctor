@@ -9,6 +9,7 @@ import {
   Control,
   UseFormSetError,
   UseFormGetValues,
+  FormState,
 } from 'react-hook-form'
 
 interface ImageHandlerPropsType {
@@ -17,7 +18,7 @@ interface ImageHandlerPropsType {
   // subTitle?: string
   control?: Control<FieldValues, object>
   // register: UseFormRegister<FieldValues>
-  errors?: any
+  formState?: FormState<FieldValues>
   setError?: UseFormSetError<FieldValues>
   getValues?: UseFormGetValues<FieldValues>
   // setCertificationImage: React.Dispatch<React.SetStateAction<File | null>>
@@ -64,7 +65,7 @@ const ImageHandler: VFC<ImageHandlerPropsType> = ({
   control,
   setError,
   getValues,
-  errors,
+  formState,
   // setCertificationImage,
 }) => {
   const [disposalUrl, setDisposalUrl] = useState('')
@@ -162,7 +163,7 @@ const ImageHandler: VFC<ImageHandlerPropsType> = ({
           )
         }}
       />
-      {errorRenderer(errors.fileTypeError, errors.name)}
+      {errorRenderer(formState?.errors.fileTypeError, formState?.errors.name)}
     </div>
   )
 }

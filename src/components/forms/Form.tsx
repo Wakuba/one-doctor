@@ -1,7 +1,8 @@
-import { createElement } from 'react'
+import { createElement, useEffect } from 'react'
 import {
   Control,
   FieldValues,
+  FormState,
   useForm,
   UseFormClearErrors,
   UseFormGetValues,
@@ -29,7 +30,9 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
     clearErrors,
     watch,
     setValue,
-    formState: { errors },
+    reset,
+    resetField,
+    formState,
   } = useForm()
   // const names: string[] = []
   if (process.browser) {
@@ -48,6 +51,13 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
     useFormPersist('form', { watch, setValue })
   }
 
+  useEffect(() => {
+    if (formState?.isSubmitSuccessful) {
+      reset()
+      resetField('gender')
+    }
+  }, [formState, reset])
+
   return (
     <form name={formName} onSubmit={handleSubmit(onSubmit)} className={style}>
       {Array.isArray(children)
@@ -60,13 +70,14 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
                   ...{
                     ...gChild.props,
                     register,
-                    errors,
+                    formState,
                     setError,
                     getValues,
                     control,
                     watch,
                     setValue,
                     clearErrors,
+                    reset,
                     key,
                   },
                 })
@@ -76,7 +87,7 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
                 ...{
                   ...child.props,
                   register,
-                  errors,
+                  formState,
                   setError,
                   getValues,
                   control,
@@ -92,7 +103,7 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
             ...{
               ...children.props,
               register,
-              errors,
+              formState,
               setError,
               getValues,
               watch,
@@ -110,7 +121,7 @@ export default Form
 const Nest = ({
   children,
   register,
-  errors,
+  formState,
   setError,
   watch,
   setValue,
@@ -123,7 +134,7 @@ const Nest = ({
   register?: UseFormRegister<FieldValues>
   // eslint-disable-next-line @typescript-eslint/ban-types
   control?: Control<FieldValues, object>
-  errors?: any
+  formState?: FormState<FieldValues>
   setError?: UseFormSetError<FieldValues>
   watch?: UseFormWatch<FieldValues>
   setValue?: UseFormSetValue<FieldValues>
@@ -140,7 +151,7 @@ const Nest = ({
               ...{
                 ...child.props,
                 register,
-                errors,
+                formState,
                 setError,
                 getValues,
                 watch,
@@ -155,7 +166,7 @@ const Nest = ({
             ...{
               ...children.props,
               register,
-              errors,
+              formState,
               setError,
               watch,
               setValue,
@@ -169,3 +180,4 @@ const Nest = ({
 }
 
 Form.Nest = Nest
+

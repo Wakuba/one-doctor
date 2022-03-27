@@ -6,7 +6,7 @@ import InputDouble from './formAtoms/InputDouble'
 import SubmitButton from './formAtoms/SubmitButton'
 import MultiSelector from './formAtoms/MultiSelector'
 import Link from 'next/link'
-import { VFC } from 'react'
+import { useState, VFC } from 'react'
 import {
   SignUpAuthorizationDataTypeDataWithImageId,
   SignUpDataTypeForNotStudent,
@@ -20,6 +20,7 @@ import {
 } from '../../../public/staticData'
 import postPreUserData from '../../lib/customFunctions/postPreUserData'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
+import { ModalBackdrop, ModalMainArea } from '../UIAtoms/Modal'
 
 interface NotStudentSignUpFormDataType {
   departmentWishFor: string[]
@@ -43,6 +44,7 @@ const postNewUserData = httpsCallable(
 
 const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
   const { signUp } = useAuthProvider()
+  const [emailAlreadyInUseModal, setEmailAlreadyInUseModal] = useState(false)
   const onSubmit = async (data: NotStudentSignUpFormDataType) => {
     const certificationImageId = await imageUploader(data.doctorCertification)
     const cleansedData: SignUpAuthorizationDataTypeDataWithImageId = {
@@ -75,19 +77,37 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
       favoDeparts: [],
       favoEvents: [],
     }
-    signUp(signUpData).then((odUser) => {
-      postNewUserData({ ...cleansedData, uid: odUser.uid })
-        .then((res) => console.log('スラックへの送信成功', res))
-        .catch((e) => console.log('スラックへの送信失敗', e))
+    signUp(signUpData)
+      .then((odUser) => {
+        postNewUserData({ ...cleansedData, uid: odUser.uid })
+          .then((res) => console.log('スラックへの送信成功', res))
+          .catch((e) => console.log('スラックへの送信失敗', e))
 
-      postPreUserData({ ...cleansedData, uid: odUser.uid }).then((res) =>
-        console.log('スプレッドシートへの送信成功', res)
-      )
-    })
+        postPreUserData({ ...cleansedData, uid: odUser.uid }).then((res) =>
+          console.log('スプレッドシートへの送信成功', res)
+        )
+      })
+      .catch((e) => {
+        if (e.code === 'auth/email-already-in-use')
+          setEmailAlreadyInUseModal(true)
+      })
   }
 
   return (
     <div className={style}>
+      {emailAlreadyInUseModal && (
+        <>
+          <ModalMainArea
+            closeModal={() => setEmailAlreadyInUseModal(false)}
+            modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
+            modalContainerStyle='w-full space-y-4'
+            zIndex='z-60'
+          >
+            メールアドレスが既に使用されています
+          </ModalMainArea>
+          <ModalBackdrop closeModal={() => setEmailAlreadyInUseModal(false)} />
+        </>
+      )}
       <div title='topSection' className=''>
         <h1 className='mt-10 text-prime-blue-rich font-semibold text-2xl mb-6'>
           新規登録 for 研修医 or その他

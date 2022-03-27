@@ -15,6 +15,7 @@ import univEmailValidator from '../../lib/customFunctions/univEmailValidator'
 import { ModalBackdrop, ModalMainArea } from '../UIAtoms/Modal'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 import {
+  departmentCategoryList,
   gradeList,
   prifectureList,
   universityList,
@@ -41,6 +42,8 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
   const { signUp } = useAuthProvider()
   const [isStudentAuthErrorModalOpen, setIsStudentAuthErrorModalOpen] =
     useState(false)
+  const [isSubmittedModal, setIsSubmittedModal] = useState(false)
+  const [emailAlreadyInUseModal, setEmailAlreadyInUseModal] = useState(false)
   const onSubmit = (data: StudentSignUpFormDataType) => {
     const cleansedData = {
       name: `${data.familyName} ${data.firstName}`,
@@ -60,6 +63,14 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
     if (univEmailValidator(data.emailUniv)) {
       console.log('医学生認証完了')
       signUp(cleansedData)
+        .then((res) => {
+          console.log(res)
+          setIsSubmittedModal(true)
+        })
+        .catch((e) => {
+          if (e.code === 'auth/email-already-in-use')
+            setEmailAlreadyInUseModal(true)
+        })
     } else {
       setIsStudentAuthErrorModalOpen(true)
     }
@@ -73,12 +84,40 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
             closeModal={() => setIsStudentAuthErrorModalOpen(false)}
             modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
             modalContainerStyle='w-full space-y-4'
+            zIndex='z-60'
           >
             医学生認証ができませんでした
           </ModalMainArea>
           <ModalBackdrop
             closeModal={() => setIsStudentAuthErrorModalOpen(false)}
           />
+        </>
+      )}
+      {emailAlreadyInUseModal && (
+        <>
+          <ModalMainArea
+            closeModal={() => setEmailAlreadyInUseModal(false)}
+            modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
+            modalContainerStyle='w-full space-y-4'
+            zIndex='z-60'
+          >
+            メールアドレスが既に使用されています
+          </ModalMainArea>
+          <ModalBackdrop closeModal={() => setEmailAlreadyInUseModal(false)} />
+        </>
+      )}
+      {isSubmittedModal && (
+        <>
+          <ModalMainArea
+            modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
+            modalContainerStyle='w-full space-y-4'
+            closeModal={() => setIsSubmittedModal(false)}
+            zIndex='z-60'
+          >
+            アカウントの登録はまだ完了していません。
+            認証メールが届きますので、そちらのURLをクリックして完了となります。
+          </ModalMainArea>
+          <ModalBackdrop closeModal={() => setIsSubmittedModal(false)} />
         </>
       )}
       <div title='topSection'>
@@ -165,7 +204,7 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
         <MultiSelector
           {...{
             name: 'departmentWishFor',
-            options: ['総合診療科', '精神科', '消化器内科', '循環器内科'],
+            options: departmentCategoryList,
           }}
         >
           希望診療科

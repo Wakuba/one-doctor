@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { VFC } from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
+import { Control, Controller, FieldValues, FormState } from 'react-hook-form'
 import Select from 'react-select'
 
 interface MultiSelectorPropsType {
@@ -9,7 +9,7 @@ interface MultiSelectorPropsType {
   defaultValue?: { value: string; label: string }[]
   subTitle?: string
   // register: UseFormRegister<FieldValues>
-  errors?: any
+  formState?: FormState<FieldValues>
   options: string[]
   name: string
   style?: { wholeStyle?: string; selectorStyle?: string }
@@ -44,7 +44,7 @@ const MultiSelector: VFC<MultiSelectorPropsType> = ({
   placeholder,
   defaultValue,
   subTitle,
-  errors,
+  formState,
   options,
   name,
   style,
@@ -86,9 +86,9 @@ const MultiSelector: VFC<MultiSelectorPropsType> = ({
           )
         }}
       />
-      {errors?.name ? (
+      {formState?.errors?.name ? (
         <div className='block mt-2 text-xs text-[#FF0000]'>
-          {`${children}が${errors[name].message}`}
+          {`${children}が${formState?.errors[name].message}`}
         </div>
       ) : (
         <div className='invisible block mt-2 text-xs '>message</div>

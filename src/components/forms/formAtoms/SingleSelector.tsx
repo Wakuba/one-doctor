@@ -6,7 +6,7 @@ import Select from 'react-select'
 interface SingleSelectorPropsType {
   children?: string
   placeholder?: string
-  errors?: any
+  formState?: any
   options: string[]
   name: string
   style?: { wholeStyle?: string; selectorStyle?: string }
@@ -40,7 +40,7 @@ const customStyles = {
 const SingleSelector: VFC<SingleSelectorPropsType> = ({
   children,
   placeholder,
-  errors,
+  formState,
   options,
   name,
   style,
@@ -73,7 +73,7 @@ const SingleSelector: VFC<SingleSelectorPropsType> = ({
           )
         }}
       />
-      {errors[name] ? (
+      {formState?.errors[name] ? (
         <div className='block mt-2 text-xs text-[#FF0000]'>
           {/* {`${children}が${errors[name].message}`} */}
         </div>

@@ -1,5 +1,5 @@
 import { VFC, ChangeEvent } from 'react'
-import { FieldValues, UseFormRegister } from 'react-hook-form'
+import { FieldValues, FormState, UseFormRegister } from 'react-hook-form'
 
 type InputPropsType = {
   name: string
@@ -9,7 +9,7 @@ type InputPropsType = {
   type: 'email' | 'password' | 'text'
   placeholder?: string
   register?: UseFormRegister<FieldValues>
-  errors?: any
+  formState?: FormState<FieldValues>
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -21,7 +21,7 @@ const Input: VFC<InputPropsType> = ({
   type,
   placeholder,
   register,
-  errors,
+  formState,
   onChange,
 }) => {
   let errorMessage = ''
@@ -65,9 +65,9 @@ const Input: VFC<InputPropsType> = ({
           })}
         />
       )}
-      {errors[name] ? (
+      {formState?.errors[name] ? (
         <div className='block mt-2 text-xs text-[#FF0000]'>
-          {errors[name].message}
+          {formState?.errors[name].message}
         </div>
       ) : (
         <div className='invisible text-xs blocki mt-2'>message</div>

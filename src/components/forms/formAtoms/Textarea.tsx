@@ -1,5 +1,5 @@
 import { VFC } from 'react'
-import { FieldValues, UseFormRegister } from 'react-hook-form'
+import { FieldValues, FormState, UseFormRegister } from 'react-hook-form'
 
 type TextareaPropsType = {
   children?: string
@@ -7,7 +7,7 @@ type TextareaPropsType = {
   style?: { wholeStyle?: string; labelStyle?: string; textareaStyle?: string }
   placeholder?: string
   register?: UseFormRegister<FieldValues>
-  errors?: any
+  formState?: FormState<FieldValues>
   // watch?: UseFormWatch<FieldValues>
   // setValue?: UseFormSetValue<FieldValues>
 }
@@ -17,7 +17,7 @@ const Textarea: VFC<TextareaPropsType> = ({
   children,
   style,
   register,
-  errors,
+  formState,
   // watch,
   //  setValue
 }) => {
@@ -36,9 +36,9 @@ const Textarea: VFC<TextareaPropsType> = ({
           })}
         />
       )}
-      {errors[name] ? (
+      {formState?.errors[name] ? (
         <div className='block mt-2 text-xs text-[#FF0000]'>
-          {errors[name].message}
+          {formState?.errors[name].message}
         </div>
       ) : (
         <div className='invisible'>message</div>

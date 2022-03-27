@@ -5,6 +5,7 @@ import {
   UseFormRegister,
   UseFormSetError,
   UseFormClearErrors,
+  FormState,
 } from 'react-hook-form'
 import Input from './Input'
 
@@ -19,7 +20,7 @@ interface DoubleBindCheckPropsType {
   subTitleTwo?: string
   style?: string
   register?: UseFormRegister<FieldValues>
-  errors?: any
+  formState?: FormState<FieldValues>
   errorSetting: { errorName: string; errorMessage: string }
   setError?: UseFormSetError<FieldValues>
   getValues?: UseFormGetValues<FieldValues>
@@ -37,7 +38,7 @@ const DoubleBindCheck: VFC<DoubleBindCheckPropsType> = ({
   style,
   type,
   register,
-  errors,
+  formState,
   setError,
   errorSetting,
   getValues,
@@ -52,8 +53,8 @@ const DoubleBindCheck: VFC<DoubleBindCheckPropsType> = ({
           type: 'manual',
           message: errorMessage,
         })
-        console.log(errors)
-        console.log(errors[errorName])
+        console.log(formState)
+        console.log(formState?.errors[errorName])
       } else {
         clearErrors(errorName)
       }
@@ -68,7 +69,7 @@ const DoubleBindCheck: VFC<DoubleBindCheckPropsType> = ({
           subTitle: subTitleOne,
           style: { wholeStyle: 'block mb-6', inputStyle: 'block' },
           register: register,
-          errors: errors,
+          errors: formState?.errors,
         }}
       >
         {titleOne}
@@ -80,15 +81,15 @@ const DoubleBindCheck: VFC<DoubleBindCheckPropsType> = ({
           subTitle: subTitleTwo,
           style: { wholeStyle: 'block', inputStyle: 'block' },
           register: register,
-          errors: errors,
+          errors: formState?.errors,
           onChange: handleChange,
         }}
       >
         {titleTwo}
       </Input>
-      {errors[errorName] ? (
+      {formState?.errors[errorName] ? (
         <div className='block text-xs text-[#FF0000]'>
-          {errors[errorName].message}
+          {formState?.errors[errorName].message}
         </div>
       ) : (
         <div className='invisible text-xs block'>message</div>

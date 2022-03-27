@@ -1,5 +1,5 @@
 import { VFC } from 'react'
-import { UseFormRegister, FieldValues } from 'react-hook-form'
+import { UseFormRegister, FieldValues, FormState } from 'react-hook-form'
 import Input from './Input'
 
 interface InputDoublePropsType {
@@ -16,7 +16,7 @@ interface InputDoublePropsType {
   placeholderOne: string
   placeholderTwo: string
   register?: UseFormRegister<FieldValues>
-  errors?: any
+  formState?: FormState<FieldValues>
 }
 
 const InputDouble: VFC<InputDoublePropsType> = ({
@@ -29,7 +29,7 @@ const InputDouble: VFC<InputDoublePropsType> = ({
   placeholderOne,
   placeholderTwo,
   register,
-  errors,
+  formState,
 }) => {
   return (
     <div
@@ -46,7 +46,7 @@ const InputDouble: VFC<InputDoublePropsType> = ({
           }}
           type={type}
           register={register}
-          errors={errors}
+          formState={formState}
           placeholder={placeholderOne}
         >
           {children}
@@ -61,7 +61,7 @@ const InputDouble: VFC<InputDoublePropsType> = ({
           }}
           type={type}
           register={register}
-          errors={errors}
+          formState={formState}
           placeholder={placeholderOne}
         />
       )}
@@ -75,7 +75,7 @@ const InputDouble: VFC<InputDoublePropsType> = ({
           }}
           type={type}
           register={register}
-          errors={errors}
+          formState={formState}
           placeholder={placeholderTwo}
         >
           dummy
@@ -90,7 +90,7 @@ const InputDouble: VFC<InputDoublePropsType> = ({
           }}
           type={type}
           register={register}
-          errors={errors}
+          formState={formState}
           placeholder={placeholderTwo}
         />
       )}
