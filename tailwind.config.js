@@ -50,6 +50,7 @@ module.exports = {
       zIndex: {
         '-10': '-10',
         '-20': '-20',
+        60: '60',
       },
       fontSize: {
         '10vw': '10vw',

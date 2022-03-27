@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 
 const PlaneButton = (props: {
   children: ReactNode
+  wrapperStyle?: string
   href?: string
   id?: string
   color?: 'blue' | 'gray'
@@ -13,8 +14,9 @@ const PlaneButton = (props: {
       target='_blank'
       href={props.href}
       className={clsx(
-        'rounded shadow-md w-48  h-10 bg-[#B7B7B7] flex justify-center items-center border-b-4 border-[rgb(146,146,146)]',
-        'active:transform active:translate-y-[2px] active:border-none'
+        'pointer-events-auto rounded shadow-md w-48  h-10 bg-[#B7B7B7] flex justify-center items-center border-b-4 border-[rgb(146,146,146)]',
+        'active:transform active:translate-y-[2px] active:border-none',
+        props.wrapperStyle
       )}
     >
       <span className='text-white text-sm font-medium '>{props.children}</span>
@@ -25,8 +27,9 @@ const PlaneButton = (props: {
       target='_blank'
       href={props.href}
       className={clsx(
-        'rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center border-b-4 border-[#5493AA]',
-        'active:transform active:translate-y-[2px] active:border-none'
+        'pointer-events-auto rounded shadow-md w-48  h-10 bg-prime-blue-rich flex justify-center items-center border-b-4 border-[#5493AA]',
+        'active:transform active:translate-y-[2px] active:border-none',
+        props.wrapperStyle
       )}
     >
       <span className='text-white text-sm font-medium '>{props.children}</span>

@@ -61,7 +61,7 @@ export default function Home(props: HomeProps) {
       <main>
         <section
           className={clsx(
-            'relative pt-[10vw] pb-24',
+            'relative pt-[13vw] pb-24',
             'sm:flex sm:flex-col sm:items-center',
             'rounded-br-[15vw] 2xl:rounded-br-[216px]'
           )}
@@ -127,7 +127,10 @@ export default function Home(props: HomeProps) {
               />
             </div>
           </div>
-          <div className='sm:hidden w-full flex justify-center '>
+          <div
+            id='newsBoard-ov-md'
+            className='sm:hidden w-full flex justify-center '
+          >
             <div className='relative mt-10 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
               <NewsBoard layoutStyles='text-white' content={newsBoardData} />
             </div>
@@ -163,11 +166,17 @@ export default function Home(props: HomeProps) {
             'after:h-[15vw] after:w-[15vw] after:max-h-[216px] after:max-w-[216px] after:bg-prime-blue-rich after:-z-10 after:absolute after:bottom-0 after:right-0'
           )}
         >
-          <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
+          <div
+            id='newVideoBoard'
+            className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'
+          >
             <NewVideosBoard videosData={newVideos} />
           </div>
 
-          <div className='ov-md:hidden w-full flex justify-center '>
+          <div
+            id='newsBoard-sm'
+            className='ov-md:hidden w-full flex justify-center '
+          >
             <div className='mt-10 w-11/12'>
               <NewsBoard
                 layoutStyles='text-prime-blue-rich'
@@ -178,6 +187,7 @@ export default function Home(props: HomeProps) {
         </section>
 
         <section
+          id='studentVoices'
           className={clsx(
             'bg-prime-blue-rich relative flex flex-col items-center',
             'rounded-tl-[15vw] 2xl:rounded-tl-[216px] rounded-br-[15vw] 2xl:rounded-br-[216px]',
@@ -195,7 +205,9 @@ export default function Home(props: HomeProps) {
             <VoiceBoard />
           </div>
         </section>
+
         <section
+          id='originalContents'
           className={clsx(
             'h-[600px] bg-prime-blue-muted relative flex flex-col items-center',
             'rounded-tl-[15vw] 2xl:rounded-tl-[216px] rounded-br-[15vw] 2xl:rounded-br-[216px]',
@@ -213,7 +225,9 @@ export default function Home(props: HomeProps) {
             <OriginalContentsBoard depList={depList} />
           </div>
         </section>
+
         <section
+          id='departBoard'
           className={clsx(
             'relative w-full flex flex-col items-center py-24 bg-prime-blue-rich rounded-tl-[15vw] rounded-br-[15vw] 2xl:rounded-tl-[216px] 2xl:rounded-br-[216px]',
             'before:absolute before:h-[15vw] before:w-[15vw] before:max-h-[216px] before:max-w-[216px] before:bg-prime-blue-muted before:-z-10 before:top-0 before:left-0',
@@ -232,6 +246,7 @@ export default function Home(props: HomeProps) {
         </section>
 
         <section
+          id='aboutUniversity'
           className={clsx(
             'relative w-full rounded-[15vw] 2xl:rounded-[216px] bg-prime-blue-muted py-24 flex flex-col items-center ',
             'after:absolute after:h-[15vw] after:w-[15vw] after:max-h-[216px] after:max-w-[216px] after:bg-prime-blue-rich after:top-0 after:left-0 after:-z-10'

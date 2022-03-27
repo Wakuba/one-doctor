@@ -1,8 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import MyPageMenu from './MyPageMenu'
+import { useRouter } from 'next/router'
+import MenuBar from './MenuBar'
 
 export default function Header() {
+  const router = useRouter()
+  console.log(router.pathname)
   return (
     <header className='flex justify-between sm:static sm:top-0 sm:bg-white ov-md:fixed ov-md:bg-transparent py-1.5 sm:h-20 ov-md:min-h-20  ov-md:h-[5vw] w-full flex-row z-50 pointer-events-none'>
       <Link href='/'>
@@ -21,7 +24,7 @@ export default function Header() {
           </div>
         </div>
       </Link>
-      <MyPageMenu layoutStyle='pointer-events-auto' />
+      { router.pathname === '/' && <MenuBar layoutStyle='pointer-events-auto' />}
     </header>
   )
 }

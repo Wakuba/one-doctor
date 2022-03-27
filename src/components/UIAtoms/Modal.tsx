@@ -17,10 +17,11 @@ const CancelButton = ({
 )
 
 interface ModalMainAreaPropsType {
-  closeModal: MouseEventHandler<HTMLDivElement>
+  closeModal?: MouseEventHandler<HTMLDivElement>
   children: ReactNode
   modalWrapperStyle?: string
   modalContainerStyle?: string
+  zIndex?: string
 }
 
 export const ModalMainArea = ({
@@ -28,15 +29,30 @@ export const ModalMainArea = ({
   children,
   modalWrapperStyle,
   modalContainerStyle,
-}: ModalMainAreaPropsType) => {
-  return (
+  zIndex = 'z-50',
+}: ModalMainAreaPropsType) =>
+  closeModal ? (
     <div
       onClick={closeModal}
       className={clsx(
         modalWrapperStyle,
+        zIndex,
         'fixed left-1/2 top-1/2  bg-opacity-70 bg-gray-100 rounded-xl shadow-xl overflow-y-scroll',
         'backdrop-filter backdrop-blur',
-        'transform -translate-x-1/2 -translate-y-1/2 z-50'
+        'transform -translate-x-1/2 -translate-y-1/2'
+      )}
+    >
+      <div className={clsx(modalContainerStyle, 'ov-md:p-8 sm:p-6')}>
+        {children}
+      </div>
+    </div>
+  ) : (
+    <div
+      className={clsx(
+        modalWrapperStyle,
+        'fixed left-1/2 top-1/2  bg-opacity-70 bg-gray-100 rounded-xl shadow-xl overflow-y-scroll',
+        'backdrop-filter backdrop-blur',
+        'transform -translate-x-1/2 -translate-y-1/2 z-60'
       )}
     >
       <div className={clsx(modalContainerStyle, 'ov-md:p-8 sm:p-6')}>
@@ -44,15 +60,18 @@ export const ModalMainArea = ({
       </div>
     </div>
   )
-}
 
 export const ModalBackdrop = ({
   closeModal,
+  backdropStyle,
+  zIndex = 'z-50',
 }: {
   closeModal: MouseEventHandler<HTMLDivElement>
+  backdropStyle?: string
+  zIndex?: string
 }) => (
   <div
-    className='w-full h-full fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur z-40'
+    className={`${backdropStyle} ${zIndex} pointer-events-auto w-full h-full fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur`}
     onClick={closeModal}
   >
     <CancelButton onCancel={closeModal} />

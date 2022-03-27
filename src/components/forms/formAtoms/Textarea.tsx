@@ -8,6 +8,8 @@ type TextareaPropsType = {
   placeholder?: string
   register?: UseFormRegister<FieldValues>
   errors?: any
+  // watch?: UseFormWatch<FieldValues>
+  // setValue?: UseFormSetValue<FieldValues>
 }
 
 const Textarea: VFC<TextareaPropsType> = ({
@@ -16,6 +18,8 @@ const Textarea: VFC<TextareaPropsType> = ({
   style,
   register,
   errors,
+  // watch,
+  //  setValue
 }) => {
   return (
     <div className={`${style?.wholeStyle}`}>

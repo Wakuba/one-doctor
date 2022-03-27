@@ -23,7 +23,7 @@ const NewsBoard: FC<NewsBoardProps> = ({ layoutStyles, content }) => {
         NEWS
       </div>
       <p className='text-sm mb-4'>イベントや説明会の情報をお知らせします。</p>
-      <div className='flex-col items-start bg-white rounded shadow-lg p-2.5 space-y-2'>
+      <div className='flex-col items-start bg-white rounded shadow-lg sm:py-4 sm:px-2 sm:space-y-2 ov-md:py-6 ov-md:px-4 ov-md:space-y-3'>
         {content.map((news: NewsLineType, idx: number): JSX.Element => {
           return (
             <NewsLine key={idx} title={news.title}>
