@@ -13,8 +13,12 @@ const UserDashboard: React.VFC = () => {
     <>
       <Header />
       <div className='flex flex-col items-center ov-md:pt-20 bg-prime-blue-muted'>
-        <main className='w-11/12 sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] bg-red-400'>
-          <h1 className='text-prime-blue-rich'>マイページ</h1>
+        <main className='w-11/12 sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] bg-prime-blue-muted '>
+          <h1 className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold mb-6'>マイページ</h1>
+          <div className='mb-6'>
+            <p className='text-prime-blue-rich sm:text-2xl ov-md:text-3xl mb-4'>おしらせ</p>
+            <div className='h-[100px] w-full bg-white shadow-lg'></div>
+          </div>
           <DashboardElmBoard />
         </main>
       </div>

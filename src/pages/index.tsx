@@ -222,6 +222,9 @@ export default function Home(props: HomeProps) {
             <div className='text-sm mb-4 w-full flex justify-self-start'>
               （テキスト要編集）ここでは本サイトでしか見れない…テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります
             </div>
+            <div className='text-[#B7B7B7] sm:text-2xl ov-md:text-4xl font-semibold mb-6 w-full'>
+              筑波大学
+            </div>
             <OriginalContentsBoard depList={depList} />
           </div>
         </section>

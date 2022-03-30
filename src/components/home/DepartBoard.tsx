@@ -8,7 +8,7 @@ interface DepartBoardPropsType {
 const DepartBoard: React.VFC<DepartBoardPropsType> = ({ wsData }) => {
   console.log(wsData)
   return (
-    <div className='w-full sm:overflow-x-auto sm:overflow-y-hidden md:overflow-x-auto md:overflow-y-hidden'>
+    <div className='w-full sm:overflow-x-auto sm:overflow-y-hidden md:overflow-x-auto md:overflow-y-hidden pb-6'>
       <div
         className={clsx(
           'sm:grid sm:grid-cols-4 sm:grid-flow-row sm:gap-6 sm:w-[900px]',
