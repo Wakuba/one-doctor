@@ -33,7 +33,7 @@ const UserProfile: React.VFC = () => {
           <h1 className='text-2xl text-prime-blue-rich font-semibold mb-6'>
             ユーザー情報
           </h1>
-          <AccountNotExistAlert />
+          <AccountNotExistAlert backToTop />
           <NotAuthorizedAlert />
           <NotEmailVerifiedAlert />
           {'grade' in userData ? (

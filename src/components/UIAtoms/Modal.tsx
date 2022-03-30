@@ -71,7 +71,7 @@ export const ModalBackdrop = ({
   zIndex?: string
 }) => (
   <div
-    className={`${backdropStyle} ${zIndex} pointer-events-auto w-full h-full fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur`}
+    className={`${backdropStyle} ${zIndex} pointer-events-auto cursor-pointer w-full h-full fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur`}
     onClick={closeModal}
   >
     <CancelButton onCancel={closeModal} />

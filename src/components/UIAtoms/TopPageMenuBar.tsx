@@ -1,14 +1,14 @@
-import Link from 'next/link'
-import { Router, useRouter } from 'next/router'
-import { ReactNode, useState, VFC } from 'react'
+import { useRouter } from 'next/router'
+import { Dispatch, ReactNode, SetStateAction, useState, VFC } from 'react'
 import { Link as Scroll } from 'react-scroll'
 import { useRequiredPermission } from '../../lib/customHooks/useRequiredPermission'
 
-const MenuBar: React.VFC<{ layoutStyle: string }> = ({ layoutStyle }) => {
+const TopPageMenuBar: React.VFC<{ layoutStyle: string }> = ({
+  layoutStyle,
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isMenuEventActive, setIsMenuEventActive] = useState(false)
   const {
-    auth,
     NotAuthorizedAlert,
     NotEmailVerifiedAlert,
     AccountNotExistAlert,
@@ -26,15 +26,13 @@ const MenuBar: React.VFC<{ layoutStyle: string }> = ({ layoutStyle }) => {
           <List href='aboutUniversity'>筑波大学附属病院について</List>
           <List href='studentVoices'>医学生の声</List>
           <List href='originalContents'>オリジナルコンテンツ</List>
-          {/* <li className='list-none cursor-pointer'>
-            <Link href={auth.odUser ? '/UserDashboard' : '/SignUpDashboard'}>
-              <a className='text-white text-sm '>マイページ/新規登録 ▼</a>
-            </Link>
-          </li> */}
-          <ListMyPage {...{ permissionChecker }} />
+          <MyPageLink {...{ permissionChecker }} />
         </div>
         <div
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={() => {
+            setIsMenuOpen(!isMenuOpen)
+            setIsMenuEventActive(true)
+          }}
           className={`ov-lg:hidden h-20 w-20 p-6 flex flex-col items-stretch justify-around`}
         >
           <p className='bg-gray-600 w-full h-1 rounded'></p>
@@ -49,7 +47,7 @@ const MenuBar: React.VFC<{ layoutStyle: string }> = ({ layoutStyle }) => {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={`${
               isMenuEventActive ? 'pointer-events-auto' : 'pointer-events-none'
-            } fixed left-0 top-0 h-full w-full bg-opacity-10 backdrop-filter backdrop-blur z-30`}
+            } cursor-pointer fixed left-0 top-0 h-full w-full bg-opacity-10 backdrop-filter backdrop-blur z-30`}
           ></div>
         </>
       )}
@@ -60,17 +58,19 @@ const MenuBar: React.VFC<{ layoutStyle: string }> = ({ layoutStyle }) => {
   )
 }
 
-export default MenuBar
+export default TopPageMenuBar
 
 const List: VFC<{
   children: ReactNode
   href: string
-  setIsMenuOpen?: any
+  setIsMenuOpen?: Dispatch<SetStateAction<boolean>>
 }> = ({ children, href, setIsMenuOpen }) => {
   return (
     <li className='list-none cursor-pointer pointer-events-auto w-auto h-auto flex flex-col items-center justify-center'>
       <Scroll
-        onClick={() => setIsMenuOpen(false)}
+        onClick={() => {
+          if (setIsMenuOpen) setIsMenuOpen(false)
+        }}
         to={href}
         smooth
         duration={400}
@@ -88,7 +88,6 @@ const MenuModal: VFC<{ setIsMenuEventActive?: any; setIsMenuOpen: any }> = ({
   setIsMenuOpen,
 }) => {
   const {
-    auth,
     NotAuthorizedAlert,
     NotEmailVerifiedAlert,
     AccountNotExistAlert,
@@ -107,14 +106,7 @@ const MenuModal: VFC<{ setIsMenuEventActive?: any; setIsMenuOpen: any }> = ({
         <List {...{ setIsMenuOpen, href: 'originalContents' }}>
           オリジナルコンテンツ
         </List>
-        {/* <li className=' pointer-events-auto list-none cursor-pointer z-50'>
-          <Link href={auth.odUser ? '/UserDashboard' : '/SignUpDashboard'}>
-            <a className='text-white lg:text-xs ov-xl:text-sm '>
-              マイページ/新規登録 ▼
-            </a>
-          </Link>
-        </li> */}
-        <ListMyPage {...{ setIsMenuEventActive, permissionChecker }} />
+        <MyPageLink {...{ setIsMenuEventActive, permissionChecker }} />
       </div>
       <AccountNotExistAlert {...{ setIsMenuEventActive }} />
       <NotEmailVerifiedAlert {...{ setIsMenuEventActive }} />
@@ -123,7 +115,7 @@ const MenuModal: VFC<{ setIsMenuEventActive?: any; setIsMenuOpen: any }> = ({
   )
 }
 
-const ListMyPage: VFC<{ setIsMenuEventActive?: any; permissionChecker: any }> =
+const MyPageLink: VFC<{ setIsMenuEventActive?: any; permissionChecker: any }> =
   ({ setIsMenuEventActive, permissionChecker }) => {
     const router = useRouter()
     return (
