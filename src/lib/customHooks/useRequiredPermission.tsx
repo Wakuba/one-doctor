@@ -5,18 +5,22 @@ import { useState, ReactNode, VFC } from 'react'
 import { ModalBackdrop, ModalMainArea } from '../../components/UIAtoms/Modal'
 import PlaneButton from '../../components/UIAtoms/PlaneButton'
 import clsx from 'clsx'
+import { useRouter } from 'next/router'
 
 const NotAuthorizedMessage = 'このアカウントは運営による認可を受けていません'
 
 export const useRequiredPermission = (): {
   auth: odUserContextType
-  NotEmailVerifiedAlert: VFC<{ setIsMenuEventActive?: any }>
-  AccountNotExistAlert: VFC<{ setIsMenuEventActive?: any }>
-  NotAuthorizedAlert: VFC<{ setIsMenuEventActive?: any }>
+  NotEmailVerifiedAlert: VFC<{
+    setIsMenuEventActive?: any
+    backToTop?: boolean
+  }>
+  AccountNotExistAlert: VFC<{ setIsMenuEventActive?: any; backToTop?: boolean }>
+  NotAuthorizedAlert: VFC<{ setIsMenuEventActive?: any; backToTop?: boolean }>
   permissionChecker: () => boolean
 } => {
   const auth = useAuth()
-  // const router = useRouter()
+  const router = useRouter()
   const [openAccountNotExistModal, setOpenAccountNotExistModal] =
     useState<boolean>(false)
   const [openNotEmailVerifiedModal, setOpenNotEmailVerifiedModal] =
@@ -50,15 +54,20 @@ export const useRequiredPermission = (): {
     }
   }
 
-  const NotEmailVerifiedAlert: VFC<{ setIsMenuEventActive?: any }> = ({
-    setIsMenuEventActive,
-  }) => {
+  const NotEmailVerifiedAlert: VFC<{
+    setIsMenuEventActive?: any
+    backToTop?: boolean
+  }> = ({ setIsMenuEventActive, backToTop = false }) => {
     return (
       <>
         {openNotEmailVerifiedModal && (
           <AlertComponent
             setStateBack={() => {
-              setOpenNotEmailVerifiedModal(false)
+              if (backToTop) {
+                router.push('/')
+              } else {
+                setOpenNotEmailVerifiedModal(false)
+              }
               if (setIsMenuEventActive) setIsMenuEventActive(true)
             }}
           >
@@ -76,15 +85,20 @@ export const useRequiredPermission = (): {
     )
   }
 
-  const AccountNotExistAlert: VFC<{ setIsMenuEventActive?: any }> = ({
-    setIsMenuEventActive,
-  }) => {
+  const AccountNotExistAlert: VFC<{
+    setIsMenuEventActive?: any
+    backToTop?: boolean
+  }> = ({ setIsMenuEventActive, backToTop = false }) => {
     return (
       <>
         {openAccountNotExistModal && (
           <AlertComponent
             setStateBack={() => {
-              setOpenAccountNotExistModal(false)
+              if (backToTop) {
+                router.push('/')
+              } else {
+                setOpenAccountNotExistModal(false)
+              }
               if (setIsMenuEventActive) setIsMenuEventActive(true)
             }}
           >
@@ -110,15 +124,20 @@ export const useRequiredPermission = (): {
     )
   }
 
-  const NotAuthorizedAlert: VFC<{ setIsMenuEventActive?: any }> = ({
-    setIsMenuEventActive,
-  }) => {
+  const NotAuthorizedAlert: VFC<{
+    setIsMenuEventActive?: any
+    backToTop?: boolean
+  }> = ({ setIsMenuEventActive, backToTop = false }) => {
     return (
       <>
         {openNotAuthorizedModal && (
           <AlertComponent
             setStateBack={() => {
-              setOpenNotAuthorizedModal(false)
+              if (backToTop) {
+                router.push('/')
+              } else {
+                setOpenNotAuthorizedModal(false)
+              }
               if (setIsMenuEventActive) setIsMenuEventActive(true)
             }}
           >

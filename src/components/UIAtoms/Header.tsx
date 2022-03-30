@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import MenuBar from './MenuBar'
+import TopPageMenuBar from './TopPageMenuBar'
+import MyPageMenuBar from './MyPageMenuBar'
 
 export default function Header() {
   const router = useRouter()
@@ -24,7 +25,10 @@ export default function Header() {
           </div>
         </div>
       </Link>
-      { router.pathname === '/' && <MenuBar layoutStyle='pointer-events-auto' />}
+      {router.pathname === '/' && (
+        <TopPageMenuBar layoutStyle='pointer-events-auto' />
+      )}
+      {router.pathname === '/UserDashboard' && <MyPageMenuBar />}
     </header>
   )
 }
