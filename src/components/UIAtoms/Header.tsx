@@ -28,7 +28,9 @@ export default function Header() {
       {router.pathname === '/' && (
         <TopPageMenuBar layoutStyle='pointer-events-auto' />
       )}
-      {router.pathname === '/UserDashboard' && <MyPageMenuBar />}
+      {['/UserDashboard', '/FavoriteDepartment'].some(
+        (path) => router.pathname === path
+      ) && <MyPageMenuBar />}
     </header>
   )
 }
