@@ -34,16 +34,6 @@ import BasicInfoTab from '../../components/departments/BasicInfoTab'
 import GeoInfoTab from '../../components/departments/GeoInfoTab'
 
 export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
-  const {
-    departmentName,
-    universityName,
-    hospitalName,
-    tabMenu,
-    topSection,
-    officialWebSite,
-  } = postData
-  console.log('postData', tabMenu.basicInfoTab)
-
   return (
     <>
       <Header />
@@ -53,36 +43,39 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
             <div className='flex-col ov-md:pt-20 w-full'>
               {/* sm:w-11/12  ov-md:w-8/12  */}
               <h1 className='text-white text-xl font-semibold mb-1'>
-                {hospitalName.hospitalNameInJapanese}
+                {postData.hospitalName.hospitalNameInJapanese}
                 {'　'}
-                {departmentName.departmentNameInJapanese}
+                {postData.departmentName.departmentNameInJapanese}
               </h1>
               <p className='text-white text-xs mb-1'>
-                {hospitalName.hospitalNameInEnglish}-
-                {departmentName.departmentNameInEnglish}
+                {postData.hospitalName.hospitalNameInEnglish}-
+                {postData.departmentName.departmentNameInEnglish}
               </p>
               <div className='flex flex-row w-full justify-between'>
                 <div className='flex flex-row '>
                   <Tag layoutStyle='mr-2'>
-                    {universityName.universityNameInJapanese}
+                    {postData.universityName.universityNameInJapanese}
                   </Tag>
                   <Tag layoutStyle='mr-2'>
-                    {departmentName.departmentNameInJapanese}
+                    {postData.departmentName.departmentNameInJapanese}
                   </Tag>
                 </div>
-                <FavoriteButton layoutStyle='' depName={departmentName} />
+                <FavoriteButton
+                  layoutStyle=''
+                  depName={postData.departmentName}
+                />
               </div>
             </div>
           </section>
 
           <section className='mb-16 relative w-full flex flex-col items-center'>
             <DepTopSection
-              depName={departmentName.departmentNameInJapanese}
+              depName={postData.departmentName.departmentNameInJapanese}
               heroImgUrl={postData?.heroImgUrl}
-              educationalPoint={topSection.educationalPoint}
-              clinicalPoint={topSection.clinicalPoint}
-              researchPoint={topSection.researchPoint}
-              otherPoint={topSection.otherPoint}
+              educationalPoint={postData.topSection.educationalPoint}
+              clinicalPoint={postData.topSection.clinicalPoint}
+              researchPoint={postData.topSection.researchPoint}
+              otherPoint={postData.topSection.otherPoint}
             />
           </section>
 
@@ -103,19 +96,24 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
             <TabMenu
               style={{ tabButtonStyle: 'ov-md:h-10 ov-md:w-24 sm:h-8 sm:w-16' }}
             >
-              <BasicInfoTab title='基本情報' basicInfo={tabMenu.basicInfoTab} />
+              <BasicInfoTab
+                title='基本情報'
+                basicInfo={postData.tabMenu.basicInfoTab}
+              />
               <CrewBoardTab
                 title='医局員'
-                crewDataList={tabMenu.crewCardListTab}
+                crewDataList={postData.tabMenu.crewCardListTab}
               />
               <GeoInfoTab
                 title='周辺地図'
-                gmIframe={tabMenu.geographicalInformationTab.googleMapIframe}
+                gmIframe={
+                  postData.tabMenu.geographicalInformationTab.googleMapIframe
+                }
               />
               <EventTab
                 title='イベント'
-                dep={departmentName}
-                univ={universityName}
+                dep={postData.departmentName}
+                univ={postData.universityName}
               />
               <div
                 title='SNS'
@@ -125,13 +123,15 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
                   <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
                     公式サイト
                   </div>
-                  <PlaneButton href={officialWebSite}>
+                  <PlaneButton href={postData.officialWebSite}>
                     診療科公式ページ→
                   </PlaneButton>
                   <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
                     関連SNS
                   </div>
-                  <TwitterTimeline userId={tabMenu.snsTab.twitterUserId} />
+                  <TwitterTimeline
+                    userId={postData.tabMenu.snsTab.twitterUserId}
+                  />
                 </div>
               </div>
             </TabMenu>
@@ -157,7 +157,7 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
                 <div className='text-sm'>
                   詳しい情報については診療科のホームページをご覧ください
                 </div>
-                <PlaneButton href={officialWebSite}>
+                <PlaneButton href={postData.officialWebSite}>
                   診療科公式ページ→
                 </PlaneButton>
               </div>
