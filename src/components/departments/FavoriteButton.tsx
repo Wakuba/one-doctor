@@ -36,8 +36,8 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
   const router = useRouter()
   const curDepData = {
     curDepName: {
-      nameInEng: depName.departmentNameInEnglish,
-      nameInJap: depName.departmentNameInJapanese,
+      nameInEng: depName?.departmentNameInEnglish,
+      nameInJap: depName?.departmentNameInJapanese,
     },
     curDepUrl: '/Departments/' + router.query.id,
   }

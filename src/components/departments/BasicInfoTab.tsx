@@ -8,7 +8,6 @@ const BasicInfoTab: React.VFC<BasicInfoTabPropsType> = ({
   title,
   basicInfo,
 }) => {
-  console.log('basicInfoくれ', basicInfo)
   return (
     <div
       title={title}

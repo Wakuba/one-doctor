@@ -43,26 +43,26 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
             <div className='flex-col ov-md:pt-20 w-full'>
               {/* sm:w-11/12  ov-md:w-8/12  */}
               <h1 className='text-white text-xl font-semibold mb-1'>
-                {postData?.hospitalName.hospitalNameInJapanese}
+                {postData?.hospitalName?.hospitalNameInJapanese}
                 {'　'}
-                {postData?.departmentName.departmentNameInJapanese}
+                {postData?.departmentName?.departmentNameInJapanese}
               </h1>
               <p className='text-white text-xs mb-1'>
-                {postData.hospitalName.hospitalNameInEnglish}-
-                {postData.departmentName.departmentNameInEnglish}
+                {postData?.hospitalName?.hospitalNameInEnglish}-
+                {postData?.departmentName?.departmentNameInEnglish}
               </p>
               <div className='flex flex-row w-full justify-between'>
                 <div className='flex flex-row '>
                   <Tag layoutStyle='mr-2'>
-                    {postData.universityName.universityNameInJapanese}
+                    {postData?.universityName?.universityNameInJapanese}
                   </Tag>
                   <Tag layoutStyle='mr-2'>
-                    {postData.departmentName.departmentNameInJapanese}
+                    {postData?.departmentName?.departmentNameInJapanese}
                   </Tag>
                 </div>
                 <FavoriteButton
                   layoutStyle=''
-                  depName={postData.departmentName}
+                  depName={postData?.departmentName}
                 />
               </div>
             </div>
@@ -70,12 +70,12 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
 
           <section className='mb-16 relative w-full flex flex-col items-center'>
             <DepTopSection
-              depName={postData.departmentName.departmentNameInJapanese}
+              depName={postData?.departmentName?.departmentNameInJapanese}
               heroImgUrl={postData?.heroImgUrl}
-              educationalPoint={postData.topSection.educationalPoint}
-              clinicalPoint={postData.topSection.clinicalPoint}
-              researchPoint={postData.topSection.researchPoint}
-              otherPoint={postData.topSection.otherPoint}
+              educationalPoint={postData?.topSection?.educationalPoint}
+              clinicalPoint={postData?.topSection?.clinicalPoint}
+              researchPoint={postData?.topSection?.researchPoint}
+              otherPoint={postData?.topSection?.otherPoint}
             />
           </section>
 
@@ -98,22 +98,22 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
             >
               <BasicInfoTab
                 title='基本情報'
-                basicInfo={postData.tabMenu.basicInfoTab}
+                basicInfo={postData?.tabMenu?.basicInfoTab}
               />
               <CrewBoardTab
                 title='医局員'
-                crewDataList={postData.tabMenu.crewCardListTab}
+                crewDataList={postData?.tabMenu?.crewCardListTab}
               />
               <GeoInfoTab
                 title='周辺地図'
                 gmIframe={
-                  postData.tabMenu.geographicalInformationTab.googleMapIframe
+                  postData?.tabMenu?.geographicalInformationTab.googleMapIframe
                 }
               />
               <EventTab
                 title='イベント'
-                dep={postData.departmentName}
-                univ={postData.universityName}
+                dep={postData?.departmentName}
+                univ={postData?.universityName}
               />
               <div
                 title='SNS'
@@ -123,14 +123,14 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
                   <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
                     公式サイト
                   </div>
-                  <PlaneButton href={postData.officialWebSite}>
+                  <PlaneButton href={postData?.officialWebSite}>
                     診療科公式ページ→
                   </PlaneButton>
                   <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
                     関連SNS
                   </div>
                   <TwitterTimeline
-                    userId={postData.tabMenu.snsTab.twitterUserId}
+                    userId={postData?.tabMenu?.snsTab?.twitterUserId}
                   />
                 </div>
               </div>
@@ -157,7 +157,7 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
                 <div className='text-sm'>
                   詳しい情報については診療科のホームページをご覧ください
                 </div>
-                <PlaneButton href={postData.officialWebSite}>
+                <PlaneButton href={postData?.officialWebSite}>
                   診療科公式ページ→
                 </PlaneButton>
               </div>
@@ -184,7 +184,7 @@ export const getStaticPaths: GetStaticPaths<ParamsType> = async () => {
   const querySnapshot = await getDocs(qForPaths)
   querySnapshot.forEach((doc) => {
     paths.push({
-      params: { id: doc.data().id },
+      params: { id: doc.data().id ?? '' },
     })
   })
   return {
@@ -246,9 +246,9 @@ export const getStaticProps: GetStaticProps<
         otherPoint: '',
       },
       tabMenu: {
-        basicInfoTab: data?.tabMenu.basicInfoTab ?? '',
+        basicInfoTab: data?.tabMenu?.basicInfoTab ?? '',
         geographicalInformationTab: data?.tabMenu
-          .geographicalInformationTab ?? {
+          ?.geographicalInformationTab ?? {
           googleMapIframe: '',
           geographicalInformationDescription: '',
         },
@@ -257,13 +257,13 @@ export const getStaticProps: GetStaticProps<
           //   getUrlFromTwitterTimeline(
           //     data?.tabMenu.snsTab.twitterTimelineUrl
           //   ) ?? '',
-          userId: data?.tabMenu.snsTab.userId ?? '',
+          userId: data?.tabMenu?.snsTab?.userId ?? '',
         },
         crewCardListTab: [],
       },
     }
-    for (const card of data?.tabMenu.crewCardListTab) {
-      const crewImgId = card.crewImage[0]?.id
+    for (const card of data?.tabMenu?.crewCardListTab) {
+      const crewImgId = card?.crewImage[0]?.id
       let url = ''
       if (crewImgId) {
         const docSnap = await getDoc(doc(db, 'fl_files', crewImgId))
@@ -272,15 +272,15 @@ export const getStaticProps: GetStaticProps<
           ref(storage, `flamelink/media/${crewImgName}`)
         )
       }
-      postData.tabMenu.crewCardListTab.push({
+      postData?.tabMenu?.crewCardListTab.push({
         crewImgUrl: url ?? '',
-        crewName: card.crewName ?? '',
-        position: card.position ?? '',
-        background: card.background ?? '',
-        licence: card.licence ?? '',
-        majorField: card.majorField ?? '',
-        schoolLife: card.schoolLife ?? '',
-        forFun: card.forFun ?? '',
+        crewName: card?.crewName ?? '',
+        position: card?.position ?? '',
+        background: card?.background ?? '',
+        licence: card?.licence ?? '',
+        majorField: card?.majorField ?? '',
+        schoolLife: card?.schoolLife ?? '',
+        forFun: card?.forFun ?? '',
       })
     }
     return {
