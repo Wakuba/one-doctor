@@ -14,7 +14,6 @@ const InqueriesForm: VFC<{ style: string }> = ({ style }) => {
     // console.log('data', data)
     // const abortCtrl = new AbortController()
     // postFormToSlackHitter(data, abortCtrl)
-    console.log(data)
     postFormData(data)
     consoler()
   }

@@ -1,12 +1,14 @@
 import clsx from 'clsx'
 import { OfficialWebSiteDataType } from '../../lib/types'
-import DepartKanban from './DepartKanban'
-interface DepartBoardPropsType {
+import DepUrlKanban from './DepUrlKanban'
+interface DepUrlBoardPropsType {
   wsData: OfficialWebSiteDataType[]
 }
 
-const DepartBoard: React.VFC<DepartBoardPropsType> = ({ wsData }) => {
-  console.log(wsData)
+const DepUrlBoard: React.VFC<DepUrlBoardPropsType> = ({ wsData }) => {
+  wsData.sort((a: OfficialWebSiteDataType, b: OfficialWebSiteDataType) =>
+    a.universityNameInJapanese.localeCompare(b.universityNameInJapanese)
+  )
   return (
     <div className='w-full sm:overflow-x-auto sm:overflow-y-hidden md:overflow-x-auto md:overflow-y-hidden pb-6'>
       <div
@@ -19,10 +21,12 @@ const DepartBoard: React.VFC<DepartBoardPropsType> = ({ wsData }) => {
         )}
       >
         {wsData.map((data: OfficialWebSiteDataType, idx: number) => (
-          <div key={idx + 1} className='flex justify-self-center self-center'>
-            <DepartKanban pageUrl={data.url}>
-              {data.departmentNameInJapanese}
-            </DepartKanban>
+          <div key={idx + 1} className='flex  justify-self-center self-center'>
+            <DepUrlKanban
+              univName={data.universityNameInJapanese}
+              depName={data.departmentNameInJapanese}
+              pageUrl={data.url}
+            />
           </div>
         ))}
       </div>
@@ -30,4 +34,4 @@ const DepartBoard: React.VFC<DepartBoardPropsType> = ({ wsData }) => {
   )
 }
 
-export default DepartBoard
+export default DepUrlBoard

@@ -15,7 +15,6 @@ const GradeUpdateForm: VFC<GradeUpdateFormPropsType> = ({ data }) => {
   const uid = auth.odUser?.uid
   const [edit, setEdit] = useState(false)
   const onSubmit = (data: { grade: string }) => {
-    console.log('新しい学年データです', data)
     if (uid) {
       const gradeDoc = doc(db, 'odUsers', uid)
       return updateDoc(gradeDoc, { grade: data.grade })

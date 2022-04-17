@@ -22,13 +22,11 @@ const DepartmentWishForUpdateForm: VFC<DepartmentWishForUpdateFormPropsType> =
     const uid = auth.odUser?.uid
     const [edit, setEdit] = useState(false)
     const onSubmit = (data: { departmentWishFor: string[] }) => {
-      console.log('新しい希望診療科データです', data)
       if (uid) {
         const departmentDoc = doc(db, 'odUsers', uid)
         return updateDoc(departmentDoc, {
           departmentWishFor: data.departmentWishFor,
         })
-        console.log('新しいやつ', data)
       } else {
         return console.log('uidが存在しません')
       }

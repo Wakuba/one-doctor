@@ -9,7 +9,7 @@ interface SingleSelectorPropsType {
   formState?: any
   options: string[]
   name: string
-  style?: { wholeStyle?: string; selectorStyle?: string }
+  style?: { wrapperStyle?: string; selectorStyle?: string }
   control?: Control<FieldValues, object>
   isSearchable: any
 }
@@ -52,7 +52,7 @@ const SingleSelector: VFC<SingleSelectorPropsType> = ({
   )
 
   return (
-    <div className={`${style?.wholeStyle}`}>
+    <div className={`${style?.wrapperStyle}`}>
       <label className='block text-sm'>
         {children}
         {children && <span className='text-[#FF0000]'>*</span>}
@@ -64,6 +64,8 @@ const SingleSelector: VFC<SingleSelectorPropsType> = ({
         render={({ field: { onChange } }) => {
           return (
             <Select
+              id={name}
+              instanceId={name}
               styles={customStyles}
               onChange={(val) => onChange(val?.value)}
               options={optionsTmp}

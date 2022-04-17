@@ -3,6 +3,7 @@ declare module 'react-twitter-embed' {
   interface PropType {
     sourceType: any
     userId: any
+    optiobs: any
   }
   export class TwitterTimelineEmbed extends Component {
     static propTypes: PropType

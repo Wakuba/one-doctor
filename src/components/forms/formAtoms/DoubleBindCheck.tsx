@@ -53,8 +53,6 @@ const DoubleBindCheck: VFC<DoubleBindCheckPropsType> = ({
           type: 'manual',
           message: errorMessage,
         })
-        console.log(formState)
-        console.log(formState?.errors[errorName])
       } else {
         clearErrors(errorName)
       }
@@ -65,10 +63,10 @@ const DoubleBindCheck: VFC<DoubleBindCheckPropsType> = ({
       <Input
         {...{
           name: nameOne,
-          type: type,
+          type,
           subTitle: subTitleOne,
-          style: { wholeStyle: 'block mb-6', inputStyle: 'block' },
-          register: register,
+          style: { wrapperStyle: 'block mb-6', inputStyle: 'block' },
+          register,
           errors: formState?.errors,
         }}
       >
@@ -77,10 +75,10 @@ const DoubleBindCheck: VFC<DoubleBindCheckPropsType> = ({
       <Input
         {...{
           name: nameTwo,
-          type: type,
+          type,
           subTitle: subTitleTwo,
-          style: { wholeStyle: 'block', inputStyle: 'block' },
-          register: register,
+          style: { wrapperStyle: 'block', inputStyle: 'block' },
+          register,
           errors: formState?.errors,
           onChange: handleChange,
         }}

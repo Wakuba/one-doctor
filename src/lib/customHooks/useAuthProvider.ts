@@ -25,7 +25,7 @@ import {
 //Types
 import {
   LoginDataType,
-  odUserDataType,
+  OdUserDataType,
   SignUpDataTypeForStudent,
   SignUpDataTypeForNotStudent,
 } from '../types'
@@ -34,9 +34,10 @@ import {
 export const useAuthProvider = () => {
   const [odUser, setOdUser] = useState<User | null>(null)
   // odUserDataはアカウント作成には必須では無いユーザー情報
-  const [odUserData, setOdUserData] = useState<odUserDataType>(
+  const [odUserData, setOdUserData] = useState<OdUserDataType>(
     {
       uid: '',
+      ts: new Date(),
       name: '',
       email: '',
       ruby: '',
@@ -51,6 +52,7 @@ export const useAuthProvider = () => {
       departmentWishFor: [],
     } || {
       uid: '',
+      ts: new Date(),
       name: '',
       email: '',
       ruby: '',
@@ -102,8 +104,7 @@ export const useAuthProvider = () => {
     const docSnap: DocumentSnapshot = await getDoc(doc(db, 'odUsers', uid))
     if (docSnap.exists()) {
       const doc: DocumentData = docSnap.data()
-      setOdUserData(doc as odUserDataType)
-      console.log('userAdditionalData', doc)
+      setOdUserData(doc as OdUserDataType)
     } else {
       console.log('No such a document')
     }
@@ -134,7 +135,6 @@ export const useAuthProvider = () => {
         const odUser = userCredential.user
         setOdUser(odUser)
         getUserAdditionalData(odUser.uid)
-        console.log(odUserData)
       })
       .catch((error) => {
         const errorCode = error.code

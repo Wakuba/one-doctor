@@ -4,13 +4,10 @@ import TwitterTimeline from './TwitterTimeline'
 
 interface SnsTabPropsType {
   officialWebSite: string
-  twitterTimelineUrl: string
+  userId: string
 }
 
-const SnsTab: FC<SnsTabPropsType> = ({
-  officialWebSite,
-  twitterTimelineUrl,
-}) => {
+const SnsTab: FC<SnsTabPropsType> = ({ officialWebSite, userId }) => {
   return (
     <div className='w-full ov-md:p-8 sm:p-4 bg-white flex flex-col'>
       <div className='space-y-8'>
@@ -21,7 +18,7 @@ const SnsTab: FC<SnsTabPropsType> = ({
         <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
           関連SNS
         </div>
-        <TwitterTimeline userId={twitterTimelineUrl} />
+        {userId && <TwitterTimeline {...{ userId }} />}
       </div>
     </div>
   )

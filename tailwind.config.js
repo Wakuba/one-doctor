@@ -11,6 +11,9 @@ module.exports = {
     './src/components/tabs/*.{ts,tsx}',
     './src/components/userDashboard/*.{ts,tsx}',
     './src/components/UIAtoms/*.{ts,tsx}',
+    './src/components/favoriteDepartment/*.{ts,tsx}',
+    './src/components/browseStudentsVoices/*.{ts,tsx}',
+    './src/components/myRecord/*.{ts,tsx}',
   ],
   darkMode: false, // Or 'media' or 'class'
   theme: {

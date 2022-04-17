@@ -8,7 +8,7 @@ interface InputDoublePropsType {
   nameOne: string
   nameTwo: string
   style?: {
-    wholeStyle?: string
+    wrapperStyle?: string
     styleOne?: string
     styleTwo?: string
   }
@@ -34,13 +34,13 @@ const InputDouble: VFC<InputDoublePropsType> = ({
   return (
     <div
       key={name}
-      className={`${style?.wholeStyle} grid grid-cols-2 h-[64px]`}
+      className={`${style?.wrapperStyle} grid grid-cols-2 h-[64px]`}
     >
       {children ? (
         <Input
           name={nameOne}
           style={{
-            wholeStyle: 'inline col-span-1',
+            wrapperStyle: 'inline col-span-1',
             labelStyle: 'block',
             inputStyle: `${style?.styleOne} w-4/5`,
           }}
@@ -55,7 +55,7 @@ const InputDouble: VFC<InputDoublePropsType> = ({
         <Input
           name={nameOne}
           style={{
-            wholeStyle: 'inline col-span-1',
+            wrapperStyle: 'inline col-span-1',
             labelStyle: 'block',
             inputStyle: `${style?.styleOne} w-4/5`,
           }}
@@ -69,7 +69,7 @@ const InputDouble: VFC<InputDoublePropsType> = ({
         <Input
           name={nameTwo}
           style={{
-            wholeStyle: 'inline col-span-1',
+            wrapperStyle: 'inline col-span-1',
             labelStyle: 'block',
             inputStyle: `${style?.styleTwo} w-4/5`,
           }}
@@ -84,7 +84,7 @@ const InputDouble: VFC<InputDoublePropsType> = ({
         <Input
           name={nameTwo}
           style={{
-            wholeStyle: 'inline col-span-1',
+            wrapperStyle: 'inline col-span-1',
             labelStyle: 'block',
             inputStyle: `${style?.styleTwo} w-4/5`,
           }}

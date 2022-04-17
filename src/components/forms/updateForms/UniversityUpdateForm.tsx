@@ -15,7 +15,6 @@ const UniversityUpdateForm: VFC<UniversityUpdateFormPropsType> = ({ data }) => {
   const uid = auth.odUser?.uid
   const [edit, setEdit] = useState(false)
   const onSubmit = (data: { university: string }) => {
-    console.log('新しい大学データです', data)
     if (uid) {
       const universityDoc = doc(db, 'odUsers', uid)
       return updateDoc(universityDoc, { university: data.university })

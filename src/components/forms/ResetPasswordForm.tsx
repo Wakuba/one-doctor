@@ -7,9 +7,7 @@ const ResetPasswordForm: React.VFC<{ style: string }> = ({ style }) => {
   const auth = useAuth()
   const router = useRouter()
   const onSubmit = (data: { email: string }) => {
-    console.log('email', data.email)
     auth.sendPasswordResetEmailToUser(data.email)
-    console.log('sendPasswordReset実行完了')
     router.push('/UserDashboard')
   }
   return (

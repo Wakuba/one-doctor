@@ -16,7 +16,7 @@ const NewsBoard: FC<NewsBoardProps> = ({ layoutStyles, content }) => {
     <div className='w-full'>
       <div
         className={clsx(
-          'mb-2 sm:text-2xl ov-md:text-4xl sm:text-prime-blue-rich font-semibold',
+          'mb-2 sm:text-2xl ov-md:text-3xl sm:text-prime-blue-rich font-semibold',
           layoutStyles
         )}
       >

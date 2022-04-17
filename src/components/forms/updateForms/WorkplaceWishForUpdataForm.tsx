@@ -22,13 +22,11 @@ const WorkplaceWishForUpdateForm: VFC<WorkplaceWishForUpdateFormPropsType> = ({
   const uid = auth.odUser?.uid
   const [edit, setEdit] = useState(false)
   const onSubmit = (data: { workplaceWishFor: string }) => {
-    console.log('新しい希望就職地データです', data)
     if (uid) {
       const workplaceDoc = doc(db, 'odUsers', uid)
       return updateDoc(workplaceDoc, {
         workplaceWishFor: data.workplaceWishFor,
       })
-      console.log('新しいやつ', data)
     } else {
       return console.log('uidが存在しません')
     }

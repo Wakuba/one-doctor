@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, VFC } from 'react'
 
 type TabFieldProps = {
   key: number
@@ -6,6 +6,8 @@ type TabFieldProps = {
   title?: string
 }
 
-export default function TabField(props: TabFieldProps) {
+const TabField: VFC<TabFieldProps> = (props) => {
   return <>{props.children}</>
 }
+
+export default TabField

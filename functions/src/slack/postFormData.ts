@@ -4,7 +4,6 @@ import { config } from '../index'
 import { app } from '../slack/app'
 
 const postFormData = (formData: FormDataType): void => {
-  console.log('formdata', formData)
   app.client.chat
     .postMessage({
       channel: config.slack.channel_id_form,

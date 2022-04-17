@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import CrewCard from '../departments/CrewCard'
+import CrewCard from './CrewCard'
 import { CrewCardListTabType } from '../../lib/types'
 
 const CrewBoardTab = ({

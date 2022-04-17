@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import { cwd } from 'process'
 import DashboardElm from './DashboardElm'
 
 const DashboardElmBoard = () => {
@@ -10,10 +9,34 @@ const DashboardElmBoard = () => {
         'w-full flex ov-md:flex-row flex-wrap justify-between mb-6'
       )}
     >
-      <DashboardElm href='/'>お気に入り診療科</DashboardElm>
-      <DashboardElm href='/'>参加予定イベント</DashboardElm>
-      <DashboardElm href='/'>自分の記録帳</DashboardElm>
-      <DashboardElm href='/UserProfile'>登録情報の変更</DashboardElm>
+      <DashboardElm
+        href='/FavoriteDepartment'
+        imageSrc='/images/favoriteDepartment.png'
+        title='favoriteDepartment'
+      >
+        お気に入り診療科
+      </DashboardElm>
+      <DashboardElm
+        href='/MyEvents'
+        imageSrc='/images/plannedEvent.png'
+        title='plannedEvent'
+      >
+        参加予定イベント
+      </DashboardElm>
+      <DashboardElm
+        href='/MyRecord'
+        imageSrc='/images/myNote.png'
+        title='myNote'
+      >
+        自分の記録帳
+      </DashboardElm>
+      <DashboardElm
+        href='/UserProfile'
+        imageSrc='/images/editUserInfo.png'
+        title='editUserInfo'
+      >
+        登録情報の変更
+      </DashboardElm>
     </div>
   )
 }

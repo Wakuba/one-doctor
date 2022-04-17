@@ -36,6 +36,7 @@ interface NotStudentSignUpFormDataType {
   passwordTwo: string
   workplace: string
   workplaceWishFor: string[]
+  ts: Date
 }
 const postNewUserData = httpsCallable(
   firebaseFunction,
@@ -61,7 +62,23 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
       authorizedByAdmin: false,
       favoDeparts: [],
       favoEvents: [],
+      ts: new Date(),
     }
+
+    //   departmentWishFor: string[]
+    // workplace: string
+    // workplaceWishFor: string[]
+    // authorizedByAdmin: boolean
+    // uid?: string
+    // ts: Date
+    // name: string
+    // email: string
+    // password: string
+    // ruby: string
+    // gender: string
+    // isStudent: boolean
+    // favoDeparts: string[]
+    // favoEvents: any[]
 
     const signUpData: SignUpDataTypeForNotStudent = {
       name: `${data.familyName} ${data.firstName}`,
@@ -76,21 +93,24 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
       authorizedByAdmin: false,
       favoDeparts: [],
       favoEvents: [],
+      ts: new Date(),
     }
-    signUp(signUpData)
-      .then((odUser) => {
-        postNewUserData({ ...cleansedData, uid: odUser.uid })
-          .then((res) => console.log('スラックへの送信成功', res))
-          .catch((e) => console.log('スラックへの送信失敗', e))
+    if (!('grade' in signUpData)) {
+      signUp(signUpData)
+        .then((odUser) => {
+          postNewUserData({ ...cleansedData, uid: odUser.uid })
+            .then((res) => console.log('スラックへの送信成功', res))
+            .catch((e) => console.log('スラックへの送信失敗', e))
 
-        postPreUserData({ ...cleansedData, uid: odUser.uid }).then((res) =>
-          console.log('スプレッドシートへの送信成功', res)
-        )
-      })
-      .catch((e) => {
-        if (e.code === 'auth/email-already-in-use')
-          setEmailAlreadyInUseModal(true)
-      })
+          postPreUserData({ ...cleansedData, uid: odUser.uid }).then((res) =>
+            console.log('スプレッドシートへの送信成功', res)
+          )
+        })
+        .catch((e) => {
+          if (e.code === 'auth/email-already-in-use')
+            setEmailAlreadyInUseModal(true)
+        })
+    }
   }
 
   return (
@@ -163,7 +183,7 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
         <Input
           name='emailOne'
           type='email'
-          style={{ wholeStyle: 'block', inputStyle: 'block' }}
+          style={{ wrapperStyle: 'block', inputStyle: 'block' }}
           subTitle='※職場のメールアドレス以外を入力してください'
         >
           メールアドレス
@@ -171,14 +191,14 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
         <Input
           name='emailTwo'
           type='email'
-          style={{ wholeStyle: 'block', inputStyle: 'block' }}
+          style={{ wrapperStyle: 'block', inputStyle: 'block' }}
         >
           メールアドレス(確認用)
         </Input>
         <Input
           name='workplace'
           type='text'
-          style={{ wholeStyle: 'block', inputStyle: 'block' }}
+          style={{ wrapperStyle: 'block', inputStyle: 'block' }}
           subTitle='※正式名称をご入力ください'
         >
           現在のお勤め先
@@ -203,7 +223,7 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
         <Input
           name='passwordOne'
           type='password'
-          style={{ wholeStyle: 'block', inputStyle: 'block' }}
+          style={{ wrapperStyle: 'block', inputStyle: 'block' }}
           subTitle='（仮テキスト）半角英数を混ぜて６文字以上'
         >
           パスワード
@@ -211,7 +231,7 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
         <Input
           name='passwordTwo'
           type='password'
-          style={{ wholeStyle: 'block', inputStyle: 'block' }}
+          style={{ wrapperStyle: 'block', inputStyle: 'block' }}
         >
           パスワード※ （確認用）
         </Input>

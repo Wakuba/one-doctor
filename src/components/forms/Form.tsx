@@ -7,6 +7,8 @@ import {
   UseFormClearErrors,
   UseFormGetValues,
   UseFormRegister,
+  UseFormReset,
+  UseFormResetField,
   UseFormSetError,
   UseFormSetValue,
   UseFormWatch,
@@ -35,26 +37,26 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
     formState,
   } = useForm()
   // const names: string[] = []
-  if (process.browser) {
-    // const form = document.getElementsByTagName('form')[0]
-    // const childCount = form.childElementCount
-    // console.log('childCount', childCount)
-    // for (let i = 0; i < childCount - 1; i++) {
-    //   const label = form.getElementsByTagName('label')[i]
-    //   // console.log(label)
-    //   if (label?.htmlFor) {
-    //     // console.log(label.htmlFor)
-    //     names.push(label.htmlFor)
-    //   }
-    //   console.log(names)
-    // }
-    useFormPersist('form', { watch, setValue })
-  }
+  // if (process.browser) {
+  // const form = document.getElementsByTagName('form')[0]
+  // const childCount = form.childElementCount
+  // console.log('childCount', childCount)
+  // for (let i = 0; i < childCount - 1; i++) {
+  //   const label = form.getElementsByTagName('label')[i]
+  //   // console.log(label)
+  //   if (label?.htmlFor) {
+  //     // console.log(label.htmlFor)
+  //     names.push(label.htmlFor)
+  //   }
+  //   console.log(names)
+  // }
+  // console.log('どうですか', watch())
+  const persist = useFormPersist('form_' + formName, watch, setValue, reset)
+  // }
 
   useEffect(() => {
     if (formState?.isSubmitSuccessful) {
-      reset()
-      resetField('gender')
+      persist.clear()
     }
   }, [formState, reset])
 
@@ -63,9 +65,7 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
       {Array.isArray(children)
         ? children.map((child, key) => {
             if (Array.isArray(child)) {
-              console.log(child)
               return child.map((gChild, key) => {
-                console.log('oi', gChild)
                 return createElement(gChild.type, {
                   ...{
                     ...gChild.props,
@@ -78,7 +78,8 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
                     setValue,
                     clearErrors,
                     reset,
-                    key,
+                    resetField,
+                    key: key,
                   },
                 })
               })
@@ -93,8 +94,10 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
                   control,
                   watch,
                   setValue,
+                  reset,
+                  resetField,
                   clearErrors,
-                  key,
+                  key: key,
                 },
               })
             }
@@ -110,6 +113,8 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
               setValue,
               control,
               clearErrors,
+              reset,
+              resetField,
             },
           })}
     </form>
@@ -119,6 +124,7 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
 export default Form
 
 const Nest = ({
+  key,
   children,
   register,
   formState,
@@ -128,6 +134,8 @@ const Nest = ({
   getValues,
   control,
   clearErrors,
+  reset,
+  resetField,
   style,
 }: {
   children: any
@@ -140,11 +148,13 @@ const Nest = ({
   setValue?: UseFormSetValue<FieldValues>
   getValues?: UseFormGetValues<FieldValues>
   clearErrors?: UseFormClearErrors<FieldValues>
+  reset?: UseFormReset<FieldValues>
+  resetField?: UseFormResetField<FieldValues>
   style?: string
-  key: number
+  key?: number
 }) => {
   return (
-    <div className={style}>
+    <div key={key} className={style}>
       {Array.isArray(children)
         ? children.map((child, key) => {
             return createElement(child.type, {
@@ -158,7 +168,9 @@ const Nest = ({
                 setValue,
                 control,
                 clearErrors,
-                key,
+                reset,
+                resetField,
+                key: key,
               },
             })
           })
@@ -173,6 +185,8 @@ const Nest = ({
               getValues,
               control,
               clearErrors,
+              reset,
+              resetField,
             },
           })}
     </div>
@@ -180,4 +194,3 @@ const Nest = ({
 }
 
 Form.Nest = Nest
-

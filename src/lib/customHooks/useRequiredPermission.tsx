@@ -1,4 +1,4 @@
-import { odUserContextType } from '../types'
+import { OdUserContextType } from '../types'
 import { useAuth } from '../context'
 // import { useRouter } from 'next/router'
 import { useState, ReactNode, VFC } from 'react'
@@ -6,11 +6,12 @@ import { ModalBackdrop, ModalMainArea } from '../../components/UIAtoms/Modal'
 import PlaneButton from '../../components/UIAtoms/PlaneButton'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
+import { getAuth } from 'firebase/auth'
 
 const NotAuthorizedMessage = 'このアカウントは運営による認可を受けていません'
 
 export const useRequiredPermission = (): {
-  auth: odUserContextType
+  auth: OdUserContextType
   NotEmailVerifiedAlert: VFC<{
     setIsMenuEventActive?: any
     backToTop?: boolean
@@ -30,27 +31,25 @@ export const useRequiredPermission = (): {
   >(null)
 
   const permissionChecker = () => {
-    console.log('permissionCheckerが発火しました')
-    if (!auth.odUser) {
-      console.log('アカウントが作成されていません')
-      // router.push('/SignUpDashboard')
-      setOpenAccountNotExistModal(true)
-      return false
-    } else {
+    const authFb = getAuth()
+    const user = authFb.currentUser
+    if (user) {
       if ('authorizedByAdmin' in auth.odUserData) {
         if (auth.odUserData.authorizedByAdmin === false) {
-          console.log(NotAuthorizedMessage)
           setOpenNotAuthorizedModal(false)
+          return false
         }
       }
-      if (!auth.odUser.emailVerified) {
-        console.log('メール認証がされていません')
+      if (!user.emailVerified) {
         // router.push('/SignUpDashboard')
         setOpenNotEmailVerifiedModal(true)
         return false
       } else {
         return true
       }
+    } else {
+      setOpenAccountNotExistModal(true)
+      return false
     }
   }
 

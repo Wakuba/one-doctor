@@ -8,7 +8,6 @@ export default async function postFormToSlackHitter(
   const { signal } = abortCtrl
 
   const stringifiedFormtData = JSON.stringify(formData)
-  console.log('str', stringifiedFormtData)
 
   await fetch(`/api/postFormToSlack/${stringifiedFormtData}`, {
     method: 'POST',

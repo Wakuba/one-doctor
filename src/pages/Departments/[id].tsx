@@ -23,16 +23,15 @@ import AppealCardBoard from '../../components/departments/AppealCardBoard'
 import VideoCarousel from '../../components/departments/VideoCarousel'
 import ContactButtonModal from '../../components/UIAtoms/ContactButtonModal'
 import DepTopSection from '../../components/departments/DepTopSeciton '
-import EventTab from '../../components/tabs/EventTab'
-import CrewBoardTab from '../../components/tabs/CrewBoardTab'
-import TwitterTimeline from '../../components/tabs/TwitterTimeline'
-import { getUrlFromTwitterTimeline } from '../../lib/customFunctions/urlExtractor'
+import EventTab from '../../components/departments/EventTab'
+import CrewBoardTab from '../../components/departments/CrewBoardTab'
+import TwitterTimeline from '../../components/departments/TwitterTimeline'
 import { GetStaticPaths, GetStaticProps, GetStaticPropsResult } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import router from 'next/router'
 import FavoriteButton from '../../components/departments/FavoriteButton'
-import BasicInfoTab from '../../components/tabs/BasicInfoTab'
-import GeoInfoTab from '../../components/tabs/GeoInfoTab'
+import BasicInfoTab from '../../components/departments/BasicInfoTab'
+import GeoInfoTab from '../../components/departments/GeoInfoTab'
 
 export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
   const {
@@ -44,7 +43,7 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
     topSection,
     officialWebSite,
   } = postData
-  console.log('on frontenc', postData)
+  console.log('postData', tabMenu.basicInfoTab)
 
   return (
     <>
@@ -72,10 +71,7 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
                     {departmentName.departmentNameInJapanese}
                   </Tag>
                 </div>
-                <FavoriteButton
-                  layoutStyle=''
-                  department={departmentName.departmentNameInEnglish}
-                />
+                <FavoriteButton layoutStyle='' depName={departmentName} />
               </div>
             </div>
           </section>
@@ -105,11 +101,10 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
           </section>
 
           <section className='w-full flex flex-col items-center mb-16'>
-            <TabMenu>
-              <BasicInfoTab
-                title='基本情報'
-                basicInfo={postData.tabMenu.basicInfo}
-              />
+            <TabMenu
+              style={{ tabButtonStyle: 'ov-md:h-10 ov-md:w-24 sm:h-8 sm:w-16' }}
+            >
+              <BasicInfoTab title='基本情報' basicInfo={tabMenu.basicInfoTab} />
               <CrewBoardTab
                 title='医局員'
                 crewDataList={tabMenu.crewCardListTab}
@@ -120,8 +115,8 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
               />
               <EventTab
                 title='イベント'
-                dep={departmentName.departmentNameInJapanese}
-                univ={universityName.universityNameInEnglish}
+                dep={departmentName}
+                univ={universityName}
               />
               <div
                 title='SNS'
@@ -238,23 +233,18 @@ export const getStaticProps: GetStaticProps<
       hospitalName: data?.hospitalName ?? '',
       topSection: data?.topSection ?? '',
       tabMenu: {
-        basicInfoTab: {
-          curriculum: data?.tabMenu.curriculum ?? '',
-          route: data?.tabMenu.route ?? '',
-          licence: data?.tabMenu.licence ?? '',
-          others: data?.tabMenu.others ?? '',
-        },
+        basicInfoTab: data?.tabMenu.basicInfoTab ?? '',
         geographicalInformationTab: data?.tabMenu.geographicalInformationTab,
         snsTab: {
-          twitterTimelineUrl:
-            getUrlFromTwitterTimeline(
-              data?.tabMenu.snsTab.twitterTimelineUrl
-            ) ?? '',
+          // twitterTimelineUrl:
+          //   getUrlFromTwitterTimeline(
+          //     data?.tabMenu.snsTab.twitterTimelineUrl
+          //   ) ?? '',
+          userId: data?.tabMenu.snsTab.userId ?? '',
         },
         crewCardListTab: [],
       },
     }
-
     for (const card of data?.tabMenu.crewCardListTab) {
       const crewImgId = card.crewImage[0]?.id
       let url = ''

@@ -5,7 +5,7 @@ type InputPropsType = {
   name: string
   children?: string
   subTitle?: string
-  style?: { wholeStyle?: string; labelStyle?: string; inputStyle?: string }
+  style?: { wrapperStyle?: string; labelStyle?: string; inputStyle?: string }
   type: 'email' | 'password' | 'text'
   placeholder?: string
   register?: UseFormRegister<FieldValues>
@@ -30,7 +30,7 @@ const Input: VFC<InputPropsType> = ({
   else errorMessage = '入力されていません'
   console.log('errorMessage', errorMessage)
   return (
-    <div className={`${style?.wholeStyle}`}>
+    <div className={`${style?.wrapperStyle}`}>
       <label
         htmlFor={name}
         className={`text-sm ${style?.labelStyle} ${
@@ -49,7 +49,7 @@ const Input: VFC<InputPropsType> = ({
         <input
           className={`${style?.inputStyle} text-sm w-full rounded border-1 border-solid border-[#707070] bg-white h-10`}
           type={type}
-          placeholder={placeholder}
+          placeholder={placeholder ? ' ' + placeholder : ''}
           {...register(name, {
             required: errorMessage,
             pattern:

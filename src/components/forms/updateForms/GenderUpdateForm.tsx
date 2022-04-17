@@ -15,7 +15,6 @@ const GenderUpdateForm: VFC<GenderUpdateFormPropsType> = ({ data }) => {
   const uid = auth.odUser?.uid
   const [edit, setEdit] = useState(false)
   const onSubmit = (data: { gender: string }) => {
-    console.log('新しい性別データです', data)
     if (uid) {
       const genderDoc = doc(db, 'odUsers', uid)
       return updateDoc(genderDoc, { gender: data.gender })

@@ -16,12 +16,9 @@ const LoginForm: VFC<{ style: string }> = ({ style }) => {
   const router = useRouter()
 
   const onSubmit = (data: LoginFormDataType) => {
-    console.log(data)
     const { email, password } = data
-    return auth.logIn({ email, password }).then((user) => {
-      console.log('logIn function', data)
+    return auth.logIn({ email, password }).then(() => {
       router.push('/UserDashboard')
-      console.log('logInData', user)
     })
   }
 
@@ -42,15 +39,15 @@ const LoginForm: VFC<{ style: string }> = ({ style }) => {
         <Input
           name='email'
           type='email'
-          style={{ wholeStyle: 'block', inputStyle: 'block' }}
-          subTitle='大学のメアド以外を入力してください'
+          style={{ wrapperStyle: 'block', inputStyle: 'block' }}
+          subTitle='大学のメールアドレス以外を入力してください'
         >
           メールアドレス
         </Input>
         <Input
           name='password'
           type='password'
-          style={{ wholeStyle: 'block', inputStyle: 'block' }}
+          style={{ wrapperStyle: 'block', inputStyle: 'block' }}
           subTitle='（仮テキスト）半角英数を混ぜて６文字以上'
         >
           パスワード

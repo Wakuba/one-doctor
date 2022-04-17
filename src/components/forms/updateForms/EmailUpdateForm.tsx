@@ -15,7 +15,6 @@ const EmailUpdateForm: VFC<EmailUpdateFormPropsType> = ({ data }) => {
   const uid = auth.odUser?.uid
   const [edit, setEdit] = useState(false)
   const onSubmit = (data: { email: string }) => {
-    console.log('新しいメールアドレスです', data)
     if (uid) {
       const emailDoc = doc(db, 'odUsers', uid)
       return updateDoc(emailDoc, { email: data.email })
@@ -46,7 +45,7 @@ const EmailUpdateForm: VFC<EmailUpdateFormPropsType> = ({ data }) => {
             name='email'
             type='email'
             placeholder={data}
-            style={{ wholeStyle: 'block', inputStyle: 'block' }}
+            style={{ wrapperStyle: 'block', inputStyle: 'block' }}
           />
           <SubmitButton style={{ buttonStyle: 'h-8 w-16 mt-[4px] ml-4' }}>
             完了

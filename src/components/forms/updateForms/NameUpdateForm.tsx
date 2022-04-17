@@ -14,11 +14,9 @@ const NameUpdateForm: React.VFC<NameUpdateFormPropsType> = ({ data }) => {
   const splitName = data ? data.split(' ') : 'NO NAME'
   const familyName = Array.isArray(splitName) ? splitName[0] : ''
   const firstName = Array.isArray(splitName) ? splitName[1] : ''
-  console.log(firstName, familyName)
   const auth = useAuthProvider()
   const uid = auth.odUser?.uid
   const onSubmit = (data: { familyName: string; firstName: string }) => {
-    console.log('新しい名前です', data)
     if (uid) {
       const nameDoc = doc(db, 'odUsers', uid)
       return updateDoc(nameDoc, {

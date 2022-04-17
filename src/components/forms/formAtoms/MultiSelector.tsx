@@ -12,15 +12,17 @@ interface MultiSelectorPropsType {
   formState?: FormState<FieldValues>
   options: string[]
   name: string
-  style?: { wholeStyle?: string; selectorStyle?: string }
+  style?: { wrapperStyle?: string; selectorStyle?: string }
   control?: Control<FieldValues, object>
+  isRequired?: boolean
 }
 
 const customStyles = {
   control: (provided: any) => {
     const result = {
       ...provided,
-      height: '40px', // 2.5rem相当
+      // height: '40px', // 2.5rem相当
+      // overflow: 'scroll',
       border: '1px solid #707070',
       borderRadius: '4px',
       // boxShadow: 'none',
@@ -33,7 +35,8 @@ const customStyles = {
   container: (provided: any) => {
     return {
       ...provided,
-      height: '40px',
+      // overflow: 'scroll',
+      // height: '40px',
       // '&:focus': { outline: 'none !important', border: '1px dotted #93c5fd' },
     }
   },
@@ -42,23 +45,23 @@ const customStyles = {
 const MultiSelector: VFC<MultiSelectorPropsType> = ({
   children,
   placeholder,
-  defaultValue,
   subTitle,
   formState,
   options,
   name,
   style,
   control,
+  isRequired = true,
 }) => {
   const optionsTmp: { value: string; label: string }[] = options.map(
     (option: string) => ({ value: option, label: option })
   )
   return (
-    <div className={`${style?.wholeStyle}`}>
+    <div className={`${style?.wrapperStyle}`}>
       <label htmlFor={name} className='block text-sm'>
         {children}
         {children && '(検索可能, 複数選択可能)'}
-        {children && (
+        {isRequired && (
           <>
             <span className='text-[#FF0000]'>*</span>
             <div className='text-sm'>{subTitle}</div>
@@ -68,20 +71,25 @@ const MultiSelector: VFC<MultiSelectorPropsType> = ({
       <Controller
         control={control}
         name={name}
-        rules={{ required: '選択されていません' }}
-        render={({ field: { onChange } }) => {
+        rules={isRequired ? { required: '選択されていません' } : undefined}
+        render={({ field: { onChange, value } }) => {
           return (
             <Select
-              defaultValue={defaultValue}
+              id={name}
+              instanceId={name}
+              value={options?.find((c) => c === value)}
+              // defaultValue={defaultValue}
               styles={customStyles}
               onChange={(val: any) => {
                 return onChange([...val.map((v: any) => v.value)])
               }}
-              options={optionsTmp}
+              options={optionsTmp.map((o) => o.value)}
               placeholder={placeholder ?? '▼選択してください'}
               isSearchable
               isMulti
               isClearable
+              closeMenuOnScroll
+              closeMenuOnSelect={false}
             />
           )
         }}

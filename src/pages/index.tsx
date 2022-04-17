@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import Header from '../components/UIAtoms/Header'
 import Footer from '../components/UIAtoms/Footer'
 import NewsBoard from '../components/home/NewsBoard'
-import DepartBoard from '../components/home/DepartBoard'
+import DepUrlBoard from '../components/home/DepUrltBoard'
 import CustomizedParticles from '../components/home/CustomizedParticles'
 import PlaneButton from '../components/UIAtoms/PlaneButton'
 
@@ -20,9 +20,8 @@ import { storage } from '../lib/firebase/firebase.config'
 import {
   NewsLineType,
   OfficialWebSiteDataType,
-  newVideoDataType,
-  depPathDataType,
-  voiceDataType,
+  NewVideoDataType,
+  DepPathDataType,
 } from '../lib/types'
 import { collection, getDocs, query, where } from '@firebase/firestore'
 import VoiceBoard from '../components/home/VoiceBoard'
@@ -32,28 +31,27 @@ import { DocumentData } from '@google-cloud/firestore'
 import { GetStaticProps } from 'next/types'
 // import { requestErrorWithOriginal } from '../../functions/node_modules/@slack/web-api/dist/errors'
 import NewVideosBoard from '../components/home/NewVideosBoard'
+import { VFC } from 'react'
 
-interface HomeProps {
+interface HomePropsType {
   newsBoardData: NewsLineType[]
-  depList: depPathDataType[]
+  depList: DepPathDataType[]
   officialWebSiteData: OfficialWebSiteDataType[]
-  newVideos: newVideoDataType[]
-  voices: voiceDataType[]
+  newVideos: NewVideoDataType[]
+  voices: any[]
 }
 // 'after:h-[15vw] after:w-[15vw] after:max-w-[216px] after:max-h-[216px] after:absolute after:bg-prime-blue-rich after:right-0 after:bottom-0 after:-z-10',
 //             'before:h-[15vw] before:w-[15vw] before:max-w-[216px] before:max-h-[216px] before:absolute before:bg-prime-blue-rich before:left-0 before:top-0 before:-z-10'
 
-export default function Home(props: HomeProps) {
+const Home: VFC<HomePropsType> = (props) => {
   const { newsBoardData, newVideos, depList, officialWebSiteData, voices } =
     props
-  console.log('props', props)
-  console.log(officialWebSiteData)
+  // console.log(props)
   // const { data, error } = useSWR(
   //   'https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyBPWdOhQK4MIm9GCg2WkMol7ptJU7lxuvU&part=snippet&id=PIrZ9QRXYzI'
   // )
   // console.log('imagedata', data.items[1].snippet.thumbnails.high.url)
-  console.log('newMovie', newVideos)
-  console.log('voice', voices)
+  // console.log('newMovie', newVideos)
 
   return (
     <>
@@ -196,13 +194,13 @@ export default function Home(props: HomeProps) {
           )}
         >
           <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] flex flex-col items-center py-24'>
-            <div className='text-white sm:text-2xl ov-md:text-4xl font-semibold w-full flex justify-self-start mb-2'>
+            <div className='text-white sm:text-2xl ov-md:text-3xl font-semibold w-full flex justify-self-start mb-2'>
               医学生の声
             </div>
             <div className='text-sm mb-4 w-full flex justify-self-start'>
               （例文）実習に参加した医学生によるリアルな体験談を見ることができます。あなたも記入しませんか？
             </div>
-            <VoiceBoard />
+            <VoiceBoard voices={voices} />
           </div>
         </section>
 
@@ -216,13 +214,13 @@ export default function Home(props: HomeProps) {
           )}
         >
           <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] flex flex-col items-center py-24'>
-            <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold w-full flex justify-self-start mb-2'>
+            <div className='text-prime-blue-rich sm:text-2xl ov-md:text-3xl font-semibold w-full flex justify-self-start mb-2'>
               One Doctor オリジナルコンテンツ
             </div>
             <div className='text-sm mb-4 w-full flex justify-self-start'>
               （テキスト要編集）ここでは本サイトでしか見れない…テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります
             </div>
-            <div className='text-[#B7B7B7] sm:text-2xl ov-md:text-4xl font-semibold mb-6 w-full'>
+            <div className='text-[#B7B7B7] sm:text-2xl ov-md:text-3xl font-semibold mb-6 w-full'>
               筑波大学
             </div>
             <OriginalContentsBoard depList={depList} />
@@ -238,13 +236,13 @@ export default function Home(props: HomeProps) {
           )}
         >
           <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] flex flex-col items-center'>
-            <div className='text-white sm:text-2xl ov-md:text-4xl font-semibold w-full flex justify-self-start mb-2'>
+            <div className='text-white sm:text-2xl ov-md:text-3xl font-semibold w-full flex justify-self-start mb-2'>
               診療科一覧
             </div>
             <div className='text-sm mb-4 w-full flex justify-self-start'>
               各診療科の公式ページに飛ぶことができます
             </div>
-            <DepartBoard wsData={officialWebSiteData} />
+            <DepUrlBoard wsData={officialWebSiteData} />
           </div>
         </section>
 
@@ -257,7 +255,7 @@ export default function Home(props: HomeProps) {
         >
           <div className='bg-transparent flex flex-col items-center sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
             <div className='w-full sm:mb-4 ov-md:mb-8'>
-              <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold'>
+              <div className='text-prime-blue-rich sm:text-2xl ov-md:text-3xl font-semibold'>
                 筑波大学附属病院について
               </div>
             </div>
@@ -281,159 +279,158 @@ export default function Home(props: HomeProps) {
   )
 }
 
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const props: HomeProps = {
-    newsBoardData: [],
-    depList: [],
-    officialWebSiteData: [],
-    newVideos: [],
-    voices: [],
+export default Home
+
+export const getStaticProps: GetStaticProps<HomePropsType> = async () => {
+  const q0 = query(
+    collection(db, 'fl_content'),
+    where('_fl_meta_.schema', '==', 'topPageNewsBoard')
+  )
+  const snapshot0 = await getDocs(q0)
+  const newsBoardData = snapshot0.docs.map((doc) => {
+    return {
+      id: doc.data().id,
+      title: doc.data().newsTitle,
+      detail: doc.data().newsDetail,
+    }
+  })
+
+  // create department page url
+  const q1 = query(
+    collection(db, 'fl_content'),
+    where('_fl_meta_.schema', '==', 'departmentPage')
+  )
+  const snapshot1 = await getDocs(q1)
+  const depList = snapshot1.docs.map((doc) => {
+    if (doc.data().id) {
+      return {
+        id: doc.data().id ?? 'toppage',
+        path: `/Departments/${doc.data().id}`,
+        depName: doc.data().departmentName,
+      }
+    } else {
+      return {
+        id: 'no department page',
+        path: '/',
+        depName: 'topPage',
+      }
+    }
+  })
+
+  // get web site url
+  const q2 = query(
+    collection(db, 'fl_content'),
+    where('_fl_meta_.schema', '==', 'topPageOfficialWebSiteUrls')
+  )
+  const snapshot2 = await getDocs(q2)
+  const officialWebSiteData = snapshot2.docs.map(
+    (doc): OfficialWebSiteDataType => {
+      const data = doc.data()
+      return {
+        universityNameInJapanese: data.universityNameInJapanese,
+        departmentNameInJapanese: data.departmentNameInJapanese,
+        url: data.officialWebSiteUrl,
+      }
+    }
+  )
+
+  //新着動画一覧を取得
+  //   const newVideos = await Promise.all(
+  //     snapshotDash.docs.map(async (document) => {
+  //       const videoInfo = await thumbnailIdExtractor(document).then(
+  //         async (res) => {
+  //           console.log('response', res)
+  //           const thumbnailId = res.thumbnailId
+  //           if (thumbnailId === '') {
+  //             return {
+  //               title: res.title,
+  //               videoUrl: res.videoUrl,
+  //               thumbnailUrl: '',
+  //             }
+  //           } else {
+  //             const snapshot = await getDoc(doc(db, 'fl_files', thumbnailId))
+  //             const thumbnailName = snapshot.data()?.file
+  //             const url = await getDownloadURL(
+  //               ref(storage, `flamelink/media/${thumbnailName}`)
+  //             )
+  //             return {
+  //               title: res.title,
+  //               videoUrl: res.videoUrl,
+  //               thumbnailUrl: url,
+  //             }
+  //           }
+  //         }
+  //       )
+  //       return videoInfo
+  //     })
+  //   )
+  //   props.newVideos = newVideos
+  // } catch (e) {
+  //   console.log(e)
+  // }
+
+  const q3 = query(
+    collection(db, 'fl_content'),
+    where('_fl_meta_.schema', '==', 'topPageNewVideos')
+  )
+  const snapshot3 = await getDocs(q3)
+  const newVideos = await Promise.all(
+    snapshot3.docs.map(
+      async (document: QueryDocumentSnapshot<DocumentData>) => {
+        const info = {
+          title: '',
+          id: '',
+          videoUrl: '',
+          thumbnailUrl: '',
+        }
+        info.title = document.data().title
+        info.id = document.data().id
+        info.videoUrl = document.data().videoUrl
+        const thumbnailRef = document.data().verticalThumbnail[0]
+        if (thumbnailRef) {
+          const snap = await getDoc(thumbnailRef)
+          const thumbnailDoc = snap.data() as DocumentData
+          const verticalThumbnailId = thumbnailDoc.id as string
+          const imageSnap = await getDoc(
+            doc(db, 'fl_files', verticalThumbnailId)
+          )
+          const thumbnailName = imageSnap.data()?.file
+          const url = await getDownloadURL(
+            ref(storage, `flamelink/media/${thumbnailName}`)
+          )
+          info.thumbnailUrl = url
+        }
+        return info
+        console.log(info)
+      }
+    )
+  )
+
+  // トップページの医学生の声をfirebaseから取ってくる
+  const q4 = query(
+    collection(db, 'fl_content'),
+    where('_fl_meta_.schema', '==', 'topPageStudentsVoices')
+  )
+  const snapshot4 = await getDocs(q4)
+  const voices = snapshot4.docs.map((doc) => {
+    return {
+      contributor: doc.data().contributor ?? '',
+      contents: doc.data().contents ?? '',
+      departmentNameInJapanese: doc.data().departmentNameInJapanese ?? '',
+      universityNameInJapanese: doc.data().universityNameInJapanese ?? '',
+    }
+  })
+  // console.log(props)
+  const props: HomePropsType = {
+    newsBoardData,
+    depList,
+    officialWebSiteData,
+    newVideos,
+    voices,
   }
 
-  try {
-    // get top page news data
-    try {
-      const q = query(
-        collection(db, 'fl_content'),
-        where('_fl_meta_.schema', '==', 'topPageNewsBoard')
-      )
-      const snapshotDash = await getDocs(q)
-      const newsBoardData = snapshotDash.docs.map((doc) => {
-        return {
-          id: doc.data().id,
-          title: doc.data().newsTitle,
-          detail: doc.data().newsDetail,
-        }
-      })
-      props.newsBoardData = newsBoardData
-    } catch (error) {
-      console.log('Error getting news documents from FlameLink; ', error)
-    }
-
-    // create department page url
-    try {
-      const qDash = query(
-        collection(db, 'fl_content'),
-        where('_fl_meta_.schema', '==', 'departmentPage')
-      )
-      const snapshot = await getDocs(qDash)
-      const depList = snapshot.docs.map((doc) => {
-        if (doc.data().id) {
-          return {
-            id: doc.data().id ?? 'toppage',
-            path: `/Departments/${doc.data().id}`,
-            depName: doc.data().departmentName,
-          }
-        } else {
-          return {
-            id: 'no department page',
-            path: '/',
-            depName: 'topPage',
-          }
-        }
-      })
-      props.depList = depList
-    } catch (error) {
-      console.log('Error getting depList', error)
-    }
-
-    // get web site url
-    try {
-      const q = query(
-        collection(db, 'fl_content'),
-        where('_fl_meta_.schema', '==', 'topPageOfficialWebSiteUrls')
-      )
-      const snap = await getDocs(q)
-      const officialWebSiteData = snap.docs.map(
-        (doc): OfficialWebSiteDataType => {
-          const data = doc.data()
-          return {
-            universityNameInJapanese: data.universityNameInJapanese,
-            departmentNameInJapanese: data.departmentNameInJapanese,
-            url: data.officialWebSiteUrl,
-          }
-        }
-      )
-      props.officialWebSiteData = officialWebSiteData
-    } catch (error) {
-      console.log(error)
-    }
-
-    //新着動画一覧を取得
-    try {
-      const q = query(
-        collection(db, 'fl_content'),
-        where('_fl_meta_.schema', '==', 'topPageNewVideos')
-      )
-      const snapshotDash = await getDocs(q)
-
-      const newVideos = await Promise.all(
-        snapshotDash.docs.map(async (document) => {
-          const videoInfo = await thumbnailIdExtractor(document).then(
-            async (res) => {
-              console.log('response', res)
-              const thumbnailId = res.thumbnailId
-              if (thumbnailId === '') {
-                return {
-                  title: res.title,
-                  videoUrl: res.videoUrl,
-                  thumbnailUrl: '',
-                }
-              } else {
-                const snapshot = await getDoc(doc(db, 'fl_files', thumbnailId))
-                const thumbnailName = snapshot.data()?.file
-                const url = await getDownloadURL(
-                  ref(storage, `flamelink/media/${thumbnailName}`)
-                )
-                return {
-                  title: res.title,
-                  videoUrl: res.videoUrl,
-                  thumbnailUrl: url,
-                }
-              }
-            }
-          )
-          return videoInfo
-        })
-      )
-      props.newVideos = newVideos
-    } catch (e) {
-      console.log(e)
-    }
-
-    // トップページの医学生の声をfirebaseから取ってくる
-    try {
-      const q = query(
-        collection(db, 'fl_content'),
-        where('_fl_meta_.schema', '==', 'topPageStudentsVoices')
-      )
-      const snapshot = await getDocs(q)
-      const voices = snapshot.docs.map((doc) => {
-        return {
-          contributor: doc.data().contributor ?? '',
-          contents: doc.data().contents ?? '',
-          departmentNameInJapanese: doc.data().departmentNameInJapanese,
-          universityNameInJapanese: doc.data().universityNameInJapanese,
-        }
-      })
-      props.voices = voices
-    } catch (e) {
-      console.log(e)
-    }
-
-    return {
-      props,
-    }
-  } catch (e) {
-    // return { props: { message: e.message } }
-    if (e instanceof Error) {
-      console.error(e.message)
-      return { props }
-    }
-    console.log(e)
-    return {
-      props,
-    }
+  return {
+    props,
   }
 }
 
@@ -445,20 +442,20 @@ function ScrollArrow() {
   )
 }
 
-const thumbnailIdExtractor = (
-  doc: QueryDocumentSnapshot<DocumentData>
-): Promise<{
-  title: string
-  videoUrl: string
-  thumbnailId: string
-}> => {
-  return new Promise((response, reject) => {
-    const title = doc.data().title ?? 'ブランク動画'
-    const videoUrl = doc.data().videoUrl ?? ''
-    const thumbnailId = doc.data().thumbnail[0]
-      ? doc.data().thumbnail[0].id
-      : ''
-    response({ title, videoUrl, thumbnailId })
-    reject('thumbnailExtractor was rejected')
-  })
-}
+// const thumbnailIdExtractor = (
+//   doc: QueryDocumentSnapshot<DocumentData>
+// ): Promise<{
+//   title: string
+//   videoUrl: string
+//   thumbnailId: string
+// }> => {
+//   return new Promise((response, reject) => {
+//     const title = doc.data().title ?? 'ブランク動画'
+//     const videoUrl = doc.data().videoUrl ?? ''
+//     const thumbnailId = doc.data().thumbnail[0]
+//       ? doc.data().thumbnail[0].id
+//       : ''
+//     response({ title, videoUrl, thumbnailId })
+//     reject('thumbnailExtractor was rejected')
+//   })
+// }

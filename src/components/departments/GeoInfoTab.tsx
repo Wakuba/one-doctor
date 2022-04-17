@@ -7,7 +7,6 @@ interface GeoInfoTabPropsType {
 }
 const GeoInfoTab: React.VFC<GeoInfoTabPropsType> = ({ gmIframe, title }) => {
   const cleanIframe = DOMpurify.sanitize(gmIframe)
-  console.log(cleanIframe)
   return (
     <div
       title={title}
@@ -24,7 +23,7 @@ const GeoInfoTab: React.VFC<GeoInfoTabPropsType> = ({ gmIframe, title }) => {
               'after:absolute after:w-full after:h-[54px] after:bg-white after:z-50 after:top-0'
             )}
           >
-            <div dangerouslySetInnerHTML={{ __html: gmIframe }} />
+            <div dangerouslySetInnerHTML={{ __html: cleanIframe }} />
           </div>
         )}
       </div>

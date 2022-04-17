@@ -1,55 +1,48 @@
 import { useEffect } from 'react'
+import {
+  FieldValues,
+  UseFormReset,
+  UseFormSetValue,
+  UseFormWatch,
+} from 'react-hook-form'
 
 const useFormPersist = (
   name: string,
-  {
-    watch,
-    setValue,
-  }: {
-    watch: any
-    setValue: any
-  },
-  {
-    storage,
-    exclude = [],
-    include,
-    onDataRestored,
-    validate = false,
-    dirty = false,
-  }: any = {}
+  watch: UseFormWatch<FieldValues>,
+  setValue: UseFormSetValue<FieldValues>,
+  reset: UseFormReset<FieldValues>
 ) => {
-  const values = watch(include)
-  const getStorage = () => storage || window.sessionStorage
+  const getStorage: () => Storage = () => window.sessionStorage
+  let values: any = {}
 
   useEffect(() => {
     const str = getStorage().getItem(name)
     if (str) {
-      const values = JSON.parse(str)
-      const dataRestored = {}
-
+      values = JSON.parse(str)
       Object.keys(values).forEach((key) => {
-        const shouldSet = !exclude.includes(key)
-        if (shouldSet) {
-          dataRestored[key] = values[key]
-          setValue(key, values[key], {
-            shouldValidate: validate,
-            shouldDirty: dirty,
-          })
-        }
+        setValue(key, values[key])
       })
-
-      if (onDataRestored) {
-        onDataRestored(dataRestored)
-      }
+    } else {
+      values = watch()
     }
   }, [name])
 
   useEffect(() => {
+    values = watch()
     getStorage().setItem(name, JSON.stringify(values))
   })
 
   return {
-    clear: () => getStorage().removeItem(name),
+    clear: () => {
+      const data = { ...watch() }
+      const dataKeys = Object.keys(data)
+      const resetData = dataKeys.reduce(
+        (acc, cur) => ((acc[cur] = ''), acc),
+        {}
+      )
+      getStorage().removeItem(name)
+      reset({ ...resetData })
+    },
   }
 }
 

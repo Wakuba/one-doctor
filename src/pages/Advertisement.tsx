@@ -15,7 +15,7 @@ const Advertisement: React.VFC = () => {
           )}
         >
           <div className='w-11/12 sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
-            <h1 className='sm:text-2xl ov-md:text-4xl text-white'>
+            <h1 className='sm:text-2xl ov-md:text-3xl text-white'>
               キャッチコピー
             </h1>
             <h3 className='sm:text-xl ov-md:text-2xl text-white'>
@@ -32,7 +32,7 @@ const Advertisement: React.VFC = () => {
           )}
         >
           <div className='w-11/12 sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
-            <h2 className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold mt-10'>
+            <h2 className='text-prime-blue-rich sm:text-2xl ov-md:text-3xl font-semibold mt-10'>
               CONTENTS
             </h2>
           </div>
@@ -45,7 +45,7 @@ const Advertisement: React.VFC = () => {
           )}
         >
           <div className='w-11/12 sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] '>
-            <h2 className='text-white sm:text-2xl ov-md:text-4xl font-semibold mt-10'>
+            <h2 className='text-white sm:text-2xl ov-md:text-3xl font-semibold mt-10'>
               ADVERTISEMENT
             </h2>
           </div>
@@ -57,7 +57,7 @@ const Advertisement: React.VFC = () => {
           )}
         >
           <div className='w-11/12 sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
-            <h2 className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold mt-10'>
+            <h2 className='text-prime-blue-rich sm:text-2xl ov-md:text-3xl font-semibold mt-10'>
               OUR VOICE
             </h2>
             <SignUpPort />
@@ -72,14 +72,14 @@ const Advertisement: React.VFC = () => {
 export default Advertisement
 
 const SignUpPort: React.VFC = () => (
-  <div className='mb-12 w-full flex flex-row justify-evenly'>
+  <div className='mb-12 w-full flex flex-row justify-evenly -sm'>
     <Link href='/SignUpDashboard'>
-      <a className='bg-white text-black shadow-all-dir w-52 h-16 rounded text-2xl font-medium flex justify-center items-center'>
+      <a className='bg-white text-black shadow-all-dir w-48 h-12 rounded text-lg font-medium flex justify-center items-center'>
         新規登録
       </a>
     </Link>
     <Link href='/LogIn'>
-      <a className='bg-gray-400 text-white shadow-all-dir w-52 h-16 rounded text-2xl font-medium flex items-center justify-center'>
+      <a className='bg-gray-400 text-white shadow-all-dir w-48 h-12 rounded text-lg font-medium flex items-center justify-center'>
         ログイン
       </a>
     </Link>

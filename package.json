@@ -14,6 +14,7 @@
     "@slack/web-api": "^6.5.0",
     "@types/react-scroll": "^1.8.3",
     "browser-image-compression": "^1.0.17",
+    "caniuse-lite": "^1.0.30001323",
     "clsx": "^1.1.1",
     "dompurify": "^2.3.4",
     "eslint-config-prettier": "^8.3.0",

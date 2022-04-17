@@ -1,11 +1,12 @@
-import { Children, ReactNode, useState } from 'react'
+import { Children, ReactNode, useState, VFC } from 'react'
 import TabButtons from '../tabs/TabButtons'
 
 interface TabsProps {
   children?: ReactNode
+  style: { tabButtonStyle: string }
 }
 
-export default function Tabs({ children }: TabsProps) {
+const Tabs: VFC<TabsProps> = ({ children, style }) => {
   const [activeTab, setActiveTab] = useState(0),
     changeTab: (value: number) => void = (tabNum) => {
       setActiveTab(tabNum)
@@ -19,6 +20,7 @@ export default function Tabs({ children }: TabsProps) {
         activeTab={activeTab}
         buttons={buttons}
         changeTab={changeTab}
+        style={style.tabButtonStyle}
       />
       {Children.toArray(children).map((child: any, key: number) => {
         buttons.push({ tabIdx: key, title: child.props.title })
@@ -30,3 +32,5 @@ export default function Tabs({ children }: TabsProps) {
     </>
   )
 }
+
+export default Tabs

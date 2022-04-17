@@ -15,7 +15,7 @@ export default function AboutUsPage() {
         '
         >
           <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
-            <h1 className='text-white sm:text-2xl ov-md:text-4xl font-semibold pt-10 mb-5'>
+            <h1 className='text-white sm:text-2xl ov-md:text-3xl font-semibold pt-10 mb-5'>
               ABOUT US
             </h1>
             <div className='shadow-xl mb-10 text-xs p-3.5'>
@@ -23,7 +23,7 @@ export default function AboutUsPage() {
               キャッチコピーを手書き文字のような感じにしたいです。（エモい感じの）
               トップページと同じでいいです{' '}
             </div>
-            <p className='text-white sm:text-2xl ov-md:text-4xl font-semibold'>
+            <p className='text-white sm:text-2xl ov-md:text-3xl font-semibold'>
               OUR MISSION
             </p>
             <div className='text-white '>
@@ -46,7 +46,7 @@ export default function AboutUsPage() {
         >
           <RichBlueTLSquare />
           <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
-            <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold mb-5'>
+            <div className='text-prime-blue-rich sm:text-2xl ov-md:text-3xl font-semibold mb-5'>
               運営について
             </div>
             <p className='text-sm mb-10'>
@@ -60,7 +60,7 @@ export default function AboutUsPage() {
 
         <section className='bg-prime-blue-muted flex flex-col items-center'>
           <div className=' sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
-            <div className='text-prime-blue-rich sm:text-2xl ov-md:text-4xl font-semibold mb-5'>
+            <div className='text-prime-blue-rich sm:text-2xl ov-md:text-3xl font-semibold mb-5'>
               ABOUT LOGO
             </div>
             <div className='w-full ov-md:grid ov-md:grid-cols-2 ov-md:grid-flow-row'>

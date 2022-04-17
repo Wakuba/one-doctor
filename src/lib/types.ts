@@ -49,15 +49,6 @@ interface TopSectionType {
   otherPoint: string
 }
 
-export interface BasicInfoTabType {
-  curriculum?: string
-  curriculumImgUrl?: string
-  route?: string
-  licence?: string
-  others?: string
-  othersImgUrl?: string
-}
-
 export interface CrewCardListTabType {
   crewImgUrl: string
   crewName: string
@@ -70,11 +61,11 @@ export interface CrewCardListTabType {
 }
 
 interface SnsTabType {
-  twitterTimelineUrl: string
+  userId: string
 }
 
 interface TabMenuType {
-  basicInfoTab: BasicInfoTabType
+  basicInfoTab: any
   geographicalInformationTab: {
     googleMapIframe: RegExpMatchArray | string
     geographicalInformationDescription: string
@@ -111,6 +102,7 @@ export interface OdUserAuthState {
 
 export interface SignUpDataType {
   uid?: string
+  ts: Date
   name: string
   email: string
   password: string
@@ -118,7 +110,7 @@ export interface SignUpDataType {
   gender: string
   isStudent: boolean
   favoDeparts: string[]
-  favoEvents: string[]
+  favoEvents: any[]
 }
 
 export interface SignUpDataTypeForStudent extends SignUpDataType {
@@ -150,14 +142,14 @@ export interface LoginDataType {
   password: string
 }
 
-export type odUserDataType =
+export type OdUserDataType =
   | SignUpDataTypeForStudent
   | SignUpDataTypeForNotStudent
 
-export interface odUserContextType {
+export interface OdUserContextType {
   odUser: User | null
   isLoading: boolean
-  odUserData: odUserDataType
+  odUserData: OdUserDataType
   signUp: ({ name, email, password, ...rest }: SignUpDataTypeForStudent) => void
   logIn: ({ email, password }: LoginDataType) => Promise<void | User>
   logOut: () => Promise<void>
@@ -176,21 +168,63 @@ export interface OfficialWebSiteDataType {
   url: string
 }
 
-export interface newVideoDataType {
+export interface NewVideoDataType {
+  id: string
   title: string
   videoUrl: string
   thumbnailUrl: string
 }
 
-export interface depPathDataType {
+export interface DepPathDataType {
   id: string
   path: string
   depName: string
 }
 
-export interface voiceDataType {
-  contributor: string
-  contents: string
+export interface VoiceDataType {
+  name: string
+  uid?: string
+  ts: Date
+  grade: string
+  year: string
+  month: string
   departmentNameInJapanese: string
   universityNameInJapanese: string
+  facility?: {
+    goodPoint?: string
+    dissatisfiedPoint?: string
+    comprehensiveEvaluation?: string
+  }
+  coaching?: {
+    goodPoint?: string
+    dissatisfiedPoint?: string
+    procedure?: string
+    teaching?: string
+    report?: string
+    conference?: string
+    comprehensiveEvaluation?: string
+  }
+  clinicalCase?: {
+    goodPoint?: string
+    dissatisfiedPoint?: string
+    desease?: string
+    specialityBias?: string
+    comprehensiveEvaluation?: string
+  }
+  atomosphere?: {
+    goodPoint?: string
+    dissatisfiedPoint?: string
+    teachers?: string
+    comprehensiveEvaluation?: string
+  }
+  impression?: string
+  prepare?: string
+  materials?: string
+  messageToStudents?: string
+  isPublic: '公開' | '非公開'
+}
+
+export interface FavoDepDataType {
+  favoDepName: { nameInJap: string; nameInEng: string }
+  favoDepUrl: string
 }

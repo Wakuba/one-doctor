@@ -29,7 +29,7 @@ export const ModalMainArea = ({
   children,
   modalWrapperStyle,
   modalContainerStyle,
-  zIndex = 'z-50',
+  zIndex = 'z-60',
 }: ModalMainAreaPropsType) =>
   closeModal ? (
     <div

@@ -5,13 +5,16 @@ import clsx from 'clsx'
 type DepartKanbanProps = {
   children: ReactNode
   pageUrl?: string
+  style?: string
 }
 
-export default function DepartKanban({ children, pageUrl }: DepartKanbanProps) {
+export default function DepartKanban({
+  children,
+  pageUrl,
+  style,
+}: DepartKanbanProps) {
   const router = useRouter()
   const isExternal = String(pageUrl).search(new RegExp('^http.*', 'g')) !== -1
-  console.log(isExternal)
-  console.log(pageUrl)
   if (isExternal) {
     return (
       <a
@@ -21,10 +24,11 @@ export default function DepartKanban({ children, pageUrl }: DepartKanbanProps) {
         className={clsx(
           'bg-white rounded shadow-xl flex flex-row items-center justify-center',
           'sm:h-14 sm:w-52',
-          'ov-md:h-16 ov-md:w-64'
+          'ov-md:h-16 ov-md:w-64',
+          style
         )}
       >
-        <div className='sm:text-xs md:text-sm lg:text-1vw ov-xl:text-sm mr-4 '>
+        <div className='sm:text-xs md:text-sm lg:text-1vw ov-xl:text-sm mx-4 '>
           {children}
         </div>
       </a>
@@ -38,7 +42,8 @@ export default function DepartKanban({ children, pageUrl }: DepartKanbanProps) {
         className={clsx(
           'bg-white rounded shadow-xl flex flex-row items-center',
           'sm:h-14 sm:w-52',
-          'ov-md:h-16 ov-md:w-64'
+          'ov-md:h-16 ov-md:w-64',
+          style
         )}
       >
         <img

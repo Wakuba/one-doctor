@@ -20,6 +20,7 @@ import {
   prifectureList,
   universityList,
 } from '../../../public/staticData'
+import { useRouter } from 'next/router'
 
 interface StudentSignUpFormDataType {
   departmentWishFor: string[]
@@ -36,13 +37,14 @@ interface StudentSignUpFormDataType {
   passwordTwo: string
   university: string
   workplaceWishFor: string[]
+  ts: Date
 }
 
-const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
+const StudentSignUpForm: VFC = () => {
   const { signUp } = useAuthProvider()
+  const router = useRouter()
   const [isStudentAuthErrorModalOpen, setIsStudentAuthErrorModalOpen] =
     useState(false)
-  const [isSubmittedModal, setIsSubmittedModal] = useState(false)
   const [emailAlreadyInUseModal, setEmailAlreadyInUseModal] = useState(false)
   const onSubmit = (data: StudentSignUpFormDataType) => {
     const cleansedData = {
@@ -58,14 +60,14 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
       isStudent: true,
       favoDeparts: [],
       favoEvents: [],
+      ts: new Date(),
     }
-    console.log('cleansed', data)
     if (univEmailValidator(data.emailUniv)) {
-      console.log('医学生認証完了')
       signUp(cleansedData)
-        .then((res) => {
-          console.log(res)
-          setIsSubmittedModal(true)
+        .then(() => {
+          setEmailAlreadyInUseModal(false)
+          setIsStudentAuthErrorModalOpen(false)
+          router.push('/AccountRegistrationFinished')
         })
         .catch((e) => {
           if (e.code === 'auth/email-already-in-use')
@@ -74,10 +76,13 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
     } else {
       setIsStudentAuthErrorModalOpen(true)
     }
+    setEmailAlreadyInUseModal(false)
+    setIsStudentAuthErrorModalOpen(false)
+    router.push('/AccountRegistrationFinished')
   }
 
   return (
-    <div className={style}>
+    <>
       {isStudentAuthErrorModalOpen && (
         <>
           <ModalMainArea
@@ -106,20 +111,6 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
           <ModalBackdrop closeModal={() => setEmailAlreadyInUseModal(false)} />
         </>
       )}
-      {isSubmittedModal && (
-        <>
-          <ModalMainArea
-            modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
-            modalContainerStyle='w-full space-y-4'
-            closeModal={() => setIsSubmittedModal(false)}
-            zIndex='z-60'
-          >
-            アカウントの登録はまだ完了していません。
-            認証メールが届きますので、そちらのURLをクリックして完了となります。
-          </ModalMainArea>
-          <ModalBackdrop closeModal={() => setIsSubmittedModal(false)} />
-        </>
-      )}
       <div title='topSection'>
         <h1 className='mt-10 text-prime-blue-rich font-semibold text-2xl mb-6'>
           新規登録 for 医学生
@@ -146,7 +137,7 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
             type: 'text',
             placeholderOne: '姓',
             placeholderTwo: '名',
-            style: { wholeStyle: 'mb-10' },
+            style: { wrapperStyle: 'mb-10' },
           }}
         >
           お名前
@@ -159,7 +150,7 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
             type: 'text',
             placeholderOne: 'せい',
             placeholderTwo: 'めい',
-            style: { wholeStyle: 'pb-20' },
+            style: { wrapperStyle: 'pb-20' },
           }}
         >
           ふりがな
@@ -184,7 +175,7 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
             },
             nameOne: 'emailOne',
             titleOne: 'メールアドレス',
-            subTitleOne: '大学のメアド以外を入力してください',
+            subTitleOne: '大学のメールアドレス以外を入力してください',
             nameTwo: 'emailTwo',
             titleTwo: 'メールアドレス(確認用)',
             subTitleTwo: '確認のためもう一度入力してください',
@@ -194,9 +185,9 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
           {...{
             name: 'emailUniv',
             type: 'email',
-            style: { wholeStyle: 'block', inputStyle: 'block' },
+            style: { wrapperStyle: 'block', inputStyle: 'block' },
             subTitle:
-              '医学生認証を行います。登録後にこのメアドにきたURLから本登録してください',
+              '医学生認証を行います。登録後にこのメールアドレスにきたURLから本登録してください',
           }}
         >
           大学のメールアドレス
@@ -255,7 +246,7 @@ const StudentSignUpForm: VFC<{ style: string }> = ({ style }) => {
           送信する
         </SubmitButton>
       </Form>
-    </div>
+    </>
   )
 }
 export default StudentSignUpForm

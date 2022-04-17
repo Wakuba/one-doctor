@@ -24,7 +24,6 @@ const CrewCard: React.VFC<CrewCardPropsType> = ({ crewData, layoutStyle }) => {
     [arrowVanisher, setArrowVanisher] = useState<boolean>(false)
   const flip = () => {
     setIsFliped(!isFliped)
-    console.log('fliped')
   }
   const {
     crewName,

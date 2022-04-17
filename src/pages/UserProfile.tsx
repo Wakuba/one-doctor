@@ -24,7 +24,7 @@ const UserProfile: React.VFC = () => {
     permissionChecker()
   }, [auth])
   const userData = auth.odUserData
-  console.log('userdata', userData)
+  // console.log('userdata', userData)
   return (
     <>
       <Header />

@@ -4,9 +4,9 @@ import { useContext, createContext, ReactNode } from 'react'
 
 //Custom functions
 import { useAuthProvider } from './customHooks/useAuthProvider'
-import { odUserContextType } from './types'
+import { OdUserContextType } from './types'
 
-const AuthContext = createContext<odUserContextType>({
+const AuthContext = createContext<OdUserContextType>({
   odUser: null,
   isLoading: true,
   odUserData: {
@@ -23,6 +23,7 @@ const AuthContext = createContext<odUserContextType>({
     university: '',
     workplaceWishFor: [],
     departmentWishFor: [],
+    ts: new Date(),
   } || {
     uid: '',
     name: '',
@@ -37,6 +38,7 @@ const AuthContext = createContext<odUserContextType>({
     workplace: '',
     workplaceWishFor: [],
     authorizedByAdmin: false,
+    ts: new Date(),
   },
   signUp: async () => {},
   logIn: async () => {},

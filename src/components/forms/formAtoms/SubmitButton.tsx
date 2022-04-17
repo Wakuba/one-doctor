@@ -5,7 +5,7 @@ interface SubmitButtonPropsType {
   name?: string
   children?: string
   style?: {
-    wholeStyle?: string
+    wrapperStyle?: string
     buttonStyle?: string
   }
 }
@@ -17,7 +17,7 @@ const SubmitButton: VFC<SubmitButtonPropsType> = ({
 }) => (
   <div
     title={name}
-    className={`${style?.wholeStyle} flex justify-center pb-10`}
+    className={`${style?.wrapperStyle} flex justify-center pb-10`}
   >
     <button
       type='submit'
