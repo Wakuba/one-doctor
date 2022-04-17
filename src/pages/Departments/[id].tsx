@@ -35,7 +35,6 @@ import GeoInfoTab from '../../components/departments/GeoInfoTab'
 
 export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
   const {
-    heroImgUrl,
     departmentName,
     universityName,
     hospitalName,
@@ -79,7 +78,7 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
           <section className='mb-16 relative w-full flex flex-col items-center'>
             <DepTopSection
               depName={departmentName.departmentNameInJapanese}
-              heroImgUrl={heroImgUrl}
+              heroImgUrl={postData?.heroImgUrl}
               educationalPoint={topSection.educationalPoint}
               clinicalPoint={topSection.clinicalPoint}
               researchPoint={topSection.researchPoint}
