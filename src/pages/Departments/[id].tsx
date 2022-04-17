@@ -43,9 +43,9 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
             <div className='flex-col ov-md:pt-20 w-full'>
               {/* sm:w-11/12  ov-md:w-8/12  */}
               <h1 className='text-white text-xl font-semibold mb-1'>
-                {postData.hospitalName.hospitalNameInJapanese}
+                {postData?.hospitalName.hospitalNameInJapanese}
                 {'　'}
-                {postData.departmentName.departmentNameInJapanese}
+                {postData?.departmentName.departmentNameInJapanese}
               </h1>
               <p className='text-white text-xs mb-1'>
                 {postData.hospitalName.hospitalNameInEnglish}-
@@ -227,13 +227,31 @@ export const getStaticProps: GetStaticProps<
     const postData: DepPostDataType = {
       heroImgUrl: url ?? '',
       officialWebSite: data?.officialWebSite ?? '',
-      departmentName: data?.departmentName ?? '',
-      universityName: data?.universityName ?? '',
-      hospitalName: data?.hospitalName ?? '',
-      topSection: data?.topSection ?? '',
+      departmentName: data?.departmentName ?? {
+        departmentNameInEnglish: '',
+        departmentNameInJapanese: '',
+      },
+      universityName: data?.universityName ?? {
+        universityNameInEnglish: '',
+        universityNameInJapanese: '',
+      },
+      hospitalName: data?.hospitalName ?? {
+        hospitalNameInEnglish: '',
+        hospitalNameInJapanese: '',
+      },
+      topSection: data?.topSection ?? {
+        educationalPoint: '',
+        clinicalPoint: '',
+        researchPoint: '',
+        otherPoint: '',
+      },
       tabMenu: {
         basicInfoTab: data?.tabMenu.basicInfoTab ?? '',
-        geographicalInformationTab: data?.tabMenu.geographicalInformationTab,
+        geographicalInformationTab: data?.tabMenu
+          .geographicalInformationTab ?? {
+          googleMapIframe: '',
+          geographicalInformationDescription: '',
+        },
         snsTab: {
           // twitterTimelineUrl:
           //   getUrlFromTwitterTimeline(
