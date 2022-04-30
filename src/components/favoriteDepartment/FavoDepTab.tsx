@@ -8,7 +8,6 @@ interface FavoTabPropsType {
 }
 
 const FavoDepTab: VFC<FavoTabPropsType> = ({ title, favoDepList }) => {
-  console.log('onFavoDepTab', favoDepList)
   return (
     <div {...{ title, className: 'min-h-[100px] p-4' }}>
       <p className='text-prime-blue-rich font-semibold'>お気に入り診療科一覧</p>

@@ -29,7 +29,6 @@ const EventKanban: React.VFC<EventKanbanPropsType> = (props) => {
       const favoEvents = auth.odUserData.favoEvents
       const favoEventsIDs = favoEvents.map((event) => event.eventId)
       if (favoEventsIDs.includes(eventId)) setIsFavorite(true)
-      console.log(isFavorite)
     }
   }, [])
 
@@ -51,7 +50,6 @@ const EventKanban: React.VFC<EventKanbanPropsType> = (props) => {
               <a
                 target='_blank'
                 onClick={() => {
-                  console.log('onClick機能')
                   updateFavoEvents({
                     name,
                     date,
@@ -123,7 +121,6 @@ const updateFavoEvents = (favoEventData) => {
   const curUser = auth.currentUser
   if (curUser) {
     const ref = doc(db, 'odUsers', curUser.uid)
-    console.log(ref)
     updateDoc(ref, { favoEvents: arrayUnion({ ...favoEventData }) })
   }
 }

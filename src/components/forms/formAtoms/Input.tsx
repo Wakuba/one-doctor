@@ -28,7 +28,6 @@ const Input: VFC<InputPropsType> = ({
   if (type === 'email') errorMessage = 'メールアドレスが記入されていません'
   else if (type === 'password') errorMessage = 'パスワードを入力してください'
   else errorMessage = '入力されていません'
-  console.log('errorMessage', errorMessage)
   return (
     <div className={`${style?.wrapperStyle}`}>
       <label

@@ -124,7 +124,6 @@ const MyPageLink: VFC<{ setIsMenuEventActive?: any; permissionChecker: any }> =
           onClick={() => {
             if (setIsMenuEventActive) setIsMenuEventActive(false)
             if (permissionChecker()) router.push('/UserDashboard')
-            console.log(permissionChecker())
           }}
           className='w-auto h-auto flex flex-col items-center justify-center text-center text-stroke !pointer-events-auto list-none cursor-pointer z-50 text-white lg:text-xs ov-xl:text-sm'
         >

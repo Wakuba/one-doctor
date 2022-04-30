@@ -9,11 +9,9 @@ interface EventTabPropsType {
 }
 
 const EventTab: React.VFC<EventTabPropsType> = ({ title, univ, dep }) => {
-  console.log(title, univ, dep)
   const { data } = useSWR(
     `https://script.google.com/macros/s/AKfycbwdR7YCQLfIbxqMKT0LDQ-ItFsJsP_pF0OUFMIbVYuTTWHdQYaTCqrmAzPRMrjeaMKe/exec?dep=${dep.departmentNameInJapanese}&univ=${univ.universityNameInJapanese}`
   )
-  console.log('data', data)
 
   if (!data)
     return (

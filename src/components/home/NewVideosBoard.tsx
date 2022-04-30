@@ -20,7 +20,6 @@ const NewVideosBoard: VFC<NewVideosBoardPropsType> = ({ videosData }) => {
     videosData = [
       { id: '', title: '無名', videoUrl: '特になし', thumbnailUrl: '特になし' },
     ]
-  console.log('moviesDataだよー', videosData)
   const videosDataCompleted = videosData.map((data) => {
     const id = data.id
     const videoUlr = data.videoUrl
@@ -40,7 +39,6 @@ const NewVideosBoard: VFC<NewVideosBoardPropsType> = ({ videosData }) => {
       }
     }
   })
-  console.log('data', videosDataCompleted)
   return (
     <>
       <div className='w-full'>
@@ -54,7 +52,6 @@ const NewVideosBoard: VFC<NewVideosBoardPropsType> = ({ videosData }) => {
           <div className='w-[1920px] flex flex-row'>
             {videosDataCompleted.map((data, key) => {
               const { title, videoId, thumbnailUrl } = data
-              console.log(data)
               return (
                 thumbnailUrl && (
                   <Video

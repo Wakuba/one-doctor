@@ -30,7 +30,6 @@ const UserDashboard: React.VFC<UserDashboardPropsType> = (props) => {
     })
     return () => unsbscribe()
   }, [auth])
-  console.log(props.newsBoardData, 'どうですか')
   return (
     <>
       <Header />
@@ -69,7 +68,6 @@ export const getStaticProps = async () => {
       where('_fl_meta_.schema', '==', 'topPageNewsBoard')
     )
     const snapshotDash = await getDocs(q)
-    console.log(snapshotDash)
     const newsBoardData: { id: string; title: string; detail: string }[] =
       snapshotDash.docs.map((doc) => {
         return {
@@ -78,10 +76,8 @@ export const getStaticProps = async () => {
           detail: doc.data().newsDetail,
         }
       })
-    console.log(newsBoardData)
     return { props: { newsBoardData } }
   } catch (error) {
-    console.log('Error getting news documents from FlameLink; ', error)
     return { props: { newsBoardData: [] } }
   }
 }

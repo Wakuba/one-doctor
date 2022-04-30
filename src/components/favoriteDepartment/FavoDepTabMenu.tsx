@@ -12,16 +12,13 @@ const FavoTabMenu = () => {
   useEffect(() => {
     const auth = getAuth()
     const curUser = auth.currentUser
-    console.log('inUseEffect')
     if (curUser) {
       const uid = curUser.uid
       const ref = doc(db, 'odUsers', uid)
-      console.log('inCurUsr')
       getDoc(ref).then((snap) => {
         const data = snap.data()
         const depList = data?.favoDeparts
         setFavoDepList(depList)
-        console.log('inGetDoc')
       })
     }
   }, [])
