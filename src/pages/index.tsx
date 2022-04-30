@@ -40,18 +40,10 @@ interface HomePropsType {
   newVideos: NewVideoDataType[]
   voices: any[]
 }
-// 'after:h-[15vw] after:w-[15vw] after:max-w-[216px] after:max-h-[216px] after:absolute after:bg-prime-blue-rich after:right-0 after:bottom-0 after:-z-10',
-//             'before:h-[15vw] before:w-[15vw] before:max-w-[216px] before:max-h-[216px] before:absolute before:bg-prime-blue-rich before:left-0 before:top-0 before:-z-10'
 
 const Home: VFC<HomePropsType> = (props) => {
   const { newsBoardData, newVideos, depList, officialWebSiteData, voices } =
     props
-  // console.log(props)
-  // const { data, error } = useSWR(
-  //   'https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyBPWdOhQK4MIm9GCg2WkMol7ptJU7lxuvU&part=snippet&id=PIrZ9QRXYzI'
-  // )
-  // console.log('imagedata', data.items[1].snippet.thumbnails.high.url)
-  // console.log('newMovie', newVideos)
 
   return (
     <>
@@ -282,6 +274,8 @@ const Home: VFC<HomePropsType> = (props) => {
 export default Home
 
 export const getStaticProps: GetStaticProps<HomePropsType> = async () => {
+
+  // トップページのNewsをフェッチ
   const q0 = query(
     collection(db, 'fl_content'),
     where('_fl_meta_.schema', '==', 'topPageNewsBoard')
@@ -289,9 +283,9 @@ export const getStaticProps: GetStaticProps<HomePropsType> = async () => {
   const snapshot0 = await getDocs(q0)
   const newsBoardData = snapshot0.docs.map((doc) => {
     return {
-      id: doc.data().id,
-      title: doc.data().newsTitle,
-      detail: doc.data().newsDetail,
+      id: doc.data().id ?? '0000',
+      title: doc.data().newsTitle ?? 'Empty News Title',
+      detail: doc.data().newsDetail ?? 'Epmty News Detail',
     }
   })
 
@@ -401,7 +395,6 @@ export const getStaticProps: GetStaticProps<HomePropsType> = async () => {
           info.thumbnailUrl = url
         }
         return info
-        console.log(info)
       }
     )
   )
@@ -420,8 +413,8 @@ export const getStaticProps: GetStaticProps<HomePropsType> = async () => {
       universityNameInJapanese: doc.data().universityNameInJapanese ?? '',
     }
   })
-  // console.log(props)
-  const props: HomePropsType = {
+
+  const props = {
     newsBoardData,
     depList,
     officialWebSiteData,
