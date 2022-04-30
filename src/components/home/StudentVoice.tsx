@@ -11,7 +11,7 @@ const StudentVoice: React.VFC<any> = ({ data }) => {
         )}
       >
         <div className='overflow-scroll'>
-          <div className='h-[308px]'>
+          <div className='h-[308px] w-full'>
             <div
               className='text-sm breakAll'
               dangerouslySetInnerHTML={{ __html: data.contents }}
