@@ -274,7 +274,6 @@ const Home: VFC<HomePropsType> = (props) => {
 export default Home
 
 export const getStaticProps: GetStaticProps<HomePropsType> = async () => {
-
   // トップページのNewsをフェッチ
   const q0 = query(
     collection(db, 'fl_content'),
