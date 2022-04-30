@@ -8,4 +8,5 @@ module.exports = {
       'youbu.be',
     ],
   },
+  swcMinify: true,
 }
