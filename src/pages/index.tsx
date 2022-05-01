@@ -275,154 +275,161 @@ export default Home
 
 export const getStaticProps: GetStaticProps<HomePropsType> = async () => {
   // トップページのNewsをフェッチ
-  const q0 = query(
-    collection(db, 'fl_content'),
-    where('_fl_meta_.schema', '==', 'topPageNewsBoard')
-  )
-  const snapshot0 = await getDocs(q0)
-  const newsBoardData = snapshot0.docs.map((doc) => {
-    return {
-      id: doc.data().id ?? '0000',
-      title: doc.data().newsTitle ?? 'Empty News Title',
-      detail: doc.data().newsDetail ?? 'Epmty News Detail',
-    }
-  })
-
-  // create department page url
-  const q1 = query(
-    collection(db, 'fl_content'),
-    where('_fl_meta_.schema', '==', 'departmentPage')
-  )
-  const snapshot1 = await getDocs(q1)
-  const depList = snapshot1.docs.map((doc) => {
-    if (doc.data().id) {
+  try {
+    const q0 = query(
+      collection(db, 'fl_content'),
+      where('_fl_meta_.schema', '==', 'topPageNewsBoard')
+    )
+    const snapshot0 = await getDocs(q0)
+    const newsBoardData = snapshot0.docs.map((doc) => {
       return {
-        id: doc.data().id ?? 'toppage',
-        path: `/Departments/${doc.data().id}`,
-        depName: doc.data().departmentName,
+        id: doc.data().id ?? '0000',
+        title: doc.data().newsTitle ?? 'Empty News Title',
+        detail: doc.data().newsDetail ?? 'Epmty News Detail',
       }
-    } else {
-      return {
-        id: 'no department page',
-        path: '/',
-        depName: 'topPage',
-      }
-    }
-  })
+    })
 
-  // get web site url
-  const q2 = query(
-    collection(db, 'fl_content'),
-    where('_fl_meta_.schema', '==', 'topPageOfficialWebSiteUrls')
-  )
-  const snapshot2 = await getDocs(q2)
-  const officialWebSiteData = snapshot2.docs.map(
-    (doc): OfficialWebSiteDataType => {
-      const data = doc.data()
-      return {
-        universityNameInJapanese: data.universityNameInJapanese,
-        departmentNameInJapanese: data.departmentNameInJapanese,
-        url: data.officialWebSiteUrl,
-      }
-    }
-  )
-
-  //新着動画一覧を取得
-  //   const newVideos = await Promise.all(
-  //     snapshotDash.docs.map(async (document) => {
-  //       const videoInfo = await thumbnailIdExtractor(document).then(
-  //         async (res) => {
-  //           console.log('response', res)
-  //           const thumbnailId = res.thumbnailId
-  //           if (thumbnailId === '') {
-  //             return {
-  //               title: res.title,
-  //               videoUrl: res.videoUrl,
-  //               thumbnailUrl: '',
-  //             }
-  //           } else {
-  //             const snapshot = await getDoc(doc(db, 'fl_files', thumbnailId))
-  //             const thumbnailName = snapshot.data()?.file
-  //             const url = await getDownloadURL(
-  //               ref(storage, `flamelink/media/${thumbnailName}`)
-  //             )
-  //             return {
-  //               title: res.title,
-  //               videoUrl: res.videoUrl,
-  //               thumbnailUrl: url,
-  //             }
-  //           }
-  //         }
-  //       )
-  //       return videoInfo
-  //     })
-  //   )
-  //   props.newVideos = newVideos
-  // } catch (e) {
-  //   console.log(e)
-  // }
-
-  const q3 = query(
-    collection(db, 'fl_content'),
-    where('_fl_meta_.schema', '==', 'topPageNewVideos')
-  )
-  const snapshot3 = await getDocs(q3)
-  const newVideos = await Promise.all(
-    snapshot3.docs.map(
-      async (document: QueryDocumentSnapshot<DocumentData>) => {
-        const info = {
-          title: '',
-          id: '',
-          videoUrl: '',
-          thumbnailUrl: '',
+    // create department page url
+    const q1 = query(
+      collection(db, 'fl_content'),
+      where('_fl_meta_.schema', '==', 'departmentPage')
+    )
+    const snapshot1 = await getDocs(q1)
+    const depList = snapshot1.docs.map((doc) => {
+      if (doc.data().id) {
+        return {
+          id: doc.data().id ?? 'toppage',
+          path: `/Departments/${doc.data().id}`,
+          depName: doc.data().departmentName,
         }
-        info.title = document.data().title
-        info.id = document.data().id
-        info.videoUrl = document.data().videoUrl
-        const thumbnailRef = document.data().verticalThumbnail[0]
-        if (thumbnailRef) {
-          const snap = await getDoc(thumbnailRef)
-          const thumbnailDoc = snap.data() as DocumentData
-          const verticalThumbnailId = thumbnailDoc.id as string
-          const imageSnap = await getDoc(
-            doc(db, 'fl_files', verticalThumbnailId)
-          )
-          const thumbnailName = imageSnap.data()?.file
-          const url = await getDownloadURL(
-            ref(storage, `flamelink/media/${thumbnailName}`)
-          )
-          info.thumbnailUrl = url
+      } else {
+        return {
+          id: 'no department page',
+          path: '/',
+          depName: 'topPage',
         }
-        return info
+      }
+    })
+
+    // get web site url
+    const q2 = query(
+      collection(db, 'fl_content'),
+      where('_fl_meta_.schema', '==', 'topPageOfficialWebSiteUrls')
+    )
+    const snapshot2 = await getDocs(q2)
+    const officialWebSiteData = snapshot2.docs.map(
+      (doc): OfficialWebSiteDataType => {
+        const data = doc.data()
+        return {
+          universityNameInJapanese: data.universityNameInJapanese,
+          departmentNameInJapanese: data.departmentNameInJapanese,
+          url: data.officialWebSiteUrl,
+        }
       }
     )
-  )
 
-  // トップページの医学生の声をfirebaseから取ってくる
-  const q4 = query(
-    collection(db, 'fl_content'),
-    where('_fl_meta_.schema', '==', 'topPageStudentsVoices')
-  )
-  const snapshot4 = await getDocs(q4)
-  const voices = snapshot4.docs.map((doc) => {
-    return {
-      contributor: doc.data().contributor ?? '',
-      contents: doc.data().contents ?? '',
-      departmentNameInJapanese: doc.data().departmentNameInJapanese ?? '',
-      universityNameInJapanese: doc.data().universityNameInJapanese ?? '',
+    //新着動画一覧を取得
+    //   const newVideos = await Promise.all(
+    //     snapshotDash.docs.map(async (document) => {
+    //       const videoInfo = await thumbnailIdExtractor(document).then(
+    //         async (res) => {
+    //           console.log('response', res)
+    //           const thumbnailId = res.thumbnailId
+    //           if (thumbnailId === '') {
+    //             return {
+    //               title: res.title,
+    //               videoUrl: res.videoUrl,
+    //               thumbnailUrl: '',
+    //             }
+    //           } else {
+    //             const snapshot = await getDoc(doc(db, 'fl_files', thumbnailId))
+    //             const thumbnailName = snapshot.data()?.file
+    //             const url = await getDownloadURL(
+    //               ref(storage, `flamelink/media/${thumbnailName}`)
+    //             )
+    //             return {
+    //               title: res.title,
+    //               videoUrl: res.videoUrl,
+    //               thumbnailUrl: url,
+    //             }
+    //           }
+    //         }
+    //       )
+    //       return videoInfo
+    //     })
+    //   )
+    //   props.newVideos = newVideos
+    // } catch (e) {
+    //   console.log(e)
+    // }
+
+    const q3 = query(
+      collection(db, 'fl_content'),
+      where('_fl_meta_.schema', '==', 'topPageNewVideos')
+    )
+    const snapshot3 = await getDocs(q3)
+    const newVideos = await Promise.all(
+      snapshot3.docs.map(
+        async (document: QueryDocumentSnapshot<DocumentData>) => {
+          const info = {
+            title: '',
+            id: '',
+            videoUrl: '',
+            thumbnailUrl: '',
+          }
+          info.title = document.data().title
+          info.id = document.data().id
+          info.videoUrl = document.data().videoUrl
+          const thumbnailRef = document.data().verticalThumbnail[0]
+          if (thumbnailRef) {
+            const snap = await getDoc(thumbnailRef)
+            const thumbnailDoc = snap.data() as DocumentData
+            const verticalThumbnailId = thumbnailDoc.id as string
+            const imageSnap = await getDoc(
+              doc(db, 'fl_files', verticalThumbnailId)
+            )
+            const thumbnailName = imageSnap.data()?.file
+            const url = await getDownloadURL(
+              ref(storage, `flamelink/media/${thumbnailName}`)
+            )
+            info.thumbnailUrl = url
+          }
+          return info
+        }
+      )
+    )
+
+    // トップページの医学生の声をfirebaseから取ってくる
+    const q4 = query(
+      collection(db, 'fl_content'),
+      where('_fl_meta_.schema', '==', 'topPageStudentsVoices')
+    )
+    const snapshot4 = await getDocs(q4)
+    const voices = snapshot4.docs.map((doc) => {
+      return {
+        contributor: doc.data().contributor ?? '',
+        contents: doc.data().contents ?? '',
+        departmentNameInJapanese: doc.data().departmentNameInJapanese ?? '',
+        universityNameInJapanese: doc.data().universityNameInJapanese ?? '',
+      }
+    })
+
+    const props = {
+      newsBoardData,
+      depList,
+      officialWebSiteData,
+      newVideos,
+      voices,
     }
-  })
 
-  const props = {
-    newsBoardData,
-    depList,
-    officialWebSiteData,
-    newVideos,
-    voices,
-  }
-
-  return {
-    props,
+    return {
+      props,
+    }
+  } catch (e) {
+    if (e instanceof Error) console.log(e.message)
+    return {
+      notFound: true,
+    }
   }
 }
 
