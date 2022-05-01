@@ -431,6 +431,7 @@ export const getStaticProps: GetStaticProps<HomePropsType> = async () => {
 
     return {
       props,
+      notFound: !props,
     }
   } catch (e) {
     if (e instanceof Error) console.log(e.message)

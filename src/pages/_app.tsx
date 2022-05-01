@@ -3,6 +3,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { AuthProvider } from '../lib/context'
+import ErrorBoundary from '../components/ErrorBoundary'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -16,9 +17,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <AuthProvider>
-        <Component {...pageProps} />
-      </AuthProvider>
+      <ErrorBoundary>
+        <AuthProvider>
+          <Component {...pageProps} />
+        </AuthProvider>
+      </ErrorBoundary>
     </>
   )
 }
