@@ -24,7 +24,7 @@ import {
   DepPathDataType,
 } from '../lib/types'
 import { collection, getDocs, query, where } from '@firebase/firestore'
-// import VoiceBoard from '../components/home/VoiceBoard'
+import VoiceBoard from '../components/home/VoiceBoard'
 import OriginalContentsBoard from '../components/home/OriginalContentsBoard'
 // import useSWR from 'swr'
 import { DocumentData } from '@google-cloud/firestore'
@@ -44,7 +44,6 @@ interface HomePropsType {
 const Home: VFC<HomePropsType> = (props) => {
   const { newsBoardData, newVideos, depList, officialWebSiteData, voices } =
     props
-  console.log(voices)
   return (
     <>
       <Header />
@@ -176,7 +175,7 @@ const Home: VFC<HomePropsType> = (props) => {
           </div>
         </section>
 
-        {/* <section
+        <section
           id='studentVoices'
           className={clsx(
             'bg-prime-blue-rich relative flex flex-col items-center',
@@ -194,7 +193,7 @@ const Home: VFC<HomePropsType> = (props) => {
             </div>
             <VoiceBoard voices={voices} />
           </div>
-        </section> */}
+        </section>
 
         <section
           id='originalContents'

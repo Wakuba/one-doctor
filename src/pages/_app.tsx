@@ -13,7 +13,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <link
           rel='icon'
           type='image/x-icon'
-          href='/public/images/favicon.ico'
+          href='/public/images/favicon.png'
         />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
