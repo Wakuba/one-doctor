@@ -1,3 +1,4 @@
+const securityHeaders = []
 module.exports = {
   images: {
     domains: [
@@ -9,4 +10,17 @@ module.exports = {
     ],
   },
   swcMinify: true,
+  async headers() {
+    return [
+      {
+        // Apply these headers to all routes in your application.
+        source: '/:path*',
+        headers: securityHeaders,
+      },
+      {
+        key: 'X-XSS-Protection',
+        value: '1; mode=block',
+      },
+    ]
+  },
 }
