@@ -275,58 +275,91 @@ export default Home
 
 export const getStaticProps: GetStaticProps<HomePropsType> = async () => {
   // トップページのNewsをフェッチ
+  let newsBoardData = [{ id: '', title: '', detail: '' }]
+  let depList = [{ id: '', path: '', depName: '' }]
+  let officialWebSiteData = [
+    { universityNameInJapanese: '', departmentNameInJapanese: '', url: '' },
+  ]
+  let newVideos = [
+    {
+      title: '',
+      id: '',
+      videoUrl: '',
+      thumbnailUrl: '',
+    },
+  ]
+  let voices = [
+    {
+      contributor: '',
+      contents: '',
+      departmentNameInJapanese: '',
+      universityNameInJapanese: '',
+    },
+  ]
   try {
-    const q0 = query(
-      collection(db, 'fl_content'),
-      where('_fl_meta_.schema', '==', 'topPageNewsBoard')
-    )
-    const snapshot0 = await getDocs(q0)
-    const newsBoardData = snapshot0.docs.map((doc) => {
-      return {
-        id: doc.data().id ?? '0000',
-        title: doc.data().newsTitle ?? 'Empty News Title',
-        detail: doc.data().newsDetail ?? 'Epmty News Detail',
-      }
-    })
+    try {
+      const q0 = query(
+        collection(db, 'fl_content'),
+        where('_fl_meta_.schema', '==', 'topPageNewsBoard')
+      )
+      const snapshot0 = await getDocs(q0)
+      newsBoardData = snapshot0.docs.map((doc) => {
+        return {
+          id: doc.data().id ?? '0000',
+          title: doc.data().newsTitle ?? 'Empty News Title',
+          detail: doc.data().newsDetail ?? 'Epmty News Detail',
+        }
+      })
+    } catch (e) {
+      if (e instanceof Error) console.log(e.message)
+    }
 
-    // create department page url
-    const q1 = query(
-      collection(db, 'fl_content'),
-      where('_fl_meta_.schema', '==', 'departmentPage')
-    )
-    const snapshot1 = await getDocs(q1)
-    const depList = snapshot1.docs.map((doc) => {
-      if (doc.data().id) {
-        return {
-          id: doc.data().id ?? 'toppage',
-          path: `/Departments/${doc.data().id}`,
-          depName: doc.data().departmentName,
+    try {
+      // create department page url
+      const q1 = query(
+        collection(db, 'fl_content'),
+        where('_fl_meta_.schema', '==', 'departmentPage')
+      )
+      const snapshot1 = await getDocs(q1)
+      depList = snapshot1.docs.map((doc) => {
+        if (doc.data().id) {
+          return {
+            id: doc.data().id ?? 'toppage',
+            path: `/Departments/${doc.data().id}`,
+            depName: doc.data().departmentName,
+          }
+        } else {
+          return {
+            id: 'no department page',
+            path: '/',
+            depName: 'topPage',
+          }
         }
-      } else {
-        return {
-          id: 'no department page',
-          path: '/',
-          depName: 'topPage',
-        }
-      }
-    })
+      })
+    } catch (e) {
+      if (e instanceof Error) console.log(e.message)
+    }
 
-    // get web site url
-    const q2 = query(
-      collection(db, 'fl_content'),
-      where('_fl_meta_.schema', '==', 'topPageOfficialWebSiteUrls')
-    )
-    const snapshot2 = await getDocs(q2)
-    const officialWebSiteData = snapshot2.docs.map(
-      (doc): OfficialWebSiteDataType => {
-        const data = doc.data()
-        return {
-          universityNameInJapanese: data.universityNameInJapanese,
-          departmentNameInJapanese: data.departmentNameInJapanese,
-          url: data.officialWebSiteUrl,
+    try {
+      // get web site url
+      const q2 = query(
+        collection(db, 'fl_content'),
+        where('_fl_meta_.schema', '==', 'topPageOfficialWebSiteUrls')
+      )
+      const snapshot2 = await getDocs(q2)
+      officialWebSiteData = snapshot2.docs.map(
+        (doc): OfficialWebSiteDataType => {
+          const data = doc.data()
+          return {
+            universityNameInJapanese: data.universityNameInJapanese,
+            departmentNameInJapanese: data.departmentNameInJapanese,
+            url: data.officialWebSiteUrl,
+          }
         }
-      }
-    )
+      )
+    } catch (e) {
+      if (e instanceof Error) console.log(e.message)
+    }
 
     //新着動画一覧を取得
     //   const newVideos = await Promise.all(
@@ -363,56 +396,64 @@ export const getStaticProps: GetStaticProps<HomePropsType> = async () => {
     //   console.log(e)
     // }
 
-    const q3 = query(
-      collection(db, 'fl_content'),
-      where('_fl_meta_.schema', '==', 'topPageNewVideos')
-    )
-    const snapshot3 = await getDocs(q3)
-    const newVideos = await Promise.all(
-      snapshot3.docs.map(
-        async (document: QueryDocumentSnapshot<DocumentData>) => {
-          const info = {
-            title: '',
-            id: '',
-            videoUrl: '',
-            thumbnailUrl: '',
-          }
-          info.title = document.data().title
-          info.id = document.data().id
-          info.videoUrl = document.data().videoUrl
-          const thumbnailRef = document.data().verticalThumbnail[0]
-          if (thumbnailRef) {
-            const snap = await getDoc(thumbnailRef)
-            const thumbnailDoc = snap.data() as DocumentData
-            const verticalThumbnailId = thumbnailDoc.id as string
-            const imageSnap = await getDoc(
-              doc(db, 'fl_files', verticalThumbnailId)
-            )
-            const thumbnailName = imageSnap.data()?.file
-            const url = await getDownloadURL(
-              ref(storage, `flamelink/media/${thumbnailName}`)
-            )
-            info.thumbnailUrl = url
-          }
-          return info
-        }
+    try {
+      const q3 = query(
+        collection(db, 'fl_content'),
+        where('_fl_meta_.schema', '==', 'topPageNewVideos')
       )
-    )
+      const snapshot3 = await getDocs(q3)
+      newVideos = await Promise.all(
+        snapshot3.docs.map(
+          async (document: QueryDocumentSnapshot<DocumentData>) => {
+            const info = {
+              title: '',
+              id: '',
+              videoUrl: '',
+              thumbnailUrl: '',
+            }
+            info.title = document.data().title
+            info.id = document.data().id
+            info.videoUrl = document.data().videoUrl
+            const thumbnailRef = document.data().verticalThumbnail[0]
+            if (thumbnailRef) {
+              const snap = await getDoc(thumbnailRef)
+              const thumbnailDoc = snap.data() as DocumentData
+              const verticalThumbnailId = thumbnailDoc.id as string
+              const imageSnap = await getDoc(
+                doc(db, 'fl_files', verticalThumbnailId)
+              )
+              const thumbnailName = imageSnap.data()?.file
+              const url = await getDownloadURL(
+                ref(storage, `flamelink/media/${thumbnailName}`)
+              )
+              info.thumbnailUrl = url
+            }
+            return info
+          }
+        )
+      )
+    } catch (e) {
+      if (e instanceof Error) console.log(e.message)
+    }
 
-    // トップページの医学生の声をfirebaseから取ってくる
-    const q4 = query(
-      collection(db, 'fl_content'),
-      where('_fl_meta_.schema', '==', 'topPageStudentsVoices')
-    )
-    const snapshot4 = await getDocs(q4)
-    const voices = snapshot4.docs.map((doc) => {
-      return {
-        contributor: doc.data().contributor ?? '',
-        contents: doc.data().contents ?? '',
-        departmentNameInJapanese: doc.data().departmentNameInJapanese ?? '',
-        universityNameInJapanese: doc.data().universityNameInJapanese ?? '',
-      }
-    })
+    try {
+      // トップページの医学生の声をfirebaseから取ってくる
+      const q4 = query(
+        collection(db, 'fl_content'),
+        where('_fl_meta_.schema', '==', 'topPageStudentsVoices')
+      )
+      const snapshot4 = await getDocs(q4)
+      voices = snapshot4.docs.map((doc) => {
+        return {
+          contributor: doc.data().contributor ?? '',
+          contents: doc.data().contents ?? '',
+          departmentNameInJapanese: doc.data().departmentNameInJapanese ?? '',
+          universityNameInJapanese: doc.data().universityNameInJapanese ?? '',
+        }
+      })
+    } catch (e) {
+      if (e instanceof Error) console.log(e.message)
+    }
 
     const props = {
       newsBoardData,
