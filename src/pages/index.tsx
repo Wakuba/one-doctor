@@ -296,6 +296,7 @@ export const getStaticProps: GetStaticProps<HomePropsType> = async () => {
       universityNameInJapanese: '',
     },
   ]
+
   try {
     try {
       const q0 = query(
@@ -360,41 +361,6 @@ export const getStaticProps: GetStaticProps<HomePropsType> = async () => {
     } catch (e) {
       if (e instanceof Error) console.log(e.message)
     }
-
-    //新着動画一覧を取得
-    //   const newVideos = await Promise.all(
-    //     snapshotDash.docs.map(async (document) => {
-    //       const videoInfo = await thumbnailIdExtractor(document).then(
-    //         async (res) => {
-    //           console.log('response', res)
-    //           const thumbnailId = res.thumbnailId
-    //           if (thumbnailId === '') {
-    //             return {
-    //               title: res.title,
-    //               videoUrl: res.videoUrl,
-    //               thumbnailUrl: '',
-    //             }
-    //           } else {
-    //             const snapshot = await getDoc(doc(db, 'fl_files', thumbnailId))
-    //             const thumbnailName = snapshot.data()?.file
-    //             const url = await getDownloadURL(
-    //               ref(storage, `flamelink/media/${thumbnailName}`)
-    //             )
-    //             return {
-    //               title: res.title,
-    //               videoUrl: res.videoUrl,
-    //               thumbnailUrl: url,
-    //             }
-    //           }
-    //         }
-    //       )
-    //       return videoInfo
-    //     })
-    //   )
-    //   props.newVideos = newVideos
-    // } catch (e) {
-    //   console.log(e)
-    // }
 
     try {
       const q3 = query(
