@@ -1,4 +1,4 @@
-import { createElement, useEffect } from 'react'
+import { createElement } from 'react'
 import {
   Control,
   FieldValues,
@@ -13,7 +13,7 @@ import {
   UseFormSetValue,
   UseFormWatch,
 } from 'react-hook-form'
-import useFormPersist from '../../lib/customHooks/useFormPersist'
+// import useFormPersist from '../../lib/customHooks/useFormPersist'
 
 interface FormPropsType {
   formName: string
@@ -51,14 +51,14 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
   //   console.log(names)
   // }
   // console.log('どうですか', watch())
-  const persist = useFormPersist('form_' + formName, watch, setValue, reset)
+  // const persist = useFormPersist('form_' + formName, watch, setValue, reset)
   // }
 
-  useEffect(() => {
-    if (formState?.isSubmitSuccessful) {
-      persist.clear()
-    }
-  }, [formState, reset])
+  // useEffect(() => {
+  //   if (formState?.isSubmitSuccessful) {
+  //     persist.clear()
+  //   }
+  // }, [formState, reset])
 
   return (
     <form name={formName} onSubmit={handleSubmit(onSubmit)} className={style}>

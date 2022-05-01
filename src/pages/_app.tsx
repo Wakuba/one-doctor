@@ -15,7 +15,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           href='/public/images/favicon.ico'
         />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-        <script src='/script-loader.js' nonce='rAnd0m'></script>
       </Head>
       <AuthProvider>
         <Component {...pageProps} />

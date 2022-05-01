@@ -187,6 +187,7 @@ export const getStaticPaths: GetStaticPaths<ParamsType> = async () => {
       params: { id: doc.data().id ?? '' },
     })
   })
+  console.log(paths)
   return {
     paths,
     fallback: false,
