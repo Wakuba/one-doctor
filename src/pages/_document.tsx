@@ -11,10 +11,6 @@ class MyDocument extends Document {
             href='/images/favicon.png'
             sizes='32×32'
           />
-          <meta
-            name='viewport'
-            content='initial-scale=1.0, width=device-width'
-          />
         </Head>
         <body>
           <Main />
