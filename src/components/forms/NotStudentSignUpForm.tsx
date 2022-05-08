@@ -16,7 +16,7 @@ import { httpsCallable } from 'firebase/functions'
 import { firebaseFunction } from '../../lib/firebase/firebase.config'
 import {
   departmentCategoryList,
-  prifectureList,
+  prefectureList,
 } from '../../../public/staticData'
 import postPreUserData from '../../lib/customFunctions/postPreUserData'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
@@ -214,7 +214,7 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
         <MultiSelector
           {...{
             name: 'workplaceWishFor',
-            options: prifectureList,
+            options: prefectureList,
           }}
         >
           希望就職地

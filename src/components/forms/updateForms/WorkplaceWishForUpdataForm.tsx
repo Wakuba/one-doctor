@@ -5,6 +5,7 @@ import { db } from '../../../lib/firebase/firebase.config'
 import Form from '../Form'
 import MultiSelector from '../formAtoms/MultiSelector'
 import SubmitButton from '../formAtoms/SubmitButton'
+import { prefectureList } from '../../../../public/staticData'
 
 interface WorkplaceWishForUpdateFormPropsType {
   data: string[]
@@ -53,7 +54,7 @@ const WorkplaceWishForUpdateForm: VFC<WorkplaceWishForUpdateFormPropsType> = ({
           <MultiSelector
             {...{
               name: 'workplaceWishFor',
-              options: ['東京', '栃木県', '茨城県', '大阪府'],
+              options: prefectureList,
               defaultValue: defaultValueArray,
             }}
           />

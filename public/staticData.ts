@@ -66,7 +66,7 @@ export const sliderData = [
   },
 ]
 
-export const prifectureList = [
+export const prefectureList = [
   '北海道',
   '青森県',
   '岩手県',

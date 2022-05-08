@@ -17,7 +17,7 @@ import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 import {
   departmentCategoryList,
   gradeList,
-  prifectureList,
+  prefectureList,
   universityList,
 } from '../../../public/staticData'
 import { useRouter } from 'next/router'
@@ -203,7 +203,7 @@ const StudentSignUpForm: VFC = () => {
         <MultiSelector
           {...{
             name: 'workplaceWishFor',
-            options: prifectureList,
+            options: prefectureList,
           }}
         >
           希望就職地
