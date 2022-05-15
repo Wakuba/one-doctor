@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, VFC } from 'react'
 import Link from 'next/link'
 
 const StyledList = (props: { children: ReactNode }) => (
@@ -12,7 +12,7 @@ const StyledList = (props: { children: ReactNode }) => (
     </ul>
   )
 
-export default function Footer() {
+const Footer: VFC<{ layoutStyle?: string }> = ({ layoutStyle }) => {
   return (
     <footer className='h-52 w-full text-white flex flex-col items-center bg-prime-blue-rich justify-evenly'>
       <StyledUnorderedLi>
@@ -33,3 +33,5 @@ export default function Footer() {
     </footer>
   )
 }
+
+export default Footer

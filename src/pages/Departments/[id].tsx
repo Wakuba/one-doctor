@@ -32,8 +32,9 @@ import router from 'next/router'
 import FavoriteButton from '../../components/departments/FavoriteButton'
 import BasicInfoTab from '../../components/departments/BasicInfoTab'
 import GeoInfoTab from '../../components/departments/GeoInfoTab'
+import { VFC } from 'react'
 
-export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
+const DepartmentPage: VFC<DepartmentPagePropsType> = ({ postData }) => {
   return (
     <>
       <Header />
@@ -324,3 +325,5 @@ export const getStaticProps: GetStaticProps<
    * file名だけ取得し、画像のダウンロードは各コンポーネントに任せる
    */
 }
+
+export default DepartmentPage

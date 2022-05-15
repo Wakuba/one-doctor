@@ -1,7 +1,7 @@
 import Footer from '../components/UIAtoms/Footer'
 import Header from '../components/UIAtoms/Header'
 import LoginForm from '../components/forms/LoginForm'
-const Login: React.FC = () => {
+const Login: React.VFC = () => {
   return (
     <>
       <Header />

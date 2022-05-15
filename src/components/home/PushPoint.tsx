@@ -1,4 +1,6 @@
-export default function PushPoint({ children }: { children: JSX.Element[] }) {
+import { VFC } from 'react'
+
+const PushPoint: VFC<{ children: JSX.Element[] }> = ({ children }) => {
   return (
     <div className='text-xs'>
       <p className='font-semibold'>{children[0]}</p>
@@ -6,3 +8,5 @@ export default function PushPoint({ children }: { children: JSX.Element[] }) {
     </div>
   )
 }
+
+export default PushPoint

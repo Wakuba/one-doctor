@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import TopPageMenuBar from './TopPageMenuBar'
 import MyPageMenuBar from './MyPageMenuBar'
 
-export default function Header() {
+const Header = () => {
   const router = useRouter()
   return (
     <header className='flex justify-between sm:static sm:top-0 sm:bg-white ov-md:fixed ov-md:bg-transparent py-1.5 sm:h-20 ov-md:min-h-20  ov-md:h-[5vw] w-full flex-row z-50 pointer-events-none pr-6'>

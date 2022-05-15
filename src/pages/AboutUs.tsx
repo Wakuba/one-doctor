@@ -3,8 +3,9 @@ import Footer from '../components/UIAtoms/Footer'
 import Image from 'next/image'
 import { RichBlueTLSquare } from '../components/UIAtoms/StyledComponents'
 import PlaneButton from '../components/UIAtoms/PlaneButton'
+import { VFC } from 'react'
 
-export default function AboutUsPage() {
+const AboutUs: VFC = () => {
   return (
     <>
       <Header />
@@ -87,3 +88,5 @@ export default function AboutUsPage() {
     </>
   )
 }
+
+export default AboutUs

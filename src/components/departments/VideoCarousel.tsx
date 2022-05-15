@@ -1,5 +1,5 @@
 // External components
-import { useState } from 'react'
+import { useState, VFC } from 'react'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
@@ -20,7 +20,7 @@ const opts = {
   width: '640',
 }
 
-export default function VideoCarousel() {
+const VideoCarousel: VFC = () => {
   const [modalActive, setModalActive] =
       useState<{ [key: number]: boolean }>(initModalState),
     closeModal = () => {
@@ -90,3 +90,5 @@ export default function VideoCarousel() {
     </>
   )
 }
+
+export default VideoCarousel

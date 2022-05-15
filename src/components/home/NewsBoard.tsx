@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { VFC } from 'react'
 import NewsLine from './NewsLine'
 import { NewsLineType } from '../../lib/types'
 import clsx from 'clsx'
@@ -8,7 +8,7 @@ type NewsBoardProps = {
   layoutStyles?: string
 }
 
-const NewsBoard: FC<NewsBoardProps> = ({ layoutStyles, content }) => {
+const NewsBoard: VFC<NewsBoardProps> = ({ layoutStyles, content }) => {
   if (content == undefined)
     content = [{ title: '特になし', detail: '特になし' }]
 

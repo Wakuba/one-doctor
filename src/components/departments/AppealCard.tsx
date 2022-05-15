@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { VFC } from 'react'
 
 interface CardPropsType {
   children: JSX.Element[]
@@ -6,11 +7,7 @@ interface CardPropsType {
   layoutStyle?: string
 }
 
-export default function AppealCard({
-  children,
-  src,
-  layoutStyle,
-}: CardPropsType) {
+const AppealCard: VFC<CardPropsType> = ({ children, src, layoutStyle }) => {
   return (
     <div
       className={clsx(
@@ -32,3 +29,5 @@ export default function AppealCard({
     </div>
   )
 }
+
+export default AppealCard

@@ -30,7 +30,7 @@ export const useRequiredPermission = (): {
     boolean | null
   >(null)
 
-  const permissionChecker = () => {
+  return { isPermitted, Loading }
     const authFb = getAuth()
     const user = authFb.currentUser
     if (user) {

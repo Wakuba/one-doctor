@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { VFC } from 'react'
 
 type TabButtonsProps = {
   buttons: { tabIdx: number; title: string }[]
@@ -7,12 +8,12 @@ type TabButtonsProps = {
   style: string
 }
 
-export default function TabButtons({
+const TabButtons: VFC<TabButtonsProps> = ({
   buttons,
   changeTab,
   activeTab,
   style,
-}: TabButtonsProps) {
+}) => {
   return (
     <div className='space-x-1'>
       {buttons.map((button) => (
@@ -35,3 +36,5 @@ export default function TabButtons({
     </div>
   )
 }
+
+export default TabButtons

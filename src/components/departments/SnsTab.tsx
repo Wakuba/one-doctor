@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { VFC } from 'react'
 import PlaneButton from '../UIAtoms/PlaneButton'
 import TwitterTimeline from './TwitterTimeline'
 
@@ -7,7 +7,7 @@ interface SnsTabPropsType {
   userId: string
 }
 
-const SnsTab: FC<SnsTabPropsType> = ({ officialWebSite, userId }) => {
+const SnsTab: VFC<SnsTabPropsType> = ({ officialWebSite, userId }) => {
   return (
     <div className='w-full ov-md:p-8 sm:p-4 bg-white flex flex-col'>
       <div className='space-y-8'>

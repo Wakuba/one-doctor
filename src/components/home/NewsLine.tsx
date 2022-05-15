@@ -13,7 +13,7 @@
  * }
  */
 import clsx from 'clsx'
-import { ReactNode } from 'react'
+import { ReactNode, VFC } from 'react'
 
 type NewsLineProps = {
   key: number
@@ -21,7 +21,7 @@ type NewsLineProps = {
   children: ReactNode
 }
 
-export default function NewsLine({ title, children }: NewsLineProps) {
+const NewsLine: VFC<NewsLineProps> = ({ title, children }) => {
   return (
     <div className='grid grid-rows-1 sm:grid-cols-3 ov-md:grid-cols-5'>
       <div>
@@ -42,3 +42,5 @@ export default function NewsLine({ title, children }: NewsLineProps) {
     </div>
   )
 }
+
+export default NewsLine

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, VFC } from 'react'
 import { useRouter } from 'next/dist/client/router'
 import clsx from 'clsx'
 
@@ -8,11 +8,7 @@ type DepartKanbanProps = {
   style?: string
 }
 
-export default function DepartKanban({
-  children,
-  pageUrl,
-  style,
-}: DepartKanbanProps) {
+const DepartKanban: VFC<DepartKanbanProps> = ({ children, pageUrl, style }) => {
   const router = useRouter()
   const isExternal = String(pageUrl).search(new RegExp('^http.*', 'g')) !== -1
   if (isExternal) {
@@ -60,3 +56,5 @@ export default function DepartKanban({
     )
   }
 }
+
+export default DepartKanban

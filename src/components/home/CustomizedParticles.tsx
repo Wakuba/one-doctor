@@ -1,10 +1,7 @@
+import { VFC } from 'react'
 import Particles from 'react-tsparticles'
 
-export default function CustomizedParticles({
-  layoutStyle,
-}: {
-  layoutStyle: string
-}) {
+const CustomizedParticles: VFC<{ layoutStyle: string }> = ({ layoutStyle }) => {
   const particlesInit = (main: any) => {
       console.log('main', main)
       // You can initialize the tsParticles instance (main) here, adding custom shapes or presets
@@ -173,3 +170,5 @@ export default function CustomizedParticles({
     </div>
   )
 }
+
+export default CustomizedParticles

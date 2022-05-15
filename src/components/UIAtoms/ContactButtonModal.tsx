@@ -1,7 +1,7 @@
 import clsx from 'clsx'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useState, VFC } from 'react'
 
-const Backdrop = ({ onCancel }: { onCancel: () => void }) => (
+const Backdrop: VFC<{ onCancel: () => void }> = ({ onCancel }) => (
     <div
       className='w-full h-screen fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur z-20'
       onClick={onCancel}
@@ -29,7 +29,7 @@ const Backdrop = ({ onCancel }: { onCancel: () => void }) => (
     )
   }
 
-export default function ContactButtonModal() {
+const ContactButtonModal: VFC = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false),
     closeModalHandler = () => {
       setModalIsOpen(false)
@@ -102,3 +102,5 @@ export default function ContactButtonModal() {
     </>
   )
 }
+
+export default ContactButtonModal

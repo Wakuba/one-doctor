@@ -4,8 +4,9 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { AuthProvider } from '../lib/context'
 import ErrorBoundary from '../components/ErrorBoundary'
+import { VFC } from 'react'
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
@@ -20,3 +21,5 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     </>
   )
 }
+
+export default MyApp
