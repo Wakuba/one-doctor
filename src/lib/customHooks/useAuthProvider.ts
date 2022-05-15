@@ -1,5 +1,5 @@
 //Library
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 //Firebase
 import { auth, db } from '../firebase/firebase.config'
@@ -8,7 +8,6 @@ import {
   signInWithEmailAndPassword,
   sendEmailVerification,
   signOut,
-  onAuthStateChanged,
   User,
   UserInfo,
   updateProfile,
@@ -25,63 +24,40 @@ import {
 //Types
 import {
   LoginDataType,
-  OdUserDataType,
+  odUserExDataType,
   SignUpDataTypeForStudent,
   SignUpDataTypeForNotStudent,
 } from '../types'
 
+//RTK
+import { useDispatch } from 'react-redux'
+import {
+  logOutState,
+  logInState,
+  signUpState,
+  defaultUserState,
+} from '../../features/userSlice'
+import { setUserExData } from '../../features/userSlice'
+import { AnyAction, Dispatch } from '@reduxjs/toolkit'
+
 //Responsibility : serve the context of user authe infomation
 export const useAuthProvider = () => {
-  const [odUser, setOdUser] = useState<User | null>(null)
-  // odUserDataはアカウント作成には必須では無いユーザー情報
-  const [odUserData, setOdUserData] = useState<OdUserDataType>(
-    {
-      uid: '',
-      ts: new Date(),
-      name: '',
-      email: '',
-      ruby: '',
-      password: '',
-      gender: '',
-      isStudent: true,
-      favoDeparts: [],
-      favoEvents: [],
-      grade: '',
-      university: '',
-      workplaceWishFor: [],
-      departmentWishFor: [],
-    } || {
-      uid: '',
-      ts: new Date(),
-      name: '',
-      email: '',
-      ruby: '',
-      password: '',
-      gender: '',
-      isStudent: true,
-      favoDeparts: [],
-      favoEvents: [],
-      departmentWishFor: [],
-      workplace: '',
-      workplaceWishFor: [],
-      authorizedByAdmin: false,
-    }
-  )
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const dispatch = useDispatch<Dispatch<AnyAction>>()
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (odUser) => {
-      if (!odUser) {
-        setOdUser(null)
-        setIsLoading(false)
-        return
-      }
-      setIsLoading(true)
-      setOdUser(odUser)
-      getUserAdditionalData(odUser.uid)
-      setIsLoading(false)
-    })
-    return () => unsubscribe()
+    const curUser = auth.currentUser
+    if (!curUser) {
+      // setOdUser(null)
+      dispatch(defaultUserState())
+      // setIsLoading(false)
+      // return
+    } else {
+      // setIsLoading(true)
+      // setOdUser(odUser)
+      dispatch(logInState(curUser))
+      getUserExData(curUser.uid)
+      // setIsLoading(false)
+    }
   }, [])
 
   // ユーザーデータのうちfirebase authアカウント作成には必須でないがfiresotreに入れるもの
@@ -90,21 +66,16 @@ export const useAuthProvider = () => {
   ) => {
     if (data.uid) {
       setDoc(doc(db, 'odUsers', data.uid), data)
-      getUserAdditionalData(data.uid)
+      getUserExData(data.uid)
     }
   }
 
-  //clear the auth state
-  const clearAuthState = () => {
-    setOdUser(null)
-    setIsLoading(true)
-  }
-
-  const getUserAdditionalData = async (uid: UserInfo['uid']): Promise<void> => {
+  const getUserExData = async (uid: UserInfo['uid']): Promise<void> => {
     const docSnap: DocumentSnapshot = await getDoc(doc(db, 'odUsers', uid))
     if (docSnap.exists()) {
       const doc: DocumentData = docSnap.data()
-      setOdUserData(doc as OdUserDataType)
+      // setodUserExData(doc as odUserExDataType)
+      dispatch(setUserExData(doc as odUserExDataType))
     } else {
       console.log('No such a document')
     }
@@ -119,13 +90,14 @@ export const useAuthProvider = () => {
       data.password
     )
     const odUser = userCredential.user
-    setOdUser(odUser)
+    // setOdUser(odUser)
     sendEmailVerificationToUser(odUser)
-    updateProfile(odUser, { displayName: data.name })
+    await updateProfile(odUser, { displayName: data.name })
     addUserDataOnFirestore({
       uid: userCredential.user.uid,
       ...data,
     })
+    dispatch(signUpState(odUser))
     return odUser
   }
 
@@ -133,8 +105,9 @@ export const useAuthProvider = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const odUser = userCredential.user
-        setOdUser(odUser)
-        getUserAdditionalData(odUser.uid)
+        // setOdUser(odUser)
+        dispatch(logInState(odUser))
+        getUserExData(odUser.uid)
       })
       .catch((error) => {
         const errorCode = error.code
@@ -143,7 +116,9 @@ export const useAuthProvider = () => {
         console.log('errorMessage', errorMessage)
       })
 
-  const logOut = (): Promise<void> => signOut(auth).then(() => clearAuthState())
+  const logOut = () => {
+    signOut(auth).then(() => dispatch(logOutState()))
+  }
 
   const sendPasswordResetEmailToUser = (email: string): Promise<void> =>
     sendPasswordResetEmail(auth, email)
@@ -168,9 +143,6 @@ export const useAuthProvider = () => {
   }
 
   return {
-    odUser,
-    odUserData,
-    isLoading,
     signUp,
     logIn,
     logOut,

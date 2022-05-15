@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { VFC, useState, ReactNode } from 'react'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 
@@ -27,7 +28,8 @@ const MyPageMenuBar: VFC = () => {
 }
 
 const MyPageMenuBoard: VFC<{ menuDropDown: boolean }> = ({ menuDropDown }) => {
-  const auth = useAuthProvider()
+  const { logOut } = useAuthProvider()
+  const router = useRouter()
   return (
     <div
       className={clsx(
@@ -43,7 +45,10 @@ const MyPageMenuBoard: VFC<{ menuDropDown: boolean }> = ({ menuDropDown }) => {
       <MyPageMenuLine href='/UserProfile'>登録情報変更</MyPageMenuLine>
       <div
         className='w-full h-full flex flex-col cursor-pointer pointer-events-auto items-center justify-center text-white bg-prime-blue-pale border-prime-blue-rich border-1 border-t-0'
-        onClick={() => auth.logOut()}
+        onClick={() => {
+          logOut()
+          router.push('/')
+        }}
       >
         ログアウト
       </div>

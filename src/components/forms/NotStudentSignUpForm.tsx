@@ -6,7 +6,7 @@ import InputDouble from './formAtoms/InputDouble'
 import SubmitButton from './formAtoms/SubmitButton'
 import MultiSelector from './formAtoms/MultiSelector'
 import Link from 'next/link'
-import { useState, VFC } from 'react'
+import { VFC } from 'react'
 import {
   SignUpAuthorizationDataTypeDataWithImageId,
   SignUpDataTypeForNotStudent,
@@ -21,6 +21,13 @@ import {
 import postPreUserData from '../../lib/customFunctions/postPreUserData'
 import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 import { ModalBackdrop, ModalMainArea } from '../UIAtoms/Modal'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  closeEAUModal,
+  openEAUModal,
+  selectEAUModal,
+} from '../../features/modalsSlice'
+import { useRouter } from 'next/router'
 
 interface NotStudentSignUpFormDataType {
   departmentWishFor: string[]
@@ -45,7 +52,9 @@ const postNewUserData = httpsCallable(
 
 const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
   const { signUp } = useAuthProvider()
-  const [emailAlreadyInUseModal, setEmailAlreadyInUseModal] = useState(false)
+  const isEmailAlreadyInUse = useSelector(selectEAUModal)
+  const dispatch = useDispatch()
+  const router = useRouter()
   const onSubmit = async (data: NotStudentSignUpFormDataType) => {
     const certificationImageId = await imageUploader(data.doctorCertification)
     const cleansedData: SignUpAuthorizationDataTypeDataWithImageId = {
@@ -65,21 +74,6 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
       ts: new Date(),
     }
 
-    //   departmentWishFor: string[]
-    // workplace: string
-    // workplaceWishFor: string[]
-    // authorizedByAdmin: boolean
-    // uid?: string
-    // ts: Date
-    // name: string
-    // email: string
-    // password: string
-    // ruby: string
-    // gender: string
-    // isStudent: boolean
-    // favoDeparts: string[]
-    // favoEvents: any[]
-
     const signUpData: SignUpDataTypeForNotStudent = {
       name: `${data.familyName} ${data.firstName}`,
       password: data.passwordOne,
@@ -98,34 +92,36 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
     if (!('grade' in signUpData)) {
       signUp(signUpData)
         .then((odUser) => {
+          router.push('/Loading')
           postNewUserData({ ...cleansedData, uid: odUser.uid })
             .then((res) => console.log('スラックへの送信成功', res))
             .catch((e) => console.log('スラックへの送信失敗', e))
-
           postPreUserData({ ...cleansedData, uid: odUser.uid }).then((res) =>
             console.log('スプレッドシートへの送信成功', res)
           )
         })
+        .then(() => {
+          router.push('/AccountRegistrationFinished')
+        })
         .catch((e) => {
-          if (e.code === 'auth/email-already-in-use')
-            setEmailAlreadyInUseModal(true)
+          if (e.code === 'auth/email-already-in-use') dispatch(openEAUModal())
         })
     }
   }
 
   return (
     <div className={style}>
-      {emailAlreadyInUseModal && (
+      {isEmailAlreadyInUse && (
         <>
           <ModalMainArea
-            closeModal={() => setEmailAlreadyInUseModal(false)}
+            closeModal={() => dispatch(closeEAUModal())}
             modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
             modalContainerStyle='w-full space-y-4'
             zIndex='z-60'
           >
             メールアドレスが既に使用されています
           </ModalMainArea>
-          <ModalBackdrop closeModal={() => setEmailAlreadyInUseModal(false)} />
+          <ModalBackdrop closeModal={() => dispatch(closeEAUModal())} />
         </>
       )}
       <div title='topSection' className=''>
@@ -204,10 +200,8 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
           現在のお勤め先
         </Input>
         <MultiSelector
-          {...{
-            name: 'departmentWishFor',
-            options: departmentCategoryList,
-          }}
+          name='departmentWishFor'
+          options={departmentCategoryList}
         >
           希望診療科
         </MultiSelector>

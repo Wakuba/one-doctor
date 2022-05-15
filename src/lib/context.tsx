@@ -9,7 +9,7 @@ import { OdUserContextType } from './types'
 const AuthContext = createContext<OdUserContextType>({
   odUser: null,
   isLoading: true,
-  odUserData: {
+  odUserExData: {
     uid: '',
     name: '',
     email: '',
@@ -40,10 +40,10 @@ const AuthContext = createContext<OdUserContextType>({
     authorizedByAdmin: false,
     ts: new Date(),
   },
-  signUp: async () => {},
-  logIn: async () => {},
-  logOut: async () => {},
-  sendPasswordResetEmailToUser: async () => {},
+  signUp: async () => { },
+  logIn: async () => { },
+  logOut: async () => { },
+  sendPasswordResetEmailToUser: async () => { },
 })
 
 export function AuthProvider(props: { children: ReactNode }): JSX.Element {

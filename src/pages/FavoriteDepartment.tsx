@@ -2,17 +2,12 @@ import { VFC } from 'react'
 import FavoTabMenu from '../components/favoriteDepartment/FavoDepTabMenu'
 import Footer from '../components/UIAtoms/Footer'
 import Header from '../components/UIAtoms/Header'
+import useRequiredPermission from '../lib/customHooks/useRequiredPermission'
 
 const FavoriteDepartment: VFC = () => {
-  // const router = useRouter()
-  // const {} = useAuthProvider()
+  const { isPermitted, Loading } = useRequiredPermission()
 
-  // useEffect(() => {
-  //   if (!auth.odUser) router.push('/')
-  // }, [auth])
-  // console.log(uid)
-
-  return (
+  return isPermitted ? (
     <>
       <Header />
       <div className='flex flex-col items-center ov-md:pt-20 bg-prime-blue-muted'>
@@ -25,6 +20,8 @@ const FavoriteDepartment: VFC = () => {
       </div>
       <Footer />
     </>
+  ) : (
+    <Loading />
   )
 }
 

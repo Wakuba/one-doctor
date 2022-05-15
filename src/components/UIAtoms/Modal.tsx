@@ -65,13 +65,17 @@ export const ModalBackdrop = ({
   closeModal,
   backdropStyle,
   zIndex = 'z-50',
+  blur = true,
 }: {
   closeModal: MouseEventHandler<HTMLDivElement>
   backdropStyle?: string
   zIndex?: string
+  blur?: boolean
 }) => (
   <div
-    className={`${backdropStyle} ${zIndex} pointer-events-auto cursor-pointer w-full h-full fixed top-0 left-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur`}
+    className={`${backdropStyle} ${zIndex} pointer-events-auto cursor-pointer w-full h-full fixed top-0 left-0  ${
+      blur && 'backdrop-filter backdrop-blur bg-white bg-opacity-10'
+    }`}
     onClick={closeModal}
   >
     <CancelButton onCancel={closeModal} />

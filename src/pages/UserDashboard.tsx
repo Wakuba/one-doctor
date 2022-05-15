@@ -1,15 +1,10 @@
-// import { useAuth } from '../lib/context'
-import { onAuthStateChanged } from 'firebase/auth'
 import { collection, getDocs, query, where } from 'firebase/firestore'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import NewsLine from '../components/home/NewsLine'
 import Footer from '../components/UIAtoms/Footer'
 import Header from '../components/UIAtoms/Header'
-// import { useRequiredPermission } from '../lib/customHooks/useAuth'
 import DashboardElmBoard from '../components/userDashboard/DashboardElmBoard'
-import { auth, db } from '../lib/firebase/firebase.config'
-// import { useRequiredPermission } from '../lib/customHooks/useAuthProvider'
+import useRequiredPermission from '../lib/customHooks/useRequiredPermission'
+import { db } from '../lib/firebase/firebase.config'
 
 interface UserDashboardPropsType {
   newsBoardData: {
@@ -20,17 +15,9 @@ interface UserDashboardPropsType {
 }
 
 const UserDashboard: React.VFC<UserDashboardPropsType> = (props) => {
-  // const { auth, accountExist } = useRequiredPermission()
-  // console.log('auth at UserDashboard', auth)
-  // if (accountExist) {
-  const router = useRouter()
-  useEffect(() => {
-    const unsbscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) router.push('/')
-    })
-    return () => unsbscribe()
-  }, [auth])
-  return (
+  const { isPermitted, Loading } = useRequiredPermission()
+
+  return isPermitted ? (
     <>
       <Header />
       <div className='flex flex-col items-center ov-md:pt-20 bg-prime-blue-muted'>
@@ -57,6 +44,8 @@ const UserDashboard: React.VFC<UserDashboardPropsType> = (props) => {
       </div>
       <Footer />
     </>
+  ) : (
+    <Loading />
   )
 }
 export default UserDashboard

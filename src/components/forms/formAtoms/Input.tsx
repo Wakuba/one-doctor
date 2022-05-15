@@ -46,7 +46,7 @@ const Input: VFC<InputPropsType> = ({
       </label>
       {register && (
         <input
-          className={`${style?.inputStyle} text-sm w-full rounded border-1 border-solid border-[#707070] bg-white h-10`}
+          className={`${style?.inputStyle} pl-2 text-sm w-full rounded border-1 border-solid border-[#707070] bg-white h-10`}
           type={type}
           placeholder={placeholder ? ' ' + placeholder : ''}
           {...register(name, {

@@ -6,7 +6,6 @@ import {
   gradeList,
   universityList,
 } from '../../../public/staticData'
-import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 import { db } from '../../lib/firebase/firebase.config'
 import Form from './Form'
 import SingleSelector from './formAtoms/SingleSelector'
@@ -14,6 +13,8 @@ import SubmitButton from './formAtoms/SubmitButton'
 import Textarea from './formAtoms/Textarea'
 import YMSelector from './formAtoms/YMSelector'
 import RadioButton from './formAtoms/RadioButton'
+import { useSelector } from 'react-redux'
+import { selectOdUser, selectOdUserExData } from '../../features/userSlice'
 
 interface MyNoteFormPropsType {
   style: string
@@ -49,11 +50,12 @@ const MyNoteForm: VFC<MyNoteFormPropsType> = ({ style, title }) => {
     setMessageToStudents(false)
     setAllState(false)
   }
-  const auth = useAuthProvider()
+  const odUserExData = useSelector(selectOdUserExData)
+  const odUser = useSelector(selectOdUser)
   const onSubmit = (data: any) => {
     const cleansedData = {
-      name: auth.odUserData.name,
-      uid: auth.odUser?.uid,
+      name: odUserExData.name,
+      uid: odUser.uid,
       ts: new Date(),
       grade: data?.grade ?? '',
       year: data?.year ?? '',
@@ -550,8 +552,3 @@ const MyNoteForm: VFC<MyNoteFormPropsType> = ({ style, title }) => {
 }
 
 export default MyNoteForm
-
-// 実習で学んだこと・印象に残ったこと
-// 実習前に準備するべきこと
-// 実習前・実習中に読んだ本・論文
-// 公開・非公開

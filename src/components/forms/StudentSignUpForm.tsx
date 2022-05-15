@@ -21,6 +21,15 @@ import {
   universityList,
 } from '../../../public/staticData'
 import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  closeEAUModal,
+  closeSAEModal,
+  openEAUModal,
+  openSAEModal,
+  selectEAUModal,
+  selectSAEModal,
+} from '../../features/modalsSlice'
 
 interface StudentSignUpFormDataType {
   departmentWishFor: string[]
@@ -43,9 +52,9 @@ interface StudentSignUpFormDataType {
 const StudentSignUpForm: VFC = () => {
   const { signUp } = useAuthProvider()
   const router = useRouter()
-  const [isStudentAuthErrorModalOpen, setIsStudentAuthErrorModalOpen] =
-    useState(false)
-  const [emailAlreadyInUseModal, setEmailAlreadyInUseModal] = useState(false)
+  const dispatch = useDispatch()
+  const isStudentAuthError = useSelector(selectSAEModal)
+  const isEmailAlreadyInUse = useSelector(selectEAUModal)
   const onSubmit = (data: StudentSignUpFormDataType) => {
     const cleansedData = {
       name: `${data.familyName} ${data.firstName}`,
@@ -65,50 +74,47 @@ const StudentSignUpForm: VFC = () => {
     if (univEmailValidator(data.emailUniv)) {
       signUp(cleansedData)
         .then(() => {
-          setEmailAlreadyInUseModal(false)
-          setIsStudentAuthErrorModalOpen(false)
+          dispatch(closeEAUModal())
+          dispatch(closeSAEModal())
           router.push('/AccountRegistrationFinished')
         })
         .catch((e) => {
-          if (e.code === 'auth/email-already-in-use')
-            setEmailAlreadyInUseModal(true)
+          if (e.code === 'auth/email-already-in-use') dispatch(openEAUModal())
         })
     } else {
-      setIsStudentAuthErrorModalOpen(true)
+      dispatch(openSAEModal())
     }
-    setEmailAlreadyInUseModal(false)
-    setIsStudentAuthErrorModalOpen(false)
+    dispatch(closeEAUModal())
+    dispatch(closeSAEModal())
     router.push('/AccountRegistrationFinished')
   }
 
   return (
     <>
-      {isStudentAuthErrorModalOpen && (
+      {isStudentAuthError && (
         <>
           <ModalMainArea
-            closeModal={() => setIsStudentAuthErrorModalOpen(false)}
+            closeModal={() => dispatch(closeSAEModal())}
             modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
             modalContainerStyle='w-full space-y-4'
             zIndex='z-60'
           >
             医学生認証ができませんでした
           </ModalMainArea>
-          <ModalBackdrop
-            closeModal={() => setIsStudentAuthErrorModalOpen(false)}
-          />
+          <ModalBackdrop closeModal={() => dispatch(closeSAEModal())} />
         </>
       )}
-      {emailAlreadyInUseModal && (
+      {isEmailAlreadyInUse && (
         <>
           <ModalMainArea
-            closeModal={() => setEmailAlreadyInUseModal(false)}
+            closeModal={() => dispatch(closeEAUModal())}
             modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
             modalContainerStyle='w-full space-y-4'
             zIndex='z-60'
           >
             メールアドレスが既に使用されています
           </ModalMainArea>
-          <ModalBackdrop closeModal={() => setEmailAlreadyInUseModal(false)} />
+          <ModalBackdrop closeModal={() => dispatch(closeEAUModal())} />
         </>
       )}
       <div title='topSection'>

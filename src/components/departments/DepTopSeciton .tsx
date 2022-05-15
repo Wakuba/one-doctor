@@ -2,8 +2,14 @@ import { ModalBackdrop, ModalMainArea } from '../UIAtoms/Modal'
 import Image from 'next/image'
 import PushPoint from '../home/PushPoint'
 import ThreePointLeader from '../home/ThreePointLeader'
-import { useState } from 'react'
 import clsx from 'clsx'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  closeDepTopTextModal,
+  openDepTopTextModal,
+  selectDepTopTextModal,
+} from '../../features/modalsSlice'
+import { VFC } from 'react'
 
 interface DepTopSectionPropsType {
   depName: string
@@ -14,40 +20,42 @@ interface DepTopSectionPropsType {
   otherPoint: string
 }
 
-export default function DepTopSection({
+const DepTopSection: VFC<DepTopSectionPropsType> = ({
   depName,
   heroImgUrl,
   educationalPoint,
   clinicalPoint,
   researchPoint,
   otherPoint,
-}: DepTopSectionPropsType) {
-  const [isTextModalOpen, setIsTextModalOpen] = useState<boolean>(false),
-    PushPoints = () => (
-      <>
-        <PushPoint>
-          <>教育：</>
-          <>{educationalPoint}</>
-        </PushPoint>
-        <PushPoint>
-          <>臨床：</>
-          <>{clinicalPoint}</>
-        </PushPoint>
-        <PushPoint>
-          <>研究：</>
-          <>{researchPoint}</>
-        </PushPoint>
-        <PushPoint>
-          <>その他：</>
-          <>{otherPoint}</>
-        </PushPoint>
-      </>
-    )
+}) => {
+  const dispatch = useDispatch()
+  const isOpenDepTopTextModal = useSelector(selectDepTopTextModal)
+
+  const PushPoints = () => (
+    <>
+      <PushPoint>
+        <>教育：</>
+        <>{educationalPoint}</>
+      </PushPoint>
+      <PushPoint>
+        <>臨床：</>
+        <>{clinicalPoint}</>
+      </PushPoint>
+      <PushPoint>
+        <>研究：</>
+        <>{researchPoint}</>
+      </PushPoint>
+      <PushPoint>
+        <>その他：</>
+        <>{otherPoint}</>
+      </PushPoint>
+    </>
+  )
 
   return (
     <>
       <div
-        onClick={() => setIsTextModalOpen(true)}
+        onClick={() => dispatch(openDepTopTextModal())}
         className='w-full bg-white shadow-md flex sm:flex-col ov-md:flex-row '
       >
         <div className='ov-md:p-8 sm:w-full md:w-[358px] lg:w-[504px] xl:w-[537.5px] 2xl:w-[681px] ov-md:h-96'>
@@ -102,10 +110,10 @@ export default function DepTopSection({
           </div>
         </div>
       </div>
-      {isTextModalOpen && (
+      {isOpenDepTopTextModal && (
         <>
           <ModalMainArea
-            closeModal={() => setIsTextModalOpen(false)}
+            closeModal={() => dispatch(closeDepTopTextModal())}
             modalWrapperStyle='sm:w-9/12 ov-md:w-[70vw]'
             modalContainerStyle='w-full space-y-4'
           >
@@ -114,9 +122,11 @@ export default function DepTopSection({
             </div>
             <PushPoints />
           </ModalMainArea>
-          <ModalBackdrop closeModal={() => setIsTextModalOpen(false)} />
+          <ModalBackdrop closeModal={() => dispatch(closeDepTopTextModal())} />
         </>
       )}
     </>
   )
 }
+
+export default DepTopSection

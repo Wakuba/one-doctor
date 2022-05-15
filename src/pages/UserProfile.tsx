@@ -1,6 +1,5 @@
 import Footer from '../components/UIAtoms/Footer'
 import Header from '../components/UIAtoms/Header'
-import { useRequiredPermission } from '../lib/customHooks/useRequiredPermission'
 import NameUpdateForm from '../components/forms/updateForms/NameUpdateForm'
 import RubyUpdateForm from '../components/forms/updateForms/RubyUpdateForm'
 import GenderUpdateForm from '../components/forms/updateForms/GenderUpdateForm'
@@ -10,22 +9,15 @@ import DepartmentWishForUpdateForm from '../components/forms/updateForms/Departm
 import GradeUpdateForm from '../components/forms/updateForms/GradeUpdateForm'
 import UniversityUpdateForm from '../components/forms/updateForms/UniversityUpdateForm'
 import WorkplaceUpdateForm from '../components/forms/updateForms/WorkplaceUpdateForm'
-import { useEffect } from 'react'
+import AccountNotExistAlert from '../components/modals/AccountNotExistAlert'
+import NotAuthorizedAlert from '../components/modals/NotAuthorizedAlert'
+import NotEmailVerifiedAlert from '../components/modals/NotEmailVerifiedAlert'
+import useRequiredPermission from '../lib/customHooks/useRequiredPermission'
 
 const UserProfile: React.VFC = () => {
-  const {
-    auth,
-    NotEmailVerifiedAlert,
-    AccountNotExistAlert,
-    NotAuthorizedAlert,
-    permissionChecker,
-  } = useRequiredPermission()
-  useEffect(() => {
-    permissionChecker()
-  }, [auth])
-  const userData = auth.odUserData
-  // console.log('userdata', userData)
-  return (
+  const { isPermitted, Loading } = useRequiredPermission()
+
+  return isPermitted ? (
     <>
       <Header />
       <div className='flex flex-col items-center ov-md:pt-20 bg-prime-blue-muted'>
@@ -33,35 +25,24 @@ const UserProfile: React.VFC = () => {
           <h1 className='text-2xl text-prime-blue-rich font-semibold mb-6'>
             ユーザー情報
           </h1>
-          <AccountNotExistAlert backToTop />
+          <AccountNotExistAlert />
           <NotAuthorizedAlert />
           <NotEmailVerifiedAlert />
-          {'grade' in userData ? (
-            <>
-              <NameUpdateForm data={userData.name} />
-              <RubyUpdateForm data={userData.ruby} />
-              <GenderUpdateForm data={userData.gender} />
-              <EmailUpdateForm data={userData.email} />
-              <WorkplaceWishForUpdateForm data={userData.workplaceWishFor} />
-              <DepartmentWishForUpdateForm data={userData.departmentWishFor} />
-              <GradeUpdateForm data={userData.grade} />
-              <UniversityUpdateForm data={userData.university} />
-            </>
-          ) : (
-            <>
-              <NameUpdateForm data={userData.name} />
-              <RubyUpdateForm data={userData.ruby} />
-              <GenderUpdateForm data={userData.gender} />
-              <EmailUpdateForm data={userData.email} />
-              <WorkplaceUpdateForm data={userData.workplace} />
-              <WorkplaceWishForUpdateForm data={userData.workplaceWishFor} />
-              <DepartmentWishForUpdateForm data={userData.departmentWishFor} />
-            </>
-          )}
+          <NameUpdateForm />
+          <RubyUpdateForm />
+          <GenderUpdateForm />
+          <EmailUpdateForm />
+          <WorkplaceWishForUpdateForm />
+          <DepartmentWishForUpdateForm />
+          <GradeUpdateForm />
+          <UniversityUpdateForm />
+          <WorkplaceUpdateForm />
         </main>
       </div>
       <Footer />
     </>
+  ) : (
+    <Loading />
   )
 }
 

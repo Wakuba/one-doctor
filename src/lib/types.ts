@@ -142,14 +142,13 @@ export interface LoginDataType {
   password: string
 }
 
-export type OdUserDataType =
+export type odUserExDataType =
   | SignUpDataTypeForStudent
   | SignUpDataTypeForNotStudent
 
 export interface OdUserContextType {
   odUser: User | null
-  isLoading: boolean
-  odUserData: OdUserDataType
+  odUserExData: odUserExDataType
   signUp: ({ name, email, password, ...rest }: SignUpDataTypeForStudent) => void
   logIn: ({ email, password }: LoginDataType) => Promise<void | User>
   logOut: () => Promise<void>

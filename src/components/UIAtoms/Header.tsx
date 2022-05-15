@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import TopPageMenuBar from './TopPageMenuBar'
+import { VFC } from 'react'
+import HeaderMenuBar from './HeaderMenuBar'
 import MyPageMenuBar from './MyPageMenuBar'
 
-const Header = () => {
+const Header: VFC = () => {
   const router = useRouter()
   return (
     <header className='flex justify-between sm:static sm:top-0 sm:bg-white ov-md:fixed ov-md:bg-transparent py-1.5 sm:h-20 ov-md:min-h-20  ov-md:h-[5vw] w-full flex-row z-50 pointer-events-none pr-6'>
@@ -25,14 +26,21 @@ const Header = () => {
         </div>
       </Link>
       {router.pathname === '/' && (
-        <TopPageMenuBar layoutStyle='pointer-events-auto' />
+        <HeaderMenuBar layoutStyle='pointer-events-auto' />
       )}
       {[
         '/UserDashboard',
         '/FavoriteDepartment',
         '/BrowseStudentsVoices',
         '/MyEvents',
-      ].some((path) => router.pathname === path) && <MyPageMenuBar />}
+        '/MyRecord',
+        '/UserProfile',
+      ].some(
+        (path) =>
+          router.pathname === path || router.pathname.includes('/Departments')
+      ) && <MyPageMenuBar />}
     </header>
   )
 }
+
+export default Header

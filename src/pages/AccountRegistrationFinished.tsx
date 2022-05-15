@@ -21,7 +21,9 @@ const AccountRegistrationFinished = () => {
             そちらのリンクをクリックし認証を完了してください。
           </p>
           <div className='w-full flex flex-col items-center mt-10'>
-            <PlaneButton href='/'>ホームへ戻る</PlaneButton>
+            <PlaneButton targetBlank={false} href='/'>
+              ホームへ戻る
+            </PlaneButton>
           </div>
         </main>
       </div>

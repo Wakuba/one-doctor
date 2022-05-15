@@ -116,11 +116,11 @@ const Home: VFC<HomePropsType> = (props) => {
               />
             </div>
           </div>
-          <div
-            id='newsBoard-ov-md'
-            className='sm:hidden w-full flex justify-center '
-          >
-            <div className='relative mt-10 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
+          <div className='sm:hidden md:hidden w-full flex justify-center '>
+            <div
+              id='newsBoard-ov-md'
+              className='relative mt-10 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'
+            >
               <NewsBoard layoutStyles='text-white' content={newsBoardData} />
             </div>
           </div>
@@ -162,11 +162,8 @@ const Home: VFC<HomePropsType> = (props) => {
             <NewVideosBoard videosData={newVideos} />
           </div>
 
-          <div
-            id='newsBoard-sm'
-            className='ov-md:hidden w-full flex justify-center '
-          >
-            <div className='mt-10 w-11/12'>
+          <div className='lg:hidden w-full flex justify-center '>
+            <div id='newsBoard-sm' className='mt-10 w-11/12'>
               <NewsBoard
                 layoutStyles='text-prime-blue-rich'
                 content={newsBoardData}

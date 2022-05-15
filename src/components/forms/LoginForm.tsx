@@ -12,12 +12,12 @@ interface LoginFormDataType {
 }
 
 const LoginForm: VFC<{ style: string }> = ({ style }) => {
-  const auth = useAuthProvider()
+  const { logIn } = useAuthProvider()
   const router = useRouter()
 
   const onSubmit = (data: LoginFormDataType) => {
     const { email, password } = data
-    return auth.logIn({ email, password }).then(() => {
+    return logIn({ email, password }).then(() => {
       router.push('/UserDashboard')
     })
   }

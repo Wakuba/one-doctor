@@ -3,9 +3,11 @@ import MyPastRecords from '../components/myRecord/MyPastRecords'
 import TabMenu from '../components/tabs/TabMenu'
 import Footer from '../components/UIAtoms/Footer'
 import Header from '../components/UIAtoms/Header'
+import useRequiredPermission from '../lib/customHooks/useRequiredPermission'
 
 const MyRecord = () => {
-  return (
+  const { isPermitted, Loading } = useRequiredPermission()
+  return isPermitted ? (
     <>
       <Header />
       <div className='flex flex-col items-center ov-md:pt-20 bg-prime-blue-muted'>
@@ -25,6 +27,8 @@ const MyRecord = () => {
       </div>
       <Footer />
     </>
+  ) : (
+    <Loading />
   )
 }
 

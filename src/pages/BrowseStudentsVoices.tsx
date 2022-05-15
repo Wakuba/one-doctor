@@ -2,9 +2,12 @@ import clsx from 'clsx'
 import SearchVoicesForm from '../components/forms/SearchVoicesForm'
 import Footer from '../components/UIAtoms/Footer'
 import Header from '../components/UIAtoms/Header'
+import useRequiredPermission from '../lib/customHooks/useRequiredPermission'
 
 const BrowseStudentsVoices = () => {
-  return (
+  const { isPermitted, Loading } = useRequiredPermission()
+
+  return isPermitted ? (
     <>
       <Header />
       <div
@@ -28,6 +31,8 @@ const BrowseStudentsVoices = () => {
       </div>
       <Footer />
     </>
+  ) : (
+    <Loading />
   )
 }
 

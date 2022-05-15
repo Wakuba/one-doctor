@@ -53,37 +53,42 @@ const MultiSelector: VFC<MultiSelectorPropsType> = ({
   control,
   isRequired = true,
 }) => {
-  const optionsTmp: { value: string; label: string }[] = options.map(
+  const optionsObj: { value: string; label: string }[] = options.map(
     (option: string) => ({ value: option, label: option })
   )
+  // console.log(options)
   return (
     <div className={`${style?.wrapperStyle}`}>
       <label htmlFor={name} className='block text-sm'>
         {children}
         {children && '(検索可能, 複数選択可能)'}
-        {isRequired && (
-          <>
-            <span className='text-[#FF0000]'>*</span>
-            <div className='text-sm'>{subTitle}</div>
-          </>
-        )}
+        {isRequired ||
+          (children && (
+            <>
+              <span className='text-[#FF0000]'>*</span>
+              <div className='text-sm'>{subTitle}</div>
+            </>
+          ))}
       </label>
       <Controller
         control={control}
         name={name}
         rules={isRequired ? { required: '選択されていません' } : undefined}
-        render={({ field: { onChange, value } }) => {
+        render={({ field: { onChange, value, ref } }) => {
           return (
             <Select
+              ref={ref}
               id={name}
               instanceId={name}
               value={options?.find((c) => c === value)}
+              // value={options}
               // defaultValue={defaultValue}
-              styles={customStyles}
               onChange={(val: any) => {
+                console.log(val)
                 return onChange([...val.map((v: any) => v.value)])
               }}
-              options={optionsTmp.map((o) => o.value)}
+              styles={customStyles}
+              options={optionsObj as any}
               placeholder={placeholder ?? '▼選択してください'}
               isSearchable
               isMulti

@@ -1,18 +1,17 @@
-import { getAuth } from 'firebase/auth'
 import useSWR from 'swr'
-import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 import TabMenu from '../tabs/TabMenu'
 import PastMyEventsTab from './PastMyEventsTab'
 import PresentMyEventsTab from './PresentMyEventsTab'
+import { auth } from '../../lib/firebase/firebase.config'
+import { useSelector } from 'react-redux'
+import { selectOdUserExData } from '../../features/userSlice'
 
 const MyEventsTabMenu = () => {
-  const authFb = getAuth()
-  const curUser = authFb.currentUser
-  const auth = useAuthProvider()
+  const curUser = auth.currentUser
+  const odUserExData = useSelector(selectOdUserExData)
   let favoEventsQueryString = ''
   if (curUser) {
-    const odUserData = auth.odUserData
-    const favoEvents = odUserData.favoEvents
+    const favoEvents = odUserExData.favoEvents
     const favoEventsQueryArray = favoEvents
       .map((event) => event.eventId)
       .filter((id) => id !== '')

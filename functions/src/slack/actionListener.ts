@@ -1,6 +1,7 @@
 import { App } from "@slack/bolt";
 import axios from 'axios'
 import { doc, updateDoc } from "firebase/firestore";
+import { config } from "..";
 import { db } from "../firebase/firebase.config";
 // import { config } from '../index'
 
@@ -12,13 +13,13 @@ const useActionListener = (app: App) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ack();
       const bodyRe: any = body
+      const ts: string = bodyRe.container.message_ts
+      app.client.chat.delete({ channel: config.slack.channel_id, ts }).then(res => console.log(res)).catch(e => console.log(e))
       const certificationImageId: string = bodyRe.message.text ?? 'NO DATA'
       const data = await checkAuthorizedAndGetDataOnSpreadSheet(certificationImageId)
       console.log('data', data)
       const ref = doc(db, 'odUsers', data.uid)
       updateDoc(ref, {authorizedByAdmin: true}).then(() => authMailer(data.email))
-      // const ts: string = bodyRe.container.message_ts
-      // app.client.chat.delete({ channel: config.slack.channel_id, ts }).then(res => console.log(res)).catch(e => console.log(e))
     }
   )
 };

@@ -14,7 +14,9 @@ const StyledList = (props: { children: ReactNode }) => (
 
 const Footer: VFC<{ layoutStyle?: string }> = ({ layoutStyle }) => {
   return (
-    <footer className='h-52 w-full text-white flex flex-col items-center bg-prime-blue-rich justify-evenly'>
+    <footer
+      className={`h-52 w-full text-white flex flex-col items-center bg-prime-blue-rich justify-evenly ${layoutStyle}`}
+    >
       <StyledUnorderedLi>
         <StyledList>運営について</StyledList>
         <StyledList>利用規約</StyledList>

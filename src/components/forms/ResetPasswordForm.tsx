@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router'
-import { useAuth } from '../../lib/context'
+import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 import Form from './Form'
 import Input from './formAtoms/Input'
 import SubmitButton from './formAtoms/SubmitButton'
 const ResetPasswordForm: React.VFC<{ style: string }> = ({ style }) => {
-  const auth = useAuth()
+  const { sendPasswordResetEmailToUser } = useAuthProvider()
   const router = useRouter()
   const onSubmit = (data: { email: string }) => {
-    auth.sendPasswordResetEmailToUser(data.email)
+    sendPasswordResetEmailToUser(data.email)
     router.push('/UserDashboard')
   }
   return (

@@ -2,11 +2,11 @@ import { Cloudinary } from '@cloudinary/url-gen'
 import Image from 'next/image'
 import clsx from 'clsx'
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
-import { db } from '../../lib/firebase/firebase.config'
-import { getAuth } from 'firebase/auth'
+import { auth, db } from '../../lib/firebase/firebase.config'
 import Link from 'next/link'
-import { useAuthProvider } from '../../lib/customHooks/useAuthProvider'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { selectOdUserExData } from '../../features/userSlice'
 
 interface EventKanbanPropsType {
   name: string
@@ -21,12 +21,11 @@ interface EventKanbanPropsType {
 
 const EventKanban: React.VFC<EventKanbanPropsType> = (props) => {
   const [isFavorite, setIsFavorite] = useState(false)
-  const auth = useAuthProvider()
+  const odUserExData = useSelector(selectOdUserExData)
   useEffect(() => {
-    const authFb = getAuth()
-    const curUser = authFb.currentUser
+    const curUser = auth.currentUser
     if (curUser) {
-      const favoEvents = auth.odUserData.favoEvents
+      const favoEvents = odUserExData.favoEvents
       const favoEventsIDs = favoEvents.map((event) => event.eventId)
       if (favoEventsIDs.includes(eventId)) setIsFavorite(true)
     }
@@ -117,7 +116,6 @@ const EventItem: React.VFC<{ title: string; content: string }> = ({
 export default EventKanban
 
 const updateFavoEvents = (favoEventData) => {
-  const auth = getAuth()
   const curUser = auth.currentUser
   if (curUser) {
     const ref = doc(db, 'odUsers', curUser.uid)

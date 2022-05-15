@@ -1,11 +1,11 @@
 import clsx from 'clsx'
-import { FC } from 'react'
+import { VFC } from 'react'
 import { Control, FieldValues } from 'react-hook-form'
 import { month, years } from '../../../../public/staticData'
 import SingleSelector from './SingleSelector'
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-const YMSelector: FC<{ control?: Control<FieldValues, object> }> = ({
+const YMSelector: VFC<{ control?: Control<FieldValues, object> }> = ({
   control,
 }) => {
   return (

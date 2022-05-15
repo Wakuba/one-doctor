@@ -1,44 +1,47 @@
 import { doc, updateDoc } from 'firebase/firestore'
 import { useState, VFC } from 'react'
-import { useAuthProvider } from '../../../lib/customHooks/useAuthProvider'
+import { useDispatch, useSelector } from 'react-redux'
+import { departmentCategoryList } from '../../../../public/staticData'
+import { openUIUModal } from '../../../features/modalsSlice'
+import { selectOdUser, selectOdUserExData } from '../../../features/userSlice'
 import { db } from '../../../lib/firebase/firebase.config'
+import UserInfoUpdatedModal from '../../modals/UserInfoUpdatedModal'
 import Form from '../Form'
 import MultiSelector from '../formAtoms/MultiSelector'
 import SubmitButton from '../formAtoms/SubmitButton'
 
-interface DepartmentWishForUpdateFormPropsType {
-  data: string[]
-}
-
-const DepartmentWishForUpdateForm: VFC<DepartmentWishForUpdateFormPropsType> =
-  ({ data }) => {
-    const joinedData = data.join('　')
-    const defaultValueArray: { value: string; label: string }[] = data.map(
-      (d) => {
-        return { value: d, label: d }
-      }
-    )
-    const auth = useAuthProvider()
-    const uid = auth.odUser?.uid
-    const [edit, setEdit] = useState(false)
-    const onSubmit = (data: { departmentWishFor: string[] }) => {
-      if (uid) {
-        const departmentDoc = doc(db, 'odUsers', uid)
-        return updateDoc(departmentDoc, {
-          departmentWishFor: data.departmentWishFor,
-        })
-      } else {
-        return console.log('uidが存在しません')
-      }
+const DepartmentWishForUpdateForm: VFC = () => {
+  const dispatch = useDispatch()
+  const odUser = useSelector(selectOdUser)
+  const odUserExData = useSelector(selectOdUserExData)
+  const departmentWishFor = odUserExData.departmentWishFor
+  const joinedData = departmentWishFor.join('　')
+  const defaultValueArray: { value: string; label: string }[] =
+    departmentWishFor.map((d) => {
+      return { value: d, label: d }
+    })
+  const uid = odUser.uid
+  const [edit, setEdit] = useState(false)
+  const onSubmit = (data: { departmentWishFor: string[] }) => {
+    if (uid) {
+      const departmentDoc = doc(db, 'odUsers', uid)
+      return updateDoc(departmentDoc, {
+        departmentWishFor: data.departmentWishFor,
+      }).then(() => dispatch(openUIUModal()))
+    } else {
+      return console.log('uidが存在しません')
     }
-    return (
+  }
+  return (
+    <>
+      <UserInfoUpdatedModal />
       <div>
         <div className='flex flex-row justify-start items-center mb-2'>
           <div className='bg-prime-blue-rich text-white px-2 rounded-l'>
             希望就職地
           </div>
           <button
-            onClick={() => (data ? setEdit(!edit) : 'NO DATA')}
+            onClick={() => (departmentWishFor ? setEdit(!edit) : 'NO DATA')}
             className='bg-[#B7B7B7] px-2 text-white rounded-r'
           >
             編集
@@ -53,7 +56,7 @@ const DepartmentWishForUpdateForm: VFC<DepartmentWishForUpdateFormPropsType> =
             <MultiSelector
               {...{
                 name: 'departmentWishFor',
-                options: ['総合診療科', '精神科', '消化器内科', '循環器内科'],
+                options: departmentCategoryList,
                 defaultValue: defaultValueArray,
               }}
             />
@@ -67,7 +70,8 @@ const DepartmentWishForUpdateForm: VFC<DepartmentWishForUpdateFormPropsType> =
           </p>
         )}
       </div>
-    )
-  }
+    </>
+  )
+}
 
 export default DepartmentWishForUpdateForm

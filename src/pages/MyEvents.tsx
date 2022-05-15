@@ -1,9 +1,11 @@
 import Footer from '../components/UIAtoms/Footer'
 import Header from '../components/UIAtoms/Header'
 import MyEventsTabMenu from '../components/myEvents/MyEventsTabMenu'
+import useRequiredPermission from '../lib/customHooks/useRequiredPermission'
 
 const MyEvents = () => {
-  return (
+  const { isPermitted, Loading } = useRequiredPermission()
+  return isPermitted ? (
     <>
       <Header />
       <div className='flex flex-col items-center ov-md:pt-20 bg-prime-blue-muted'>
@@ -16,6 +18,8 @@ const MyEvents = () => {
       </div>
       <Footer />
     </>
+  ) : (
+    <Loading />
   )
 }
 

@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import { onAuthStateChanged } from 'firebase/auth'
 import {
   arrayRemove,
   arrayUnion,
@@ -9,10 +8,14 @@ import {
 } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectOdUserExData } from '../../features/userSlice'
+import permissionChecker from '../../lib/customFunctions/permissionChecker'
 // import { setTimeout } from 'timers/promises'
-import { useRequiredPermission } from '../../lib/customHooks/useRequiredPermission'
 import { db } from '../../lib/firebase/firebase.config'
-import { auth as cAuth } from '../../lib/firebase/firebase.config'
+import { auth } from '../../lib/firebase/firebase.config'
+import AccountNotExistAlert from '../modals/AccountNotExistAlert'
+import NotEmailVerifiedAlert from '../modals/NotEmailVerifiedAlert'
 
 interface FavoriteButtonPropsType {
   layoutStyle: string
@@ -28,12 +31,12 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
   layoutStyle,
   depName,
 }) => {
+  const odUserExData = useSelector(selectOdUserExData)
   const [popup, setPopup] = useState<boolean>(false)
   const [isFavorite, setIsFavorite] = useState<boolean>(false)
-
-  const { NotEmailVerifiedAlert, AccountNotExistAlert, permissionChecker } =
-    useRequiredPermission()
   const router = useRouter()
+  const dispatch = useDispatch()
+  const curUser = auth.currentUser
   const curDepData = {
     curDepName: {
       nameInEng: depName?.departmentNameInEnglish,
@@ -48,11 +51,10 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
   }, [isFavorite])
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(cAuth, async (user) => {
-      if (user) {
-        const uid = user.uid
-        const ref = doc(db, 'odUsers', uid)
-        const snap = await getDoc(ref)
+    if (curUser) {
+      const uid = curUser.uid
+      const ref = doc(db, 'odUsers', uid)
+      getDoc(ref).then((snap) => {
         const favoDeparts = snap.data()?.favoDeparts
         if (
           favoDeparts.some(
@@ -68,44 +70,41 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
           setIsFavorite(false)
           setPopup(false)
         }
-      } else {
-        setIsFavorite(false)
-        setPopup(false)
-      }
-    })
-    return () => unsubscribe()
+      })
+    } else {
+      setIsFavorite(false)
+      setPopup(false)
+    }
   }, [])
 
   const onFavorite = () => {
-    const isPermitted = permissionChecker()
+    const isPermitted = permissionChecker(odUserExData, dispatch)
     if (isPermitted) {
-      onAuthStateChanged(cAuth, (user) => {
-        if (user) {
-          const uid = user.uid
-          if (!isFavorite) {
-            const ref = doc(db, 'odUsers', uid)
-            updateDoc(ref, {
-              favoDeparts: arrayUnion({
-                favoDepName: { ...curDepData.curDepName },
-                favoDepUrl: '/Departments/' + router.query.id,
-              }),
-            })
-            setIsFavorite(true)
-            setPopup(true)
-          } else {
-            const ref = doc(db, 'odUsers', uid)
-            updateDoc(ref, {
-              favoDeparts: arrayRemove({
-                favoDepName: { ...curDepData.curDepName },
-                favoDepUrl: '/Departments/' + router.query.id,
-              }),
-            })
-            setIsFavorite(false)
-            setPopup(false)
-          }
+      if (curUser) {
+        const uid = curUser.uid
+        if (!isFavorite) {
+          const ref = doc(db, 'odUsers', uid)
+          updateDoc(ref, {
+            favoDeparts: arrayUnion({
+              favoDepName: { ...curDepData.curDepName },
+              favoDepUrl: '/Departments/' + router.query.id,
+            }),
+          })
+          setIsFavorite(true)
+          setPopup(true)
+        } else {
+          const ref = doc(db, 'odUsers', uid)
+          updateDoc(ref, {
+            favoDeparts: arrayRemove({
+              favoDepName: { ...curDepData.curDepName },
+              favoDepUrl: '/Departments/' + router.query.id,
+            }),
+          })
+          setIsFavorite(false)
+          setPopup(false)
         }
-        // return unsubscribe()
-      })
+      }
+      // return unsubscribe()
     }
   }
 
