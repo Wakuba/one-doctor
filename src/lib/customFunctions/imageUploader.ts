@@ -26,22 +26,19 @@ const imageUploader = async (certificationImage: File) => {
   )
 
   console.log('storageRef')
-  await imageCompression(certificationImage as File, { maxSizeMB: 3 }).then(
-    (image) => {
-      console.log('image 5/15', image)
-      metadata.contentType = image.type
-      const uploadTask = uploadBytesResumable(storageRef, image, metadata)
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const prog = Math.round(
-            snapshot.bytesTransferred / snapshot.totalBytes
-          )
-          console.log('image upload progress', prog)
-        },
-        (error) => alert(error)
-      )
-    }
+  const image = await imageCompression(certificationImage as File, {
+    maxSizeMB: 3,
+  })
+  console.log('image 5/15', image)
+  metadata.contentType = image.type
+  const uploadTask = uploadBytesResumable(storageRef, image, metadata)
+  uploadTask.on(
+    'state_changed',
+    (snapshot) => {
+      const prog = Math.round(snapshot.bytesTransferred / snapshot.totalBytes)
+      console.log('image upload progress', prog)
+    },
+    (error) => alert(error)
   )
   return metadata.customMetadata.certificationImageId
 }
