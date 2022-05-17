@@ -13,11 +13,11 @@ const imageUploader = async (certificationImage: File) => {
 
   console.log('after metadata defenition')
   // storageの画像にidをふるために、firestoreに登録してidを作る
-  await addDoc(collection(db, 'odAuthorizationImageFiles'), {
+  const res = await addDoc(collection(db, 'odAuthorizationImageFiles'), {
     certificationlmageName: certificationImage?.name,
-  }).then((res) => {
-    metadata.customMetadata.certificationImageId = res.id
   })
+
+  metadata.customMetadata.certificationImageId = res.id
 
   console.log('after addDoc')
   const storageRef = ref(
