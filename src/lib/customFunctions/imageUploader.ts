@@ -1,5 +1,5 @@
 import { addDoc, collection } from '@firebase/firestore'
-import imageCompression from 'browser-image-compression'
+// import imageCompression from 'browser-image-compression'
 import { ref, uploadBytesResumable } from 'firebase/storage'
 import { db, storage } from '../firebase/firebase.config'
 
@@ -26,12 +26,16 @@ const imageUploader = async (certificationImage: File) => {
   )
 
   console.log('storageRef')
-  const image = await imageCompression(certificationImage as File, {
-    maxSizeMB: 3,
-  })
-  console.log('image 5/15', image)
-  metadata.contentType = image.type
-  const uploadTask = uploadBytesResumable(storageRef, image, metadata)
+  // const image = await imageCompression(certificationImage as File, {
+  //   maxSizeMB: 3,
+  // })
+  // console.log('image 5/15', image)
+  metadata.contentType = certificationImage.type
+  const uploadTask = uploadBytesResumable(
+    storageRef,
+    certificationImage,
+    metadata
+  )
   uploadTask.on(
     'state_changed',
     (snapshot) => {
