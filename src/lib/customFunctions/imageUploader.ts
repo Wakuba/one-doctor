@@ -11,6 +11,7 @@ const imageUploader = async (certificationImage: File) => {
     },
   }
 
+  console.log('after metadata defenition')
   // storageの画像にidをふるために、firestoreに登録してidを作る
   await addDoc(collection(db, 'odAuthorizationImageFiles'), {
     certificationlmageName: certificationImage?.name,
@@ -18,23 +19,30 @@ const imageUploader = async (certificationImage: File) => {
     metadata.customMetadata.certificationImageId = res.id
   })
 
+  console.log('after addDoc')
   const storageRef = ref(
     storage,
     `odUser/certificationImage/${certificationImage?.name}`
   )
 
-  await imageCompression(certificationImage, { maxSizeMB: 3 }).then((image) => {
-    metadata.contentType = image.type
-    const uploadTask = uploadBytesResumable(storageRef, image, metadata)
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const prog = Math.round(snapshot.bytesTransferred / snapshot.totalBytes)
-        console.log('image upload progress', prog)
-      },
-      (error) => alert(error)
-    )
-  })
+  console.log('storageRef')
+  await imageCompression(certificationImage as File, { maxSizeMB: 3 }).then(
+    (image) => {
+      console.log('image 5/15', image)
+      metadata.contentType = image.type
+      const uploadTask = uploadBytesResumable(storageRef, image, metadata)
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const prog = Math.round(
+            snapshot.bytesTransferred / snapshot.totalBytes
+          )
+          console.log('image upload progress', prog)
+        },
+        (error) => alert(error)
+      )
+    }
+  )
   return metadata.customMetadata.certificationImageId
 }
 
