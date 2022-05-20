@@ -1,5 +1,4 @@
 import StudentSignUpForm from '../components/forms/StudentSignUpForm'
-
 import Header from '../components/UIAtoms/Header'
 import Footer from '../components/UIAtoms/Footer'
 const StudentSignUpPage: React.VFC = () => {

@@ -17,7 +17,7 @@ const NameUpdateForm: React.VFC = () => {
   const splitName = name ? name.split(' ') : 'NO NAME'
   const familyName = Array.isArray(splitName) ? splitName[0] : ''
   const firstName = Array.isArray(splitName) ? splitName[1] : ''
-  const uid = odUser.uid
+  const uid = odUser ? odUser.uid : ''
   const onSubmit = (data: { familyName: string; firstName: string }) => {
     if (uid) {
       const nameDoc = doc(db, 'odUsers', uid)

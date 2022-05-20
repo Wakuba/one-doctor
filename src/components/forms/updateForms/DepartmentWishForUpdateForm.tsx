@@ -20,7 +20,7 @@ const DepartmentWishForUpdateForm: VFC = () => {
     departmentWishFor.map((d) => {
       return { value: d, label: d }
     })
-  const uid = odUser.uid
+  const uid = odUser ? odUser.uid : ''
   const [edit, setEdit] = useState(false)
   const onSubmit = (data: { departmentWishFor: string[] }) => {
     if (uid) {

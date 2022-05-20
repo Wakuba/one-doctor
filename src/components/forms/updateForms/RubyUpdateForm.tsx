@@ -17,7 +17,7 @@ const RubyUpdateForm: VFC = () => {
   const familyRuby = Array.isArray(splitRuby) ? splitRuby[0] : ''
   const firstRuby = Array.isArray(splitRuby) ? splitRuby[1] : ''
   const odUser = useSelector(selectOdUser)
-  const uid = odUser.uid
+  const uid = odUser ? odUser.uid : ''
   const [edit, setEdit] = useState(false)
   const onSubmit = (data: { familyRuby: string; firstRuby: string }) => {
     if (uid) {

@@ -9,9 +9,6 @@ import DepartmentWishForUpdateForm from '../components/forms/updateForms/Departm
 import GradeUpdateForm from '../components/forms/updateForms/GradeUpdateForm'
 import UniversityUpdateForm from '../components/forms/updateForms/UniversityUpdateForm'
 import WorkplaceUpdateForm from '../components/forms/updateForms/WorkplaceUpdateForm'
-import NotLogInAlert from '../components/modals/NotLogInAlert'
-import NotAuthorizedAlert from '../components/modals/NotAuthorizedAlert'
-import NotEmailVerifiedAlert from '../components/modals/NotEmailVerifiedAlert'
 import useRequiredPermission from '../lib/customHooks/useRequiredPermission'
 
 const UserProfile: React.VFC = () => {

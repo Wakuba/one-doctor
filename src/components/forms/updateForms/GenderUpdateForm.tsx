@@ -12,7 +12,7 @@ import UserInfoUpdatedModal from '../../modals/UserInfoUpdatedModal'
 const GenderUpdateForm: VFC = () => {
   const dispatch = useDispatch()
   const odUser = useSelector(selectOdUser)
-  const uid = odUser.uid
+  const uid = odUser ? odUser.uid : ''
   const odUserExData = useSelector(selectOdUserExData)
   const gender = odUserExData.gender
   const [edit, setEdit] = useState(false)

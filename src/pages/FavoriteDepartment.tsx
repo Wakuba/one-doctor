@@ -1,8 +1,5 @@
 import { VFC } from 'react'
 import FavoTabMenu from '../components/favoriteDepartment/FavoDepTabMenu'
-import NotLogInAlert from '../components/modals/NotLogInAlert'
-import NotAuthorizedAlert from '../components/modals/NotAuthorizedAlert'
-import NotEmailVerifiedAlert from '../components/modals/NotEmailVerifiedAlert'
 import Footer from '../components/UIAtoms/Footer'
 import Header from '../components/UIAtoms/Header'
 import useRequiredPermission from '../lib/customHooks/useRequiredPermission'

@@ -20,7 +20,7 @@ const WorkplaceWishForUpdateForm: VFC = () => {
       return { value: d, label: d }
     })
   const odUser = useSelector(selectOdUser)
-  const uid = odUser.uid
+  const uid = odUser ? odUser.uid : ''
   const [edit, setEdit] = useState(false)
   const onSubmit = (data: { workplaceWishFor: string }) => {
     if (uid) {

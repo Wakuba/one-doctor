@@ -12,14 +12,9 @@ import {
   logInState,
   logOutState,
   selectOdUser,
-  selectOdUserExData,
   selectUserState,
 } from '../../features/userSlice'
-import permissionChecker from '../../lib/customFunctions/permissionChecker'
 import { auth } from '../../lib/firebase/firebase.config'
-import NotLogInAlert from '../modals/NotLogInAlert'
-import NotAuthorizedAlert from '../modals/NotAuthorizedAlert'
-import NotEmailVerifiedAlert from '../modals/NotEmailVerifiedAlert'
 
 const HeaderMenuBar: React.VFC<{ layoutStyle: string }> = ({ layoutStyle }) => {
   const dispatch = useDispatch()
