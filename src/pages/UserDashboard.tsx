@@ -15,10 +15,10 @@ interface UserDashboardPropsType {
 }
 
 const UserDashboard: React.VFC<UserDashboardPropsType> = (props) => {
-  const { isPermitted, Loading } = useRequiredPermission()
-
-  return isPermitted ? (
+  const { PermissionAlerts } = useRequiredPermission()
+  return (
     <>
+      <PermissionAlerts />
       <Header />
       <div className='flex flex-col items-center ov-md:pt-20 bg-prime-blue-muted'>
         <main className='w-11/12 sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px] bg-prime-blue-muted '>
@@ -44,8 +44,6 @@ const UserDashboard: React.VFC<UserDashboardPropsType> = (props) => {
       </div>
       <Footer />
     </>
-  ) : (
-    <Loading />
   )
 }
 export default UserDashboard

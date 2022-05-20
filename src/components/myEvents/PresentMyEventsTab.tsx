@@ -29,7 +29,7 @@ const PresentMyEventsTab: VFC<PresentMyEventsTabPropsType> = ({
 }) => {
   return (
     <div {...{ title, className: 'min-h-[100px] p-4' }}>
-      {data ? (
+      {data.length !== 0 ? (
         data.map((d, key) => {
           const {
             contact,

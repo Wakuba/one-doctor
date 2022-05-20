@@ -31,12 +31,7 @@ import {
 
 //RTK
 import { useDispatch } from 'react-redux'
-import {
-  logOutState,
-  logInState,
-  signUpState,
-  defaultUserState,
-} from '../../features/userSlice'
+import { logOutState, logInState, signUpState } from '../../features/userSlice'
 import { setUserExData } from '../../features/userSlice'
 import { AnyAction, Dispatch } from '@reduxjs/toolkit'
 
@@ -48,7 +43,7 @@ export const useAuthProvider = () => {
     const curUser = auth.currentUser
     if (!curUser) {
       // setOdUser(null)
-      dispatch(defaultUserState())
+      dispatch(logOutState())
       // setIsLoading(false)
       // return
     } else {

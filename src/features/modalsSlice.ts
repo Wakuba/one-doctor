@@ -6,8 +6,8 @@ interface ModalsType {
   headerMenuState: { isOpenMenuModal: boolean; isMenuEventActive: boolean } // Headerのモーダルとクリックした時のイベントが機能するか
   isOpenUserInfoUpdatedModal: boolean
   isEmailAlreadyInUse: boolean
-  isStudentAuthError: boolean
-  isAccountNotExist: boolean //アカウントそのものが存在するか
+  isStudentAuthError: boolean //メールアドレスによる医学生認証
+  isNotLogIn: boolean //ログイン状態かどうか
   isNotEmailVerified: boolean //ユーザー自身がメールを承認したか
   isNotAuthorized: boolean //運営による認可を受けているか
 }
@@ -19,7 +19,7 @@ const initialState: ModalsType = {
   isOpenUserInfoUpdatedModal: false,
   isEmailAlreadyInUse: false,
   isStudentAuthError: false,
-  isAccountNotExist: false,
+  isNotLogIn: false,
   isNotEmailVerified: false,
   isNotAuthorized: false,
 }
@@ -72,11 +72,11 @@ export const modalsSlice = createSlice({
       state.isStudentAuthError = false
     },
 
-    openANEModal: (state) => {
-      state.isAccountNotExist = true
+    openNLModal: (state) => {
+      state.isNotLogIn = true
     },
-    closeANEModal: (state) => {
-      state.isAccountNotExist = false
+    closeNLModal: (state) => {
+      state.isNotLogIn = false
     },
 
     openNEVModal: (state) => {
@@ -94,7 +94,7 @@ export const modalsSlice = createSlice({
     },
 
     closeAllModal: (state) => {
-      state.isAccountNotExist = false
+      state.isNotLogIn = false
       state.isNotAuthorized = false
       state.isNotEmailVerified = false
       state.headerMenuState.isOpenMenuModal = false
@@ -121,8 +121,8 @@ export const {
   closeEAUModal,
   openSAEModal,
   closeSAEModal,
-  openANEModal,
-  closeANEModal,
+  openNLModal,
+  closeNLModal,
   openNAModal,
   closeNAModal,
   openNEVModal,
@@ -140,7 +140,7 @@ export const selectSAEModal = (state): boolean =>
 export const selectEAUModal = (state): boolean =>
   state.modals.isEmailAlreadyInUse
 
-export const selectANEModal = (state): boolean => state.modals.isAccountNotExist
+export const selectNLModal = (state): boolean => state.modals.isNotLogIn
 
 export const selectNEVModal = (state): boolean =>
   state.modals.isNotEmailVerified

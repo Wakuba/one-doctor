@@ -1,30 +1,43 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 interface PermissionSliceType {
-  isPermitted: boolean
+  isEmailVerified: boolean
+  isAuthorizedByAdmin: boolean
 }
 
 const initialState: PermissionSliceType = {
-  isPermitted: false,
+  isEmailVerified: false,
+  isAuthorizedByAdmin: false,
 }
 export const permissionSlice = createSlice({
   name: 'permission',
   initialState,
   reducers: {
-    setPermission: (state) => {
-      state.isPermitted = true
+    setIsEmailVerified: (state) => {
+      state.isEmailVerified = true
     },
-    deletePermission: (state) => {
-      state.isPermitted = false
+    setIsAuthorizedByAdmin: (state) => {
+      state.isAuthorizedByAdmin = true
+    },
+    setIsNoAuthorizedByAdmin: (state) => {
+      state.isAuthorizedByAdmin = false
     },
   },
 })
 
-export const { setPermission, deletePermission } = permissionSlice.actions
+export const {
+  setIsEmailVerified,
+  setIsAuthorizedByAdmin,
+  setIsNoAuthorizedByAdmin,
+} = permissionSlice.actions
 
 // selectors
-export const selectPermission = (state): boolean => {
-  return state.permission.isPermitted
+export const selectIsEmailVerified = (state): boolean => {
+  return state.permission.isEmailVerified
+}
+
+export const selectIsAuthorizedByAdmin = (state): boolean => {
+  return state.permission.isAuthorizedByAdmin
 }
 
 export default permissionSlice.reducer

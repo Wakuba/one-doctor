@@ -1,11 +1,17 @@
 import { AnyAction, Dispatch } from '@reduxjs/toolkit'
 import {
-  openANEModal,
+  openNLModal,
   openNAModal,
   openNEVModal,
+  closeNAModal,
   // selectNAModal,
 } from '../../features/modalsSlice'
-import { setPermission } from '../../features/permissionSlice'
+import {
+  setIsAuthorizedByAdmin,
+  setIsEmailVerified,
+  setIsNoAuthorizedByAdmin,
+} from '../../features/permissionSlice'
+import { logInState, logOutState } from '../../features/userSlice'
 import { auth } from '../firebase/firebase.config'
 import { odUserExDataType } from '../types'
 
@@ -14,11 +20,12 @@ const permissionChecker = (
   dispatch: Dispatch<AnyAction>
 ) => {
   const curUser = auth.currentUser
-  console.log('curUser', curUser)
-
-  // ↓アカウントが存在するかどうか
+  console.log('asdlkfj')
+  console.log('nanikore', curUser)
+  // ↓ログインしているかどうか
   if (curUser) {
-    // アカウントが存在する場合
+    // ログインしている
+    dispatch(logInState(curUser))
 
     // ↓運営から認可を得ているかどうか
     if (
@@ -27,9 +34,12 @@ const permissionChecker = (
     ) {
       //運営から認可を得ていない場合
       dispatch(openNAModal())
+      dispatch(setIsNoAuthorizedByAdmin())
       return false
     } else {
       // 運営から認可を受けている場合
+      dispatch(setIsAuthorizedByAdmin())
+      dispatch(closeNAModal())
 
       // ↓ユーザー自身がメールを承認したかどうか
       if (!curUser.emailVerified) {
@@ -38,13 +48,14 @@ const permissionChecker = (
         return false
       } else {
         // 承認している場合
-        dispatch(setPermission())
+        dispatch(setIsEmailVerified())
         return true
       }
     }
   } else {
     // アカウントが存在しない場合
-    dispatch(openANEModal())
+    dispatch(openNLModal())
+    dispatch(logOutState())
     return false
   }
 }

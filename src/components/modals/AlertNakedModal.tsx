@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
-import { useDispatch } from 'react-redux'
-import { closeAllModal } from '../../features/modalsSlice'
+// import { useDispatch } from 'react-redux'
+// import { closeAllModal } from '../../features/modalsSlice'
 import { ModalBackdrop, ModalMainArea } from '../UIAtoms/Modal'
 
 const AlertNakedModal = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   return (
     <>
       <ModalMainArea
@@ -17,7 +17,7 @@ const AlertNakedModal = ({ children }: { children: ReactNode }) => {
       </ModalMainArea>
       <ModalBackdrop
         closeModal={() => {
-          dispatch(closeAllModal())
+          // dispatch(closeAllModal())
           router.push('/')
         }}
       />

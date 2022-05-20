@@ -24,6 +24,8 @@ const MyEventsTabMenu = () => {
   const { data } = useSWR(
     `https://script.google.com/macros/s/AKfycbzJNXMl1AjZAyXOjgOxasyhsT6Re6GuW6yMtYwmg-JX_qL6qSZWTGbCTUq-7gjx0tIj/exec?${favoEventsQueryString}`
   )
+  console.log('data from spreadsheet', data)
+
   return (
     <TabMenu style={{ tabButtonStyle: 'h-10' }}>
       {data ? (

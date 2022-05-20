@@ -14,7 +14,7 @@ import permissionChecker from '../../lib/customFunctions/permissionChecker'
 // import { setTimeout } from 'timers/promises'
 import { db } from '../../lib/firebase/firebase.config'
 import { auth } from '../../lib/firebase/firebase.config'
-import AccountNotExistAlert from '../modals/AccountNotExistAlert'
+import NotLogInAlert from '../modals/NotLogInAlert'
 import NotEmailVerifiedAlert from '../modals/NotEmailVerifiedAlert'
 
 interface FavoriteButtonPropsType {
@@ -78,8 +78,7 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
   }, [])
 
   const onFavorite = () => {
-    const isPermitted = permissionChecker(odUserExData, dispatch)
-    if (isPermitted) {
+    if (permissionChecker(odUserExData, dispatch)) {
       if (curUser) {
         const uid = curUser.uid
         if (!isFavorite) {
@@ -104,8 +103,8 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
           setPopup(false)
         }
       }
-      // return unsubscribe()
     }
+    // return unsubscribe()
   }
 
   return (
@@ -123,7 +122,7 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
         ★お気に入り
       </button>
       <NotEmailVerifiedAlert />
-      <AccountNotExistAlert />
+      <NotLogInAlert />
     </>
   )
 }

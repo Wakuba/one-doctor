@@ -13,16 +13,21 @@ import { config } from '../index';
 
 const postNewUserData = (data: SignUpAuthorizationDataTypeDataWithImageId): string => {
   try {
+    console.log('なんでやねん')
     const listRef = ref(storage, 'odUser/certificationImage')
     listAll(listRef).then((res) => {
+      console.log('in listAll')
       res.items.map((ref) => {
         getMetadata(ref).then((metadata: FullMetadata) => {
+          console.log('in getMetadata', metadata.customMetadata)
           if (metadata.customMetadata) {
+            console.log('in ifasldjfkalsd', metadata.customMetadata.certificationImageId)
             if (
               metadata.customMetadata.certificationImageId ===
               data.certificationImageId
             ) {
               getDownloadURL(ref).then((url) => {
+                console.log('in getDownloadUrl')
                 const dataWithImageUrl: SignUpAuthorizationDataTypeDataWithImageUrl = {
                   ...data,
                   certificationImageUrl: url,

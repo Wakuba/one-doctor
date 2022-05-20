@@ -1,5 +1,6 @@
-import { useRouter } from 'next/router'
-import { ReactNode, VFC } from 'react'
+import { onAuthStateChanged } from 'firebase/auth'
+import Link from 'next/link'
+import { ReactNode, useEffect, VFC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link as Scroll } from 'react-scroll'
 import {
@@ -7,9 +8,16 @@ import {
   openHeaderMenu,
   selectHeaderMenuState,
 } from '../../features/modalsSlice'
-import { selectOdUser, selectOdUserExData } from '../../features/userSlice'
+import {
+  logInState,
+  logOutState,
+  selectOdUser,
+  selectOdUserExData,
+  selectUserState,
+} from '../../features/userSlice'
 import permissionChecker from '../../lib/customFunctions/permissionChecker'
-import AccountNotExistAlert from '../modals/AccountNotExistAlert'
+import { auth } from '../../lib/firebase/firebase.config'
+import NotLogInAlert from '../modals/NotLogInAlert'
 import NotAuthorizedAlert from '../modals/NotAuthorizedAlert'
 import NotEmailVerifiedAlert from '../modals/NotEmailVerifiedAlert'
 
@@ -55,9 +63,6 @@ const HeaderMenuBar: React.VFC<{ layoutStyle: string }> = ({ layoutStyle }) => {
           ></div>
         </>
       )}
-      <AccountNotExistAlert />
-      <NotAuthorizedAlert />
-      <NotEmailVerifiedAlert />
     </>
   )
 }
@@ -99,28 +104,38 @@ const MenuModal: VFC = () => {
         <List href='originalContents'>オリジナルコンテンツ</List>
         <MyPageLink />
       </div>
-      <AccountNotExistAlert />
-      <NotEmailVerifiedAlert />
-      <NotAuthorizedAlert />
     </>
   )
 }
 
 const MyPageLink: VFC = () => {
-  const router = useRouter()
   const dispatch = useDispatch()
-  const odUserExData = useSelector(selectOdUserExData)
-  return (
-    <>
-      <li
-        onClick={() => {
-          if (permissionChecker(odUserExData, dispatch))
-            router.push('/UserDashboard')
-        }}
-        className='w-auto h-auto flex flex-col items-center justify-center text-center text-stroke !pointer-events-auto list-none cursor-pointer z-50 text-white lg:text-xs ov-xl:text-sm'
-      >
-        マイページ/ログイン▼
-      </li>
-    </>
+  const userState = useSelector(selectUserState)
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // ログイン中
+        dispatch(logInState(user))
+      } else {
+        // ログアウト中
+        dispatch(logOutState())
+      }
+    })
+    return () => unsubscribe()
+  })
+
+  return userState === 'LogIn' ? (
+    <Link href='/UserDashboard'>
+      <a className='w-auto h-auto flex flex-col items-center justify-center text-center text-stroke !pointer-events-auto list-none cursor-pointer z-50 text-white lg:text-xs ov-xl:text-sm'>
+        マイページ▼
+      </a>
+    </Link>
+  ) : (
+    <Link href='/LogIn'>
+      <a className='w-auto h-auto flex flex-col items-center justify-center text-center text-stroke !pointer-events-auto list-none cursor-pointer z-50 text-white lg:text-xs ov-xl:text-sm'>
+        ログイン▼
+      </a>
+    </Link>
   )
 }

@@ -5,10 +5,11 @@ import Header from '../components/UIAtoms/Header'
 import useRequiredPermission from '../lib/customHooks/useRequiredPermission'
 
 const BrowseStudentsVoices = () => {
-  const { isPermitted, Loading } = useRequiredPermission()
+  const { PermissionAlerts } = useRequiredPermission()
 
-  return isPermitted ? (
+  return (
     <>
+      <PermissionAlerts />
       <Header />
       <div
         title='wrapper'
@@ -31,8 +32,6 @@ const BrowseStudentsVoices = () => {
       </div>
       <Footer />
     </>
-  ) : (
-    <Loading />
   )
 }
 
