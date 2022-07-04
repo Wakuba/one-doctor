@@ -101,7 +101,7 @@ const MultiSelector: VFC<MultiSelectorPropsType> = ({
       />
       {formState?.errors?.name ? (
         <div className='block mt-2 text-xs text-[#FF0000]'>
-          {`${children}が${formState?.errors[name].message}`}
+          {`${children}が${formState.errors[name]?.message}`}
         </div>
       ) : (
         <div className='invisible block mt-2 text-xs '>message</div>

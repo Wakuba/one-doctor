@@ -13,8 +13,8 @@ const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
   useEffect(() => {
     setIsSSR(false)
   })
-  return (
-    !isSSR ? <>
+  return !isSSR ? (
+    <>
       <Head>
         <title>one doctor</title>
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
@@ -24,8 +24,10 @@ const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
           <Component {...pageProps} />
         </Provider>
       </ErrorBoundary>
-    </>:<></>
+    </>
+  ) : (
+    <></>
   )
-  }
+}
 
 export default MyApp

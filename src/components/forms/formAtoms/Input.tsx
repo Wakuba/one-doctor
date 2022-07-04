@@ -66,7 +66,7 @@ const Input: VFC<InputPropsType> = ({
       )}
       {formState?.errors[name] ? (
         <div className='block mt-2 text-xs text-[#FF0000]'>
-          {formState?.errors[name].message}
+          {formState.errors[name]?.message}
         </div>
       ) : (
         <div className='invisible text-xs blocki mt-2'>message</div>

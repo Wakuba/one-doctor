@@ -10,6 +10,10 @@ import {
   UseFormSetError,
   UseFormGetValues,
   FormState,
+  DeepRequired,
+  FieldError,
+  FieldErrorsImpl,
+  Merge,
 } from 'react-hook-form'
 
 interface ImageHandlerPropsType {
@@ -25,24 +29,27 @@ interface ImageHandlerPropsType {
 }
 
 const errorRenderer = (
-  fileTypeError: {
-    message:
-      | boolean
-      | React.ReactChild
-      | React.ReactFragment
-      | React.ReactPortal
-      | null
-      | undefined
-  },
-  noImageError: {
-    message:
-      | boolean
-      | React.ReactChild
-      | React.ReactFragment
-      | React.ReactPortal
-      | null
-      | undefined
-  }
+  fileTypeError: // {
+  //   message:
+  //     | boolean
+  //     | React.ReactChild
+  //     | React.ReactFragment
+  //     | React.ReactPortal
+
+  //     | null
+  //     | undefined
+  // }
+  Merge<FieldError, FieldErrorsImpl<DeepRequired<any>>> | undefined,
+  noImageError: //  {
+  //   message:
+  //     | boolean
+  //     | React.ReactChild
+  //     | React.ReactFragment
+  //     | React.ReactPortal
+  //     | null
+  //     | undefined
+  // }
+  Merge<FieldError, FieldErrorsImpl<DeepRequired<any>>> | undefined
 ) => {
   if (fileTypeError) {
     return <div className='text-[#FF0000] text-xs'>{fileTypeError.message}</div>
@@ -138,6 +145,7 @@ const ImageHandler: VFC<ImageHandlerPropsType> = ({
                   onChange(handleFile(e))
                 }}
               />
+
               {disposalUrl ? (
                 <div className='w-full h-full bg-gray-200'>
                   <div className='relative block w-full h-full'>

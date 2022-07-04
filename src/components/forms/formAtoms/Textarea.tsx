@@ -45,7 +45,7 @@ const Textarea: VFC<TextareaPropsType> = ({
 
       {formState?.errors[name] ? (
         <div className='block mt-2 text-xs text-[#FF0000]'>
-          {formState?.errors[name].message}
+          {formState.errors[name]?.message}
         </div>
       ) : (
         <div className='invisible'>message</div>

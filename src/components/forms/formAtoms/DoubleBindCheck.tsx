@@ -87,7 +87,7 @@ const DoubleBindCheck: VFC<DoubleBindCheckPropsType> = ({
       </Input>
       {formState?.errors[errorName] ? (
         <div className='block text-xs text-[#FF0000]'>
-          {formState?.errors[errorName].message}
+          {formState.errors[errorName]?.message}
         </div>
       ) : (
         <div className='invisible text-xs block'>message</div>

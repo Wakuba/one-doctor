@@ -162,7 +162,7 @@ const Home: VFC<HomePropsType> = (props) => {
             <NewVideosBoard videosData={newVideos} />
           </div>
 
-          <div className='lg:hidden w-full flex justify-center '>
+          <div className='ov-lg:hidden w-full flex justify-center '>
             <div id='newsBoard-sm' className='mt-10 w-11/12'>
               <NewsBoard
                 layoutStyles='text-prime-blue-rich'
