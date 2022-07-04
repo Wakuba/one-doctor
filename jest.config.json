@@ -1,0 +1,15 @@
+{  
+    "collectCoverage": true,  
+    "preset": "ts-jest",
+    "testPathIgnorePatterns": [
+      "<rootDir>/.next/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/.vercel/",
+      "<rootDir>/.vscode/"
+    ],
+     "moduleFileExtensions": [
+        "ts",
+        "tsx",
+        "js",
+        "json"
+     ]  } 

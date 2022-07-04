@@ -8,6 +8,7 @@ import { store } from '../lib/store'
 import { useEffect, useState, VFC } from 'react'
 
 const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
+  // hydration error に対する解決策
   const [isSSR, setIsSSR] = useState(true)
   useEffect(() => {
     setIsSSR(false)

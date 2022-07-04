@@ -4,7 +4,7 @@
     "alwaysStrict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "lib": [
       "dom",
       "es2017"
@@ -21,11 +21,13 @@
     "strict": true,
     "target": "es2017",
     "types": [
-      "node"
+      "@types/jest",
+      "node",
+      "@testing-library/jest-dom"
     ],
     "incremental": true,
     "typeRoots": [
-      "/src/@types"
+      "/src/@types",
     ],
     "isolatedModules": true
   },
@@ -37,5 +39,6 @@
     "**/*.tsx",
     "**/**/*.ts",
     "**/**/*.tsx",
+    "**/*.test.tsx"
   ]
 }
