@@ -5,11 +5,16 @@ import Head from 'next/head'
 import ErrorBoundary from '../components/ErrorBoundary'
 import { Provider } from 'react-redux'
 import { store } from '../lib/store'
-import { VFC } from 'react'
+import { useEffect, useState, VFC } from 'react'
 
 const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
+  // hydration error に対する解決策
+  const [isSSR, setIsSSR] = useState(true)
+  useEffect(() => {
+    setIsSSR(false)
+  })
   return (
-    <>
+    !isSSR ? <>
       <Head>
         <title>one doctor</title>
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
@@ -19,8 +24,8 @@ const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
           <Component {...pageProps} />
         </Provider>
       </ErrorBoundary>
-    </>
+    </>:<></>
   )
-}
+  }
 
 export default MyApp
