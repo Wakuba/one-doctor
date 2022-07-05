@@ -42,6 +42,7 @@ const permissionChecker = (
       dispatch(closeNAModal())
 
       // ↓ユーザー自身がメールを承認したかどうか
+      curUser.reload()
       if (!curUser.emailVerified) {
         // 承認していない場合
         dispatch(openNEVModal())
