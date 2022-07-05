@@ -22,11 +22,14 @@ const sqzByDep = (
   docs: QueryDocumentSnapshot<DocumentData>[],
   depNameFromForm: string[]
 ) => {
+  console.log('docs', docs)
+  console.log('depNameFromForm', depNameFromForm)
   return docs.filter((doc) => {
     const vData = doc.data()
-    const depNameArray = vData.departmentNameInJapanese
-    return depNameArray
-      .map((name) => depNameFromForm?.includes(name))
+    const depName = vData.departmentNameInJapanese
+    console.log(depName)
+    return depNameFromForm
+      .map((name) => depName?.includes(name))
       .some((x) => x === true)
   })
 }
