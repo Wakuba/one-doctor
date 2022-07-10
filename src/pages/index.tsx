@@ -78,7 +78,7 @@ const Home: VFC<HomePropsType> = (props) => {
                     '2xl:text-[80px]'
                   )}
                 >
-                  キャッチコピー 本番環境テストだ
+                  キャッチコピー
                   <br />
                   白の手書き文字
                 </h1>
