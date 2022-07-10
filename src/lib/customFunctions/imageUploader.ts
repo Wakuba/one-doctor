@@ -32,6 +32,7 @@ const imageUploader = async (certificationImage: File) => {
     'state_changed',
     (snapshot) => {
       const prog = Math.round(snapshot.bytesTransferred / snapshot.totalBytes)
+      console.log(prog)
     },
     (error) => alert(error)
   )
