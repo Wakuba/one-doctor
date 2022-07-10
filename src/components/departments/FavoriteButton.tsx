@@ -119,8 +119,6 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
         {popup && <RegisteredMessage />}
         ★お気に入り
       </button>
-      <NotEmailVerifiedAlert />
-      <NotLogInAlert />
     </>
   )
 }
