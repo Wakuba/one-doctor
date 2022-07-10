@@ -1,8 +1,8 @@
 import router from 'next/router'
-import { SignUpAuthorizationDataWithImageId } from '../types'
+import { SignUpAuthorizationDataTypeDataWithImageId } from '../types'
 
 export default async function postUserDataToSlackHitter(
-  postData: SignUpAuthorizationDataWithImageId,
+  postData: SignUpAuthorizationDataTypeDataWithImageId,
   abortCtrl: AbortController,
   disposalUrl: string
 ) {
@@ -10,7 +10,7 @@ export default async function postUserDataToSlackHitter(
 
   const stringifiedPostData = JSON.stringify(postData)
 
-  await fetch(`/api/postMessageToSlack/${stringifiedPostData}`, {
+  await fetch(`/api/postUserDataToSlack/${stringifiedPostData}`, {
     method: 'POST',
     signal,
   }).then(() => {

@@ -1,5 +1,5 @@
-import Header from '../components/organisms/Header'
-import Footer from '../components/organisms/Footer'
+import Header from '../components/UIAtoms/Header'
+import Footer from '../components/UIAtoms/Footer'
 import Link from 'next/link'
 
 const SignUpDashboard = () => {
@@ -21,7 +21,7 @@ const SignUpDashboard = () => {
                 <span className='ov-md:ml-[20px] text-sm'>
                   すでにアカウントを持っている場合は
                 </span>
-                <Link href='/'>
+                <Link href='/LogIn'>
                   <a className='text-sm inline text-[#00B8FF] underline'>
                     こちら
                   </a>
@@ -30,17 +30,17 @@ const SignUpDashboard = () => {
             </div>
             <div className='text-sm mb-6'>当てはまるものを選択してください</div>
             <div className='ov-md:pl-12 pb-6'>
-              <Link href='/MedStudentSignUp'>
+              <Link href='/StudentSignUp'>
                 <a className='block border-1 border-solid rounded bg-white h-[40px] leading-[40px] text-sm pl-6 mb-6 ov-md:w-1/2'>
                   医学生
                 </a>
               </Link>
-              <Link href='/ResidencySignUp'>
+              <Link href='/NotStudentSignUp'>
                 <a className='block border-1 border-solid rounded bg-white h-[40px] leading-[40px] text-sm pl-6 mb-6 ov-md:w-1/2'>
                   研修医
                 </a>
               </Link>
-              <Link href='/ResidencySignUp'>
+              <Link href='/NotStudentSignUp'>
                 <a className='block border-1 border-solid rounded bg-white min-h-[40px] leading-[40px] text-sm pl-6 mb-6 ov-md:w-1/2'>
                   その他（医局所属なし, 大学院生）
                 </a>

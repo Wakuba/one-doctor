@@ -1,8 +1,8 @@
 import router from 'next/router'
-import { FormData } from '../types'
+import { FormDataType } from '../types'
 
 export default async function postFormToSlackHitter(
-  formData: FormData,
+  formData: FormDataType,
   abortCtrl: AbortController
 ) {
   const { signal } = abortCtrl

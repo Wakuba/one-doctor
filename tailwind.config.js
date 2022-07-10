@@ -3,10 +3,17 @@ module.exports = {
   purge: [
     './src/pages/*.{ts,tsx}',
     './src/pages/Departments/*.{ts,tsx}',
-    './src/components/atoms/*.{ts,tsx}',
-    './src/components/molecules/*.{ts,tsx}',
-    './src/components/organisms/*.{ts,tsx}',
-    './src/components/templates/*.{ts,tsx}',
+    './src/components/departments/*.{ts,tsx}',
+    './src/components/forms/*.{ts,tsx}',
+    './src/components/forms/formAtoms/*.{ts,tsx}',
+    './src/components/forms/updateForms/*.{ts,tsx}',
+    './src/components/home/*.{ts,tsx}',
+    './src/components/tabs/*.{ts,tsx}',
+    './src/components/userDashboard/*.{ts,tsx}',
+    './src/components/UIAtoms/*.{ts,tsx}',
+    './src/components/favoriteDepartment/*.{ts,tsx}',
+    './src/components/browseStudentsVoices/*.{ts,tsx}',
+    './src/components/myRecord/*.{ts,tsx}',
   ],
   darkMode: false, // Or 'media' or 'class'
   theme: {
@@ -27,6 +34,7 @@ module.exports = {
         'for-narrow-ichioshi-img': 'inset 0px 60px 30px -7px white',
         'for-wide-ichioshi-img': 'inset 60px 0px 30px -7px white',
         'for-readmore': 'inset 0px -50px 48px 6px white',
+        'all-dir': '0px 0px 30px #0000004E',
       },
       borderWidth: {
         1: '1px',
@@ -45,6 +53,7 @@ module.exports = {
       zIndex: {
         '-10': '-10',
         '-20': '-20',
+        60: '60',
       },
       fontSize: {
         '10vw': '10vw',
@@ -100,8 +109,8 @@ module.exports = {
       backgroundColor: ['hover'],
     },
   },
-  coreplugins: {
-    gridTemplateColumns: true,
-    gridTemplateRows: true,
-  },
+  // coreplugins: {
+  //   gridTemplateColumns: true,
+  //   gridTemplateRows: true,
+  // },
 }

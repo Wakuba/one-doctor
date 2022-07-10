@@ -1,8 +1,9 @@
-import Header from '../components/organisms/Header'
-import Footer from '../components/organisms/Footer'
-import InqueriesForm from '../components/organisms/InqueriesForm'
+import Header from '../components/UIAtoms/Header'
+import Footer from '../components/UIAtoms/Footer'
+import InqueriesForm from '../components/forms/InqueriesForm'
+import { VFC } from 'react'
 
-export default function InqueriesPage() {
+const Inqueries: VFC = () => {
   return (
     <>
       <Header />
@@ -13,3 +14,5 @@ export default function InqueriesPage() {
     </>
   )
 }
+
+export default Inqueries

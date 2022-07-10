@@ -13,75 +13,70 @@ import {
   getDoc,
 } from 'firebase/firestore'
 import { ref, getDownloadURL } from 'firebase/storage'
-import { DepPostDataType } from '../../lib/types'
-
-// Custom components
-import PlaneButton from '../../components/atoms/PlaneButton'
-import Header from '../../components/organisms/Header'
-import Footer from '../../components/organisms/Footer'
-import TabMenu from '../../components/organisms/TabMenu'
-import Tag from '../../components/atoms/Tag'
-import AppealCardBoard from '../../components/organisms/AppealCardBoard'
-import MovieCarousel from '../../components/organisms/MovieCarousel'
-import ContactButtonModal from '../../components/molecules/ContactButtonModal'
-import DepTopSection from '../../components/organisms/DepTopSeciton '
-import EventTab from '../../components/organisms/EventTab'
-import CrewBoard from '../../components/organisms/CrewBoardTab'
-import TwitterTimeline from '../../components/molecules/TwitterTimeline'
-import {
-  getUrlFromIframe,
-  getUrlFromTwitterTimeline,
-} from '../../lib/customFunctions/urlExtractor'
+import { DepPostDataType } from '../../lib/types' // Custom components
+import PlaneButton from '../../components/UIAtoms/PlaneButton'
+import Header from '../../components/UIAtoms/Header'
+import Footer from '../../components/UIAtoms/Footer'
+import TabMenu from '../../components/tabs/TabMenu'
+import Tag from '../../components/departments/Tag'
+import AppealCardBoard from '../../components/departments/AppealCardBoard'
+import VideoCarousel from '../../components/departments/VideoCarousel'
+import ContactButtonModal from '../../components/UIAtoms/ContactButtonModal'
+import DepTopSection from '../../components/departments/DepTopSeciton '
+import EventTab from '../../components/departments/EventTab'
+import CrewBoardTab from '../../components/departments/CrewBoardTab'
+import TwitterTimeline from '../../components/departments/TwitterTimeline'
 import { GetStaticPaths, GetStaticProps, GetStaticPropsResult } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import router from 'next/router'
+import FavoriteButton from '../../components/departments/FavoriteButton'
+import BasicInfoTab from '../../components/departments/BasicInfoTab'
+import GeoInfoTab from '../../components/departments/GeoInfoTab'
+import { VFC } from 'react'
 
-export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
-  const {
-    heroImgUrl,
-    departmentName,
-    universityName,
-    hospitalName,
-    tabMenu,
-    topSection,
-    officialWebSite,
-  } = postData
-
+const DepartmentPage: VFC<DepartmentPagePropsType> = ({ postData }) => {
   return (
     <>
       <Header />
       <main className='ed-back-linear bg-contain bg-no-repeat w-full flex flex-col items-center'>
         <div className='sm:w-11/12 md:w-[716px] lg:w-[895px] xl:w-[1075px] 2xl:w-[1364px]'>
-          <section className='w-full flex flex-col items-start mb-14 pt-10'>
-            <div className='sm:w-11/12 ov-md:w-8/12 flex flex-col ov-md:pt-20'>
+          <section className='w-full flex flex-col items-start mb-14 pt-10 justify-between'>
+            <div className='flex-col ov-md:pt-20 w-full'>
+              {/* sm:w-11/12  ov-md:w-8/12  */}
               <h1 className='text-white text-xl font-semibold mb-1'>
-                {hospitalName.hospitalNameInJapanese}
+                {postData?.hospitalName?.hospitalNameInJapanese}
                 {'　'}
-                {departmentName.departmentNameInJapanese}
+                {postData?.departmentName?.departmentNameInJapanese}
               </h1>
               <p className='text-white text-xs mb-1'>
-                {hospitalName.hospitalNameInEnglish}-
-                {departmentName.departmentNameInEnglish}
+                {postData?.hospitalName?.hospitalNameInEnglish}-
+                {postData?.departmentName?.departmentNameInEnglish}
               </p>
-              <div className='flex flex-row'>
-                <Tag layoutStyle='mr-2'>
-                  {universityName.universityNameInJapanese}
-                </Tag>
-                <Tag layoutStyle='mr-2'>
-                  {departmentName.departmentNameInJapanese}
-                </Tag>
+              <div className='flex flex-row w-full justify-between'>
+                <div className='flex flex-row '>
+                  <Tag layoutStyle='mr-2'>
+                    {postData?.universityName?.universityNameInJapanese}
+                  </Tag>
+                  <Tag layoutStyle='mr-2'>
+                    {postData?.departmentName?.departmentNameInJapanese}
+                  </Tag>
+                </div>
+                <FavoriteButton
+                  layoutStyle=''
+                  depName={postData?.departmentName}
+                />
               </div>
             </div>
           </section>
 
           <section className='mb-16 relative w-full flex flex-col items-center'>
             <DepTopSection
-              depName={departmentName.departmentNameInJapanese}
-              heroImgUrl={heroImgUrl}
-              educationalPoint={topSection.educationalPoint}
-              clinicalPoint={topSection.clinicalPoint}
-              researchPoint={topSection.researchPoint}
-              otherPoint={topSection.otherPoint}
+              depName={postData?.departmentName?.departmentNameInJapanese}
+              heroImgUrl={postData?.heroImgUrl}
+              educationalPoint={postData?.topSection?.educationalPoint}
+              clinicalPoint={postData?.topSection?.clinicalPoint}
+              researchPoint={postData?.topSection?.researchPoint}
+              otherPoint={postData?.topSection?.otherPoint}
             />
           </section>
 
@@ -94,54 +89,50 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
               <p className='text-white sm:text-xs ov-md:text-md sm:my-2 ov-md:my-4 breakAll'>
                 紹介動画を視聴して雰囲気をみてみませんか？
               </p>
-              <MovieCarousel />
+              <VideoCarousel />
             </div>
           </section>
 
           <section className='w-full flex flex-col items-center mb-16'>
-            <TabMenu>
-              <div className='w-full ov-md:p-8 sm:p-4 bg-white flex flex-col items-start'>
-                <div className='space-y-8'>
-                  <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
-                    研修カリキュラム
-                  </div>
-                  {/* <Image/> */}
-                  <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
-                    主な進路
-                  </div>
-                  <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
-                    取得可能な資格
-                  </div>
-                </div>
-              </div>
-              <CrewBoard crewDataList={tabMenu.crewCardListTab} />
-              <div className='w-full ov-md:p-8 sm:p-4 bg-white flex flex-col'>
-                <div className='space-y-8'>
-                  <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
-                    周辺地図
-                  </div>
-                  <iframe
-                    className='w-full mb-10 h-[50vw]'
-                    src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d279785.1765704249!2d140.17047807758485!3d35.991258388550875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60220bff99f57b0b%3A0x1cad40e7632fb4b8!2z562R5rOi5aSn5a2m!5e0!3m2!1sja!2sjp!4v1626441216082!5m2!1sja!2sjp'
-                    width='600'
-                    height='450'
-                    loading='lazy'
-                  ></iframe>
-                </div>
-              </div>
-              <EventTab />
-              <div className='w-full ov-md:p-8 sm:p-4 bg-white flex flex-col'>
+            <TabMenu
+              style={{ tabButtonStyle: 'ov-md:h-10 ov-md:w-24 sm:h-8 sm:w-16' }}
+            >
+              <BasicInfoTab
+                title='基本情報'
+                basicInfo={postData?.tabMenu?.basicInfoTab}
+              />
+              <CrewBoardTab
+                title='医局員'
+                crewDataList={postData?.tabMenu?.crewCardListTab}
+              />
+              <GeoInfoTab
+                title='周辺地図'
+                gmIframe={
+                  postData?.tabMenu?.geographicalInformationTab.googleMapIframe
+                }
+              />
+              <EventTab
+                title='イベント'
+                dep={postData?.departmentName}
+                univ={postData?.universityName}
+              />
+              <div
+                title='SNS'
+                className='w-full ov-md:p-8 sm:p-4 bg-white flex flex-col'
+              >
                 <div className='space-y-8'>
                   <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
                     公式サイト
                   </div>
-                  <PlaneButton href={officialWebSite}>
+                  <PlaneButton href={postData?.officialWebSite}>
                     診療科公式ページ→
                   </PlaneButton>
                   <div className='border-l-8 block bg-prime-blue-muted px-2 border-prime-blue-rich sm:text-sm ov-md:text-md font-medium'>
                     関連SNS
                   </div>
-                  <TwitterTimeline href={tabMenu.snsTab.twitterTimelineUrl} />
+                  <TwitterTimeline
+                    userId={postData?.tabMenu?.snsTab?.twitterUserId}
+                  />
                 </div>
               </div>
             </TabMenu>
@@ -167,7 +158,7 @@ export default function DepartmentPage({ postData }: DepartmentPagePropsType) {
                 <div className='text-sm'>
                   詳しい情報については診療科のホームページをご覧ください
                 </div>
-                <PlaneButton href={officialWebSite}>
+                <PlaneButton href={postData?.officialWebSite}>
                   診療科公式ページ→
                 </PlaneButton>
               </div>
@@ -194,9 +185,10 @@ export const getStaticPaths: GetStaticPaths<ParamsType> = async () => {
   const querySnapshot = await getDocs(qForPaths)
   querySnapshot.forEach((doc) => {
     paths.push({
-      params: { id: doc.data().id },
+      params: { id: doc.data().id ?? '' },
     })
   })
+  console.log(paths)
   return {
     paths,
     fallback: false,
@@ -237,40 +229,60 @@ export const getStaticProps: GetStaticProps<
     const postData: DepPostDataType = {
       heroImgUrl: url ?? '',
       officialWebSite: data?.officialWebSite ?? '',
-      departmentName: data?.departmentName ?? '',
-      universityName: data?.universityName ?? '',
-      hospitalName: data?.hospitalName ?? '',
-      topSection: data?.topSection ?? '',
+      departmentName: data?.departmentName ?? {
+        departmentNameInEnglish: '',
+        departmentNameInJapanese: '',
+      },
+      universityName: data?.universityName ?? {
+        universityNameInEnglish: '',
+        universityNameInJapanese: '',
+      },
+      hospitalName: data?.hospitalName ?? {
+        hospitalNameInEnglish: '',
+        hospitalNameInJapanese: '',
+      },
+      topSection: data?.topSection ?? {
+        educationalPoint: '',
+        clinicalPoint: '',
+        researchPoint: '',
+        otherPoint: '',
+      },
       tabMenu: {
-        basicInfoTab: data?.tabMenu.basicInfoTab ?? '',
-        geographicalInformationTab:
-          getUrlFromIframe(data?.tabMenu.geographicalInformationTab) ?? '',
+        basicInfoTab: data?.tabMenu?.basicInfoTab ?? '',
+        geographicalInformationTab: data?.tabMenu
+          ?.geographicalInformationTab ?? {
+          googleMapIframe: '',
+          geographicalInformationDescription: '',
+        },
         snsTab: {
-          twitterTimelineUrl:
-            getUrlFromTwitterTimeline(
-              data?.tabMenu.snsTab.twitterTimelineUrl
-            ) ?? '',
+          // twitterTimelineUrl:
+          //   getUrlFromTwitterTimeline(
+          //     data?.tabMenu.snsTab.twitterTimelineUrl
+          //   ) ?? '',
+          userId: data?.tabMenu?.snsTab?.userId ?? '',
         },
         crewCardListTab: [],
       },
     }
-
-    for (const card of data?.tabMenu.crewCardListTab) {
-      const crewImgId = card.crewImage[0].id
-      const docSnap = await getDoc(doc(db, 'fl_files', crewImgId))
-      const crewImgName = docSnap.data()?.file
-      const url = await getDownloadURL(
-        ref(storage, `flamelink/media/${crewImgName}`)
-      )
-      postData.tabMenu.crewCardListTab.push({
+    for (const card of data?.tabMenu?.crewCardListTab) {
+      const crewImgId = card?.crewImage[0]?.id
+      let url = ''
+      if (crewImgId) {
+        const docSnap = await getDoc(doc(db, 'fl_files', crewImgId))
+        const crewImgName = docSnap.data()?.file
+        url = await getDownloadURL(
+          ref(storage, `flamelink/media/${crewImgName}`)
+        )
+      }
+      postData?.tabMenu?.crewCardListTab.push({
         crewImgUrl: url ?? '',
-        crewName: card.crewName ?? '',
-        position: card.position ?? '',
-        background: card.background ?? '',
-        licence: card.licence ?? '',
-        majorField: card.majorField ?? '',
-        schoolLife: card.schoolLife ?? '',
-        forFun: card.forFun ?? '',
+        crewName: card?.crewName ?? '',
+        position: card?.position ?? '',
+        background: card?.background ?? '',
+        licence: card?.licence ?? '',
+        majorField: card?.majorField ?? '',
+        schoolLife: card?.schoolLife ?? '',
+        forFun: card?.forFun ?? '',
       })
     }
     return {
@@ -313,3 +325,5 @@ export const getStaticProps: GetStaticProps<
    * file名だけ取得し、画像のダウンロードは各コンポーネントに任せる
    */
 }
+
+export default DepartmentPage

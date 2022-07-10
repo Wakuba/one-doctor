@@ -1,7 +1,8 @@
-import Footer from '../components/organisms/Footer'
-import Header from '../components/organisms/Header'
-import LoginForm from '../components/organisms/LoginForm'
-const Login: React.FC = () => {
+import Footer from '../components/UIAtoms/Footer'
+import Header from '../components/UIAtoms/Header'
+import LoginForm from '../components/forms/LoginForm'
+const Login: React.VFC = () => {
+  console.log('ここはどこ')
   return (
     <>
       <Header />

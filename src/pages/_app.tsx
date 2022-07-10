@@ -2,23 +2,32 @@ import 'tailwindcss/tailwind.css'
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { AuthProvider } from '../lib/context'
+import ErrorBoundary from '../components/ErrorBoundary'
+import { Provider } from 'react-redux'
+import { store } from '../lib/store'
+import { useEffect, useState, VFC } from 'react'
 
-export default function MyApp({ Component, pageProps }: AppProps) {
-  return (
+const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
+  // hydration error に対する解決策
+  const [isSSR, setIsSSR] = useState(true)
+  useEffect(() => {
+    setIsSSR(false)
+  })
+  return !isSSR ? (
     <>
       <Head>
         <title>one doctor</title>
-        <link
-          rel='icon'
-          type='image/x-icon'
-          href='/public/images/favicon.ico'
-        />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <AuthProvider>
-        <Component {...pageProps} />
-      </AuthProvider>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
+      </ErrorBoundary>
     </>
+  ) : (
+    <></>
   )
 }
+
+export default MyApp
