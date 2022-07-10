@@ -61,7 +61,7 @@ export interface CrewCardListTabType {
 }
 
 interface SnsTabType {
-  userId: string
+  twitterUserId: number
 }
 
 interface TabMenuType {
