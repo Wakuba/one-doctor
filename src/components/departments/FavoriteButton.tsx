@@ -13,8 +13,6 @@ import permissionChecker from '../../lib/customFunctions/permissionChecker'
 // import { setTimeout } from 'timers/promises'
 import { db } from '../../lib/firebase/firebase.config'
 import { auth } from '../../lib/firebase/firebase.config'
-import NotLogInAlert from '../modals/NotLogInAlert'
-import NotEmailVerifiedAlert from '../modals/NotEmailVerifiedAlert'
 
 interface FavoriteButtonPropsType {
   layoutStyle: string
