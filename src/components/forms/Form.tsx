@@ -36,30 +36,6 @@ const Form = ({ formName, children, onSubmit, style }: FormPropsType) => {
     resetField,
     formState,
   } = useForm()
-  // const names: string[] = []
-  // if (process.browser) {
-  // const form = document.getElementsByTagName('form')[0]
-  // const childCount = form.childElementCount
-  // console.log('childCount', childCount)
-  // for (let i = 0; i < childCount - 1; i++) {
-  //   const label = form.getElementsByTagName('label')[i]
-  //   // console.log(label)
-  //   if (label?.htmlFor) {
-  //     // console.log(label.htmlFor)
-  //     names.push(label.htmlFor)
-  //   }
-  //   console.log(names)
-  // }
-  // console.log('どうですか', watch())
-  // const persist = useFormPersist('form_' + formName, watch, setValue, reset)
-  // }
-
-  // useEffect(() => {
-  //   if (formState?.isSubmitSuccessful) {
-  //     persist.clear()
-  //   }
-  // }, [formState, reset])
-
   return (
     <form name={formName} onSubmit={handleSubmit(onSubmit)} className={style}>
       {Array.isArray(children)

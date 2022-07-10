@@ -19,7 +19,6 @@ const useRequiredPermission = () => {
 
   useEffect(() => {
     permissionChecker(dispatch)
-    console.log('useEffectなう')
   }, [])
 
   const PermissionAlerts: VFC = () => {
@@ -29,44 +28,7 @@ const useRequiredPermission = () => {
     return <></>
   }
 
-  // const checkIfEmailVerified = () => {
-  //   if (odUser.currentUser) {
-  //     if (odUser.currentUser.emailVerified) {
-  //       dispatch(setIsEmailVerified())
-  //       return true
-  //     } else {
-  //       dispatch(openNEVModal())
-  //       return false
-  //     }
-  //   } else {
-  //     dispatch(openANEModal())
-  //     return false
-  //   }
-  // }
-
-  // const checkIfAuthorizedByAdmin = () => {
-  //   if (odUser.currentUser) {
-  //     if ('authorizedByAdmin' in odUserExData) {
-  //       if (odUserExData.authorizedByAdmin) {
-  //         dispatch(setIsAuthorizedByAdmin())
-  //         return true
-  //       } else {
-  //         dispatch(openNAModal())
-  //       }
-  //     } else {
-  //       // Studentなので
-  //       dispatch(setIsAuthorizedByAdmin())
-  //       return true
-  //     }
-  //   } else {
-  //     dispatch(openANEModal())
-  //     return false
-  //   }
-  // }
-
   return {
-    // checkIfEmailVerified,
-    // checkIfAuthorizedByAdmin,
     PermissionAlerts,
   }
 }

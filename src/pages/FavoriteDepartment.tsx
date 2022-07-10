@@ -24,21 +24,3 @@ const FavoriteDepartment: VFC = () => {
 }
 
 export default FavoriteDepartment
-
-// export const getStaticProps: GetStaticProps<FavoriteDepartmentPropsType> =
-//   async () => {
-
-//     const uid = auth.odUser?.uid
-//     let favoDepList = ['なし']
-//     try {
-//       if (uid) {
-//         const ref = doc(db, 'odUsers', uid)
-//         const snap = await getDoc(ref)
-//         favoDepList = snap.data()?.favoDeparts ?? ['なし']
-//         return { props: { favoDepList } }
-//       }
-//     } catch (e) {
-//       console.log(e)
-//       return { props: { favoDepList } }
-//     }
-//   }

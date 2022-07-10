@@ -56,7 +56,6 @@ const MultiSelector: VFC<MultiSelectorPropsType> = ({
   const optionsObj: { value: string; label: string }[] = options.map(
     (option: string) => ({ value: option, label: option })
   )
-  // console.log(options)
   return (
     <div className={`${style?.wrapperStyle}`}>
       <label htmlFor={name} className='block text-sm'>
@@ -84,7 +83,6 @@ const MultiSelector: VFC<MultiSelectorPropsType> = ({
               // value={options}
               // defaultValue={defaultValue}
               onChange={(val: any) => {
-                console.log(val)
                 return onChange([...val.map((v: any) => v.value)])
               }}
               styles={customStyles}

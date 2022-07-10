@@ -32,22 +32,6 @@ const permissionChecker = async (dispatch: Dispatch<AnyAction>) => {
     const snap = await getDoc(doc(db, 'odUsers', uid))
     if (snap.exists()) {
       const odUserExData = snap.data()
-      // {
-      //   epartmentWishFor: [],
-      //   email: '',
-      //   favoDeparts: [],
-      //   favoEvents: [],
-      //   gender: '',
-      //   grade: '',
-      //   isStudent: true,
-      //   name: '',
-      //   password: '',
-      //   ruby: '',
-      //   ts: '',
-      //   uid: '',
-      //   university: '',
-      //   workplaceWishFor: [],
-      //   }
       dispatch(setUserExData(odUserExData as odUserExDataType))
 
       // ↓運営から認可を得ているかどうか

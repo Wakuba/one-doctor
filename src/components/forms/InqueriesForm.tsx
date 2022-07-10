@@ -11,9 +11,6 @@ const consoler = httpsCallable(firebaseFunction, 'consolerTest')
 
 const InqueriesForm: VFC<{ style: string }> = ({ style }) => {
   const onSubmit = (data: any) => {
-    // console.log('data', data)
-    // const abortCtrl = new AbortController()
-    // postFormToSlackHitter(data, abortCtrl)
     postFormData(data)
     consoler()
   }

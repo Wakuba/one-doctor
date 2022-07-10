@@ -56,7 +56,6 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
   const dispatch = useDispatch()
   const router = useRouter()
   const onSubmit = async (data: NotStudentSignUpFormDataType) => {
-    console.log('data 5/15', data)
     // const dcFile = new File()
     const certificationImageId = await imageUploader(data.doctorCertification)
     const cleansedData: SignUpAuthorizationDataTypeDataWithImageId = {

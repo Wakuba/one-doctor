@@ -48,22 +48,18 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     signUpState: (state, action) => {
-      console.log('signUpState', state.odUser, state.userState)
       state.odUser = action.payload
       state.userState = 'LogOut'
     },
     logInState: (state, action) => {
-      console.log('logInState', state.odUser, state.userState)
       state.odUser = action.payload
       state.userState = 'LogIn'
     },
     logOutState: (state) => {
-      console.log('logOutState', state.odUser, state.userState)
       state.odUser = null
       state.userState = 'LogOut'
     },
     setUserExData: (state, action) => {
-      console.log('setUserExData実行', state)
       state.odUserExData = action.payload
     },
   },
@@ -82,7 +78,6 @@ export const selectUserState = (state) => {
 }
 
 export const selectOdUserExData = (state): odUserExDataType => {
-  console.log('state', state)
   return state.user.odUserExData
 }
 
