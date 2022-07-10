@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import DepartKanban from './DepartKanban'
 
 const OriginalContentsBoard = ({ depList }: { depList: any }) => {
+  console.log(depList)
   return (
     <div className='w-full sm:overflow-x-auto sm:overflow-y-hidden md:overflow-x-auto md:overflow-y-hidden pb-6'>
       <div

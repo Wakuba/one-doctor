@@ -25,7 +25,6 @@ import ContactButtonModal from '../../components/UIAtoms/ContactButtonModal'
 import DepTopSection from '../../components/departments/DepTopSeciton '
 import EventTab from '../../components/departments/EventTab'
 import CrewBoardTab from '../../components/departments/CrewBoardTab'
-import TwitterTimeline from '../../components/departments/TwitterTimeline'
 import { GetStaticPaths, GetStaticProps, GetStaticPropsResult } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import router from 'next/router'
@@ -35,6 +34,7 @@ import GeoInfoTab from '../../components/departments/GeoInfoTab'
 import { useEffect, VFC } from 'react'
 import permissionChecker from '../../lib/customFunctions/permissionChecker'
 import { useDispatch } from 'react-redux'
+import SnsTab from '../../components/departments/SnsTab'
 
 const DepartmentPage: VFC<DepartmentPagePropsType> = ({ postData }) => {
   const dispatch = useDispatch()
@@ -122,7 +122,7 @@ const DepartmentPage: VFC<DepartmentPagePropsType> = ({ postData }) => {
                 dep={postData?.departmentName}
                 univ={postData?.universityName}
               />
-              <div
+              {/* <div
                 title='SNS'
                 className='w-full ov-md:p-8 sm:p-4 bg-white flex flex-col'
               >
@@ -140,7 +140,12 @@ const DepartmentPage: VFC<DepartmentPagePropsType> = ({ postData }) => {
                     userId={postData?.tabMenu?.snsTab?.twitterUserId}
                   />
                 </div>
-              </div>
+              </div> */}
+              <SnsTab
+                title='SNS'
+                twitterUserId={postData?.tabMenu?.snsTab?.twitterUserId}
+                officialWebSite={postData?.tabMenu?.snsTab?.officialWebSite}
+              />
             </TabMenu>
           </section>
 
@@ -231,6 +236,7 @@ export const getStaticProps: GetStaticProps<
     const url = await getDownloadURL(
       ref(storage, `flamelink/media/${heroImgName}`)
     )
+    console.log('dataだよ', data)
     const postData: DepPostDataType = {
       heroImgUrl: url ?? '',
       officialWebSite: data?.officialWebSite ?? '',
@@ -264,7 +270,7 @@ export const getStaticProps: GetStaticProps<
           //   getUrlFromTwitterTimeline(
           //     data?.tabMenu.snsTab.twitterTimelineUrl
           //   ) ?? '',
-          userId: data?.tabMenu?.snsTab?.userId ?? '',
+          twitterUserId: data?.tabMenu?.snsTab?.twitterUserId ?? '',
         },
         crewCardListTab: [],
       },
@@ -290,6 +296,7 @@ export const getStaticProps: GetStaticProps<
         forFun: card?.forFun ?? '',
       })
     }
+    // console.log('どないやねんな', postData.tabMenu)
     return {
       props: {
         postData,
