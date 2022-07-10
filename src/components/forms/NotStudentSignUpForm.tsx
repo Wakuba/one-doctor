@@ -98,6 +98,7 @@ const RecidencySignUpForm: VFC<{ style: string }> = ({ style }) => {
           postNewUserData({ ...cleansedData, uid: odUser.uid })
             .then((res) => console.log('スラックへの送信成功', res))
             .catch((e) => console.log('スラックへの送信失敗', e))
+            .then(() => router.push('/AccountRegistrationFinished'))
           postPreUserData({ ...cleansedData, uid: odUser.uid }).then((res) =>
             console.log('スプレッドシートへの送信成功', res)
           )

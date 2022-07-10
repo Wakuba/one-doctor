@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { selectOdUserExData } from '../../features/userSlice'
 import { useEffect, VFC } from 'react'
 import permissionChecker from '../customFunctions/permissionChecker'
 import NotLogInAlert from '../../components/modals/NotLogInAlert'
@@ -13,14 +12,13 @@ import {
 
 const useRequiredPermission = () => {
   // const odUser = useSelector(selectOdUser)
-  const odUserExData = useSelector(selectOdUserExData)
   const dispatch = useDispatch()
   const openNAModal = useSelector(selectNAModal)
   const openNLModal = useSelector(selectNLModal)
   const openNEVModal = useSelector(selectNEVModal)
 
   useEffect(() => {
-    permissionChecker(odUserExData, dispatch)
+    permissionChecker(dispatch)
     console.log('useEffectなう')
   }, [])
 

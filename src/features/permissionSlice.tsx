@@ -13,23 +13,17 @@ export const permissionSlice = createSlice({
   name: 'permission',
   initialState,
   reducers: {
-    setIsEmailVerified: (state) => {
-      state.isEmailVerified = true
+    setIsEmailVerified: (state, actions) => {
+      state.isEmailVerified = actions.payload
     },
-    setIsAuthorizedByAdmin: (state) => {
-      state.isAuthorizedByAdmin = true
-    },
-    setIsNoAuthorizedByAdmin: (state) => {
-      state.isAuthorizedByAdmin = false
+    setIsAuthorizedByAdmin: (state, actions) => {
+      state.isAuthorizedByAdmin = actions.payload
     },
   },
 })
 
-export const {
-  setIsEmailVerified,
-  setIsAuthorizedByAdmin,
-  setIsNoAuthorizedByAdmin,
-} = permissionSlice.actions
+export const { setIsEmailVerified, setIsAuthorizedByAdmin } =
+  permissionSlice.actions
 
 // selectors
 export const selectIsEmailVerified = (state): boolean => {

@@ -8,8 +8,7 @@ import {
 } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectOdUserExData } from '../../features/userSlice'
+import { useDispatch } from 'react-redux'
 import permissionChecker from '../../lib/customFunctions/permissionChecker'
 // import { setTimeout } from 'timers/promises'
 import { db } from '../../lib/firebase/firebase.config'
@@ -31,7 +30,6 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
   layoutStyle,
   depName,
 }) => {
-  const odUserExData = useSelector(selectOdUserExData)
   const [popup, setPopup] = useState<boolean>(false)
   const [isFavorite, setIsFavorite] = useState<boolean>(false)
   const router = useRouter()
@@ -77,8 +75,8 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
     }
   }, [])
 
-  const onFavorite = () => {
-    if (permissionChecker(odUserExData, dispatch)) {
+  const onFavorite = async () => {
+    if (await permissionChecker(dispatch)) {
       if (curUser) {
         const uid = curUser.uid
         if (!isFavorite) {
