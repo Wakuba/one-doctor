@@ -6,6 +6,7 @@ import {
   openNEVModal,
   closeNAModal,
   closeNEVModal,
+  closeNLModal,
   // selectNAModal,
 } from '../../features/modalsSlice'
 import {
@@ -28,6 +29,7 @@ const permissionChecker = async (dispatch: Dispatch<AnyAction>) => {
   if (curUser && uid) {
     // ログインしている
     dispatch(logInState(curUser))
+    dispatch(closeNLModal())
     curUser.reload()
     const snap = await getDoc(doc(db, 'odUsers', uid))
     if (snap.exists()) {

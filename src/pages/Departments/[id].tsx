@@ -32,9 +32,15 @@ import router from 'next/router'
 import FavoriteButton from '../../components/departments/FavoriteButton'
 import BasicInfoTab from '../../components/departments/BasicInfoTab'
 import GeoInfoTab from '../../components/departments/GeoInfoTab'
-import { VFC } from 'react'
+import { useEffect, VFC } from 'react'
+import permissionChecker from '../../lib/customFunctions/permissionChecker'
+import { useDispatch } from 'react-redux'
 
 const DepartmentPage: VFC<DepartmentPagePropsType> = ({ postData }) => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    permissionChecker(dispatch)
+  }, [])
   return (
     <>
       <Header />
@@ -188,7 +194,6 @@ export const getStaticPaths: GetStaticPaths<ParamsType> = async () => {
       params: { id: doc.data().id ?? '' },
     })
   })
-  console.log(paths)
   return {
     paths,
     fallback: false,
@@ -296,7 +301,6 @@ export const getStaticProps: GetStaticProps<
       console.error(e.message)
       return { props: { error: e.message } }
     }
-    console.log(e)
     return {
       props: {
         postData: { errors: e },

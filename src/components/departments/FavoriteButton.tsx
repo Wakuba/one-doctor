@@ -13,8 +13,6 @@ import permissionChecker from '../../lib/customFunctions/permissionChecker'
 // import { setTimeout } from 'timers/promises'
 import { db } from '../../lib/firebase/firebase.config'
 import { auth } from '../../lib/firebase/firebase.config'
-import NotLogInAlert from '../modals/NotLogInAlert'
-import NotEmailVerifiedAlert from '../modals/NotEmailVerifiedAlert'
 
 interface FavoriteButtonPropsType {
   layoutStyle: string
@@ -75,34 +73,35 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
     }
   }, [])
 
-  const onFavorite = async () => {
-    if (await permissionChecker(dispatch)) {
-      if (curUser) {
-        const uid = curUser.uid
-        if (!isFavorite) {
-          const ref = doc(db, 'odUsers', uid)
-          updateDoc(ref, {
-            favoDeparts: arrayUnion({
-              favoDepName: { ...curDepData.curDepName },
-              favoDepUrl: '/Departments/' + router.query.id,
-            }),
-          })
-          setIsFavorite(true)
-          setPopup(true)
-        } else {
-          const ref = doc(db, 'odUsers', uid)
-          updateDoc(ref, {
-            favoDeparts: arrayRemove({
-              favoDepName: { ...curDepData.curDepName },
-              favoDepUrl: '/Departments/' + router.query.id,
-            }),
-          })
-          setIsFavorite(false)
-          setPopup(false)
+  const onFavorite = () => {
+    permissionChecker(dispatch).then((isApproved) => {
+      if (isApproved) {
+        if (curUser) {
+          const uid = curUser.uid
+          if (!isFavorite) {
+            const ref = doc(db, 'odUsers', uid)
+            updateDoc(ref, {
+              favoDeparts: arrayUnion({
+                favoDepName: { ...curDepData.curDepName },
+                favoDepUrl: '/Departments/' + router.query.id,
+              }),
+            })
+            setIsFavorite(true)
+            setPopup(true)
+          } else {
+            const ref = doc(db, 'odUsers', uid)
+            updateDoc(ref, {
+              favoDeparts: arrayRemove({
+                favoDepName: { ...curDepData.curDepName },
+                favoDepUrl: '/Departments/' + router.query.id,
+              }),
+            })
+            setIsFavorite(false)
+            setPopup(false)
+          }
         }
       }
-    }
-    // return unsubscribe()
+    })
   }
 
   return (
@@ -119,8 +118,6 @@ const FavoriteButton: React.VFC<FavoriteButtonPropsType> = ({
         {popup && <RegisteredMessage />}
         ★お気に入り
       </button>
-      <NotEmailVerifiedAlert />
-      <NotLogInAlert />
     </>
   )
 }
